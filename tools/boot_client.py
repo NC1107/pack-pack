@@ -20,6 +20,7 @@ import argparse
 import json
 import os
 import shutil
+import signal
 import subprocess
 import sys
 import time
@@ -54,6 +55,7 @@ ENVIRONMENT_ERRORS = (
     "Failed to fetch user properties",
     "Error starting SoundSystem",
     "Couldn't connect to realms",
+    "Failed to retrieve profile key pair",
 )
 XVFB_SCREEN = "-screen 0 1920x1080x24 +extension GLX +render -noreset"
 
@@ -109,21 +111,51 @@ def install_neoforge(hmc_java: str, hmc: Path, env: dict, minecraft: str, neofor
         raise SystemExit(f"HeadlessMC installed {installed}, expected NeoForge {neoforge}")
 
 
-def launch(hmc_java: str, hmc: Path, env: dict, minecraft: str, memory: str, timeout: int) -> dict:
+def game_pids() -> list[int]:
+    """Java processes running this test's game directory (Linux /proc)."""
+    pids = []
+    for proc_dir in Path("/proc").iterdir():
+        if not proc_dir.name.isdigit():
+            continue
+        try:
+            cmdline = (proc_dir / "cmdline").read_bytes().replace(b"\0", b" ").decode("utf-8", "replace")
+        except OSError:
+            continue
+        if "java" in cmdline and str(GAME_DIR) in cmdline:
+            pids.append(int(proc_dir.name))
+    return pids
+
+
+def dump_threads(game_java: str) -> None:
+    """Save a thread dump of every hung game JVM, so a timeout shows where it is stuck."""
+    jcmd = java_home(game_java) / "bin" / "jcmd"
+    dumps = []
+    for pid in game_pids():
+        result = subprocess.run([str(jcmd), str(pid), "Thread.print"], capture_output=True, text=True, timeout=60)
+        dumps.append(f"===== pid {pid} =====\n{result.stdout}{result.stderr}")
+    (RUN / "client-threads.txt").write_text("\n".join(dumps) or "no game JVM found\n")
+    log(f"saved thread dumps of {len(dumps)} JVM(s) to run/client-threads.txt")
+
+
+def launch(hmc_java: str, game_java: str, hmc: Path, env: dict, minecraft: str, memory: str, timeout: int) -> dict:
     jvm = f"-Djava.awt.headless=true -Xmx{memory}"
     cmd = ["xvfb-run", "-a", "-s", XVFB_SCREEN, hmc_java, "-Dhmc.xvfb.check=true", "-jar", str(hmc),
            "launch", "--offline", "--jvm", jvm, "neoforge", minecraft]
     log("launching the client on a virtual display")
     started = time.monotonic()
-    try:
-        proc = subprocess.run(cmd, cwd=RUN, env=env, stdin=subprocess.DEVNULL, timeout=timeout,
-                              stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True,
-                              encoding="utf-8", errors="replace")
-        output, exit_code, timed_out = proc.stdout, proc.returncode, False
-    except subprocess.TimeoutExpired as expired:
-        output = expired.stdout.decode("utf-8", "replace") if isinstance(expired.stdout, bytes) else (expired.stdout or "")
-        exit_code, timed_out = None, True
-    (RUN / "client-launcher.log").write_text(output)
+    launcher_log = RUN / "client-launcher.log"
+    # Its own process group, so a timeout can take down xvfb, HeadlessMC, the game
+    # and anything the game spawned, instead of leaving them holding the output open.
+    with launcher_log.open("w", encoding="utf-8") as out:
+        proc = subprocess.Popen(cmd, cwd=RUN, env=env, stdin=subprocess.DEVNULL, stdout=out,
+                                stderr=subprocess.STDOUT, start_new_session=True)
+        try:
+            exit_code, timed_out = proc.wait(timeout=timeout), False
+        except subprocess.TimeoutExpired:
+            dump_threads(game_java)
+            os.killpg(proc.pid, signal.SIGKILL)
+            proc.wait()
+            exit_code, timed_out = None, True
     return {"exit_code": exit_code, "timed_out": timed_out, "wall_seconds": round(time.monotonic() - started, 1)}
 
 
@@ -148,7 +180,7 @@ def main() -> int:
     install_pack(args.java)
     env = configure_headlessmc(args.java)
     install_neoforge(args.hmc_java, hmc, env, minecraft, neoforge)
-    run = launch(args.hmc_java, hmc, env, minecraft, args.memory, args.timeout)
+    run = launch(args.hmc_java, args.java, hmc, env, minecraft, args.memory, args.timeout)
 
     game_log = gamelog.read_log(GAME_DIR)
     all_errors = gamelog.error_lines(game_log)
