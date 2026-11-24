@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.0](https://github.com/NC1107/pack-pack/compare/v0.1.0...v0.2.0) (2026-11-24)
+
+
+### Features
+
+* add client and server performance mods and first-launch defaults ([fecca9d](https://github.com/NC1107/pack-pack/commit/fecca9df9b64c7519d81767bb248965f27a7c906))
+
 ## 0.1.0 (2026-11-24)
 
 
