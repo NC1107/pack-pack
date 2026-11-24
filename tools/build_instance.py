@@ -41,7 +41,15 @@ def github_repo() -> str:
     return match["repo"]
 
 
+def ini_string(value: str) -> str:
+    # Prism reads instance.cfg with Qt's INI parser, which drops bare quotes and
+    # joins what is left, turning `"$INST_JAVA" -jar` into `$INST_JAVA-jar`.
+    escaped = value.replace("\\", "\\\\").replace('"', '\\"')
+    return f'"{escaped}"'
+
+
 def instance_cfg(name: str, pack_url: str) -> str:
+    pre_launch = f'"$INST_JAVA" -jar packwiz-installer-bootstrap.jar {pack_url}'
     return "\n".join([
         "[General]",
         "ConfigVersion=1.3",
@@ -52,7 +60,7 @@ def instance_cfg(name: str, pack_url: str) -> str:
         f"MinMemAlloc={MIN_MEMORY_MB}",
         f"MaxMemAlloc={MAX_MEMORY_MB}",
         "OverrideCommands=true",
-        f'PreLaunchCommand="$INST_JAVA" -jar packwiz-installer-bootstrap.jar {pack_url}',
+        f"PreLaunchCommand={ini_string(pre_launch)}",
         "",
     ])
 
