@@ -2,7 +2,7 @@ hash-format = "sha256"
 
 [[files]]
 file = "config/clearwater.jsonc"
-hash = "9b8d70c1d3cc3690a7593caabd8d2c0ab49e380d00e8fa19b301f375cf2f7509"
+hash = "c59ffac284cbf02069a68b61fcfa2c4f1e29877e72db277f8150afc2f16ead23"
 
 [[files]]
 file = "config/crash_assistant/config.toml"
@@ -478,39 +478,39 @@ hash = "f57815d1c8d41f574c13bb0a9e0b4cd80a22f62a098f0a4527d1f79a4439234b"
 
 [[files]]
 file = "datapacks/pack-pack-worldgen/data/minecraft/worldgen/biome/cold_ocean.json"
-hash = "2cce8ceccbd5d549be311ab58df13f5833cd793f1455ee3984b7f73b28c21e59"
+hash = "2d3881daf28c3153250e846b3b837f4ef7bd5506b345ae389ba13a8dedb76169"
 
 [[files]]
 file = "datapacks/pack-pack-worldgen/data/minecraft/worldgen/biome/deep_cold_ocean.json"
-hash = "a2bfc82a6e3f59ba41aa964763edd1be07657d32ace14d7b4b966b286856fb26"
+hash = "0c21e9ec929995c6cc72cb185829f0d2f6535362574bacabb97dab265f87f27f"
 
 [[files]]
 file = "datapacks/pack-pack-worldgen/data/minecraft/worldgen/biome/deep_frozen_ocean.json"
-hash = "ecbfbdb55198c90c7c394c8d54561030756c7d75bb8d2df818158415faad32ca"
+hash = "c624823f6af236fe02c9a172319eb393c165de6f20089cf649c1e52ab0cbfcd9"
 
 [[files]]
 file = "datapacks/pack-pack-worldgen/data/minecraft/worldgen/biome/deep_lukewarm_ocean.json"
-hash = "781a60ffddf44511f92162d7d5664b7ab7e051f2469faa2f30672956e2467e46"
+hash = "8af310cb1b6ea17d39e579d659b1598732b051d34bf8b8980fa0408a7b999070"
 
 [[files]]
 file = "datapacks/pack-pack-worldgen/data/minecraft/worldgen/biome/deep_ocean.json"
-hash = "f8efc749b704c082ad7d084acb234fa9570e0e181e5969d1af5b204c42386658"
+hash = "e4d266bd5d39331eb1b2e57ed54b9291e88450f40d9786aaca2fd773580f37e3"
 
 [[files]]
 file = "datapacks/pack-pack-worldgen/data/minecraft/worldgen/biome/frozen_ocean.json"
-hash = "5def6268eaa05a79e04a0e41b7c638a3068748ed10871fafc416db7006677e3a"
+hash = "3a7ffc2ab5cf9619d61aa465c0c82fce4dc6cad9235d33da0c74cd75a066b869"
 
 [[files]]
 file = "datapacks/pack-pack-worldgen/data/minecraft/worldgen/biome/lukewarm_ocean.json"
-hash = "e851099f1d5945ad9d1ba1a1de52bd628c8322ca14e835ddf07270488e3fc8ae"
+hash = "6a55f0da588ceb8887634e4d735a50e6c830906ee36ca2515a5ae682119e61c8"
 
 [[files]]
 file = "datapacks/pack-pack-worldgen/data/minecraft/worldgen/biome/ocean.json"
-hash = "1645179f3d49bc161d6f2dc10e5dd0a4ebf91895103b16e9d69fa40512747406"
+hash = "675052e8939e4f7adac7efd9da53e7349911daf78f47350e05f4128fe5dcee26"
 
 [[files]]
 file = "datapacks/pack-pack-worldgen/data/minecraft/worldgen/biome/warm_ocean.json"
-hash = "060cc455f3c06e4a428a37ccac1333c2ed8d1560082b518e9cf630f509036503"
+hash = "17f13e98689f3885bce24e69f33bdb29ad13264f5e7b4408c503a71b4e87eb86"
 
 [[files]]
 file = "datapacks/pack-pack-worldgen/data/minecraft/worldgen/noise_settings/overworld.json"

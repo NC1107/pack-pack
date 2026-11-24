@@ -311,7 +311,7 @@ def write_structure_overrides() -> None:
 
 # Colour of the water far away, which is also what shows beyond the last loaded chunk.
 # Vanilla ocean sky and fog are the bright overworld blue.
-DEEP_WATER_COLOR = 0x0b3c6b
+DEEP_WATER_COLOR = 0x061a3a
 
 
 def write_ocean_biomes() -> None:
@@ -324,7 +324,6 @@ def write_ocean_biomes() -> None:
         biome["effects"]["sky_color"] = DEEP_WATER_COLOR
         biome["effects"]["fog_color"] = DEEP_WATER_COLOR
         # Vanilla ocean water fog is almost black, which hides everything past a few chunks.
-        biome["effects"]["water_fog_color"] = DEEP_WATER_COLOR
         write_json(DATAPACK / f"data/minecraft/worldgen/biome/{name}.json", biome)
 
 
