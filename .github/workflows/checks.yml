@@ -39,8 +39,8 @@ jobs:
       - uses: actions/cache@v6
         with:
           path: .cache
-          key: boot-downloads-${{ hashFiles('pack/pack.toml', 'tools/boot_server.py') }}
-          restore-keys: boot-downloads-
+          key: server-boot-${{ hashFiles('pack/pack.toml', 'tools/*.py') }}
+          restore-keys: server-boot-
       - run: python tools/boot_server.py --java java --quiet
       - if: always()
         uses: actions/upload-artifact@v7
@@ -50,4 +50,44 @@ jobs:
             run/boot-report.json
             run/server/logs/latest.log
             run/server/crash-reports/
+          if-no-files-found: ignore
+
+  client-boot:
+    needs: repo-hygiene
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.13"
+      # HeadlessMC needs Java 25; the game itself runs on Java 21, set up last so it is the default.
+      - id: hmc-java
+        uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: "25"
+      - uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: "21"
+      - run: sudo DEBIAN_FRONTEND=noninteractive apt-get install -y xvfb x11-xserver-utils libgl1-mesa-dri
+      - id: versions
+        run: python -c "import tomllib; print('neoforge=' + tomllib.load(open('pack/pack.toml', 'rb'))['versions']['neoforge'])" >> "$GITHUB_OUTPUT"
+      # Minecraft's libraries and NeoForge's patched jars only change with the NeoForge version.
+      - uses: actions/cache@v6
+        with:
+          path: .cache
+          key: client-boot-${{ steps.versions.outputs.neoforge }}-${{ hashFiles('pack/pack.toml', 'tools/*.py') }}
+          restore-keys: client-boot-${{ steps.versions.outputs.neoforge }}-
+      - run: python tools/boot_client.py --java java --hmc-java "${{ steps.hmc-java.outputs.path }}/bin/java"
+      - if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: client-boot
+          path: |
+            run/client-report.json
+            run/client-launcher.log
+            run/client/logs/latest.log
+            run/client/crash-reports/
           if-no-files-found: ignore
