@@ -13,8 +13,10 @@ MENU_TO_WORLD = re.compile(r"Time from main menu to in-game was (?P<seconds>[\d.
 # listed by exact text with the issue, kept out of the failure count, and still shown
 # in the reports, so anything new still fails and these get dropped once fixed.
 KNOWN_UPSTREAM_ERRORS = {
-    # Lost Cities saves a spawner block entity where its block ended up as air.
+    # Lost Cities saves a spawner block entity where its block later ended up as air or
+    # water (its ruin pass on drowned buildings); vanilla throws the block entity away.
     "Failed to create block entity minecraft:mob_spawner": "https://github.com/McJty/LostCities/issues/786",
+    "Failed to create block entity minecraft:trial_spawner": "https://github.com/McJty/LostCities/issues/786",
 }
 
 

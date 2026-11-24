@@ -166,7 +166,7 @@ def run_server(cmd: list[str], timeout: int, quiet: bool) -> dict:
     threading.Thread(target=pump, args=(proc.stdout, lines), daemon=True).start()
 
     result = {"reached_done": False, "server_reported_seconds": None,
-              "wall_seconds_to_done": None, "timed_out": False}
+              "wall_seconds_to_done": None, "timed_out": False, "crashed": False}
     after_done: list[str] = []
     deadline = started + timeout
 
@@ -181,6 +181,11 @@ def run_server(cmd: list[str], timeout: int, quiet: bool) -> dict:
             break
         if not quiet:
             sys.stdout.write(line)
+        if "Preparing crash report" in line:
+            # A crashed server can sit there until the timeout; it is not going to recover.
+            result["crashed"] = True
+            proc.kill()
+            break
         if result["reached_done"]:
             after_done.append(line.rstrip())
         elif match := DONE_LINE.search(line):
@@ -249,6 +254,8 @@ def main() -> int:
     }
 
     failures = []
+    if report["crashed"]:
+        failures.append("server crashed (see run/server/crash-reports)")
     if not report["reached_done"]:
         failures.append("server never reached Done" + (" (timed out)" if report["timed_out"] else ""))
     if report["crash_reports"]:
