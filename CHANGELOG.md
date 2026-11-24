@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.9.0](https://github.com/NC1107/pack-pack/compare/v0.8.1...v0.9.0) (2026-11-24)
+
+
+### Features
+
+* tall kelp, big sea animals, brighter water, sand under domes ([6f55d86](https://github.com/NC1107/pack-pack/commit/6f55d86a121e13990d9f33d55a07558825208eab))
+
 ## [0.8.1](https://github.com/NC1107/pack-pack/compare/v0.8.0...v0.8.1) (2026-11-24)
 
 
