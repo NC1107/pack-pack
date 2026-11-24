@@ -24,6 +24,7 @@ import tomllib
 from pathlib import Path
 
 import gamelog
+import nbt
 from downloads import cached_download, fetch, packwiz_bootstrap, packwiz_installer
 
 REPO = Path(__file__).resolve().parent.parent
@@ -49,6 +50,10 @@ online-mode=false
 spawn-protection=0
 """
 HEALTH_WAIT_SECONDS = 10
+
+# Every new world's overworld is meant to generate with The Lost Cities. Its in-game
+# commands need a player, so instead read the city hub data it saves per dimension.
+LOST_CITIES_DATA = Path("world") / "data" / "LostCityHighwayData.dat"
 
 # Aikar's G1 flags (docs.papermc.io/paper/aikars-flags), the usual baseline for
 # dedicated servers, so the boot test runs the way a host would.
@@ -193,6 +198,16 @@ def run_server(cmd: list[str], timeout: int, quiet: bool) -> dict:
     return result
 
 
+def lost_cities_dimensions() -> dict:
+    """Map each dimension with Lost Cities data to how many of its city hubs hold a city."""
+    path = SERVER / LOST_CITIES_DATA
+    if not path.is_file():
+        return {}
+    dimensions = nbt.read(path).get("data", {}).get("dimensions", {})
+    return {dim: sum(1 for hub in info.get("hubs", []) if hub.get("cityLevel", 0) > 0)
+            for dim, info in dimensions.items()}
+
+
 def scan_logs() -> dict:
     return {
         "error_lines": gamelog.error_lines(gamelog.read_log(SERVER)),
@@ -228,6 +243,7 @@ def main() -> int:
         "neoforge": neoforge_version,
         **run,
         **scan_logs(),
+        "lost_cities": lost_cities_dimensions(),
     }
 
     failures = []
@@ -239,6 +255,8 @@ def main() -> int:
         failures.append(f"server did not stop cleanly (exit code {report['exit_code']})")
     if len(report["error_lines"]) > args.max_errors:
         failures.append(f"{len(report['error_lines'])} error line(s) in latest.log (allowed {args.max_errors})")
+    if report["reached_done"] and not report["lost_cities"].get("minecraft:overworld"):
+        failures.append(f"overworld has no Lost Cities cities near spawn (city hubs per dimension: {report['lost_cities']})")
     report["failures"] = failures
 
     REPORT.write_text(json.dumps(report, indent=2))
@@ -247,6 +265,7 @@ def main() -> int:
         log(f"boot: {report['server_reported_seconds']}s (server), {report['wall_seconds_to_done']}s (wall)")
     log(f"{len(report['server_mods'])} server mods, {len(report['error_lines'])} error line(s)")
     log(f"health: {json.dumps(report['health'])}")
+    log(f"lost cities: {json.dumps(report['lost_cities'])}")
     for f in failures:
         log(f"FAIL: {f}")
     return 1 if failures else 0
