@@ -165,24 +165,16 @@ file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/buildings/packpa
 hash = "d1a2fe106646e650947606a5f350171252b98b042d5b0b966b54beb5f9c225f4"
 
 [[files]]
-file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/citystyles/citystyle_packpack_dome.json"
-hash = "99218c70da25ec3804f424845b5b133df6a6f60726bbeb826ea54155e9a61da0"
-
-[[files]]
 file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/citystyles/citystyle_packpack_village.json"
-hash = "098514915a6fd81bd66558d902efd8c6a359be3ec2b8f3a49cc2e9f2a7c8e859"
+hash = "1c62429d454f78ee1d0f8a6c0adca9c6c88d8388ea52f75aa879fc8863e40b09"
 
 [[files]]
 file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/multibuildings/packpack_village_cluster.json"
 hash = "4db33670679a991fb3ae4f4e4148e69f0e3176630b0cc84244f7d054928a50fb"
 
 [[files]]
-file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/palettes/packpack_dome.json"
-hash = "fb7b3b56461ab073f04d221576fdeb46b90f8c88c4adb7a0b99fad4164c35a91"
-
-[[files]]
 file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/palettes/packpack_village.json"
-hash = "988ad0fa716ca943492c7bad7f888744ba184d3ed4b8e2a363a3e2eda7cea9b4"
+hash = "1eedbc59763b85910f9af299b5ae9ebac74d19a0d600ee0727ab17b59807436b"
 
 [[files]]
 file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/parts/packpack_village_plains_accessory_1_floor.json"
@@ -457,16 +449,12 @@ file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/parts/packpack_v
 hash = "60a9621c6e821efb0379a59d196d6e69f03825d64b41fb399d0321a073094cab"
 
 [[files]]
-file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/styles/packpack_dome.json"
-hash = "8b6d73f75108931a64119ae15eea1d1a2716cc0b045dd4e85c49399aa93c0678"
-
-[[files]]
 file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/styles/packpack_village.json"
 hash = "2f348b7d2963e2f1da565b5bc14e778fc80ab105061c85b4aa6b5e194dbb2ac6"
 
 [[files]]
 file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/worldstyles/packpack_domes.json"
-hash = "56801dd0229c3073e6e4ccfcda4034d862b68b4cc2c031dae2f34e0e8afe692d"
+hash = "d3f811a26f3952855e569175b76e2dc07839081bee58dfa5687c7e20fec5e402"
 
 [[files]]
 file = "datapacks/pack-pack-worldgen/data/minecraft/tags/function/load.json"
