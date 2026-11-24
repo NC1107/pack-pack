@@ -6,7 +6,7 @@ hash = "c6406f3e491aef05e7cd09a3287c12b2020526757125cdc9d6aeecc03c4ba8f1"
 
 [[files]]
 file = "config/incontrol/spawner.json"
-hash = "f0e19f6808dd7f7eadfe9a4ffbf4e973eae74b4da5f1295bae7cacc49d3767ed"
+hash = "69a3c258afb69f4a9f69b6b8326e12a076bc00d63a79af5f0f51981cb11b4830"
 
 [[files]]
 file = "config/lostcities/common.toml"
@@ -159,10 +159,6 @@ hash = "6a06fc7a62af2c812eb917989b583ac4e5161c2b1ec73ddd4bd33df9d440b2d7"
 [[files]]
 file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/buildings/packpack_village_plains_weaponsmith_1.json"
 hash = "d1a2fe106646e650947606a5f350171252b98b042d5b0b966b54beb5f9c225f4"
-
-[[files]]
-file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/citystyles/citystyle_packpack_start.json"
-hash = "a6792a8697afe649a13a2e562d273c129450ff39b3161f863e1fb60d62f23558"
 
 [[files]]
 file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/citystyles/citystyle_packpack_village.json"
@@ -449,14 +445,6 @@ file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/parts/packpack_v
 hash = "60a9621c6e821efb0379a59d196d6e69f03825d64b41fb399d0321a073094cab"
 
 [[files]]
-file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/predefinedcities/start.json"
-hash = "f6fb937113a0e70a3301de1968b7117664062f9350c84edfb301cc4f51a65a48"
-
-[[files]]
-file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/predefinedspheres/start.json"
-hash = "92c1c502f36aa149f00119ef7c68a91d0581d0327e19dbb5a2c6b916be6b0e52"
-
-[[files]]
 file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/styles/packpack_village.json"
 hash = "2f348b7d2963e2f1da565b5bc14e778fc80ab105061c85b4aa6b5e194dbb2ac6"
 
@@ -489,8 +477,12 @@ file = "datapacks/pack-pack-worldgen/data/minecraft/worldgen/world_preset/normal
 hash = "a09832d9217f98f642f0f24fc22d79a70b8138881c37e9deba04523f23a5a514"
 
 [[files]]
-file = "datapacks/pack-pack-worldgen/data/packpack/function/light_start_sphere.mcfunction"
-hash = "5ed639ce0b1833da6f702cfc2c12b8a102cf4f74d39ae535bf1da638adb1ed81"
+file = "datapacks/pack-pack-worldgen/data/packpack/function/build_start_dome.mcfunction"
+hash = "b5d6d065714d1636685fbb2ed24f2ae8b95986d705f0973739871660d68ea1e7"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/function/place_new_player.mcfunction"
+hash = "4237fc2f207b1900c38eb688dac499d79d0372b7eba8522ec5b2ac54398dc500"
 
 [[files]]
 file = "datapacks/pack-pack-worldgen/data/packpack/function/settle_new_villagers.mcfunction"
@@ -498,11 +490,11 @@ hash = "ad464ac8dea2c1f5e3b618be236aa5772b8adf4de6f8eff35dd21fbb944063ba"
 
 [[files]]
 file = "datapacks/pack-pack-worldgen/data/packpack/function/start.mcfunction"
-hash = "c86b9a36c5988eaff179ffe56e55db466a45478247c42baf9530decd8bba7dd4"
+hash = "1251e9d34ba489c3d88ab8e11c17bf94e64a5671b251fe6b7245f836b0c28fc4"
 
 [[files]]
 file = "datapacks/pack-pack-worldgen/data/packpack/function/start_tick.mcfunction"
-hash = "57f1daccb596ab573ef0a0d7a579821bdb3b45b3b1fc7d2adcff6c5bca00cdf4"
+hash = "d7c8a1d3539149cc7cb5a6ef6fd97aafcb873b2d859e70798cd4aaf0f43e9bff"
 
 [[files]]
 file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/seabed_gravel.json"

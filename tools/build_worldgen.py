@@ -58,15 +58,11 @@ DEEP_BELOW_CONTINENTALNESS = -0.3
 CITY_FREE_RADIUS = 500
 CITY_FULL_RADIUS = 600
 
-# Every new player starts in a small glass sphere on the sea floor at 0,0. It is a Lost
-# Cities predefined sphere, so the glass and the dry floor are part of world generation.
-# Its centre sits on a chunk corner because Lost Worlds only builds a sphere into a chunk
-# when one of the chunk's corners is inside it.
-START_SPHERE = "start"
-START_SPHERE_RADIUS = 7
-START_SPHERE_CENTER = (0, 0)
-# No buildings in the chunks around the start sphere (Lost Cities measures from each
-# chunk's corner, so this covers the four chunks that meet at 0,0).
+# Every new player starts under a one block thick glass half dome resting on the sea floor
+# at 0,0. It is built by a function once the chunks under it exist, because Lost Cities'
+# own spheres are whole spheres that cut a pit into the floor.
+START_DOME_RADIUS = 7
+# No Lost Cities buildings this close to 0,0.
 START_CLEAR_RADIUS = 32
 
 # Domes sit this far above the sea floor, so their glass base is not buried in it. Lost
@@ -177,42 +173,92 @@ def build_datapack(village_factor: float) -> str:
     }
     write_json(DATAPACK / "data/minecraft/worldgen/world_preset/normal.json", preset)
 
-    write_json(DATAPACK / f"data/lostcities/lostcities/predefinedspheres/{START_SPHERE}.json", {
-        "dimension": "minecraft:overworld", "chunkx": 0, "chunkz": 0,
-        "centerx": START_SPHERE_CENTER[0], "centerz": START_SPHERE_CENTER[1], "radius": START_SPHERE_RADIUS,
-    })
     tick = DATAPACK / "data/minecraft/tags/function/tick.json"
     write_json(tick, {"values": write_start_functions()})
     write_seabed_cover()
     write_structure_overrides()
-    lc_villages.write_start_city(DATAPACK, START_SPHERE_CENTER, START_SPHERE_RADIUS)
     return lc_villages.build(DATAPACK, vanilla_jar(), lost_cities_jar(), village_factor, DOME_CITY_FACTOR)
 
 
+def dome_cells(radius: int) -> tuple[list, list, list]:
+    """Floor, shell and interior cells (x, y, z) of a half dome centred on x=0, z=0.
+
+    The shell is every cell inside the sphere with a face-neighbour outside it, which is
+    exactly one block thick and watertight.
+    """
+    def inside(x, y, z):
+        return y >= 0 and x * x + y * y + z * z <= radius * radius
+    floor, shell, interior = [], [], []
+    for y in range(0, radius + 1):
+        for x in range(-radius, radius + 1):
+            for z in range(-radius, radius + 1):
+                if not inside(x, y, z):
+                    continue
+                if y == 0:
+                    floor.append((x, y, z))
+                elif any(not inside(x + dx, y + dy, z + dz)
+                         for dx, dy, dz in ((1, 0, 0), (-1, 0, 0), (0, 1, 0), (0, 0, 1), (0, 0, -1))):
+                    shell.append((x, y, z))
+                else:
+                    interior.append((x, y, z))
+    return floor, shell, interior
+
+
+def fill_runs(cells: list, block: str) -> list[str]:
+    """One fill command per run of cells along z."""
+    lines, run = [], None
+    for x, y, z in sorted(cells):
+        if run and run[0] == (x, y) and run[2] == z - 1:
+            run[2] = z
+            continue
+        if run:
+            lines.append(f"fill ~{run[0][0]} ~{run[0][1]} ~{run[1]} ~{run[0][0]} ~{run[0][1]} ~{run[2]} {block}")
+        run = [(x, y), z, z]
+    if run:
+        lines.append(f"fill ~{run[0][0]} ~{run[0][1]} ~{run[1]} ~{run[0][0]} ~{run[0][1]} ~{run[2]} {block}")
+    return lines
+
+
 def write_start_functions() -> list[str]:
-    """Write the start sphere functions and return the function ids the tick tag must run."""
+    """Write the start dome functions and return the function ids the tick tag must run."""
     functions = DATAPACK / "data/packpack/function"
     functions.mkdir(parents=True, exist_ok=True)
-    cx, cz = START_SPHERE_CENTER
-    # Load functions run on the server's first tick, before it handles any player login, so
-    # the very first player already spawns in the sphere. The chunk does not have to exist
-    # yet: the sphere's floor height is fixed by world generation. Only done once, so a
-    # spawn moved later by an operator stays where they put it.
-    (functions / "start.mcfunction").write_text("\n".join([
-        "gamerule spawnRadius 0",
-        f"execute unless data storage packpack:start spawn run setworldspawn {cx} {DOME_FLOOR_Y} {cz}",
-        "data modify storage packpack:start spawn set value 1b",
+    r = START_DOME_RADIUS
+    floor, shell, interior = dome_cells(r)
+    lights = [(0, 0, 0), (3, 0, 0), (-3, 0, 0), (0, 0, 3), (0, 0, -3)]
+    # No light reaches the sea floor, so sea lanterns in the floor keep mobs from spawning inside.
+    build = [
+        *fill_runs(interior, "minecraft:air"),
+        *fill_runs(floor, "minecraft:grass_block"),
+        *fill_runs(shell, "minecraft:glass"),
+        *[f"setblock ~{x} ~{y} ~{z} minecraft:sea_lantern" for x, y, z in lights],
+        "setworldspawn ~ ~1 ~",
+        "summon minecraft:marker ~ ~1 ~ {Tags:[\"packpack_dome\"]}",
+        "execute store result storage packpack:start y int 1 run data get entity"
+        " @e[type=minecraft:marker,tag=packpack_dome,limit=1] Pos[1]",
+        "kill @e[type=minecraft:marker,tag=packpack_dome]",
+        "data modify storage packpack:start built set value 1b",
+        "forceload remove -8 -8 8 8",
+    ]
+    (functions / "build_start_dome.mcfunction").write_text("\n".join(build) + "\n")
+    # In a new world the load tag runs before the chunks under spawn exist, so the dome is
+    # built from the tick tag instead: force-load the four chunks around 0,0, wait until
+    # they are loaded, then build once at the real sea floor (a storage flag keeps it from
+    # ever overwriting player changes) and move anyone who already joined into it.
+    corners = " ".join(f"if loaded {x} 0 {z}" for x in (-8, 8) for z in (-8, 8))
+    (functions / "start_tick.mcfunction").write_text("\n".join([
+        "execute unless data storage packpack:start built run forceload add -8 -8 8 8",
+        f"execute unless data storage packpack:start built positioned 0 0 0 {corners}"
+        " positioned over ocean_floor run function packpack:build_start_dome",
+        "execute if data storage packpack:start built as @a[tag=!packpack_started]"
+        " run function packpack:place_new_player with storage packpack:start",
     ]) + "\n")
+    (functions / "place_new_player.mcfunction").write_text("\n".join([
+        "$tp @s 0.5 $(y) 0.5",
+        "tag @s add packpack_started",
+    ]) + "\n")
+    (functions / "start.mcfunction").write_text("gamerule spawnRadius 0\n")
     write_json(DATAPACK / "data/minecraft/tags/function/load.json", {"values": ["packpack:start"]})
-    # No light reaches the sea floor, so the start sphere gets one sea lantern in its floor,
-    # once it is generated.
-    (functions / "light_start_sphere.mcfunction").write_text("\n".join([
-        f"setblock {cx} {DOME_FLOOR_Y - 1} {cz} minecraft:sea_lantern",
-        "data modify storage packpack:start lit set value 1b",
-    ]) + "\n")
-    (functions / "start_tick.mcfunction").write_text(
-        f"execute unless data storage packpack:start lit if loaded {cx} {DOME_FLOOR_Y} {cz}"
-        " run function packpack:light_start_sphere\n")
     return ["packpack:start_tick"]
 
 
@@ -305,8 +351,8 @@ def write_incontrol_spawner() -> None:
             },
         }
     write_json(INCONTROL_SPAWNER, [
-        rule("water_ambient", 1.0, (3, 6), 40, SEA_LEVEL),           # cod, salmon, tropical fish
-        rule("water_creature", 0.2, (1, 3), 12, SEA_LEVEL),          # squid, dolphins
+        rule("water_ambient", 1.0, (3, 6), 25, SEA_LEVEL),           # cod, salmon, tropical fish
+        rule("water_creature", 0.6, (1, 3), 8, SEA_LEVEL),           # squid, sharks, rays, orcas, jellyfish
         rule("underground_water_creature", 0.2, (1, 3), 12, SEABED_Y + 60),  # glow squid in the dark
     ])
 

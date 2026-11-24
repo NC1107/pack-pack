@@ -16,12 +16,12 @@
       "maxdist": 48,
       "minheight": -25,
       "maxheight": 160,
-      "maxthis": 40
+      "maxthis": 25
     }
   },
   {
     "mobsfrombiome": "water_creature",
-    "persecond": 0.2,
+    "persecond": 0.6,
     "attempts": 20,
     "amount": {
       "minimum": 1,
@@ -36,7 +36,7 @@
       "maxdist": 48,
       "minheight": -25,
       "maxheight": 160,
-      "maxthis": 12
+      "maxthis": 8
     }
   },
   {
