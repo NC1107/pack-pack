@@ -1,5 +1,5 @@
 --- a/src/main/java/mcjty/lostworlds/worldgen/LWChunkGenerator.java	2026-11-24 04:57:59.552682855 -0500
-+++ b/src/main/java/mcjty/lostworlds/worldgen/LWChunkGenerator.java	2026-11-24 12:21:43.152056490 -0500
++++ b/src/main/java/mcjty/lostworlds/worldgen/LWChunkGenerator.java	2026-11-24 12:42:37.264144786 -0500
 @@ -19,6 +19,7 @@
  import net.minecraft.world.level.LevelHeightAccessor;
  import net.minecraft.world.level.StructureManager;
@@ -8,7 +8,25 @@
  import net.minecraft.world.level.biome.BiomeManager;
  import net.minecraft.world.level.biome.BiomeSource;
  import net.minecraft.world.level.block.Blocks;
-@@ -184,6 +185,16 @@
+@@ -156,7 +157,7 @@
+                         for (int z = 0; z < 16; ++z) {
+                             if (!context.isInSphere(cp.getMinBlockX() + x, y, cp.getMinBlockZ() + z)) {
+                                 if (customSea && y < getGroundLevel(groundBuffer, x, z)) {
+-                                    levelchunksection.setBlockState(x, y & 15, z, y < minBuildHeight + 2 ? bedrock : defaultBlock, false);
++                                    levelchunksection.setBlockState(x, y & 15, z, groundBlock(y, getGroundLevel(groundBuffer, x, z), minBuildHeight, bedrock, defaultBlock), false);
+                                 } else {
+                                     levelchunksection.setBlockState(x, y & 15, z, block, false);
+                                 }
+@@ -167,7 +168,7 @@
+                     for (int x = 0; x < 16; ++x) {
+                         for (int z = 0; z < 16; ++z) {
+                             if (customSea && y < getGroundLevel(groundBuffer, x, z)) {
+-                                levelchunksection.setBlockState(x, y & 15, z, y < minBuildHeight + 2 ? bedrock : defaultBlock, false);
++                                levelchunksection.setBlockState(x, y & 15, z, groundBlock(y, getGroundLevel(groundBuffer, x, z), minBuildHeight, bedrock, defaultBlock), false);
+                             } else {
+                                 levelchunksection.setBlockState(x, y & 15, z, block, false);
+                             }
+@@ -184,9 +185,31 @@
      }
  
      private double[] sampleGroundNoise(ChunkPos chunkPos) {
@@ -25,7 +43,22 @@
          return groundNoise.getRegion(null, chunkPos.getMinBlockX(), chunkPos.getMinBlockZ(), 16, 16, 1.0 / 16.0, 1.0 / 16.0, 1.0D);
      }
  
-@@ -256,17 +267,35 @@
++
++    /**
++     * Under the sea floor: sand for SeaFloor.SAND_DEPTH blocks so there is nothing to carve into
++     * around domes and no bedrock showing on slopes, then bedrock.
++     */
++    private BlockState groundBlock(int y, int ground, int minBuildHeight, BlockState bedrock, BlockState defaultBlock) {
++        if (lwSettings.type() != LostWorldType.SPHERES || !lwSettings.hasCustomSea()) {
++            return y < minBuildHeight + 2 ? bedrock : defaultBlock;
++        }
++        return y < minBuildHeight + 2 || y < ground - SeaFloor.SAND_DEPTH ? bedrock : Blocks.SAND.defaultBlockState();
++    }
++
+     private int getGroundLevel(double[] groundBuffer, int x, int z) {
+         double vr = -15 + groundBuffer[x + z * 16] / GROUND_SCALE;
+         return (int) vr;
+@@ -256,17 +279,35 @@
  
      @Override
      public int getBaseHeight(int x, int z, Heightmap.Types type, LevelHeightAccessor level, RandomState random) {
@@ -68,3 +101,21 @@
      // We override buildSurface because there is some hardcoded badlands stuff that is done here and we don't want that
      @Override
      public void buildSurface(ChunkAccess chunkAccess, WorldGenerationContext wgContext, RandomState random, StructureManager structureManager, BiomeManager biomeManager, Registry<Biome> biomes, Blender blender) {
+@@ -308,7 +349,7 @@
+                                 for (int z = 0; z < 16; ++z) {
+                                     if (!context.isInSphere(cp.getMinBlockX() + x, y, cp.getMinBlockZ() + z)) {
+                                         if (customSea && y < getGroundLevel(groundBuffer, x, z)) {
+-                                            levelchunksection.setBlockState(x, y & 15, z, y < minBuildHeight + 2 ? bedrock : defaultBlock, false);
++                                            levelchunksection.setBlockState(x, y & 15, z, groundBlock(y, getGroundLevel(groundBuffer, x, z), minBuildHeight, bedrock, defaultBlock), false);
+                                         } else {
+                                             levelchunksection.setBlockState(x, y & 15, z, block, false);
+                                         }
+@@ -319,7 +360,7 @@
+                             for (int x = 0; x < 16; ++x) {
+                                 for (int z = 0; z < 16; ++z) {
+                                     if (customSea && y < getGroundLevel(groundBuffer, x, z)) {
+-                                        levelchunksection.setBlockState(x, y & 15, z, y < minBuildHeight + 2 ? bedrock : defaultBlock, false);
++                                        levelchunksection.setBlockState(x, y & 15, z, groundBlock(y, getGroundLevel(groundBuffer, x, z), minBuildHeight, bedrock, defaultBlock), false);
+                                     } else {
+                                         levelchunksection.setBlockState(x, y & 15, z, block, false);
+                                     }

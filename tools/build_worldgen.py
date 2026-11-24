@@ -63,8 +63,6 @@ CITY_FULL_RADIUS = 600
 # at 0,0. It is built by a function once the chunks under it exist, because Lost Cities'
 # own spheres are whole spheres that cut a pit into the floor.
 START_DOME_RADIUS = 7
-# No Lost Cities buildings this close to 0,0.
-START_CLEAR_RADIUS = 32
 
 # Domes sit this far above the sea floor, so their glass base is not buried in it. Lost
 # Cities centres every dome on one ground level, so this raises all domes, not just the start.
@@ -155,11 +153,10 @@ def build_datapack(village_factor: float) -> str:
     # This sea level only fills air inside domes (Lost Worlds fills the ocean itself), so
     # keep it below every dome floor.
     noise["sea_level"] = -64
-    # Nothing to dig into: below the sea floor (and below the dirt in a dome) it is solid
-    # bedrock, so players cannot tunnel under the ocean or mine ore. Lost Worlds fills the
-    # floor with the default block, and the deepslate rule would turn dome ground back into
-    # diggable rock.
-    noise["default_block"] = {"Name": "minecraft:bedrock"}
+    # Nothing to mine: the ground is sand (Lost Worlds puts 30 blocks of it under the sea floor,
+    # then bedrock), so there is no ore and nothing to carve into around domes. The deepslate
+    # rule would turn dome ground back into rock.
+    noise["default_block"] = {"Name": "minecraft:sand"}
     noise["surface_rule"]["sequence"] = [
         rule for rule in noise["surface_rule"]["sequence"]
         if rule.get("if_true", {}).get("random_name") != "minecraft:deepslate"
@@ -191,6 +188,7 @@ def build_datapack(village_factor: float) -> str:
     write_seabed_cover()
     write_structure_overrides()
     write_ocean_biomes()
+    write_structure_set_filters()
     return lc_villages.build(DATAPACK, vanilla_jar(), lost_cities_jar(), village_factor, DOME_CITY_FACTOR)
 
 
@@ -328,32 +326,45 @@ def write_ocean_biomes() -> None:
         write_json(DATAPACK / f"data/minecraft/worldgen/biome/{name}.json", biome)
 
 
+# Structures dropped from mod structure sets. The sea dragon skeletons are long serpents that
+# cut through domes and hang in the middle of the water.
+REMOVED_STRUCTURES = {"mos:sea_dragon_skeleton", "mos:dragon_skeleton"}
+
+
+def write_structure_set_filters() -> None:
+    for jar in sorted((SERVER / "mods").glob("*.jar")):
+        with zipfile.ZipFile(jar) as z:
+            for name in z.namelist():
+                if "/worldgen/structure_set/" not in name or not name.endswith(".json"):
+                    continue
+                structure_set = json.loads(z.read(name))
+                kept = [e for e in structure_set["structures"] if e["structure"] not in REMOVED_STRUCTURES]
+                if len(kept) != len(structure_set["structures"]):
+                    structure_set["structures"] = kept
+                    write_json(DATAPACK / name, structure_set)
+
+
 def write_seabed_cover() -> None:
     # Disks of up to radius 8, ten per chunk, leave well under 1% of the floor uncovered.
     # They run after ores, so ore that was showing on the floor gets covered too.
-    bare_floor = {"type": "minecraft:any_of", "predicates": [
-        {"type": "minecraft:matching_block_tag", "tag": "minecraft:base_stone_overworld"},
-        {"type": "minecraft:matching_block_tag", "tag": "c:ores"},
-        {"type": "minecraft:matching_blocks", "blocks": "minecraft:bedrock"},
-    ]}
+    sand = {"type": "minecraft:matching_blocks", "blocks": "minecraft:sand"}
     covered = {"type": "minecraft:matching_blocks", "blocks": ["minecraft:sand", "minecraft:gravel"]}
     worldgen = DATAPACK / "data/packpack/worldgen"
     configured = {
-        "seabed_sand": disk("minecraft:sand", (5, 8), 3, bare_floor),
-        "seabed_gravel": disk("minecraft:gravel", (5, 8), 3, bare_floor),
+        "seabed_gravel": disk("minecraft:gravel", (5, 8), 3, sand),
         "seabed_gravel_patch": disk("minecraft:gravel", (2, 5), 1, covered),
         "seabed_clay_patch": disk("minecraft:clay", (2, 3), 1, covered),
     }
     # (count per chunk, 1 in how many chunks)
     placed = {
-        "seabed_sand": (10, 1), "seabed_gravel": (10, 1), "seabed_gravel_patch": (2, 1), "seabed_clay_patch": (1, 3),
+        "seabed_gravel": (10, 1), "seabed_gravel_patch": (2, 1), "seabed_clay_patch": (1, 3),
     }
     for name, feature in configured.items():
         write_json(worldgen / "configured_feature" / f"{name}.json", feature)
         write_json(worldgen / "placed_feature" / f"{name}.json", on_seabed(f"packpack:{name}", *placed[name]))
     features = {
-        "sand": ["seabed_sand", "seabed_clay_patch"],
-        "mixed": ["seabed_sand", "seabed_gravel_patch", "seabed_clay_patch"],
+        "sand": ["seabed_clay_patch"],
+        "mixed": ["seabed_gravel_patch", "seabed_clay_patch"],
         "gravel": ["seabed_gravel", "seabed_clay_patch"],
     }
     for cover, biomes in SEABED_COVER.items():
@@ -436,10 +447,8 @@ def build_profiles(dome_world_style: str, city_free_radius: int) -> None:
     domes["cities"].update({"cityMinRadius": DOME_CITY_RADIUS[0], "cityMaxRadius": DOME_CITY_RADIUS[1]})
     # Every dome is a city: biosphere leaves 20% of them as empty lawn.
     domes["cities"]["cityChance"] = 1.0
-    domes["cities"].update({
-        "citySpawnDistance1": START_CLEAR_RADIUS, "citySpawnMultiplier1": 0.0,
-        "citySpawnDistance2": START_CLEAR_RADIUS + 16, "citySpawnMultiplier2": 1.0,
-    })
+    # The patched Lost Cities also keeps domes themselves out of the city free radius, so
+    # nothing is visible from spawn: players find the first dome by swimming out.
     domes["cities"].update({f"cityLevel{i}Height": DOME_FLOOR_Y + 6 * i for i in range(8)})
     # Lights in dome buildings keep their torches (and let dome villagers spawn); more
     # lots become buildings instead of lawn.

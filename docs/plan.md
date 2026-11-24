@@ -275,6 +275,7 @@ The sea floor needs real elevation, like ridges, trenches and plateaus.
 - Lost Worlds answers every height lookup outside a dome with the world minimum, and it has a bug where it multiplies the block position by 16 first.
   Structures that place themselves by height end up buried or floating, and some get an air box cut into the ground.
   Mod structures now get a fixed start height from our datapack, which fixed the ones we checked.
+- The ground is sand all the way down to bedrock at the bottom of the world, so there is nothing to mine and nothing to carve into around domes.
 - Real elevation needed a change to the Lost Worlds ground function, which a datapack cannot do, so the pack ships a patched Lost Worlds, see `tools/lostworlds/README.md`.
   The floor now has plates, ridges, trenches and seamounts, ranging from about -57 to +50, flat around domes and spawn, and structures and drowned cities follow it.
 - Done: the old note about this below is kept for the reasoning.

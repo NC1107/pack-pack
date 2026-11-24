@@ -6,7 +6,6 @@
     "minecraft:deep_lukewarm_ocean"
   ],
   "features": [
-    "packpack:seabed_sand",
     "packpack:seabed_clay_patch"
   ],
   "step": "underground_decoration"
