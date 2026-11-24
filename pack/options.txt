@@ -2,3 +2,4 @@ onboardAccessibility:false
 skipMultiplayerWarning:true
 joinedFirstServer:true
 tutorialStep:none
+gamma:1.0
