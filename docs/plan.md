@@ -260,3 +260,42 @@ Tick things off when they're handled, add new ones when they come up.
 - ftb-snbt-lib: https://github.com/peunsu/ftb-snbt-lib
 - spark commands: https://spark.lucko.me/docs/Command-Usage
 - Curseforge third-party distribution and prism: https://prismlauncher.org/news/ftb-removal
+
+## Audit, 2026-11-24
+
+Three reviewers looked at the pack against real packs, the dev pipeline and the world generation.
+Some of what they found is checked, some is their own judgement, so treat the details as leads.
+
+### World direction
+
+The world should feel post-apocalyptic.
+Cities are covered by miles of water, only a few small domes survived, and the old flooded cities and roads are overrun by ocean life.
+The sea floor needs real elevation, like ridges, trenches and plateaus.
+
+- Lost Worlds answers every height lookup outside a dome with the world minimum, and it has a bug where it multiplies the block position by 16 first.
+  Structures that place themselves by height end up buried or floating, and some get an air box cut into the ground.
+  Mod structures now get a fixed start height from our datapack, which fixed the ones we checked.
+- Real elevation means changing the Lost Worlds ground function, which a datapack cannot do.
+  The reviewer recommends a patched copy of Lost Worlds with a multi-scale ground function that is flat under domes, and a taller vertical budget.
+  Replacing the generator with the vanilla one would lose the dry dome interiors, so it is not recommended.
+- Overgrown cities and roads are a decoration pass after the city features, plus a higher ruin chance on the flooded profile.
+
+### Pack design gaps
+
+- There is no tier map yet, and everything else depends on it.
+- The resource loop has no answer yet: with bedrock under the floor there is no ore, so where do the first metals, wood, fuel and food come from?
+  Decide this before picking Create, Create Deep Seas or GregTech.
+- The pod needs a survival loop, and the 500 block swim needs a gate.
+- FTB Quests is installed but has no chapters.
+- Pick one difficulty mode now and make the others config override folders later.
+- Worldgen datapack changes do not touch existing worlds, so decide when a release means a new world.
+
+### Pipeline gaps
+
+- Capture evidence for hangs: a server thread dump on a stall, and a separate client shutdown deadline with a dump.
+- A nightly soak with a chunk pregen over several seeds, to ever reproduce the Lost Cities `sphere is null` error.
+- Tests and lint for `tools/`.
+- A static check of mod metadata and dependencies before booting.
+- A scheduled mod update workflow.
+- Performance budgets with baselines.
+- Recipe dump, overlap report, progression solvability graph and quest validator, in that order, once the tier map exists.
