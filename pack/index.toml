@@ -5,16 +5,20 @@ file = "config/crash_assistant/config.toml"
 hash = "c6406f3e491aef05e7cd09a3287c12b2020526757125cdc9d6aeecc03c4ba8f1"
 
 [[files]]
+file = "config/incontrol/spawner.json"
+hash = "f0e19f6808dd7f7eadfe9a4ffbf4e973eae74b4da5f1295bae7cacc49d3767ed"
+
+[[files]]
 file = "config/lostcities/common.toml"
 hash = "4c4a57c7efb7336653a68809bbfa9a3d68e04533b51b3ca120fe0580ac78801b"
 
 [[files]]
 file = "config/lostcities/profiles/waterworld.json"
-hash = "1814a95b8d6d882e9156741ba2b8940632e53fc20def9a575e989cb9f9498bb3"
+hash = "3b572ad3e08b2c6d3be448fcd1531d10e5c95e9fc0832c829afe98e9316c33b9"
 
 [[files]]
 file = "config/lostcities/profiles/waterworld_domes.json"
-hash = "9bcdd1cc36a926ab897562f4512382f4ec5c47adeff764af2cceb2320109d3f4"
+hash = "57cfae192ad8f12131cc0595f7f6b2812f1776dd9bb222e77145aa4bdeb5dbdc"
 
 [[files]]
 file = "config/modernfix-mixins.properties"
@@ -155,6 +159,10 @@ hash = "6a06fc7a62af2c812eb917989b583ac4e5161c2b1ec73ddd4bd33df9d440b2d7"
 [[files]]
 file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/buildings/packpack_village_plains_weaponsmith_1.json"
 hash = "d1a2fe106646e650947606a5f350171252b98b042d5b0b966b54beb5f9c225f4"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/citystyles/citystyle_packpack_start.json"
+hash = "a6792a8697afe649a13a2e562d273c129450ff39b3161f863e1fb60d62f23558"
 
 [[files]]
 file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/citystyles/citystyle_packpack_village.json"
@@ -441,6 +449,14 @@ file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/parts/packpack_v
 hash = "60a9621c6e821efb0379a59d196d6e69f03825d64b41fb399d0321a073094cab"
 
 [[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/predefinedcities/start.json"
+hash = "f6fb937113a0e70a3301de1968b7117664062f9350c84edfb301cc4f51a65a48"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/predefinedspheres/start.json"
+hash = "92c1c502f36aa149f00119ef7c68a91d0581d0327e19dbb5a2c6b916be6b0e52"
+
+[[files]]
 file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/styles/packpack_village.json"
 hash = "2f348b7d2963e2f1da565b5bc14e778fc80ab105061c85b4aa6b5e194dbb2ac6"
 
@@ -454,23 +470,19 @@ hash = "802452e0ed26aa8d7139802ed1bd03898cded646fe6ab48e90bcbc8d2b6a7c2d"
 
 [[files]]
 file = "datapacks/pack-pack-worldgen/data/minecraft/tags/function/tick.json"
-hash = "f7ef4880b8ee7647a329c0831d74bfc2c689bd496422017ec0eae59a557bf2e2"
+hash = "f57815d1c8d41f574c13bb0a9e0b4cd80a22f62a098f0a4527d1f79a4439234b"
 
 [[files]]
 file = "datapacks/pack-pack-worldgen/data/minecraft/worldgen/noise_settings/overworld.json"
-hash = "7028d658401dc1e46f71015b9b12df0dd02744a186b977cdf89a08b4ace9d4d5"
+hash = "5103fabb4a0d00f64ad675c08a960ca9b59ee6e17a3aa45ecc057eeadf737f15"
 
 [[files]]
 file = "datapacks/pack-pack-worldgen/data/minecraft/worldgen/world_preset/normal.json"
-hash = "78d297e28bd0e534d2ea2bc10b0775e62027f98ba57af1917ed36cc85164728b"
+hash = "a09832d9217f98f642f0f24fc22d79a70b8138881c37e9deba04523f23a5a514"
 
 [[files]]
-file = "datapacks/pack-pack-worldgen/data/packpack/function/build_start_pod.mcfunction"
-hash = "0185e507d47d8003690e5026fc65ddab8bafdf5e7ee37f7f936a34d33a847f31"
-
-[[files]]
-file = "datapacks/pack-pack-worldgen/data/packpack/function/place_new_player.mcfunction"
-hash = "8bdeb2cb8e008e8af8a14532ccb4b65fcffaf317498b326645c35d740811ef23"
+file = "datapacks/pack-pack-worldgen/data/packpack/function/light_start_sphere.mcfunction"
+hash = "5ed639ce0b1833da6f702cfc2c12b8a102cf4f74d39ae535bf1da638adb1ed81"
 
 [[files]]
 file = "datapacks/pack-pack-worldgen/data/packpack/function/settle_new_villagers.mcfunction"
@@ -478,11 +490,55 @@ hash = "ad464ac8dea2c1f5e3b618be236aa5772b8adf4de6f8eff35dd21fbb944063ba"
 
 [[files]]
 file = "datapacks/pack-pack-worldgen/data/packpack/function/start.mcfunction"
-hash = "1251e9d34ba489c3d88ab8e11c17bf94e64a5671b251fe6b7245f836b0c28fc4"
+hash = "c86b9a36c5988eaff179ffe56e55db466a45478247c42baf9530decd8bba7dd4"
 
 [[files]]
-file = "datapacks/pack-pack-worldgen/data/packpack/function/start_pod_tick.mcfunction"
-hash = "29cdb462cadc8eaf0970a188be30849e078c4f68c199cc3748edff0745afc5ff"
+file = "datapacks/pack-pack-worldgen/data/packpack/function/start_tick.mcfunction"
+hash = "57f1daccb596ab573ef0a0d7a579821bdb3b45b3b1fc7d2adcff6c5bca00cdf4"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/seabed_gravel.json"
+hash = "089e1138888d1000fd86aee08d180815af1aed1a5927fddaa994308ebba817e7"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/seabed_mixed.json"
+hash = "ef68e5c968f99d36f06662ec2c6569aa929b7c73daf330df9655c9eabc823de3"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/seabed_sand.json"
+hash = "52f2ff33d614c2ce6105ceecfb96609f9b327c0b35c710def9b266eea1ec65cc"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/worldgen/configured_feature/seabed_clay_patch.json"
+hash = "8abc2abad9beba0fa80e95d4317e39d21b80304b7e248981ee5395fb708e0f5b"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/worldgen/configured_feature/seabed_gravel.json"
+hash = "6bb1000d277b5c333cb9f6961155cee2f6174e0a031bc8ee8430ed2a2c3bf532"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/worldgen/configured_feature/seabed_gravel_patch.json"
+hash = "26792dca89b320817a8d9171ba13d0d9b935e0252752f7b8e83512e756990247"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/worldgen/configured_feature/seabed_sand.json"
+hash = "5df3440a5b2b14db872d9a3cd918065f92adc3ad84659e49aa7ef7998c1b4705"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/worldgen/placed_feature/seabed_clay_patch.json"
+hash = "c1d99e9e3991f13c5bf1862446a49527c419ead73ed014607da4698759f3615c"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/worldgen/placed_feature/seabed_gravel.json"
+hash = "f5ce1f554a769ad34d40fd2cfb164b11cf2534dedefcfb3a331ad6fec43f98da"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/worldgen/placed_feature/seabed_gravel_patch.json"
+hash = "9aad253b50aa762825587120214a2c0ca66330fcef14487efbe6ce7c05c3f8d6"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/worldgen/placed_feature/seabed_sand.json"
+hash = "1fa20d4ac03b49b6e0dd8e87880f44232b44d68ed3bae2727fd07f1cf72036d1"
 
 [[files]]
 file = "datapacks/pack-pack-worldgen/pack.mcmeta"
@@ -566,6 +622,11 @@ metafile = true
 [[files]]
 file = "mods/immediatelyfast.pw.toml"
 hash = "4601b9be31b6e131dca8a148c974d015444bcac7c82fcb66fbd8751a67933a5d"
+metafile = true
+
+[[files]]
+file = "mods/in-control.pw.toml"
+hash = "d24d01bc01bb095d47c905a778ebe27d14a568cd9e39e63a614b1223b33a7254"
 metafile = true
 
 [[files]]

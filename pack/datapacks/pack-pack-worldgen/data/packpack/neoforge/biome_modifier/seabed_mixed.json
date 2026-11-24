@@ -1,0 +1,13 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": [
+    "minecraft:ocean",
+    "minecraft:deep_ocean"
+  ],
+  "features": [
+    "packpack:seabed_sand",
+    "packpack:seabed_gravel_patch",
+    "packpack:seabed_clay_patch"
+  ],
+  "step": "underground_decoration"
+}

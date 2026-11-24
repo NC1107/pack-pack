@@ -1,0 +1,14 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": [
+    "minecraft:cold_ocean",
+    "minecraft:deep_cold_ocean",
+    "minecraft:frozen_ocean",
+    "minecraft:deep_frozen_ocean"
+  ],
+  "features": [
+    "packpack:seabed_gravel",
+    "packpack:seabed_clay_patch"
+  ],
+  "step": "underground_decoration"
+}

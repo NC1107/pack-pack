@@ -145,6 +145,24 @@ def to_parts(name: str, size: tuple, blocks: dict) -> list[dict]:
     ]
 
 
+START_STYLE = "citystyle_packpack_start"
+
+
+def write_start_city(datapack: Path, center: tuple[int, int], radius: int) -> None:
+    """A predefined city on the start sphere, styled so the whole sphere is glass."""
+    out = datapack / NAMESPACE_DIR
+    (out / "citystyles").mkdir(parents=True, exist_ok=True)
+    (out / "citystyles" / f"{START_STYLE}.json").write_text(json.dumps({
+        "style": "standard", "inherit": "citystyle_standard",
+        "sphereblocks": {"glass": "Z", "border": "Z", "inner": "b"},
+    }) + "\n")
+    (out / "predefinedcities").mkdir(parents=True, exist_ok=True)
+    (out / "predefinedcities" / "start.json").write_text(json.dumps({
+        "dimension": "minecraft:overworld", "chunkx": center[0] >> 4, "chunkz": center[1] >> 4,
+        "radius": radius, "citystyle": START_STYLE,
+    }) + "\n")
+
+
 def build(datapack: Path, vanilla_jar: Path, lost_cities_jar: Path, village_factor: float,
           city_factor: float) -> str:
     """Write the village assets into the datapack and return the dome world style's name."""
