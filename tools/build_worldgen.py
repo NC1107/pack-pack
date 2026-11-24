@@ -191,7 +191,6 @@ def build_datapack(village_factor: float) -> str:
     write_seabed_cover()
     write_structure_overrides()
     write_ocean_biomes()
-    write_mod_structure_heights()
     return lc_villages.build(DATAPACK, vanilla_jar(), lost_cities_jar(), village_factor, DOME_CITY_FACTOR)
 
 
@@ -329,40 +328,6 @@ def write_ocean_biomes() -> None:
         write_json(DATAPACK / f"data/minecraft/worldgen/biome/{name}.json", biome)
 
 
-# Lost Worlds answers every height lookup outside a dome with the world minimum, so
-# structures that find their height by projecting onto a heightmap end up in the wrong
-# place. Mod structures get a fixed start height instead: the sea floor for underwater
-# ones, the water surface for ships.
-HEIGHTMAP_START = {
-    "OCEAN_FLOOR_WG": SEABED_Y, "OCEAN_FLOOR": SEABED_Y,
-    "WORLD_SURFACE_WG": SEA_LEVEL, "WORLD_SURFACE": SEA_LEVEL, "MOTION_BLOCKING": SEA_LEVEL,
-}
-
-
-def write_mod_structure_heights() -> None:
-    fixed = collections.Counter()
-    for jar in sorted((SERVER / "mods").glob("*.jar")):
-        with zipfile.ZipFile(jar) as z:
-            for name in z.namelist():
-                parts = name.split("/")
-                if len(parts) < 5 or parts[0] != "data" or parts[2:4] != ["worldgen", "structure"] or not name.endswith(".json"):
-                    continue
-                if parts[1] == "minecraft":
-                    continue
-                try:
-                    structure = json.loads(z.read(name))
-                except ValueError:
-                    continue
-                heightmap = structure.get("project_start_to_heightmap")
-                if heightmap not in HEIGHTMAP_START:
-                    continue
-                structure.pop("project_start_to_heightmap")
-                structure["start_height"] = {"absolute": HEIGHTMAP_START[heightmap]}
-                write_json(DATAPACK / name, structure)
-                fixed[parts[1]] += 1
-    print("structure start heights fixed:", dict(fixed))
-
-
 def write_seabed_cover() -> None:
     # Disks of up to radius 8, ten per chunk, leave well under 1% of the floor uncovered.
     # They run after ores, so ore that was showing on the floor gets covered too.
@@ -380,31 +345,16 @@ def write_seabed_cover() -> None:
         "seabed_clay_patch": disk("minecraft:clay", (2, 3), 1, covered),
     }
     # (count per chunk, 1 in how many chunks)
-    # Low rises on the otherwise flat floor: blobs of sand or gravel that replace water just
-    # above the floor.
-    for kind in ("sand", "gravel"):
-        configured[f"seabed_hill_{kind}"] = {"type": "minecraft:ore", "config": {
-            "size": 48, "discard_chance_on_air_exposure": 0.0,
-            "targets": [{"target": {"predicate_type": "minecraft:block_match", "block": "minecraft:water"},
-                         "state": {"Name": f"minecraft:{kind}"}}],
-        }}
     placed = {
         "seabed_sand": (10, 1), "seabed_gravel": (10, 1), "seabed_gravel_patch": (2, 1), "seabed_clay_patch": (1, 3),
-        "seabed_hill_sand": (3, 1), "seabed_hill_gravel": (3, 1),
     }
     for name, feature in configured.items():
         write_json(worldgen / "configured_feature" / f"{name}.json", feature)
         write_json(worldgen / "placed_feature" / f"{name}.json", on_seabed(f"packpack:{name}", *placed[name]))
-        if name.startswith("seabed_hill"):
-            hill = json.loads((worldgen / "placed_feature" / f"{name}.json").read_text())
-            hill["placement"][3] = {"type": "minecraft:height_range", "height": {
-                "type": "minecraft:uniform", "min_inclusive": {"absolute": SEABED_Y - 2},
-                "max_inclusive": {"absolute": SEABED_Y + 3}}}
-            write_json(worldgen / "placed_feature" / f"{name}.json", hill)
     features = {
-        "sand": ["seabed_sand", "seabed_clay_patch", "seabed_hill_sand"],
-        "mixed": ["seabed_sand", "seabed_gravel_patch", "seabed_clay_patch", "seabed_hill_sand", "seabed_hill_gravel"],
-        "gravel": ["seabed_gravel", "seabed_clay_patch", "seabed_hill_gravel"],
+        "sand": ["seabed_sand", "seabed_clay_patch"],
+        "mixed": ["seabed_sand", "seabed_gravel_patch", "seabed_clay_patch"],
+        "gravel": ["seabed_gravel", "seabed_clay_patch"],
     }
     for cover, biomes in SEABED_COVER.items():
         write_json(DATAPACK / f"data/packpack/neoforge/biome_modifier/seabed_{cover}.json", {
@@ -456,7 +406,8 @@ def build_profiles(dome_world_style: str, city_free_radius: int) -> None:
     flooded["lostcity"]["groundLevel"] = SEABED_Y
     flooded["cities"].update({
         **{f"cityLevel{i}Height": SEABED_Y + 8 * i for i in range(8)},
-        "cityMinHeight": SEABED_Y - 20, "cityMaxHeight": SEABED_Y + 90,
+        # Drowned cities only on the low plains: not on ridges, seamounts or in trenches.
+        "cityMinHeight": SEABED_Y - 20, "cityMaxHeight": SEABED_Y + 12,
     })
     # Highways ran past the domes instead of into them; domes connect by monorail instead.
     flooded["lostcity"]["highwayDistanceMask"] = 0

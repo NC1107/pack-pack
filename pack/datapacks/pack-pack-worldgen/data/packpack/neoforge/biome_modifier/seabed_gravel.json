@@ -8,8 +8,7 @@
   ],
   "features": [
     "packpack:seabed_gravel",
-    "packpack:seabed_clay_patch",
-    "packpack:seabed_hill_gravel"
+    "packpack:seabed_clay_patch"
   ],
   "step": "underground_decoration"
 }
