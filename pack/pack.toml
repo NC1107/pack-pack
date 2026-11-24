@@ -1,0 +1,13 @@
+name = "pack-pack"
+author = "NC1107"
+version = "0.0.0"
+pack-format = "packwiz:1.1.0"
+
+[index]
+file = "index.toml"
+hash-format = "sha256"
+hash = "331565f46a2d296a4c1dabe61f56ef240499c78169f8c2528f5049dbf6e88e9a"
+
+[versions]
+minecraft = "1.21.1"
+neoforge = "21.1.267"

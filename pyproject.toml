@@ -1,0 +1,4 @@
+[tool.pyright]
+# The tools are run as plain scripts, so they import each other as top-level modules.
+extraPaths = ["tools"]
+pythonVersion = "3.11"

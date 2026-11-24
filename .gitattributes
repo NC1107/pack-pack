@@ -1,0 +1,16 @@
+# One line-ending convention on both Linux and Windows checkouts, so packwiz
+# hashes and diffs match no matter who committed the file.
+* text=auto eol=lf
+
+*.bat text eol=crlf
+*.cmd text eol=crlf
+*.ps1 text eol=crlf
+
+*.jar binary
+*.zip binary
+*.png binary
+*.jpg binary
+*.ogg binary
+*.nbt binary
+*.dat binary
+*.mca binary
