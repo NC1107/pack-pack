@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.7.0](https://github.com/NC1107/pack-pack/compare/v0.6.0...v0.7.0) (2026-11-24)
+
+
+### Features
+
+* bedrock under the sea floor, no caves, deep water sky, quest book, denser domes ([aa85a15](https://github.com/NC1107/pack-pack/commit/aa85a15310b15bfe5effdc0e421eb2838999b4d2))
+
+
+### Bug Fixes
+
+* give mod structures a fixed start height so they sit on the sea floor ([04fabdd](https://github.com/NC1107/pack-pack/commit/04fabdd653e9e5815c8e2160e9b559c602adf15c))
+
 ## [0.6.0](https://github.com/NC1107/pack-pack/compare/v0.5.0...v0.6.0) (2026-11-24)
 
 
