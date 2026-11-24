@@ -23,6 +23,7 @@ import time
 import tomllib
 from pathlib import Path
 
+import gamelog
 from downloads import cached_download, fetch, packwiz_bootstrap, packwiz_installer
 
 REPO = Path(__file__).resolve().parent.parent
@@ -60,7 +61,6 @@ SERVER_GC_FLAGS = [
     "-XX:G1RSetUpdatingPauseTimePercent=5", "-XX:SurvivorRatio=32", "-XX:+PerfDisableSharedMem",
     "-XX:MaxTenuringThreshold=1",
 ]
-LOG_ERROR = re.compile(r"/(ERROR|FATAL)\]")
 
 
 def log(msg: str) -> None:
@@ -194,14 +194,11 @@ def run_server(cmd: list[str], timeout: int, quiet: bool) -> dict:
 
 
 def scan_logs() -> dict:
-    latest = SERVER / "logs" / "latest.log"
-    errors = []
-    if latest.is_file():
-        errors = [ln.rstrip() for ln in latest.read_text("utf-8", errors="replace").splitlines()
-                  if LOG_ERROR.search(ln)]
-    crashes = sorted(p.name for p in (SERVER / "crash-reports").glob("*.txt")) if (SERVER / "crash-reports").is_dir() else []
-    mods = sorted(p.name for p in (SERVER / "mods").glob("*.jar")) if (SERVER / "mods").is_dir() else []
-    return {"error_lines": errors, "crash_reports": crashes, "server_mods": mods}
+    return {
+        "error_lines": gamelog.error_lines(gamelog.read_log(SERVER)),
+        "crash_reports": gamelog.crash_reports(SERVER),
+        "server_mods": gamelog.mod_jars(SERVER),
+    }
 
 
 def main() -> int:

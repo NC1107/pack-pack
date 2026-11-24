@@ -48,7 +48,10 @@ packwiz refresh                      # after editing anything under pack/
 cd ..
 python3 tools/check_repo.py
 python3 tools/boot_server.py --java <path-to-java-21>
+python3 tools/boot_client.py --java <path-to-java-21> --hmc-java <path-to-java-25>
 ```
+
+The client one needs `xvfb-run` (fedora: `sudo dnf install xorg-x11-server-Xvfb`) since it renders on a virtual display, so it's mostly a linux and CI thing.
 
 If packwiz says a mod is marked for both sides but only needs one, pick on purpose and set `side` in its `.pw.toml`.
 A client-only mod on the server crashes it.
@@ -60,4 +63,5 @@ Work on a branch and open a PR so CI runs before it lands on `main`.
 
 - `tools/check_repo.py` checks line endings, case collisions, windows-reserved names, path length, and that the packwiz index matches the files. `--json` gives output an agent can read.
 - `tools/boot_server.py` installs neoforge and the server side of the pack into `run/server`, boots it on a fixed seed, grabs a spark health report, and writes `run/boot-report.json`.
+- `tools/boot_client.py` does the same for the client, it launches the game with headlessmc on a virtual display, mc-runtime-test makes a world and joins it, then it writes `run/client-report.json`.
 - `tools/build_instance.py` builds the prism instance zips into `dist/`.

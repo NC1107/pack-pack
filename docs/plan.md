@@ -95,7 +95,7 @@ Tick things off when they're handled, add new ones when they come up.
 - [ ] **Humans sign off on balance.**
   Agents open an issue or PR for balance stuff, they don't change recipes on their own.
 - [x] **Basic CI.**
-  `check_repo.py` on linux and windows, then the server boot test, on every push and PR.
+  `check_repo.py` on linux and windows, then a server boot test and a client boot test that joins a world, on every push and PR.
 
 ### Performance
 

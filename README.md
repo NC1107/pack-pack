@@ -20,11 +20,13 @@ Setup and the day to day stuff is in [docs/dev.md](docs/dev.md).
 
 ## How it's checked
 
-Every push and PR runs two checks on github:
+Every push and PR runs three checks on github:
 
 - `tools/check_repo.py` looks for stuff that breaks between linux and windows, like crlf line endings, file names that only differ by case, paths that are too long, and a mod index that's out of date.
 - `tools/boot_server.py` installs the pack on a real dedicated server and boots it.
   It fails if the server crashes, logs errors, or never finishes starting, and it records boot time and tick times so we can see when something gets slower.
+- `tools/boot_client.py` installs the client side of the pack and launches the actual game on a virtual display.
+  It creates a world, joins it, lets it tick for a bit, then quits, and fails on the same stuff as the server one.
 
 The bigger checks (recipe overlap, dupes, quests you can't finish, etc) come later once there's content to check.
 
