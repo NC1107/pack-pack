@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.9.1](https://github.com/NC1107/pack-pack/compare/v0.9.0...v0.9.1) (2026-11-24)
+
+
+### Bug Fixes
+
+* switch off the tubes between domes ([b556225](https://github.com/NC1107/pack-pack/commit/b5562253d79c999e4c6f4cc6eecb24e4b83af388))
+
 ## [0.9.0](https://github.com/NC1107/pack-pack/compare/v0.8.1...v0.9.0) (2026-11-24)
 
 
