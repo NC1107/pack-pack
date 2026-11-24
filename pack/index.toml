@@ -605,6 +605,11 @@ hash = "73360e397134d238ee8fd21d33fd7f9275e9441f74f8f1b6ed92278877c0b9f1"
 metafile = true
 
 [[files]]
+file = "mods/geckolib.pw.toml"
+hash = "0a933e834f0f816c326d0abeafaf1aa60310e2a5bc89bc67826cd1ffffce19c9"
+metafile = true
+
+[[files]]
 file = "mods/globalpacks.pw.toml"
 hash = "a7f2ae8ea415e95ce1a3518b66edcaf124d8903ff9101d07331f7fec92b3400f"
 metafile = true
@@ -617,6 +622,16 @@ metafile = true
 [[files]]
 file = "mods/hopo-better-underwater-ruins.pw.toml"
 hash = "be75fa97845b24c102d33441e3f1e9a24d0ab622d57b031c0d0f6888ce5927a5"
+metafile = true
+
+[[files]]
+file = "mods/hybrid-api.pw.toml"
+hash = "d2a5dbd90b927d700febdfb08bd2ce5ef1ab5684fa1eee5ca2dc5e1a412f6551"
+metafile = true
+
+[[files]]
+file = "mods/hybrid-aquatic.pw.toml"
+hash = "af60f4cd6512a46528cc606f854354c6a261a79bdf2ced261b89b42905bbd7c0"
 metafile = true
 
 [[files]]
@@ -645,8 +660,18 @@ hash = "bd5bff86bc51d20fe7588a954b90ee451e9fde418270d49b20ab72645944a8f9"
 metafile = true
 
 [[files]]
+file = "mods/kotlin-for-forge.pw.toml"
+hash = "52be2f8af37fa9a10f817b3a676e56c9cdf33a3632048d8e922312878244b794"
+metafile = true
+
+[[files]]
 file = "mods/lithium.pw.toml"
 hash = "51e129832b04acd57da470fc41725bad5e101b6a6b1d4901fd8ea7a92b14e13d"
+metafile = true
+
+[[files]]
+file = "mods/lithostitched.pw.toml"
+hash = "c0611d8448bc043f372a008a435e14aa238ba8fca52fd1d79634424576ea9e12"
 metafile = true
 
 [[files]]
@@ -715,6 +740,11 @@ hash = "0bef7b3dd4758a661d3e6827bd390c12ff8a3ede4a66bb2e01e3c760f02bd509"
 metafile = true
 
 [[files]]
+file = "mods/simple-dive-gear.pw.toml"
+hash = "72ece6cf46053a6539542a6af4de498c46c120f13adfdc9bd4df30f6a525b3b1"
+metafile = true
+
+[[files]]
 file = "mods/sodium-extra.pw.toml"
 hash = "7ece7b8e65ac74bc1c705a3e25948ce5772c26ddf148514f29d90920ca1c3866"
 metafile = true
@@ -732,6 +762,11 @@ metafile = true
 [[files]]
 file = "mods/the-lost-cities.pw.toml"
 hash = "92f10c8f46f08f0874a3ac1e83700bd50a26ef1dffb3ab26113a363e784c5351"
+metafile = true
+
+[[files]]
+file = "mods/underwater-village.pw.toml"
+hash = "183b6911813421c59df2de77ae810a0c188ea8d6b5d4e465ff19859b900ebbf5"
 metafile = true
 
 [[files]]
