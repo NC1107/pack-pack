@@ -14,7 +14,7 @@
       "norestrictions": true,
       "mindist": 16,
       "maxdist": 48,
-      "minheight": -25,
+      "minheight": -24,
       "maxheight": 160,
       "maxthis": 25
     }
@@ -34,7 +34,7 @@
       "norestrictions": true,
       "mindist": 16,
       "maxdist": 48,
-      "minheight": -25,
+      "minheight": -24,
       "maxheight": 160,
       "maxthis": 8
     }
@@ -54,8 +54,8 @@
       "norestrictions": true,
       "mindist": 16,
       "maxdist": 48,
-      "minheight": -25,
-      "maxheight": 45,
+      "minheight": -24,
+      "maxheight": 46,
       "maxthis": 12
     }
   },
@@ -87,7 +87,7 @@
       "norestrictions": true,
       "mindist": 32,
       "maxdist": 96,
-      "minheight": -25,
+      "minheight": -24,
       "maxheight": 140,
       "maxthis": 3
     }

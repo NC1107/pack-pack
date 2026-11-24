@@ -1,5 +1,5 @@
 --- a/src/main/java/mcjty/lostworlds/worldgen/LWChunkGenerator.java	2026-11-24 04:57:59.552682855 -0500
-+++ b/src/main/java/mcjty/lostworlds/worldgen/LWChunkGenerator.java	2026-11-24 12:42:37.264144786 -0500
++++ b/src/main/java/mcjty/lostworlds/worldgen/LWChunkGenerator.java	2026-11-24 16:28:37.074757912 -0500
 @@ -19,6 +19,7 @@
  import net.minecraft.world.level.LevelHeightAccessor;
  import net.minecraft.world.level.StructureManager;
@@ -74,7 +74,7 @@
 +            // structures and city placement see the real floor and the real water surface
 +            int sea = Math.min(lwSettings.seaLevel(), level.getMaxBuildHeight() - 2);
 +            return switch (type) {
-+                case OCEAN_FLOOR, OCEAN_FLOOR_WG -> SeaFloor.height(x, z) + 1;
++                case OCEAN_FLOOR, OCEAN_FLOOR_WG -> SeaFloor.height(x, z);
 +                default -> sea + 1;
 +            };
          }
@@ -91,7 +91,7 @@
 +            BlockState stone = generatorSettings().value().defaultBlock();
 +            for (int i = 0; i < states.length; i++) {
 +                int y = min + i;
-+                states[i] = y <= floor ? stone : y <= sea ? Blocks.WATER.defaultBlockState() : Blocks.AIR.defaultBlockState();
++                states[i] = y < floor ? stone : y <= sea ? Blocks.WATER.defaultBlockState() : Blocks.AIR.defaultBlockState();
 +            }
 +            return new NoiseColumn(min, states);
 +        }
