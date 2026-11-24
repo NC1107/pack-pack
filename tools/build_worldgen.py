@@ -74,7 +74,10 @@ DOME_RAISE = 2
 # city that survived the water rising.
 DOME_FLOOR_Y = SEABED_Y + DOME_RAISE
 # Lost Cities can put a dome every 32 chunks (512 blocks) instead of every 16.
-DOME_GRID_32 = True
+DOME_GRID_32 = False
+# City radius in blocks and the fraction of it that becomes the dome radius (60 to 72).
+DOME_CITY_RADIUS = (100, 120)
+DOME_SPHERE_FACTOR = 0.6
 
 # Vanilla only spawns fish, squid and dolphins in the top 13 blocks of water, and they
 # despawn when no player is within 128 blocks, so nothing swims near the sea floor.
@@ -151,6 +154,15 @@ def build_datapack(village_factor: float) -> str:
     # This sea level only fills air inside domes (Lost Worlds fills the ocean itself), so
     # keep it below every dome floor.
     noise["sea_level"] = -64
+    # Nothing to dig into: below the sea floor (and below the dirt in a dome) it is solid
+    # bedrock, so players cannot tunnel under the ocean or mine ore. Lost Worlds fills the
+    # floor with the default block, and the deepslate rule would turn dome ground back into
+    # diggable rock.
+    noise["default_block"] = {"Name": "minecraft:bedrock"}
+    noise["surface_rule"]["sequence"] = [
+        rule for rule in noise["surface_rule"]["sequence"]
+        if rule.get("if_true", {}).get("random_name") != "minecraft:deepslate"
+    ]
     # Vanilla only applies sand, gravel and grass above the "preliminary surface", which the
     # flattened terrain puts far above the sea floor, leaving bare stone and ores there.
     # Apply the same surface rules everywhere.
@@ -177,6 +189,7 @@ def build_datapack(village_factor: float) -> str:
     write_json(tick, {"values": write_start_functions()})
     write_seabed_cover()
     write_structure_overrides()
+    write_ocean_biomes()
     return lc_villages.build(DATAPACK, vanilla_jar(), lost_cities_jar(), village_factor, DOME_CITY_FACTOR)
 
 
@@ -255,6 +268,7 @@ def write_start_functions() -> list[str]:
     ]) + "\n")
     (functions / "place_new_player.mcfunction").write_text("\n".join([
         "$tp @s 0.5 $(y) 0.5",
+        "give @s ftbquests:book",
         "tag @s add packpack_started",
     ]) + "\n")
     (functions / "start.mcfunction").write_text("gamerule spawnRadius 0\n")
@@ -296,12 +310,30 @@ def write_structure_overrides() -> None:
         write_json(DATAPACK / f"data/minecraft/worldgen/structure_set/{name}.json", structure_set)
 
 
+# Colour of the water far away, which is also what shows beyond the last loaded chunk.
+# Vanilla ocean sky and fog are the bright overworld blue.
+DEEP_WATER_COLOR = 0x061a3a
+
+
+def write_ocean_biomes() -> None:
+    """Override the vanilla ocean biomes: no caves, and sky and fog the colour of deep water."""
+    ocean_biomes = sorted({b for _, deep, shallow in TEMPERATURE_BANDS for b in (deep, shallow)})
+    for name in ocean_biomes:
+        biome = vanilla(f"data/minecraft/worldgen/biome/{name}.json")
+        # Carvers cut air pockets into the water column because the aquifers are switched off.
+        biome["carvers"] = {}
+        biome["effects"]["sky_color"] = DEEP_WATER_COLOR
+        biome["effects"]["fog_color"] = DEEP_WATER_COLOR
+        write_json(DATAPACK / f"data/minecraft/worldgen/biome/{name}.json", biome)
+
+
 def write_seabed_cover() -> None:
     # Disks of up to radius 8, ten per chunk, leave well under 1% of the floor uncovered.
     # They run after ores, so ore that was showing on the floor gets covered too.
     bare_floor = {"type": "minecraft:any_of", "predicates": [
         {"type": "minecraft:matching_block_tag", "tag": "minecraft:base_stone_overworld"},
         {"type": "minecraft:matching_block_tag", "tag": "c:ores"},
+        {"type": "minecraft:matching_blocks", "blocks": "minecraft:bedrock"},
     ]}
     covered = {"type": "minecraft:matching_blocks", "blocks": ["minecraft:sand", "minecraft:gravel"]}
     worldgen = DATAPACK / "data/packpack/worldgen"
@@ -312,16 +344,31 @@ def write_seabed_cover() -> None:
         "seabed_clay_patch": disk("minecraft:clay", (2, 3), 1, covered),
     }
     # (count per chunk, 1 in how many chunks)
+    # Low rises on the otherwise flat floor: blobs of sand or gravel that replace water just
+    # above the floor.
+    for kind in ("sand", "gravel"):
+        configured[f"seabed_hill_{kind}"] = {"type": "minecraft:ore", "config": {
+            "size": 48, "discard_chance_on_air_exposure": 0.0,
+            "targets": [{"target": {"predicate_type": "minecraft:block_match", "block": "minecraft:water"},
+                         "state": {"Name": f"minecraft:{kind}"}}],
+        }}
     placed = {
         "seabed_sand": (10, 1), "seabed_gravel": (10, 1), "seabed_gravel_patch": (2, 1), "seabed_clay_patch": (1, 3),
+        "seabed_hill_sand": (3, 1), "seabed_hill_gravel": (3, 1),
     }
     for name, feature in configured.items():
         write_json(worldgen / "configured_feature" / f"{name}.json", feature)
         write_json(worldgen / "placed_feature" / f"{name}.json", on_seabed(f"packpack:{name}", *placed[name]))
+        if name.startswith("seabed_hill"):
+            hill = json.loads((worldgen / "placed_feature" / f"{name}.json").read_text())
+            hill["placement"][3] = {"type": "minecraft:height_range", "height": {
+                "type": "minecraft:uniform", "min_inclusive": {"absolute": SEABED_Y - 2},
+                "max_inclusive": {"absolute": SEABED_Y + 3}}}
+            write_json(worldgen / "placed_feature" / f"{name}.json", hill)
     features = {
-        "sand": ["seabed_sand", "seabed_clay_patch"],
-        "mixed": ["seabed_sand", "seabed_gravel_patch", "seabed_clay_patch"],
-        "gravel": ["seabed_gravel", "seabed_clay_patch"],
+        "sand": ["seabed_sand", "seabed_clay_patch", "seabed_hill_sand"],
+        "mixed": ["seabed_sand", "seabed_gravel_patch", "seabed_clay_patch", "seabed_hill_sand", "seabed_hill_gravel"],
+        "gravel": ["seabed_gravel", "seabed_clay_patch", "seabed_hill_gravel"],
     }
     for cover, biomes in SEABED_COVER.items():
         write_json(DATAPACK / f"data/packpack/neoforge/biome_modifier/seabed_{cover}.json", {
@@ -395,8 +442,11 @@ def build_profiles(dome_world_style: str, city_free_radius: int) -> None:
     # City chance, size and level heights from Lost Cities' own domed profile (biosphere),
     # so domes are filled by a city and its levels start near the dome floor.
     biosphere = read_only_copy("biosphere")["cities"]
-    for key in ("cityThreshold", "cityMaxRadius"):
-        domes["cities"][key] = biosphere[key]
+    domes["cities"]["cityThreshold"] = biosphere["cityThreshold"]
+    # A lot is built up with a probability that falls from 1 at the city centre to 0 at the
+    # city radius. A dome is as big as its city radius times the sphere factor, so a city
+    # radius well past the dome keeps the whole dome built up instead of just its middle.
+    domes["cities"].update({"cityMinRadius": DOME_CITY_RADIUS[0], "cityMaxRadius": DOME_CITY_RADIUS[1]})
     # Every dome is a city: biosphere leaves 20% of them as empty lawn.
     domes["cities"]["cityChance"] = 1.0
     domes["cities"].update({
@@ -420,9 +470,10 @@ def build_profiles(dome_world_style: str, city_free_radius: int) -> None:
     })
     domes["cityspheres"].update({
         "outsideProfile": "waterworld",
-        "citySphereChance": 0.5,
+        "citySphereChance": 0.8,
+        "citySphereFactor": DOME_SPHERE_FACTOR,
         # Every pair of neighbouring domes is linked by a glass monorail tube.
-        "monorailChance": 1.0,
+        "monorailChance": 0.9,
         # Clearing above a dome carves air unless the generator reports an outer sea level,
         # which only Lost Worlds' generator does, so leave the water above domes alone.
         "citySphereClearAbove": 0,

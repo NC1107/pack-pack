@@ -1,6 +1,10 @@
 hash-format = "sha256"
 
 [[files]]
+file = "config/clearwater.jsonc"
+hash = "c59ffac284cbf02069a68b61fcfa2c4f1e29877e72db277f8150afc2f16ead23"
+
+[[files]]
 file = "config/crash_assistant/config.toml"
 hash = "c6406f3e491aef05e7cd09a3287c12b2020526757125cdc9d6aeecc03c4ba8f1"
 
@@ -18,7 +22,7 @@ hash = "3b572ad3e08b2c6d3be448fcd1531d10e5c95e9fc0832c829afe98e9316c33b9"
 
 [[files]]
 file = "config/lostcities/profiles/waterworld_domes.json"
-hash = "57cfae192ad8f12131cc0595f7f6b2812f1776dd9bb222e77145aa4bdeb5dbdc"
+hash = "d6029d9073e25a28b1b7994dec0431d9a6ccc5cff23434c1c0c45f114c7749cc"
 
 [[files]]
 file = "config/modernfix-mixins.properties"
@@ -461,8 +465,44 @@ file = "datapacks/pack-pack-worldgen/data/minecraft/tags/function/tick.json"
 hash = "f57815d1c8d41f574c13bb0a9e0b4cd80a22f62a098f0a4527d1f79a4439234b"
 
 [[files]]
+file = "datapacks/pack-pack-worldgen/data/minecraft/worldgen/biome/cold_ocean.json"
+hash = "2d3881daf28c3153250e846b3b837f4ef7bd5506b345ae389ba13a8dedb76169"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/minecraft/worldgen/biome/deep_cold_ocean.json"
+hash = "0c21e9ec929995c6cc72cb185829f0d2f6535362574bacabb97dab265f87f27f"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/minecraft/worldgen/biome/deep_frozen_ocean.json"
+hash = "c624823f6af236fe02c9a172319eb393c165de6f20089cf649c1e52ab0cbfcd9"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/minecraft/worldgen/biome/deep_lukewarm_ocean.json"
+hash = "8af310cb1b6ea17d39e579d659b1598732b051d34bf8b8980fa0408a7b999070"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/minecraft/worldgen/biome/deep_ocean.json"
+hash = "e4d266bd5d39331eb1b2e57ed54b9291e88450f40d9786aaca2fd773580f37e3"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/minecraft/worldgen/biome/frozen_ocean.json"
+hash = "3a7ffc2ab5cf9619d61aa465c0c82fce4dc6cad9235d33da0c74cd75a066b869"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/minecraft/worldgen/biome/lukewarm_ocean.json"
+hash = "6a55f0da588ceb8887634e4d735a50e6c830906ee36ca2515a5ae682119e61c8"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/minecraft/worldgen/biome/ocean.json"
+hash = "675052e8939e4f7adac7efd9da53e7349911daf78f47350e05f4128fe5dcee26"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/minecraft/worldgen/biome/warm_ocean.json"
+hash = "17f13e98689f3885bce24e69f33bdb29ad13264f5e7b4408c503a71b4e87eb86"
+
+[[files]]
 file = "datapacks/pack-pack-worldgen/data/minecraft/worldgen/noise_settings/overworld.json"
-hash = "5103fabb4a0d00f64ad675c08a960ca9b59ee6e17a3aa45ecc057eeadf737f15"
+hash = "8b99c6e91d726cde2b990256faf6a3dac98d57592a8ce104aa089955ef3b13f7"
 
 [[files]]
 file = "datapacks/pack-pack-worldgen/data/minecraft/worldgen/structure_set/mineshafts.json"
@@ -482,7 +522,7 @@ hash = "b5d6d065714d1636685fbb2ed24f2ae8b95986d705f0973739871660d68ea1e7"
 
 [[files]]
 file = "datapacks/pack-pack-worldgen/data/packpack/function/place_new_player.mcfunction"
-hash = "4237fc2f207b1900c38eb688dac499d79d0372b7eba8522ec5b2ac54398dc500"
+hash = "8ad3a07047f7d3af12225e348980f16bee1dee7dc73b10da1fcff5eb98477c69"
 
 [[files]]
 file = "datapacks/pack-pack-worldgen/data/packpack/function/settle_new_villagers.mcfunction"
@@ -498,15 +538,15 @@ hash = "d7c8a1d3539149cc7cb5a6ef6fd97aafcb873b2d859e70798cd4aaf0f43e9bff"
 
 [[files]]
 file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/seabed_gravel.json"
-hash = "089e1138888d1000fd86aee08d180815af1aed1a5927fddaa994308ebba817e7"
+hash = "12d8fbc1cba4f734bfe42d254a35ea3265c844827c2bb7415b693b8a0415fa01"
 
 [[files]]
 file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/seabed_mixed.json"
-hash = "ef68e5c968f99d36f06662ec2c6569aa929b7c73daf330df9655c9eabc823de3"
+hash = "8a344eab69f127071d9a1905ffed8ff22d38129f5d4be77907c7a9b1ebeac692"
 
 [[files]]
 file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/seabed_sand.json"
-hash = "52f2ff33d614c2ce6105ceecfb96609f9b327c0b35c710def9b266eea1ec65cc"
+hash = "3fa7e33b23e3452c83824d7ea2107d58e121877baa036fbe5ee4bb7f578a988e"
 
 [[files]]
 file = "datapacks/pack-pack-worldgen/data/packpack/worldgen/configured_feature/seabed_clay_patch.json"
@@ -514,15 +554,23 @@ hash = "8abc2abad9beba0fa80e95d4317e39d21b80304b7e248981ee5395fb708e0f5b"
 
 [[files]]
 file = "datapacks/pack-pack-worldgen/data/packpack/worldgen/configured_feature/seabed_gravel.json"
-hash = "6bb1000d277b5c333cb9f6961155cee2f6174e0a031bc8ee8430ed2a2c3bf532"
+hash = "a9e59806daedbc6e2fbf3de3718b51235a02b7f4f1838623416b12539355ba61"
 
 [[files]]
 file = "datapacks/pack-pack-worldgen/data/packpack/worldgen/configured_feature/seabed_gravel_patch.json"
 hash = "26792dca89b320817a8d9171ba13d0d9b935e0252752f7b8e83512e756990247"
 
 [[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/worldgen/configured_feature/seabed_hill_gravel.json"
+hash = "745776b7e72310231dd9aadf27daad95dbba902ca58dcea7fc026afd2bed4d61"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/worldgen/configured_feature/seabed_hill_sand.json"
+hash = "056a3e84f346b2ac899d98f3c73c4699230904bd9acb249c539af9b23fbcc95c"
+
+[[files]]
 file = "datapacks/pack-pack-worldgen/data/packpack/worldgen/configured_feature/seabed_sand.json"
-hash = "5df3440a5b2b14db872d9a3cd918065f92adc3ad84659e49aa7ef7998c1b4705"
+hash = "1a8f959ba1b9afedcb2587a6cc1fc7a92401a4d2020a451646ece80b800cc517"
 
 [[files]]
 file = "datapacks/pack-pack-worldgen/data/packpack/worldgen/placed_feature/seabed_clay_patch.json"
@@ -537,6 +585,14 @@ file = "datapacks/pack-pack-worldgen/data/packpack/worldgen/placed_feature/seabe
 hash = "9aad253b50aa762825587120214a2c0ca66330fcef14487efbe6ce7c05c3f8d6"
 
 [[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/worldgen/placed_feature/seabed_hill_gravel.json"
+hash = "4de60b8902d33b267848b7c95ae6b462d19639ce1da92b8dbc93db7c59541d0a"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/worldgen/placed_feature/seabed_hill_sand.json"
+hash = "c3e7797e503dd2ec8519b2d95996bb92b89d849cc2b39965b384585efbed936d"
+
+[[files]]
 file = "datapacks/pack-pack-worldgen/data/packpack/worldgen/placed_feature/seabed_sand.json"
 hash = "1fa20d4ac03b49b6e0dd8e87880f44232b44d68ed3bae2727fd07f1cf72036d1"
 
@@ -547,6 +603,11 @@ hash = "bf8d53a894cb1f7635ba66e4278c4b32cb8b3bb0d6386a060b9c118a5c6ce1c1"
 [[files]]
 file = "mods/appleskin.pw.toml"
 hash = "716d930feff599bf9ce732e05979fbae8025dc8a3c13ccf4f1cb207a70883bc6"
+metafile = true
+
+[[files]]
+file = "mods/architectury-api.pw.toml"
+hash = "9412ae80a3b8633c4b8507402610c4d8ad3e27809a27a9a76263d16fa7347b2e"
 metafile = true
 
 [[files]]
@@ -602,6 +663,21 @@ metafile = true
 [[files]]
 file = "mods/ferrite-core.pw.toml"
 hash = "73360e397134d238ee8fd21d33fd7f9275e9441f74f8f1b6ed92278877c0b9f1"
+metafile = true
+
+[[files]]
+file = "mods/ftb-library-forge.pw.toml"
+hash = "1c653566b0cea97e9282c23458a28b7de879e5fd226f5bb3455502adabfc839d"
+metafile = true
+
+[[files]]
+file = "mods/ftb-quests-forge.pw.toml"
+hash = "4c973a826e4e866c3fb4d1813ebdf649526af21a332a83856ae4a2fd57362283"
+metafile = true
+
+[[files]]
+file = "mods/ftb-teams-forge.pw.toml"
+hash = "d1665d3000a0857df2d4ea5d3b3a6c5e2b0a60b0c83f8c0f30f05b5305b1878f"
 metafile = true
 
 [[files]]

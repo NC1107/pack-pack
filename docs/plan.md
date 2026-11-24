@@ -86,6 +86,9 @@ Tick things off when they're handled, add new ones when they come up.
   Vanilla reefs barely generate on the flat sea floor, and Reef Redux made things worse: in a warm-ocean sample 4,210 of its coral blocks were dead and buried inside stone, with only 16 alive.
   Switching vanilla features to the normal ocean floor heightmap did not help (plants disappeared), so the cause is still unknown.
   Probably needs a custom reef feature that places coral by looking at the actual blocks.
+- [ ] **Dome tunnels and edges still need a look.**
+  Tunnels between domes are Lost Cities monorails, they can run several hundred blocks, and Nick saw gaps where water gets in.
+  Ocean monuments have a big box of air above their temples, and dome floors showed pools of water at the edge, none of which I could reproduce from world data yet.
 - [ ] **Really tall kelp.**
   Vanilla kelp tops out around 26 blocks, the "goes on forever" kelp forest would need a custom worldgen feature.
 - [ ] **Lost cities sometimes stalls worldgen.**
