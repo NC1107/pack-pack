@@ -12,7 +12,8 @@
           "path": "pack/pack.toml",
           "jsonpath": "$.version"
         }
-      ]
+      ],
+      "initial-version": "0.1.0"
     }
   }
 }
