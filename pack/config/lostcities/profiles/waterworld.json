@@ -3,7 +3,7 @@
     "cityLevel4Height": 17,
     "cityAvoidVoid": true,
     "cityMaxRadius": 128,
-    "cityMaxHeight": 75,
+    "cityMaxHeight": -3,
     "citySpawnDistance1": 500,
     "citySpawnDistance2": 600,
     "cityLevel0Height": -15,

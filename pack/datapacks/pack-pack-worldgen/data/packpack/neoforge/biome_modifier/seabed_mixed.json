@@ -7,9 +7,7 @@
   "features": [
     "packpack:seabed_sand",
     "packpack:seabed_gravel_patch",
-    "packpack:seabed_clay_patch",
-    "packpack:seabed_hill_sand",
-    "packpack:seabed_hill_gravel"
+    "packpack:seabed_clay_patch"
   ],
   "step": "underground_decoration"
 }
