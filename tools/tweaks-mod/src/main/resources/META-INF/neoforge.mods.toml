@@ -1,0 +1,26 @@
+modLoader = "javafml"
+loaderVersion = "[2,)"
+license = "MIT"
+
+[[mods]]
+modId = "packpack_tweaks"
+version = "${version}"
+displayName = "pack-pack tweaks"
+description = "Small gameplay tweaks for the pack-pack modpack: very tall kelp."
+
+[[mixins]]
+config = "packpack_tweaks.mixins.json"
+
+[[dependencies.packpack_tweaks]]
+modId = "neoforge"
+type = "required"
+versionRange = "[21.1,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.packpack_tweaks]]
+modId = "minecraft"
+type = "required"
+versionRange = "[1.21.1]"
+ordering = "NONE"
+side = "BOTH"

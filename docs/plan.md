@@ -86,11 +86,16 @@ Tick things off when they're handled, add new ones when they come up.
   Vanilla reefs barely generate on the flat sea floor, and Reef Redux made things worse: in a warm-ocean sample 4,210 of its coral blocks were dead and buried inside stone, with only 16 alive.
   Switching vanilla features to the normal ocean floor heightmap did not help (plants disappeared), so the cause is still unknown.
   Probably needs a custom reef feature that places coral by looking at the actual blocks.
+- [ ] **Tunnels meeting domes, and air near them.**
+  A tube between domes ends with its glass walls starting a few blocks before the dome and there is a wide air gap at floor level around the junction.
+  Water gets in there, and Nick still sees air pockets near tunnels.
+  This needs a proper look at how Lost Cities cuts the opening in the dome shell, or the tubes can be switched off.
 - [ ] **Dome tunnels and edges still need a look.**
   Tunnels between domes are Lost Cities monorails, they can run several hundred blocks, and Nick saw gaps where water gets in.
   Ocean monuments have a big box of air above their temples, and dome floors showed pools of water at the edge, none of which I could reproduce from world data yet.
-- [ ] **Really tall kelp.**
-  Vanilla kelp tops out around 26 blocks, the "goes on forever" kelp forest would need a custom worldgen feature.
+- [x] **Really tall kelp.**
+  A small mod of ours (`tools/tweaks-mod`) makes generated kelp 1 to 75 blocks tall and lets it keep growing until it runs out of water.
+  Generation is measured (median 38, longest 76), the growth past the old limit is only checked by reading the game code, not by a test.
 - [ ] **Lost cities sometimes stalls worldgen.**
   One pre-generation hit a 60 second server tick and the watchdog killed the server, and once the client hung saving the world on quit. Both were one-offs, need a thread dump from a stalled run.
 - [ ] **Worldgen is slow.**
