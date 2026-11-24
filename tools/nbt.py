@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import gzip
+import io
 import struct
 from pathlib import Path
 from typing import Any, Protocol
@@ -51,11 +52,19 @@ def _payload(stream: Readable, tag: int) -> Any:
     raise ValueError(f"unknown NBT tag {tag}")
 
 
+def _root(stream: Readable) -> dict:
+    if _unpack(stream, ">b") != TAG_COMPOUND:
+        raise ValueError("NBT data does not start with a compound tag")
+    _string(stream)
+    return _payload(stream, TAG_COMPOUND)
+
+
 def read(path: Path) -> dict:
     """Read a gzipped NBT file and return its root compound as nested dicts and lists."""
     with gzip.open(path, "rb") as stream:
-        root_tag = _unpack(stream, ">b")
-        if root_tag != TAG_COMPOUND:
-            raise ValueError(f"{path} does not start with a compound tag")
-        _string(stream)
-        return _payload(stream, TAG_COMPOUND)
+        return _root(stream)
+
+
+def read_bytes(data: bytes) -> dict:
+    """Read uncompressed NBT, e.g. a chunk after zlib-decompressing it from a region file."""
+    return _root(io.BytesIO(data))
