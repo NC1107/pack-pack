@@ -12,6 +12,8 @@ You import a zip into prism launcher and it keeps itself updated from this repo.
 3. Launch it.
 
 Before the game starts it pulls whatever mods the pack currently lists, so updates just show up the next time you launch.
+New worlds generate with lost cities in the overworld.
+Shaders are off by default, there's three packs in video settings if you want to try them.
 The mods themselves still download from modrinth or curseforge since that's where their authors host them, but the pack itself lives here on github.
 
 ## Working on it

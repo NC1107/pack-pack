@@ -20,6 +20,17 @@ Tick things off when they're handled, add new ones when they come up.
   No curseforge or modrinth listing.
   You import an instance zip into prism, and every launch it syncs to `pack.toml` on github with packwiz.
   The mods still download from wherever their authors host them, so we never rehost anyone's jars.
+- **2026-11-24, the overworld is lost cities.**
+  Every new world, singleplayer or server, generates the overworld with lost cities' `default` profile, set through `dimensionsWithProfiles` in `config/lostcities/common.toml`.
+  The actual starting scenario is still open, so the profile will probably change, it's a one word swap.
+  Loading a lost cities world pops vanilla's "experimental settings" warning every time, hide experimental warning removes it.
+- **2026-11-24, QoL mods most packs ship.**
+  Picked from the actual mod lists of the 20 most downloaded 1.21.1 neoforge packs on modrinth (61 to 311 mods each), only stuff that doesn't change gameplay:
+  jei, jade, appleskin, mouse tweaks, controlling, xaero's minimap and world map, reese's sodium options, better advancements, shulker box tooltip, clumps, badoptimizations, no chat reports, and lootr so loot chests in the cities are per player in multiplayer.
+  Left out on purpose since they're design calls: waystones, backpacks, curios, voice chat.
+- **2026-11-24, iris with three shader packs to try.**
+  Complementary reimagined, photon, and makeup ultra fast for weaker machines, all off by default, you pick one in video settings.
+  All three compile with no errors over a lost city.
 
 ## Open questions and gaps
 
@@ -64,6 +75,10 @@ Tick things off when they're handled, add new ones when they come up.
 - [ ] **Curseforge distribution opt-outs.**
   Some curseforge authors block third-party downloads, and packwiz can't fetch those mods.
   Prefer modrinth versions and check any curseforge-only mod before adding it.
+  Lost cities is curseforge only and it downloads fine.
+- [ ] **Recipe viewer.**
+  Jei is what most packs ship (60% vs emi's 30% in that sample), but emi's recipe tree is really nice for long processing chains.
+  Worth revisiting once the backbone is picked, emi can also show jei plugin recipes.
 
 ### Validation pipeline
 
