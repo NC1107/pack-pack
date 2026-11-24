@@ -99,9 +99,26 @@ Tick things off when they're handled, add new ones when they come up.
 
 ### Performance
 
+- [x] **Performance mods.**
+  Client: sodium, sodium extra, immediatelyfast, entityculling, moreculling, dynamic fps. Both sides: modernfix, ferritecore, lithium, spark.
+  That's pretty much the set big 1.21.1 neoforge packs like atm10 ship.
+  Skipped for now: c2me and scalablelux (still alpha), noisium (abandoned), krypton (no real neoforge build), alltheleaks (curseforge only).
+  Later once there's content: fastsuite/fastworkbench/fastfurnace, polymorph, packet fixer, servercore.
+- [x] **Modernfix dynamic resources is on.**
+  It loads models when they're needed instead of baking all of them at startup.
+  At this size it's within noise (10.7s vs 11.1s over 3 launches each), it should matter more once there's thousands of models.
+  If a mod shows up with missing textures or a startup crash, this is the first thing to turn off.
+  Lithium and modernfix both patch biome temperature, so modernfix's copy is off.
+  They also overlap on one chunk method, modernfix just skips it and logs a warning, that one's fine.
+- [x] **JVM flags.**
+  The server boot test runs aikar's G1 flags since that's what most hosts use.
+  The client gets 2-6GB and java 21's default G1, there's no java 21 data showing custom client flags help, so we'll revisit once the pack is big.
 - [ ] **No budgets yet.**
   The boot test records boot time, tps, tick times and heap on a fixed seed, but nothing fails when they get worse.
-  Baseline with just the performance mods (2026-11-23, fedora, java 21): about 4s to start, median tick 0.5ms, 95th percentile 8ms.
+  Numbers so far (2026-11-23, fedora, java 21, rtx 5080):
+  - server: about 4s to start, median tick 0.5ms, 95th percentile around 4-8ms
+  - client with 4 mods: about 9.3s to the main menu
+  - client with 21 mods: about 11s to the main menu, 2.1s from menu into a world
 - [ ] *(verify)* **Kubejs makes startup slower over time** as recipe edits pile up, track it per release.
 - [ ] **Late game load.**
   Big multiblocks, long pipe networks, create contraptions and big ae2 networks are what usually tank tps, so we need a late game benchmark world.
@@ -122,7 +139,12 @@ Tick things off when they're handled, add new ones when they come up.
 - [ ] **Multiplayer join test.**
   The boot test already installs only server side mods on a real dedicated server, still need a real client joining it.
 - [ ] **Player support.**
-  Issue templates asking for version, logs and crash report, plus a crash helper mod like crash assistant.
+  Crash assistant is in, when the game crashes it shows what went wrong and points people at a new github issue.
+  Its log upload metadata to the author's server is turned off.
+  Still need issue templates asking for version, logs and crash report.
+- [x] **First launch.**
+  New players skip the narrator/accessibility prompt and the tutorial popups, and the window opens at 1600x900 instead of 854x480.
+  `options.txt` ships with `preserve = true` so it only gets written if you don't already have one, your settings never get overwritten.
 - [x] **Releases.**
   release-please writes the changelog from commit messages, merging its PR tags the release, attaches the instance zips and moves the `stable` branch.
 

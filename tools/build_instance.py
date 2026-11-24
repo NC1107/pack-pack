@@ -28,6 +28,8 @@ DIST = REPO / "dist"
 CHANNEL_BRANCHES = {"dev": "main", "stable": "stable"}
 MIN_MEMORY_MB = 2048
 MAX_MEMORY_MB = 6144
+# Vanilla opens at 854x480, which is cramped for recipe viewers and machine GUIs.
+WINDOW_SIZE = (1600, 900)
 
 
 def github_repo() -> str:
@@ -59,6 +61,9 @@ def instance_cfg(name: str, pack_url: str) -> str:
         "OverrideMemory=true",
         f"MinMemAlloc={MIN_MEMORY_MB}",
         f"MaxMemAlloc={MAX_MEMORY_MB}",
+        "OverrideWindow=true",
+        f"MinecraftWinWidth={WINDOW_SIZE[0]}",
+        f"MinecraftWinHeight={WINDOW_SIZE[1]}",
         "OverrideCommands=true",
         f"PreLaunchCommand={ini_string(pre_launch)}",
         "",

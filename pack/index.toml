@@ -1,13 +1,61 @@
 hash-format = "sha256"
 
 [[files]]
+file = "config/crash_assistant/config.toml"
+hash = "c6406f3e491aef05e7cd09a3287c12b2020526757125cdc9d6aeecc03c4ba8f1"
+
+[[files]]
+file = "config/modernfix-mixins.properties"
+hash = "b55e21a78bbbebf52ed85df01b7c3a4e24ddac497462bece65ca701b2899df55"
+
+[[files]]
+file = "mods/cloth-config.pw.toml"
+hash = "66b2e57fad1d958893206d82ff878159b7fdfef64ccb74fe1232b71012409953"
+metafile = true
+
+[[files]]
+file = "mods/crash-assistant.pw.toml"
+hash = "f13994485d9005720181e64c20c8b20204edea6749030877fdcbe0b6fd6de443"
+metafile = true
+
+[[files]]
+file = "mods/dynamic-fps.pw.toml"
+hash = "ae6fd52d8bdcbeca5bbe6db840f22f92c1928fe0fda22017b19612b9b00a245a"
+metafile = true
+
+[[files]]
+file = "mods/entityculling.pw.toml"
+hash = "2245e143a7f25789d22a1807aeb0b240aba3bf542fe280d5759de9c49c48c564"
+metafile = true
+
+[[files]]
 file = "mods/ferrite-core.pw.toml"
 hash = "73360e397134d238ee8fd21d33fd7f9275e9441f74f8f1b6ed92278877c0b9f1"
 metafile = true
 
 [[files]]
+file = "mods/immediatelyfast.pw.toml"
+hash = "4601b9be31b6e131dca8a148c974d015444bcac7c82fcb66fbd8751a67933a5d"
+metafile = true
+
+[[files]]
+file = "mods/lithium.pw.toml"
+hash = "51e129832b04acd57da470fc41725bad5e101b6a6b1d4901fd8ea7a92b14e13d"
+metafile = true
+
+[[files]]
 file = "mods/modernfix.pw.toml"
 hash = "ef65836e005bd42a0f40df30a94eba1ad7ee5ed3194b11eafbeadc64edb44252"
+metafile = true
+
+[[files]]
+file = "mods/moreculling.pw.toml"
+hash = "e484cc8f8f03940addbb053b09e9efd2804785d95240719b81393942eb3883d3"
+metafile = true
+
+[[files]]
+file = "mods/sodium-extra.pw.toml"
+hash = "7ece7b8e65ac74bc1c705a3e25948ce5772c26ddf148514f29d90920ca1c3866"
 metafile = true
 
 [[files]]
@@ -19,3 +67,8 @@ metafile = true
 file = "mods/spark.pw.toml"
 hash = "593fa7b30ab016aa45be07bd6bef3a9f160ed0f24689850d60bf84995d69b843"
 metafile = true
+
+[[files]]
+file = "options.txt"
+hash = "d2f1774f9836f8ee6607c2fcefe37385fc7c4a9e2d42fe1eade325708993465b"
+preserve = true
