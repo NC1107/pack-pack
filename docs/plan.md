@@ -89,7 +89,7 @@ Tick things off when they're handled, add new ones when they come up.
 - [ ] **Tunnels meeting domes, and air near them.**
   A tube between domes ends with its glass walls starting a few blocks before the dome and there is a wide air gap at floor level around the junction.
   Water gets in there, and Nick still sees air pockets near tunnels.
-  This needs a proper look at how Lost Cities cuts the opening in the dome shell, or the tubes can be switched off.
+  The tubes between domes are switched off for now (`monorailChance` 0), turn them back on once the junction is understood.
 - [ ] **Dome tunnels and edges still need a look.**
   Tunnels between domes are Lost Cities monorails, they can run several hundred blocks, and Nick saw gaps where water gets in.
   Ocean monuments have a big box of air above their temples, and dome floors showed pools of water at the edge, none of which I could reproduce from world data yet.
