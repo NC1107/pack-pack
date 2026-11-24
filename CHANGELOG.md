@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.8.0](https://github.com/NC1107/pack-pack/compare/v0.7.0...v0.8.0) (2026-11-24)
+
+
+### Features
+
+* sea floor relief with ridges, trenches and seamounts via a patched Lost Worlds ([ad4a23c](https://github.com/NC1107/pack-pack/commit/ad4a23c6f75fd6141f7f52c486782b6494d7e815))
+
 ## [0.7.0](https://github.com/NC1107/pack-pack/compare/v0.6.0...v0.7.0) (2026-11-24)
 
 
