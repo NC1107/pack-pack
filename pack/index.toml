@@ -2,7 +2,7 @@ hash-format = "sha256"
 
 [[files]]
 file = "config/clearwater.jsonc"
-hash = "c59ffac284cbf02069a68b61fcfa2c4f1e29877e72db277f8150afc2f16ead23"
+hash = "9b8d70c1d3cc3690a7593caabd8d2c0ab49e380d00e8fa19b301f375cf2f7509"
 
 [[files]]
 file = "config/crash_assistant/config.toml"
@@ -10,7 +10,7 @@ hash = "c6406f3e491aef05e7cd09a3287c12b2020526757125cdc9d6aeecc03c4ba8f1"
 
 [[files]]
 file = "config/incontrol/spawner.json"
-hash = "69a3c258afb69f4a9f69b6b8326e12a076bc00d63a79af5f0f51981cb11b4830"
+hash = "f449f8bfc01244fad7d3926d9767c8ce5cb049bfea846f6a6551324afbaf7b2f"
 
 [[files]]
 file = "config/lostcities/common.toml"
@@ -165,16 +165,24 @@ file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/buildings/packpa
 hash = "d1a2fe106646e650947606a5f350171252b98b042d5b0b966b54beb5f9c225f4"
 
 [[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/citystyles/citystyle_packpack_dome.json"
+hash = "99218c70da25ec3804f424845b5b133df6a6f60726bbeb826ea54155e9a61da0"
+
+[[files]]
 file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/citystyles/citystyle_packpack_village.json"
-hash = "1c62429d454f78ee1d0f8a6c0adca9c6c88d8388ea52f75aa879fc8863e40b09"
+hash = "098514915a6fd81bd66558d902efd8c6a359be3ec2b8f3a49cc2e9f2a7c8e859"
 
 [[files]]
 file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/multibuildings/packpack_village_cluster.json"
 hash = "4db33670679a991fb3ae4f4e4148e69f0e3176630b0cc84244f7d054928a50fb"
 
 [[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/palettes/packpack_dome.json"
+hash = "fb7b3b56461ab073f04d221576fdeb46b90f8c88c4adb7a0b99fad4164c35a91"
+
+[[files]]
 file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/palettes/packpack_village.json"
-hash = "1eedbc59763b85910f9af299b5ae9ebac74d19a0d600ee0727ab17b59807436b"
+hash = "988ad0fa716ca943492c7bad7f888744ba184d3ed4b8e2a363a3e2eda7cea9b4"
 
 [[files]]
 file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/parts/packpack_village_plains_accessory_1_floor.json"
@@ -449,12 +457,16 @@ file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/parts/packpack_v
 hash = "60a9621c6e821efb0379a59d196d6e69f03825d64b41fb399d0321a073094cab"
 
 [[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/styles/packpack_dome.json"
+hash = "8b6d73f75108931a64119ae15eea1d1a2716cc0b045dd4e85c49399aa93c0678"
+
+[[files]]
 file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/styles/packpack_village.json"
 hash = "2f348b7d2963e2f1da565b5bc14e778fc80ab105061c85b4aa6b5e194dbb2ac6"
 
 [[files]]
 file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/worldstyles/packpack_domes.json"
-hash = "d3f811a26f3952855e569175b76e2dc07839081bee58dfa5687c7e20fec5e402"
+hash = "56801dd0229c3073e6e4ccfcda4034d862b68b4cc2c031dae2f34e0e8afe692d"
 
 [[files]]
 file = "datapacks/pack-pack-worldgen/data/minecraft/tags/function/load.json"
@@ -466,39 +478,39 @@ hash = "f57815d1c8d41f574c13bb0a9e0b4cd80a22f62a098f0a4527d1f79a4439234b"
 
 [[files]]
 file = "datapacks/pack-pack-worldgen/data/minecraft/worldgen/biome/cold_ocean.json"
-hash = "2d3881daf28c3153250e846b3b837f4ef7bd5506b345ae389ba13a8dedb76169"
+hash = "2cce8ceccbd5d549be311ab58df13f5833cd793f1455ee3984b7f73b28c21e59"
 
 [[files]]
 file = "datapacks/pack-pack-worldgen/data/minecraft/worldgen/biome/deep_cold_ocean.json"
-hash = "0c21e9ec929995c6cc72cb185829f0d2f6535362574bacabb97dab265f87f27f"
+hash = "a2bfc82a6e3f59ba41aa964763edd1be07657d32ace14d7b4b966b286856fb26"
 
 [[files]]
 file = "datapacks/pack-pack-worldgen/data/minecraft/worldgen/biome/deep_frozen_ocean.json"
-hash = "c624823f6af236fe02c9a172319eb393c165de6f20089cf649c1e52ab0cbfcd9"
+hash = "ecbfbdb55198c90c7c394c8d54561030756c7d75bb8d2df818158415faad32ca"
 
 [[files]]
 file = "datapacks/pack-pack-worldgen/data/minecraft/worldgen/biome/deep_lukewarm_ocean.json"
-hash = "8af310cb1b6ea17d39e579d659b1598732b051d34bf8b8980fa0408a7b999070"
+hash = "781a60ffddf44511f92162d7d5664b7ab7e051f2469faa2f30672956e2467e46"
 
 [[files]]
 file = "datapacks/pack-pack-worldgen/data/minecraft/worldgen/biome/deep_ocean.json"
-hash = "e4d266bd5d39331eb1b2e57ed54b9291e88450f40d9786aaca2fd773580f37e3"
+hash = "f8efc749b704c082ad7d084acb234fa9570e0e181e5969d1af5b204c42386658"
 
 [[files]]
 file = "datapacks/pack-pack-worldgen/data/minecraft/worldgen/biome/frozen_ocean.json"
-hash = "3a7ffc2ab5cf9619d61aa465c0c82fce4dc6cad9235d33da0c74cd75a066b869"
+hash = "5def6268eaa05a79e04a0e41b7c638a3068748ed10871fafc416db7006677e3a"
 
 [[files]]
 file = "datapacks/pack-pack-worldgen/data/minecraft/worldgen/biome/lukewarm_ocean.json"
-hash = "6a55f0da588ceb8887634e4d735a50e6c830906ee36ca2515a5ae682119e61c8"
+hash = "e851099f1d5945ad9d1ba1a1de52bd628c8322ca14e835ddf07270488e3fc8ae"
 
 [[files]]
 file = "datapacks/pack-pack-worldgen/data/minecraft/worldgen/biome/ocean.json"
-hash = "675052e8939e4f7adac7efd9da53e7349911daf78f47350e05f4128fe5dcee26"
+hash = "1645179f3d49bc161d6f2dc10e5dd0a4ebf91895103b16e9d69fa40512747406"
 
 [[files]]
 file = "datapacks/pack-pack-worldgen/data/minecraft/worldgen/biome/warm_ocean.json"
-hash = "17f13e98689f3885bce24e69f33bdb29ad13264f5e7b4408c503a71b4e87eb86"
+hash = "060cc455f3c06e4a428a37ccac1333c2ed8d1560082b518e9cf630f509036503"
 
 [[files]]
 file = "datapacks/pack-pack-worldgen/data/minecraft/worldgen/noise_settings/overworld.json"
@@ -777,6 +789,10 @@ metafile = true
 file = "mods/no-chat-reports.pw.toml"
 hash = "5da18814472be5dc93a21886983646da3a7236413800075ac75229be82d114fa"
 metafile = true
+
+[[files]]
+file = "mods/packpack-tweaks-1.0.0.jar"
+hash = "f69cec8765176633f45bdf64fc9e113067d8319e18c66bab0a46a675a10899a4"
 
 [[files]]
 file = "mods/reeses-sodium-options.pw.toml"

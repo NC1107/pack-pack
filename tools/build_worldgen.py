@@ -311,7 +311,7 @@ def write_structure_overrides() -> None:
 
 # Colour of the water far away, which is also what shows beyond the last loaded chunk.
 # Vanilla ocean sky and fog are the bright overworld blue.
-DEEP_WATER_COLOR = 0x061a3a
+DEEP_WATER_COLOR = 0x0b3c6b
 
 
 def write_ocean_biomes() -> None:
@@ -323,6 +323,8 @@ def write_ocean_biomes() -> None:
         biome["carvers"] = {}
         biome["effects"]["sky_color"] = DEEP_WATER_COLOR
         biome["effects"]["fog_color"] = DEEP_WATER_COLOR
+        # Vanilla ocean water fog is almost black, which hides everything past a few chunks.
+        biome["effects"]["water_fog_color"] = DEEP_WATER_COLOR
         write_json(DATAPACK / f"data/minecraft/worldgen/biome/{name}.json", biome)
 
 
@@ -376,12 +378,21 @@ def write_seabed_cover() -> None:
         })
 
 
+BIG_SEA_LIFE = [
+    "hybrid_aquatic:orca", "hybrid_aquatic:basking_shark", "hybrid_aquatic:whale_shark",
+    "hybrid_aquatic:great_white_shark", "hybrid_aquatic:hammerhead_shark", "hybrid_aquatic:manta_ray",
+    "hybrid_aquatic:ocean_sunfish", "hybrid_aquatic:bull_shark", "hybrid_aquatic:thresher_shark",
+    "hybrid_aquatic:sand_tiger_shark", "hybrid_aquatic:giant_isopod", "minecraft:dolphin",
+]
+
+
 def write_incontrol_spawner() -> None:
     # Spawned 16-48 blocks from a player, inside the 64 blocks where vanilla keeps fish
     # around; caps are per species for the whole world.
-    def rule(category: str, per_second: float, amount: tuple[int, int], max_this: int, max_height: int) -> dict:
+    def rule(category: str | list, per_second: float, amount: tuple[int, int], max_this: int, max_height: int,
+             distance: tuple[int, int] = (16, 48)) -> dict:
         return {
-            "mobsfrombiome": category,
+            **({"mob": category} if isinstance(category, list) else {"mobsfrombiome": category}),
             "persecond": per_second,
             "attempts": 20,
             "amount": {"minimum": amount[0], "maximum": amount[1], "groupdistance": 4},
@@ -389,7 +400,7 @@ def write_incontrol_spawner() -> None:
                 "dimension": "minecraft:overworld",
                 "inwater": True,
                 "norestrictions": True,
-                "mindist": 16, "maxdist": 48,
+                "mindist": distance[0], "maxdist": distance[1],
                 "minheight": SEABED_Y - 10, "maxheight": max_height,
                 "maxthis": max_this,
             },
@@ -398,6 +409,8 @@ def write_incontrol_spawner() -> None:
         rule("water_ambient", 1.0, (3, 6), 25, SEA_LEVEL),           # cod, salmon, tropical fish
         rule("water_creature", 0.6, (1, 3), 8, SEA_LEVEL),           # squid, sharks, rays, orcas, jellyfish
         rule("underground_water_creature", 0.2, (1, 3), 12, SEABED_Y + 60),  # glow squid in the dark
+        # Big animals, a few at a time, far enough out to see them whole
+        rule(BIG_SEA_LIFE, 0.25, (1, 1), 3, SEA_LEVEL - 20, distance=(32, 96)),
     ])
 
 

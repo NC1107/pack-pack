@@ -35,8 +35,14 @@ VILLAGE_PALETTE = [
     {"char": "x", "block": "minecraft:grass_block"},
     {"char": "Ʒ", "block": "minecraft:dirt"},          # building filler below a house
     {"char": "Ƹ", "block": "minecraft:coarse_dirt"},   # rubble
+    {"char": "Ω", "block": "minecraft:sand"},          # dome sphere border
 ]
 FILLER, RUBBLE = "Ʒ", "Ƹ"
+
+# The lower half of a dome sphere is built from the city style's sphere border block. Making it
+# sand means that where it sits under the sea floor it is just more ground.
+SAND_BORDER = "Ω"
+DOME_STYLE = "packpack_dome"
 
 LIGHTS = ("torch", "wall_torch", "lantern", "soul_lantern", "soul_torch", "soul_wall_torch")
 
@@ -194,13 +200,26 @@ def build(datapack: Path, vanilla_jar: Path, lost_cities_jar: Path, village_fact
         "dimx": 2, "dimz": 2, "buildings": [buildings[0:2], buildings[2:4]],
     }) + "\n")
 
+    # Standard cities in domes: the stock style with a sand border under the dome.
+    (out / "palettes" / f"{DOME_STYLE}.json").write_text(json.dumps(
+        {"palette": [{"char": SAND_BORDER, "block": "minecraft:sand"}]}, ensure_ascii=False) + "\n")
+    (out / "styles" / f"{DOME_STYLE}.json").write_text(json.dumps({"randompalettes": [
+        *standard_style["randompalettes"],
+        [{"factor": 1.0, "palette": DOME_STYLE}],
+    ]}) + "\n")
+    (out / "citystyles" / f"citystyle_{DOME_STYLE}.json").write_text(json.dumps({
+        "style": DOME_STYLE, "inherit": "citystyle_standard",
+        "sphereblocks": {**common["sphereblocks"], "border": SAND_BORDER},
+    }) + "\n")
+
     # Inheriting citystyle_common would merge its city buildings, fronts and fountains
     # into the village, so copy only the block roles and the selectors a village keeps.
     keep = ("stairs", "parks", "bridges", "largebridges")
     (out / "citystyles" / f"citystyle_{PREFIX}.json").write_text(json.dumps({
         "style": PREFIX,
         "inherit": "citystyle_config",
-        **{k: common[k] for k in ("stuff_tags", "streetblocks", "parkblocks", "corridorblocks", "railblocks", "sphereblocks")},
+        **{k: common[k] for k in ("stuff_tags", "streetblocks", "parkblocks", "corridorblocks", "railblocks")},
+        "sphereblocks": {**common["sphereblocks"], "border": SAND_BORDER},
         "buildingsettings": {"minfloors": 1, "maxfloors": 1, "mincellars": 0, "maxcellars": 0, "buildingchance": 0.6},
         "selectors": {
             "buildings": [{"factor": 1.0, "value": b} for b in buildings],
@@ -212,7 +231,7 @@ def build(datapack: Path, vanilla_jar: Path, lost_cities_jar: Path, village_fact
     # Domes get their own world style: the standard one plus a rare village city style.
     style = world_style
     style["citystyles"] = [
-        {"factor": city_factor, "citystyle": "citystyle_standard"},
+        {"factor": city_factor, "citystyle": f"citystyle_{DOME_STYLE}"},
         {"factor": village_factor, "citystyle": f"citystyle_{PREFIX}"},
     ]
     (out / "worldstyles").mkdir(parents=True, exist_ok=True)
