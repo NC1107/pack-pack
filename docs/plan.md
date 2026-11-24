@@ -213,6 +213,9 @@ Tick things off when they're handled, add new ones when they come up.
 - [ ] **Instance settings only apply on import.**
   Window size, memory and the pre-launch command live in prism's `instance.cfg`, which comes from the zip when you import it and never syncs after that.
   Mods and configs update every launch, but changing those settings means re-importing, or we find a way to sync them too.
+- [ ] **Updates can take ~15 minutes to reach players after a release.**
+  Github's raw file cdn keeps a separate cached copy for gzip requests, and packwiz-installer asks for gzip, so after the 0.4.0 release it kept getting the 0.3.0 `pack.toml` for about 15 minutes even though plain requests already got 0.4.0.
+  Moving the pack to github pages, which purges its cache on every deploy, should fix it properly.
 - [ ] **Shared test server.** Decide who hosts it and how it updates, probably packwiz on the server too.
 
 ### Players
