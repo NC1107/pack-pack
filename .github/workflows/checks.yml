@@ -88,6 +88,7 @@ jobs:
           path: |
             run/client-report.json
             run/client-launcher.log
+            run/client-threads.txt
             run/client/logs/latest.log
             run/client/crash-reports/
           if-no-files-found: ignore
