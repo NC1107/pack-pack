@@ -9,6 +9,14 @@ LOG_ERROR = re.compile(r"/(ERROR|FATAL)\]")
 GAME_TOOK = re.compile(r"Game took (?P<seconds>[\d.]+) seconds to start")
 MENU_TO_WORLD = re.compile(r"Time from main menu to in-game was (?P<seconds>[\d.]+) seconds")
 
+# Errors caused by bugs in mods we ship that are already reported upstream. They are
+# listed by exact text with the issue, kept out of the failure count, and still shown
+# in the reports, so anything new still fails and these get dropped once fixed.
+KNOWN_UPSTREAM_ERRORS = {
+    # Lost Cities saves a spawner block entity where its block ended up as air.
+    "Failed to create block entity minecraft:mob_spawner": "https://github.com/McJty/LostCities/issues/786",
+}
+
 
 def read_log(game_dir: Path) -> str:
     latest = game_dir / "logs" / "latest.log"
@@ -32,3 +40,7 @@ def mod_jars(game_dir: Path) -> list[str]:
 def seconds(pattern: re.Pattern, log: str) -> float | None:
     match = pattern.search(log)
     return round(float(match["seconds"]), 2) if match else None
+
+
+def known_upstream(line: str) -> str | None:
+    return next((issue for text, issue in KNOWN_UPSTREAM_ERRORS.items() if text in line), None)

@@ -209,8 +209,10 @@ def lost_cities_dimensions() -> dict:
 
 
 def scan_logs() -> dict:
+    errors = gamelog.error_lines(gamelog.read_log(SERVER))
     return {
-        "error_lines": gamelog.error_lines(gamelog.read_log(SERVER)),
+        "error_lines": [line for line in errors if not gamelog.known_upstream(line)],
+        "known_upstream_error_lines": [line for line in errors if gamelog.known_upstream(line)],
         "crash_reports": gamelog.crash_reports(SERVER),
         "server_mods": gamelog.mod_jars(SERVER),
     }

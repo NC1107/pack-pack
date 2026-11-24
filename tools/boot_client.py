@@ -185,6 +185,7 @@ def main() -> int:
     game_log = gamelog.read_log(GAME_DIR)
     all_errors = gamelog.error_lines(game_log)
     environment_errors = [line for line in all_errors if any(known in line for known in ENVIRONMENT_ERRORS)]
+    upstream_errors = [line for line in all_errors if gamelog.known_upstream(line)]
     report = {
         "pack_version": pack["version"],
         "minecraft": minecraft,
@@ -194,8 +195,9 @@ def main() -> int:
         "startup_seconds": gamelog.seconds(gamelog.GAME_TOOK, game_log),
         "menu_to_world_seconds": gamelog.seconds(gamelog.MENU_TO_WORLD, game_log),
         "client_mods": gamelog.mod_jars(GAME_DIR),
-        "error_lines": [line for line in all_errors if line not in environment_errors],
+        "error_lines": [line for line in all_errors if line not in environment_errors + upstream_errors],
         "environment_error_lines": environment_errors,
+        "known_upstream_error_lines": upstream_errors,
         "crash_reports": gamelog.crash_reports(GAME_DIR),
     }
 
@@ -216,7 +218,7 @@ def main() -> int:
     log(f"report written to {REPORT.relative_to(REPO)}")
     log(f"startup {report['startup_seconds']}s, menu to world {report['menu_to_world_seconds']}s, "
         f"{len(report['client_mods'])} client mods, {len(report['error_lines'])} error line(s), "
-        f"{len(environment_errors)} environment-only")
+        f"{len(environment_errors)} environment-only, {len(upstream_errors)} known upstream")
     for line in report["error_lines"][:10]:
         log(f"error: {line}")
     for failure in failures:

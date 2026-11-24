@@ -76,6 +76,10 @@ Tick things off when they're handled, add new ones when they come up.
   Some curseforge authors block third-party downloads, and packwiz can't fetch those mods.
   Prefer modrinth versions and check any curseforge-only mod before adding it.
   Lost cities is curseforge only and it downloads fine.
+- [ ] **Lost cities spawner bug.**
+  Lost cities sometimes saves a spawner where the block ended up as air, vanilla throws it away and logs an error the first time that chunk loads.
+  It's [LostCities#786](https://github.com/McJty/LostCities/issues/786), still open, so the boot tests list that one error in `tools/gamelog.py` and skip it.
+  Take it out of that list once it's fixed upstream.
 - [ ] **Recipe viewer.**
   Jei is what most packs ship (60% vs emi's 30% in that sample), but emi's recipe tree is really nice for long processing chains.
   Worth revisiting once the backbone is picked, emi can also show jei plugin recipes.
