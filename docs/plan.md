@@ -294,6 +294,15 @@ The sea floor needs real elevation, like ridges, trenches and plateaus.
 - Pick one difficulty mode now and make the others config override folders later.
 - Worldgen datapack changes do not touch existing worlds, so decide when a release means a new world.
 
+### Known upstream hang: Xaero's World Map
+
+Quitting a singleplayer world can freeze on "Saving worlds" when Xaero's World Map 1.47.0 is loading regions from the world save at that moment.
+A thread dump from CI shows the map's loader thread holding a lock while it waits for a task on the render thread, the render thread waiting for the server to stop, and the server thread waiting for that lock.
+It is the cause of the intermittent client boot hang.
+The client boot test now leaves that mod out, so it does not cover it.
+Players can hit it too, more rarely, when they quit while the map is busy.
+Options are to wait for a fixed version, report it to the author, or drop the world map and keep only the minimap.
+
 ### Pipeline gaps
 
 - Capture evidence for hangs: a server thread dump on a stall, and a separate client shutdown deadline with a dump.
