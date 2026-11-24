@@ -6,11 +6,487 @@ hash = "c6406f3e491aef05e7cd09a3287c12b2020526757125cdc9d6aeecc03c4ba8f1"
 
 [[files]]
 file = "config/lostcities/common.toml"
-hash = "04f0cb13b311bad7d4df0d480edc223728ad787fa9c5dd744d3d8237454195ec"
+hash = "4c4a57c7efb7336653a68809bbfa9a3d68e04533b51b3ca120fe0580ac78801b"
+
+[[files]]
+file = "config/lostcities/profiles/waterworld.json"
+hash = "1814a95b8d6d882e9156741ba2b8940632e53fc20def9a575e989cb9f9498bb3"
+
+[[files]]
+file = "config/lostcities/profiles/waterworld_domes.json"
+hash = "9bcdd1cc36a926ab897562f4512382f4ec5c47adeff764af2cceb2320109d3f4"
 
 [[files]]
 file = "config/modernfix-mixins.properties"
 hash = "b55e21a78bbbebf52ed85df01b7c3a4e24ddac497462bece65ca701b2899df55"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/buildings/packpack_village_plains_accessory_1.json"
+hash = "c95bc80e1b3065338cea5caae0709448b74316a1acd110122da8125a431af81c"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/buildings/packpack_village_plains_animal_pen_1.json"
+hash = "e859e7656b06a89b32559fe435062b37b40f271cc8d0815e22cd3eeaee9f5d9c"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/buildings/packpack_village_plains_animal_pen_2.json"
+hash = "dfa59922d23caf3b77070c07b9e0bd68a0a17c897a5701e8dfaa8e8225c04d30"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/buildings/packpack_village_plains_animal_pen_3.json"
+hash = "98b3c55d66efa37003c26505c919115f12a100c7a0e263d0ffdb6f5325bd2798"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/buildings/packpack_village_plains_armorer_house_1.json"
+hash = "32929a3be11cf969eba765419d4150fc89488a979af7ec12b9e61d49209f30eb"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/buildings/packpack_village_plains_big_house_1.json"
+hash = "77c6e9330c48d6d1c4821d5c970bde5c53f82f188ed7581a815a240274db6ef7"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/buildings/packpack_village_plains_butcher_shop_1.json"
+hash = "4fa979767a753ff4949ac21df4889afba467b8ca1dd47e6ba91e0c1a71149758"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/buildings/packpack_village_plains_butcher_shop_2.json"
+hash = "962c6087c920107ddfddf0ab333bb4f0232a8c2832a4a5e206aef6325460ac89"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/buildings/packpack_village_plains_cartographer_1.json"
+hash = "5c1bd3e7f0f66d051614ae44197c6f6588c5063f2d35c6573fc492e859e44436"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/buildings/packpack_village_plains_fisher_cottage_1.json"
+hash = "e825b7e465a6c75b8b026987ffdadd670107162039707c9167814eb39278643c"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/buildings/packpack_village_plains_fletcher_house_1.json"
+hash = "8a4f1820ced2f888fe156ea57dfa90ff35221a5a91b99f41c4719eb5e7e87f90"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/buildings/packpack_village_plains_large_farm_1.json"
+hash = "c137afb6999cf93fc3d53daf0c08fb922d9edb20dd35fcbb63de0c514ba6ef1d"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/buildings/packpack_village_plains_library_2.json"
+hash = "6379b09f35dcd5bc85325bc87a7196c08d485ed14c035f8c1650a0fdbd2e9182"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/buildings/packpack_village_plains_masons_house_1.json"
+hash = "cc63e30ab19e9d27a54c8b52488b57baa064126940e60e9af33928b912f2bae3"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/buildings/packpack_village_plains_medium_house_1.json"
+hash = "a0d48503d2bf33285e27ff61019f70605f772c903c35a0907aed02b8ed65323d"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/buildings/packpack_village_plains_medium_house_2.json"
+hash = "d9b4f7d392403578f985752808088c312e7b984811239191a468b06b57d4ba96"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/buildings/packpack_village_plains_meeting_point_4.json"
+hash = "cfd6eeab3e8ad2615e357372edac856a0da8b7db894dae8ad1eb27408bf56329"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/buildings/packpack_village_plains_meeting_point_5.json"
+hash = "873bcea8c85ba3b729ad25a8c853b209ae00bfd505c471fa7e10cf557616fba7"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/buildings/packpack_village_plains_shepherds_house_1.json"
+hash = "5fbb4ce0b408132e3bb0e85b1ae6b58721d201d0f5f9fe46753cd4305405c2bf"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/buildings/packpack_village_plains_small_farm_1.json"
+hash = "afdafaa8bf3a263056ca4a2189b30299286384aef32a6bf15509ff552568190d"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/buildings/packpack_village_plains_small_house_1.json"
+hash = "076e53607f23191cb789aca93d769453f679714b1487d981261c6cb816081544"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/buildings/packpack_village_plains_small_house_2.json"
+hash = "708614374a5d717ff05dbee68a317dbf9d99b84f743d9a6c8c871f0f880ca73e"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/buildings/packpack_village_plains_small_house_3.json"
+hash = "4fa1eeedb5bceea70bb81530061c4ba72627e1b2d5dc5528be3c1e9d29c66209"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/buildings/packpack_village_plains_small_house_4.json"
+hash = "dc2937e440de9d078ca55a44b9577e3b656c01627c5580cf29600f0ab371f30f"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/buildings/packpack_village_plains_small_house_5.json"
+hash = "34ee3484f1b313710597da0c2fbd07d828e4567420f42879bfc2c8e2ace007df"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/buildings/packpack_village_plains_small_house_6.json"
+hash = "055cf06e30b85de3dd068a1c2ffb368139c9b3b134ad116d1c708f874ff98ff2"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/buildings/packpack_village_plains_small_house_7.json"
+hash = "9691ffea9b2683d1f447c3dfc60aad7a85ab69d9a50e718e0ccf294cc451aa77"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/buildings/packpack_village_plains_small_house_8.json"
+hash = "55f317a878b83706e939e333f248b7c311bbe536549cf3ca4e398a5749722608"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/buildings/packpack_village_plains_stable_1.json"
+hash = "68734fee59d3f2bb72a7fa3bcc57df92336d0836af0bc8e1957c8c3f30d58e38"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/buildings/packpack_village_plains_tannery_1.json"
+hash = "5401b13a02bef18246683fc107c23766d20b987c85c3e1cdbfe8c35232efb11c"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/buildings/packpack_village_plains_temple_3.json"
+hash = "f8316e97bdaefe22122591bca5cc93b330c37218c23783892645bbcfb44fd426"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/buildings/packpack_village_plains_temple_4.json"
+hash = "e30cbdb733cdded73b59960c9178386afbc4f762bac5db6abf804bbc15369655"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/buildings/packpack_village_plains_tool_smith_1.json"
+hash = "6a06fc7a62af2c812eb917989b583ac4e5161c2b1ec73ddd4bd33df9d440b2d7"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/buildings/packpack_village_plains_weaponsmith_1.json"
+hash = "d1a2fe106646e650947606a5f350171252b98b042d5b0b966b54beb5f9c225f4"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/citystyles/citystyle_packpack_village.json"
+hash = "1c62429d454f78ee1d0f8a6c0adca9c6c88d8388ea52f75aa879fc8863e40b09"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/multibuildings/packpack_village_cluster.json"
+hash = "4db33670679a991fb3ae4f4e4148e69f0e3176630b0cc84244f7d054928a50fb"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/palettes/packpack_village.json"
+hash = "1eedbc59763b85910f9af299b5ae9ebac74d19a0d600ee0727ab17b59807436b"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/parts/packpack_village_plains_accessory_1_floor.json"
+hash = "334c224001100bef925b9eb753a9ad70796bfda97a3c841138313e94a0a83ff2"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/parts/packpack_village_plains_accessory_1_roof.json"
+hash = "7a7ff550a0f8bb8dec525ede3c6943e2755c034c90029f460186649ed00fb4fe"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/parts/packpack_village_plains_animal_pen_1_floor.json"
+hash = "39a9c9879b73d3bef503256a1de68f4ae8b3f1e3dc0de6bfa39fc7bada96d0a3"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/parts/packpack_village_plains_animal_pen_1_roof.json"
+hash = "f506f7efa7322729769083f1878dfda3f766242bb485e346d6ded5c4290bf655"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/parts/packpack_village_plains_animal_pen_2_floor.json"
+hash = "28e5d018d86a4de25549beb68fbe8d39478b15d3fed8d46c965c1ea6e0fe0242"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/parts/packpack_village_plains_animal_pen_2_roof.json"
+hash = "22acb1a04f0787bf3656737cbebeb1b1f163d1385dd49e77410a4190fb044fa1"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/parts/packpack_village_plains_animal_pen_3_floor.json"
+hash = "901098770b98ae48b3b7264993d30c7aeae907222f1e65e589bea24593589cc4"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/parts/packpack_village_plains_animal_pen_3_roof.json"
+hash = "f7b01bebed7b6179e5454385e2eb9121f7ed8f7516aebefc46cbf9443f89c587"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/parts/packpack_village_plains_armorer_house_1_floor.json"
+hash = "6bbed9ab5e570bab9a987cc98c90f0298d2536e6bc4cf452ed76a47d70336ab7"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/parts/packpack_village_plains_armorer_house_1_roof.json"
+hash = "47ee38e92c7256d7cc25f4899e411e4d67be66b6d22c1c01080f4ad6ff1d02cc"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/parts/packpack_village_plains_big_house_1_floor.json"
+hash = "79ea2426785f9c82a0534ca8b16b7e141a28c0f0ede85078db1a2715ecfd5a4c"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/parts/packpack_village_plains_big_house_1_roof.json"
+hash = "9894b0ffcb2aa7a28685b33309544a11e10123b9f27a244ae436d8ecab7dd02b"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/parts/packpack_village_plains_butcher_shop_1_floor.json"
+hash = "b943e2152535a2f380b5d4825a27e2dfc9d116b4ecec152c478e0d469798cfe5"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/parts/packpack_village_plains_butcher_shop_1_roof.json"
+hash = "36529191f626c07a9a45dd0cd98eb56570ec3c04dfb7cb0801aba125e8b7cbfa"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/parts/packpack_village_plains_butcher_shop_2_floor.json"
+hash = "9ac44d161e120d4a07e69e98f5983e9f36dcea6e3506898c46fd34250c4a6cb0"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/parts/packpack_village_plains_butcher_shop_2_roof.json"
+hash = "e7c34409b1de8e679792151944a28f127aa25d137562b0c871da4f50dae3ba32"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/parts/packpack_village_plains_cartographer_1_floor.json"
+hash = "33c9822f7b2f5fdd3fdbca4847db2b4f262667bcd8f77c1cf444dcd2b3070d11"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/parts/packpack_village_plains_cartographer_1_roof.json"
+hash = "5b72ec89ce7cc44ff307a387d889a49c1248f9775ac2e244a09616bd1957e42e"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/parts/packpack_village_plains_fisher_cottage_1_floor.json"
+hash = "bcdd4ad34e960dc6e4bfbfe7aa284af2ddcf864def14a412d7de2f2dd2e51246"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/parts/packpack_village_plains_fisher_cottage_1_roof.json"
+hash = "ae4d2927793d08821ebd4d56f1c6cde6fabbf3abfbe3e7c4d40f9539b4262cee"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/parts/packpack_village_plains_fletcher_house_1_floor.json"
+hash = "074c78e84cb22abdefdb36abc66c8cc259fa2885c4c869e632da05560f66b111"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/parts/packpack_village_plains_fletcher_house_1_roof.json"
+hash = "5c0fdc4d74267c36130574f94915c4066111a78109602872240d051b9995136a"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/parts/packpack_village_plains_large_farm_1_floor.json"
+hash = "2680a6f9d51329078c2cf8219da02037e0c1854ca200ed032e06a11b5d2dfd49"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/parts/packpack_village_plains_large_farm_1_roof.json"
+hash = "5eeb828bbaf635c0e67c989491f6cc55f9f4d7216e28f7c718e591d19f3c53b7"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/parts/packpack_village_plains_library_2_floor.json"
+hash = "d26aeab38717bd4ff0080f2ba323f11910ae522fc6eb7a63ee5e4650a98adf44"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/parts/packpack_village_plains_library_2_roof.json"
+hash = "21cee92df89ce6a408a0a7bdcf225718669fc63e1e67e2c57cbeec0b73420281"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/parts/packpack_village_plains_masons_house_1_floor.json"
+hash = "397087b5eec2ebecb309c32639c6464ad0a91f83f265ca3ce41485c95fa7598a"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/parts/packpack_village_plains_masons_house_1_roof.json"
+hash = "81f3cfb507a8f41b23220104481373f424e57815552c6dd1a08e6a65250bc4e4"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/parts/packpack_village_plains_medium_house_1_floor.json"
+hash = "b06dd9bb0aff08eeb9767ca6da3f9c8bb34789cfc57cc34b757a35a92564ad8e"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/parts/packpack_village_plains_medium_house_1_roof.json"
+hash = "a6de1adcbbe4bb6fc14844f13cf0973fb8946e0c0f66208984e5012d7c7d794b"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/parts/packpack_village_plains_medium_house_2_floor.json"
+hash = "4e4a1f6fe5a62b154b8c9461ea760b216258307d1e5afcc01a0c0b8461d5be4d"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/parts/packpack_village_plains_medium_house_2_roof.json"
+hash = "e0675a1a1edf614dfbb776bf499c38e2597fb185a22eddc69e6238a3bfebef82"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/parts/packpack_village_plains_meeting_point_4_floor.json"
+hash = "edb8ee9cc846beffd28ce0caae4e5d3ade4a9f6faf6f1bae0893ffdef05d2b00"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/parts/packpack_village_plains_meeting_point_4_roof.json"
+hash = "359ddfb404675463a4f97bfbb31ee819268558e6294e353ba758afde388e28a9"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/parts/packpack_village_plains_meeting_point_5_floor.json"
+hash = "33ec39af180212d1b5edc6cd6d6a2d857a21aa813e9c45842bb747502a830007"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/parts/packpack_village_plains_meeting_point_5_roof.json"
+hash = "12181e14b96c5852b6539b47cb64a463d081d18cdf7cf5b362006d645e5d41ce"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/parts/packpack_village_plains_shepherds_house_1_floor.json"
+hash = "c24c15e02c0393da05add458a8ea5055eebf1d39c0560a71030fa99494894f42"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/parts/packpack_village_plains_shepherds_house_1_roof.json"
+hash = "03ea37c53d2c54981c63cc4e5a77b0d471a0ca0b1cbfd419e239d7582f5c4dfa"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/parts/packpack_village_plains_small_farm_1_floor.json"
+hash = "89dd0b532f968009ef094d585f89490f477ad1d847cd4f646ed8d74fae3af288"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/parts/packpack_village_plains_small_farm_1_roof.json"
+hash = "7a2df78099e9eb3d7aabe5e0e1081c66661ba9a0270725f787ab29a8e125c83b"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/parts/packpack_village_plains_small_house_1_floor.json"
+hash = "0bc42ea6b443b1cdf0f6b855bbd1427d6fb5250c91ef22448cd88c2e34809014"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/parts/packpack_village_plains_small_house_1_roof.json"
+hash = "f4757ccd4f0d5b73b974bfd8ccf3fb4dd4029d754bf9cc9d1dc4af7ffee1f6c9"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/parts/packpack_village_plains_small_house_2_floor.json"
+hash = "eeb9c070cfbb458c177ae8e4fbd2440a399da886899ed41890c8e77cb9752c4e"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/parts/packpack_village_plains_small_house_2_roof.json"
+hash = "d987214aea9bf4b406b423b417eae032e141b426f1a3519efe4aaf4156b53575"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/parts/packpack_village_plains_small_house_3_floor.json"
+hash = "786c410d3173bbd15ee64d689e196c7ea843c59b6a24d9950ad2b4b316495526"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/parts/packpack_village_plains_small_house_3_roof.json"
+hash = "37790bb1378f90875dab3ab6b796958c47ca4bfa1a8399debf3d251aa05160b9"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/parts/packpack_village_plains_small_house_4_floor.json"
+hash = "8810c48c5f93204145eaf72e425183b09500a4f480b943bfcfc73794790c856f"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/parts/packpack_village_plains_small_house_4_roof.json"
+hash = "cdf4f060937a7b9b58a6ebc8f8b18b05403b3e63b7f47c4fe372cb7f98b42bb4"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/parts/packpack_village_plains_small_house_5_floor.json"
+hash = "f7c1dfdc258f48d7030876c0913b0b73a01ee678983c6bf0c4a4002c551119fa"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/parts/packpack_village_plains_small_house_5_roof.json"
+hash = "2e57b0ef49b20b0547fbadaf95c515e54c281892327a75cb1eaec3087d3da5d3"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/parts/packpack_village_plains_small_house_6_floor.json"
+hash = "ea7fb6d61fea7b6f0cd7a45161a9aaf6a985853530ae0c6ba030a35140307658"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/parts/packpack_village_plains_small_house_6_roof.json"
+hash = "5b718663ef791f75978418b2c8527cc6c5e6213d819837144c6721b5403e87cf"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/parts/packpack_village_plains_small_house_7_floor.json"
+hash = "f281a4ff0ccfd9fceef97100326b17502de96133580115e129eaa879c99fe563"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/parts/packpack_village_plains_small_house_7_roof.json"
+hash = "90882086b9c67cd11184f4283a31748247dfc06c0d0c1be2cd48c2cd5d3b52d7"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/parts/packpack_village_plains_small_house_8_floor.json"
+hash = "211fb01fb226925426297f4fed93b10cba4aabf44a405f98caf2dbbd1198ff86"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/parts/packpack_village_plains_small_house_8_roof.json"
+hash = "c6cd33a73b89aa26610f2b7fe2884505ec8454ecefe2707d30ab14425a869063"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/parts/packpack_village_plains_stable_1_floor.json"
+hash = "738d0eb345530757f2bdb2b0e2edd75c00212c181e99a0eaa9d08de2bf0a1642"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/parts/packpack_village_plains_stable_1_roof.json"
+hash = "23ad0999446718a3460c204863f49b64cc9e2dbffce805181a0233344391dbf5"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/parts/packpack_village_plains_tannery_1_floor.json"
+hash = "51f52a5c091c215d9a7205b555778654e11eeb42eaad0806798495bd2395d9e7"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/parts/packpack_village_plains_tannery_1_roof.json"
+hash = "1d2aecbbaaf1aa391514f47916cac53fb25ed1cb9fe959ee535a82eac85a469c"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/parts/packpack_village_plains_temple_3_floor.json"
+hash = "38bc75f557fc414e788874c9370381fda63217793fa15d94218ba1bd21055cbd"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/parts/packpack_village_plains_temple_3_roof.json"
+hash = "501c4bb2215066e73b3e4a510c861a8e54538804c065705077770e3ad77f8f83"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/parts/packpack_village_plains_temple_4_floor.json"
+hash = "f5525d76cf6a4f8fc6f4ff99b58958af2d70dc5fde0082a52e8fa68820f11f9b"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/parts/packpack_village_plains_temple_4_roof.json"
+hash = "af7b6c1171b6071e5baabea2896240821c7130a50e8ca723271fcb8679436758"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/parts/packpack_village_plains_tool_smith_1_floor.json"
+hash = "cf0e32fa4f5adc34888ffb6e5d871ff3cac6e8871c478bb281db811d9054836d"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/parts/packpack_village_plains_tool_smith_1_roof.json"
+hash = "2bf0234e089c0e08e115736208963ff480fe5192a9ace0dd4b3926c8df42d7d7"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/parts/packpack_village_plains_weaponsmith_1_floor.json"
+hash = "42b9c3fa5bd1adae684642be2d7415b47ddeb5f312fa34e8833200b45bd22bfd"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/parts/packpack_village_plains_weaponsmith_1_roof.json"
+hash = "60a9621c6e821efb0379a59d196d6e69f03825d64b41fb399d0321a073094cab"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/styles/packpack_village.json"
+hash = "2f348b7d2963e2f1da565b5bc14e778fc80ab105061c85b4aa6b5e194dbb2ac6"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/worldstyles/packpack_domes.json"
+hash = "d3f811a26f3952855e569175b76e2dc07839081bee58dfa5687c7e20fec5e402"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/minecraft/tags/function/load.json"
+hash = "802452e0ed26aa8d7139802ed1bd03898cded646fe6ab48e90bcbc8d2b6a7c2d"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/minecraft/tags/function/tick.json"
+hash = "f7ef4880b8ee7647a329c0831d74bfc2c689bd496422017ec0eae59a557bf2e2"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/minecraft/worldgen/noise_settings/overworld.json"
+hash = "7028d658401dc1e46f71015b9b12df0dd02744a186b977cdf89a08b4ace9d4d5"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/minecraft/worldgen/world_preset/normal.json"
+hash = "78d297e28bd0e534d2ea2bc10b0775e62027f98ba57af1917ed36cc85164728b"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/function/build_start_pod.mcfunction"
+hash = "0185e507d47d8003690e5026fc65ddab8bafdf5e7ee37f7f936a34d33a847f31"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/function/place_new_player.mcfunction"
+hash = "8bdeb2cb8e008e8af8a14532ccb4b65fcffaf317498b326645c35d740811ef23"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/function/settle_new_villagers.mcfunction"
+hash = "ad464ac8dea2c1f5e3b618be236aa5772b8adf4de6f8eff35dd21fbb944063ba"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/function/start.mcfunction"
+hash = "1251e9d34ba489c3d88ab8e11c17bf94e64a5671b251fe6b7245f836b0c28fc4"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/function/start_pod_tick.mcfunction"
+hash = "29cdb462cadc8eaf0970a188be30849e078c4f68c199cc3748edff0745afc5ff"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/pack.mcmeta"
+hash = "bf8d53a894cb1f7635ba66e4278c4b32cb8b3bb0d6386a060b9c118a5c6ce1c1"
 
 [[files]]
 file = "mods/appleskin.pw.toml"
@@ -25,6 +501,11 @@ metafile = true
 [[files]]
 file = "mods/better-advancements.pw.toml"
 hash = "93c4acd165a291c6d1e69c27b05b2747afc926b38a414712263fbc95f42da323"
+metafile = true
+
+[[files]]
+file = "mods/clear-water.pw.toml"
+hash = "a1f13649b8c0d8badb394119031ae9be10f6b93a797cbba5761309f192a66516"
 metafile = true
 
 [[files]]
@@ -68,8 +549,18 @@ hash = "73360e397134d238ee8fd21d33fd7f9275e9441f74f8f1b6ed92278877c0b9f1"
 metafile = true
 
 [[files]]
+file = "mods/globalpacks.pw.toml"
+hash = "a7f2ae8ea415e95ce1a3518b66edcaf124d8903ff9101d07331f7fec92b3400f"
+metafile = true
+
+[[files]]
 file = "mods/hide-experimental-warning.pw.toml"
 hash = "34ef1114d0ccd97d1f518abe0522e7d195a2ad40108654b6513f247724df2e0a"
+metafile = true
+
+[[files]]
+file = "mods/hopo-better-underwater-ruins.pw.toml"
+hash = "be75fa97845b24c102d33441e3f1e9a24d0ab622d57b031c0d0f6888ce5927a5"
 metafile = true
 
 [[files]]
@@ -103,6 +594,11 @@ hash = "0d3683a8c533e1fb67bf0b1668089a322fc5f594f9610d441657378ab4f64383"
 metafile = true
 
 [[files]]
+file = "mods/lost-worlds-lc.pw.toml"
+hash = "8b88866ed328410b7d5763a9e80ef56a67e9462d483188b4478f3dd51aed1f37"
+metafile = true
+
+[[files]]
 file = "mods/mezzconfig.pw.toml"
 hash = "f1fecbcbee6806a14efb3bd38ccf10166b48004967fbe72b6c31224e5e9fc5ea"
 metafile = true
@@ -113,8 +609,18 @@ hash = "ef65836e005bd42a0f40df30a94eba1ad7ee5ed3194b11eafbeadc64edb44252"
 metafile = true
 
 [[files]]
+file = "mods/moogs-structure-lib.pw.toml"
+hash = "0856f0ead9a5035c74709a848b475e93de9f46bb65cca153bbed7371c3b9b074"
+metafile = true
+
+[[files]]
 file = "mods/moreculling.pw.toml"
 hash = "e484cc8f8f03940addbb053b09e9efd2804785d95240719b81393942eb3883d3"
+metafile = true
+
+[[files]]
+file = "mods/mos-moogs-ocean-structures.pw.toml"
+hash = "3346d0a1863c1e04228c7a186c4e145c83644ad6d86857606caf8487c0220ed9"
 metafile = true
 
 [[files]]
@@ -130,6 +636,11 @@ metafile = true
 [[files]]
 file = "mods/reeses-sodium-options.pw.toml"
 hash = "5436ac58906c5eb870d3b75fb79b36d6a79ba55e32bb6ee3f198fe6d519b8b86"
+metafile = true
+
+[[files]]
+file = "mods/resourceful-config.pw.toml"
+hash = "cdb72abea9d80a5229354e9118338bf47b97759b5b911276c4f772917fda8417"
 metafile = true
 
 [[files]]
@@ -163,6 +674,11 @@ hash = "92f10c8f46f08f0874a3ac1e83700bd50a26ef1dffb3ab26113a363e784c5351"
 metafile = true
 
 [[files]]
+file = "mods/unwrecked-ships.pw.toml"
+hash = "2f771e0669bf6d179b40d77d295f5c0680cff28f3bd17af34093e429682f727d"
+metafile = true
+
+[[files]]
 file = "mods/xaeros-minimap.pw.toml"
 hash = "e97cb865d7a8c8310905d9140899fa55ea23c3fff2e23a17255ce2c162322ad7"
 metafile = true
@@ -173,8 +689,18 @@ hash = "3a8e91aecdb602039ba1f7445bbf6b64cc5a46344339a3ffaf3b2e3eb2f5bcbc"
 metafile = true
 
 [[files]]
+file = "mods/yungs-api.pw.toml"
+hash = "dde31f05114c72cb2f58e522417487730b872e456f77fdd02c032c9235791f6c"
+metafile = true
+
+[[files]]
+file = "mods/yungs-better-ocean-monuments.pw.toml"
+hash = "a2d7176026abf4a68a663b375811a603c508f36062cc7fb5b45416e1462682a8"
+metafile = true
+
+[[files]]
 file = "options.txt"
-hash = "d2f1774f9836f8ee6607c2fcefe37385fc7c4a9e2d42fe1eade325708993465b"
+hash = "dc336d80d01de45e2db17945ad6286e55d22633fa50ffe1ed035f7ea9f35b92c"
 preserve = true
 
 [[files]]

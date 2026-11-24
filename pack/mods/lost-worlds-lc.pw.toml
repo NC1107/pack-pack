@@ -1,0 +1,13 @@
+name = "Lost Worlds LC"
+filename = "lostworlds-1.21-2.0.0.jar"
+side = "both"
+
+[download]
+hash-format = "sha1"
+hash = "7e570a6ba3f6b1b390f69434dc9e20770eb32d4e"
+mode = "metadata:curseforge"
+
+[update]
+[update.curseforge]
+file-id = 9717677
+project-id = 964100
