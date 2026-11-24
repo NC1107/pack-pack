@@ -99,6 +99,10 @@ def install_pack(java: str) -> None:
     with (GAME_DIR / "options.txt").open("a") as options:
         # An unfocused virtual display would otherwise pause the game before the test can finish.
         options.write("pauseOnLostFocus:false\n")
+        # The test quits right after joining. With the default view distance the server is still
+        # generating chunks (domes are heavy) and the vanilla unload loop can spin forever on
+        # a chunk that is still being generated, so keep the amount of generation small.
+        options.write("renderDistance:6\nsimulationDistance:5\n")
 
 
 def configure_headlessmc(game_java: str) -> dict:
