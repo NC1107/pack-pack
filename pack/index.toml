@@ -791,10 +791,6 @@ hash = "5da18814472be5dc93a21886983646da3a7236413800075ac75229be82d114fa"
 metafile = true
 
 [[files]]
-file = "mods/packpack-tweaks-1.0.0.jar"
-hash = "f69cec8765176633f45bdf64fc9e113067d8319e18c66bab0a46a675a10899a4"
-
-[[files]]
 file = "mods/reeses-sodium-options.pw.toml"
 hash = "5436ac58906c5eb870d3b75fb79b36d6a79ba55e32bb6ee3f198fe6d519b8b86"
 metafile = true
