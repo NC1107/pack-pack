@@ -10,7 +10,7 @@ hash = "c6406f3e491aef05e7cd09a3287c12b2020526757125cdc9d6aeecc03c4ba8f1"
 
 [[files]]
 file = "config/incontrol/spawner.json"
-hash = "f449f8bfc01244fad7d3926d9767c8ce5cb049bfea846f6a6551324afbaf7b2f"
+hash = "69a3c258afb69f4a9f69b6b8326e12a076bc00d63a79af5f0f51981cb11b4830"
 
 [[files]]
 file = "config/lostcities/common.toml"

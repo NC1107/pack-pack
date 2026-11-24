@@ -410,7 +410,6 @@ def write_incontrol_spawner() -> None:
         rule("water_creature", 0.6, (1, 3), 8, SEA_LEVEL),           # squid, sharks, rays, orcas, jellyfish
         rule("underground_water_creature", 0.2, (1, 3), 12, SEABED_Y + 60),  # glow squid in the dark
         # Big animals, a few at a time, far enough out to see them whole
-        rule(BIG_SEA_LIFE, 0.25, (1, 1), 3, SEA_LEVEL - 20, distance=(32, 96)),
     ])
 
 
