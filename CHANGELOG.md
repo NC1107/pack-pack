@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.0](https://github.com/NC1107/pack-pack/compare/v0.5.0...v0.6.0) (2026-11-24)
+
+
+### Features
+
+* start in a one block thick glass half dome built on the sea floor ([dd0abab](https://github.com/NC1107/pack-pack/commit/dd0abab622109007003f0b308d46b2c3a0b02a65))
+
 ## [0.5.0](https://github.com/NC1107/pack-pack/compare/v0.4.0...v0.5.0) (2026-11-24)
 
 
