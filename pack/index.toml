@@ -477,6 +477,14 @@ file = "datapacks/pack-pack-worldgen/data/minecraft/worldgen/noise_settings/over
 hash = "5103fabb4a0d00f64ad675c08a960ca9b59ee6e17a3aa45ecc057eeadf737f15"
 
 [[files]]
+file = "datapacks/pack-pack-worldgen/data/minecraft/worldgen/structure_set/mineshafts.json"
+hash = "c9ccb6838452449847e3234aaa72e5da6c772a4a9ead04f831e87df2426ad41d"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/minecraft/worldgen/structure_set/trial_chambers.json"
+hash = "936ed918e05ae21586a3f5fc2d3f0204de841e718b95fa552f569394847dba0c"
+
+[[files]]
 file = "datapacks/pack-pack-worldgen/data/minecraft/worldgen/world_preset/normal.json"
 hash = "a09832d9217f98f642f0f24fc22d79a70b8138881c37e9deba04523f23a5a514"
 

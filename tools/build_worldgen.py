@@ -184,6 +184,7 @@ def build_datapack(village_factor: float) -> str:
     tick = DATAPACK / "data/minecraft/tags/function/tick.json"
     write_json(tick, {"values": write_start_functions()})
     write_seabed_cover()
+    write_structure_overrides()
     lc_villages.write_start_city(DATAPACK, START_SPHERE_CENTER, START_SPHERE_RADIUS)
     return lc_villages.build(DATAPACK, vanilla_jar(), lost_cities_jar(), village_factor, DOME_CITY_FACTOR)
 
@@ -234,6 +235,19 @@ def on_seabed(feature: str, count: int, rarity: int = 1) -> dict:
         {"type": "minecraft:block_predicate_filter", "predicate": {"type": "minecraft:matching_fluids", "fluids": "minecraft:water"}},
         {"type": "minecraft:biome"},
     ]}
+
+
+# Vanilla structures that generate in the rock below the sea floor. With the floor only
+# 50 blocks above bedrock their tops stick out of it, so they are switched off. Strongholds
+# stay: they are the only way to the End.
+DISABLED_STRUCTURE_SETS = ["trial_chambers", "mineshafts"]
+
+
+def write_structure_overrides() -> None:
+    for name in DISABLED_STRUCTURE_SETS:
+        structure_set = vanilla(f"data/minecraft/worldgen/structure_set/{name}.json")
+        structure_set["structures"] = []
+        write_json(DATAPACK / f"data/minecraft/worldgen/structure_set/{name}.json", structure_set)
 
 
 def write_seabed_cover() -> None:
