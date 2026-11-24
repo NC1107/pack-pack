@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.8.1](https://github.com/NC1107/pack-pack/compare/v0.8.0...v0.8.1) (2026-11-24)
+
+
+### Bug Fixes
+
+* domes out of the spawn area, sand ground, no sea dragon skeletons, patched Lost Cities ([1ae9754](https://github.com/NC1107/pack-pack/commit/1ae9754d5870204f749d2e66b10bf7e4d49d106a))
+
 ## [0.8.0](https://github.com/NC1107/pack-pack/compare/v0.7.0...v0.8.0) (2026-11-24)
 
 
