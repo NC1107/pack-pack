@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.5.0](https://github.com/NC1107/pack-pack/compare/v0.4.0...v0.5.0) (2026-11-24)
+
+
+### Features
+
+* add Hybrid Aquatic, Simple Dive Gear and Underwater Village ([0124216](https://github.com/NC1107/pack-pack/commit/012421634bb5e0e4afb975067aa80dba1b3ddf3b))
+* put the world on a seabed reference height, spawn in an all-glass start sphere at 0,0 ([34f7eb1](https://github.com/NC1107/pack-pack/commit/34f7eb1e7a785caa79c1a49b53a53ca9b430b8f5))
+* switch off trial chambers and mineshafts, they poke out of the shallow sea floor ([9515c9a](https://github.com/NC1107/pack-pack/commit/9515c9a0f4749d7cf7f9b6a3ffc15e1514bc02cf))
+
 ## [0.4.0](https://github.com/NC1107/pack-pack/compare/v0.3.0...v0.4.0) (2026-11-24)
 
 
