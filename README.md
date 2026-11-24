@@ -12,8 +12,14 @@ You import a zip into prism launcher and it keeps itself updated from this repo.
 3. Launch it.
 
 Before the game starts it pulls whatever mods the pack currently lists, so updates just show up the next time you launch.
-New worlds generate with lost cities in the overworld.
 Shaders are off by default, there's three packs in video settings if you want to try them.
+
+## The world
+
+Pretty much the whole overworld is ocean, about 175 blocks deep down to the sea floor.
+You start in a small glass pod on the sea floor, there's nothing else close by.
+Past about 500 blocks out you start finding cities, some drowned and some under glass domes that keep the water out, and every so often a dome has a village with villagers in it.
+Just make a new world with the default world type, it's all set up by the pack, an old world won't change.
 The mods themselves still download from modrinth or curseforge since that's where their authors host them, but the pack itself lives here on github.
 
 ## Working on it
