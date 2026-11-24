@@ -21,9 +21,25 @@ Tick things off when they're handled, add new ones when they come up.
   You import an instance zip into prism, and every launch it syncs to `pack.toml` on github with packwiz.
   The mods still download from wherever their authors host them, so we never rehost anyone's jars.
 - **2026-11-24, the overworld is lost cities.**
-  Every new world, singleplayer or server, generates the overworld with lost cities' `default` profile, set through `dimensionsWithProfiles` in `config/lostcities/common.toml`.
-  The actual starting scenario is still open, so the profile will probably change, it's a one word swap.
+  Lost cities generates in the overworld of every new world, set through `dimensionsWithProfiles` in `config/lostcities/common.toml`.
   Loading a lost cities world pops vanilla's "experimental settings" warning every time, hide experimental warning removes it.
+- **2026-11-24, it's an ocean world.**
+  Everything is built by `tools/build_worldgen.py`, which writes the `pack-pack-worldgen` datapack (global packs loads it into every new world) and two lost cities profiles.
+  - Lost worlds' spheres generator puts a sea floor around y=-15 with water up to y=160 everywhere outside lost cities' glass domes, and normal ground only inside them.
+  - All biomes are ocean variants picked by temperature, deep ones where vanilla has ocean basins.
+  - Terrain is flattened to a floor at y=64, which only matters inside domes, so an empty dome is a dry floor and not a hill filling the glass.
+  - Cities inside domes are dry, cities between them are drowned, nothing within 500 blocks of spawn, and lost cities' railway tunnels are off since they floated through open water as a grid.
+  - You start in a 6x6x5 glass pod with a sea lantern floor on the sea floor under spawn.
+    A tick function builds it once (a storage flag keeps it from ever overwriting changes), sets spawn there, and moves anyone who joined before it existed.
+  - New players default to "bright" brightness and clear water removes the underwater fog, so it's readable without shaders.
+- **2026-11-24, ocean structures.**
+  Moog's ocean structures, unwrecked ships, YUNG's better ocean monuments and hopo better underwater ruins.
+  Within 500 blocks you mostly get the small hopo ruins plus vanilla ocean ruins and a shipwreck, the bigger stuff starts around 850 to 1250 blocks out.
+- **2026-11-24, villages in domes.**
+  `tools/lc_villages.py` turns vanilla's plains village houses into a lost cities city style, about 1 in 9 dome cities.
+  Lost cities picks a city style per world, not per dome, so a village city outside a dome comes out drowned, those have loot and no villagers.
+  Each house has a trial spawner that spawns one villager once, and a tick function removes a new villager standing in water, so only dome villages keep villagers.
+  `python3 tools/build_worldgen.py --preview-villages` makes every city a village with no spawn radius, for looking at them.
 - **2026-11-24, QoL mods most packs ship.**
   Picked from the actual mod lists of the 20 most downloaded 1.21.1 neoforge packs on modrinth (61 to 311 mods each), only stuff that doesn't change gameplay:
   jei, jade, appleskin, mouse tweaks, controlling, xaero's minimap and world map, reese's sodium options, better advancements, shulker box tooltip, clumps, badoptimizations, no chat reports, and lootr so loot chests in the cities are per player in multiplayer.
@@ -57,6 +73,21 @@ Tick things off when they're handled, add new ones when they come up.
 - [ ] **Advancements.**
   Vanilla advancements still fire and point people at vanilla goals.
   Decide if they get disabled, replaced, or kept next to the quest book, and check them like quests if kept.
+
+### Water world
+
+- [ ] **Domes are dark between buildings.**
+  No skylight gets through 50+ blocks of water, so hostile mobs spawn on the open ground in a dome and go after the villagers. Needs some kind of ambient light.
+- [ ] **Loot near spawn.**
+  Hopo ruins (one right at spawn), vanilla ocean ruins and a shipwreck 35 blocks out all have loot inside the 500 block ring, check those loot tables against the tier plan.
+- [ ] **Something has to gate the 500 block swim.**
+  The idea is a crafted item you need before you can make it out to the cities.
+- [ ] **Really tall kelp.**
+  Vanilla kelp tops out around 26 blocks, the "goes on forever" kelp forest would need a custom worldgen feature.
+- [ ] **Lost cities sometimes stalls worldgen.**
+  One pre-generation hit a 60 second server tick and the watchdog killed the server, and once the client hung saving the world on quit. Both were one-offs, need a thread dump from a stalled run.
+- [ ] **Worldgen is slow.**
+  Pre-generating runs around 11 to 22 chunks a second on a fast machine, exploring will lean on the cpu.
 
 ### Mods
 

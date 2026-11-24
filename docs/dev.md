@@ -59,6 +59,19 @@ A client-only mod on the server crashes it.
 Commits use `feat:`, `fix:`, `chore:` etc, release-please reads those to write the changelog and pick the next version.
 Work on a branch and open a PR so CI runs before it lands on `main`.
 
+## The world generation
+
+The datapack in `pack/datapacks/pack-pack-worldgen` and the lost cities profiles in `pack/config/lostcities/profiles` are generated, don't edit them by hand.
+Change `tools/build_worldgen.py` or `tools/lc_villages.py`, then:
+
+```
+python3 tools/boot_server.py --java <path-to-java-21>   # once, it installs the jars the generator reads from
+python3 tools/build_worldgen.py
+cd pack && packwiz refresh
+```
+
+`--preview-villages` makes every city a village and allows them near spawn, handy for looking at villages, just don't commit that build.
+
 ## What the tools do
 
 - `tools/check_repo.py` checks line endings, case collisions, windows-reserved names, path length, and that the packwiz index matches the files. `--json` gives output an agent can read.
