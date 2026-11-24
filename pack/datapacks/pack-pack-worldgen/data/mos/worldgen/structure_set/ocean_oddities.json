@@ -1,0 +1,37 @@
+{
+  "structures": [
+    {
+      "structure": "mos:conduit_arch",
+      "weight": 1
+    },
+    {
+      "structure": "mos:underwater_shrine",
+      "weight": 1
+    },
+    {
+      "structure": "mos:underwater_garden",
+      "weight": 1
+    },
+    {
+      "structure": "mos:magma_block_ravine",
+      "weight": 1
+    },
+    {
+      "structure": "mos:prismarine_dog_statue",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "type": "moogs_structures:advanced_random_spread",
+    "spacing": 40,
+    "separation": 16,
+    "salt": 728043915,
+    "spread_type": "linear",
+    "frequency": 1,
+    "locate_offset": [
+      0,
+      0,
+      0
+    ]
+  }
+}

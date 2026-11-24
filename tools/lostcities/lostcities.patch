@@ -1,0 +1,229 @@
+--- a/src/main/java/mcjty/lostcities/worldgen/lost/CitySphere.java	2026-11-24 04:11:35.373332294 -0500
++++ b/src/main/java/mcjty/lostcities/worldgen/lost/CitySphere.java	2026-11-24 12:47:23.778528506 -0500
+@@ -157,98 +157,68 @@
+      * Return true if there is a horizontal monorail here. This is the case if this chunk is on a city center multiple
+      * (i.e. multiple of 16) and if there are cities left and right that both want a monorail in the correct direction
+      */
+-    public static boolean hasHorizontalMonorail(ChunkCoord coord, IDimensionInfo provider) {
+-        int chunkX = coord.chunkX();
+-        int chunkZ = coord.chunkZ();
+-        if ((chunkZ & 0xf) == 8) {
+-            // There is a city center on this vertical chunk coordinate
+-            // Find the first city on the right (with a limit)
+-            // @todo optimize this by caching the result of this scan?
+-            boolean result = false;
+-            for (int cx = chunkX+1 ; cx < chunkX+64 ; cx++) {
+-                if ((cx & 0xf) == 8) {
+-                    // This could be a city center
+-                    ChunkCoord c = new ChunkCoord(provider.getType(), cx, chunkZ);
+-                    CitySphere sphere = getCitySphere(c, provider);
+-                    if (sphere.isEnabled()) {
+-                        if (!sphere.monorailWestCandidate) {
+-                            return false;
+-                        } else {
+-                            result = true;
+-                            break;  // No need to continue. We found our city
+-                        }
+-                    }
+-                }
+-            }
+-            if (!result) {
+-                return false;
++    /**
++     * A monorail joins the nearest enabled sphere on each side of this chunk on a grid row or
++     * column. Spheres are not allowed near spawn, so a tube that would pass through the spawn
++     * free area is not built at all (instead of ending in open stubs at its edge).
++     */
++    private static boolean monorailCrossesSpawn(LostCityProfile profile, int fixedChunk, int a, int b) {
++        if (profile.CITY_SPAWN_DISTANCE1 <= 0) {
++            return false;
++        }
++        double lo = Math.min(a, b) * 16.0;
++        double hi = Math.max(a, b) * 16.0;
++        double along = (lo <= 0 && hi >= 0) ? 0 : Math.min(Math.abs(lo), Math.abs(hi));
++        double across = fixedChunk * 16.0;
++        return Math.sqrt(along * along + across * across) < profile.CITY_SPAWN_DISTANCE1;
++    }
++
++    /** First enabled sphere along a grid row (alongX) or column, or MIN_VALUE if none is close enough. */
++    private static int findSphereAlong(ChunkCoord coord, IDimensionInfo provider, boolean alongX, int step, boolean needsCandidate, boolean forward) {
++        for (int i = 1; i < 64; i++) {
++            int along = (alongX ? coord.chunkX() : coord.chunkZ()) + step * i;
++            if ((along & 0xf) != 8) {
++                continue;
+             }
+-            result = false;
+-            // Find the first city on the left (with a limit)
+-            for (int cx = chunkX-1 ; cx > chunkX-64 ; cx--) {
+-                if ((cx & 0xf) == 8) {
+-                    // This could be a city center
+-                    ChunkCoord c = new ChunkCoord(provider.getType(), cx, chunkZ);
+-                    CitySphere sphere = getCitySphere(c, provider);
+-                    if (sphere.isEnabled()) {
+-                        if (!sphere.monorailEastCandidate) {
+-                            return false;
+-                        } else {
+-                            result = true;
+-                            break;  // No need to continue. We found our city
+-                        }
+-                    }
++            ChunkCoord c = alongX
++                    ? new ChunkCoord(provider.getType(), along, coord.chunkZ())
++                    : new ChunkCoord(provider.getType(), coord.chunkX(), along);
++            CitySphere sphere = getCitySphere(c, provider);
++            if (sphere.isEnabled()) {
++                boolean candidate;
++                if (alongX) {
++                    candidate = forward ? sphere.monorailWestCandidate : sphere.monorailEastCandidate;
++                } else {
++                    candidate = forward ? sphere.monorailNorthCandidate : sphere.monorailSouthCandidate;
+                 }
++                return candidate ? along : Integer.MIN_VALUE;
+             }
+-            return result;
+-        } else {
++        }
++        return Integer.MIN_VALUE;
++    }
++
++    public static boolean hasHorizontalMonorail(ChunkCoord coord, IDimensionInfo provider) {
++        if ((coord.chunkZ() & 0xf) != 8) {
++            return false;
++        }
++        int right = findSphereAlong(coord, provider, true, 1, true, true);
++        int left = findSphereAlong(coord, provider, true, -1, true, false);
++        if (right == Integer.MIN_VALUE || left == Integer.MIN_VALUE) {
+             return false;
+         }
++        return !monorailCrossesSpawn(provider.getProfile(), coord.chunkZ(), left, right);
+     }
+ 
+     public static boolean hasVerticalMonorail(ChunkCoord coord, IDimensionInfo provider) {
+-        int chunkX = coord.chunkX();
+-        int chunkZ = coord.chunkZ();
+-        if ((chunkX & 0xf) == 8) {
+-            boolean result = false;
+-            for (int cz = chunkZ+1 ; cz < chunkZ+64 ; cz++) {
+-                if ((cz & 0xf) == 8) {
+-                    // This could be a city center
+-                    ChunkCoord c = new ChunkCoord(provider.getType(), chunkX, cz);
+-                    CitySphere sphere = getCitySphere(c, provider);
+-                    if (sphere.isEnabled()) {
+-                        if (!sphere.monorailNorthCandidate) {
+-                            return false;
+-                        } else {
+-                            result = true;
+-                            break;  // No need to continue. We found our city
+-                        }
+-                    }
+-                }
+-            }
+-            if (!result) {
+-                return false;
+-            }
+-            result = false;
+-            for (int cz = chunkZ-1 ; cz > chunkZ-64 ; cz--) {
+-                if ((cz & 0xf) == 8) {
+-                    // This could be a city center
+-                    ChunkCoord c = new ChunkCoord(provider.getType(), chunkX, cz);
+-                    CitySphere sphere = getCitySphere(c, provider);
+-                    if (sphere.isEnabled()) {
+-                        if (!sphere.monorailSouthCandidate) {
+-                            return false;
+-                        } else {
+-                            result = true;
+-                            break;  // No need to continue. We found our city
+-                        }
+-                    }
+-                }
+-            }
+-            return result;
+-        } else {
++        if ((coord.chunkX() & 0xf) != 8) {
++            return false;
++        }
++        int forward = findSphereAlong(coord, provider, false, 1, true, true);
++        int back = findSphereAlong(coord, provider, false, -1, true, false);
++        if (forward == Integer.MIN_VALUE || back == Integer.MIN_VALUE) {
+             return false;
+         }
++        return !monorailCrossesSpawn(provider.getProfile(), coord.chunkX(), back, forward);
+     }
+ 
+     /**
+@@ -364,6 +334,16 @@
+         return (cx-x)*(cx-x) + (cz-z)*(cz-z);
+     }
+ 
++    /** No spheres within the profile's city spawn distance of the world origin. */
++    private static boolean isNearSpawn(LostCityProfile profile, int chunkX, int chunkZ) {
++        if (profile.CITY_SPAWN_DISTANCE1 <= 0) {
++            return false;
++        }
++        double dx = chunkX * 16.0;
++        double dz = chunkZ * 16.0;
++        return Math.sqrt(dx * dx + dz * dz) < profile.CITY_SPAWN_DISTANCE1;
++    }
++
+     private static boolean isOnSphereGrid(LostCityProfile profile, int chunkX, int chunkZ) {
+         if (profile.CITYSPHERE_32GRID) {
+             return (chunkX & 0x1f) == 8 && (chunkZ & 0x1f) == 8;
+@@ -384,7 +364,8 @@
+         LostCityProfile profile = provider.getProfile();
+ 
+         // First compute the base properties (chance, radius, center position)
+-        boolean baseEnabled = predef != null || (rand.nextFloat() < profile.CITYSPHERE_CHANCE && isOnSphereGrid(profile, chunkX, chunkZ));
++        boolean baseEnabled = predef != null || (rand.nextFloat() < profile.CITYSPHERE_CHANCE && isOnSphereGrid(profile, chunkX, chunkZ)
++                && !isNearSpawn(profile, chunkX, chunkZ));
+         float radius = predef != null ? predef.getRadius() : getSphereRadius(center, provider, rand);
+         BlockPos centerPosition = predef != null ? new BlockPos(predef.getCenterX(), profile.GROUNDLEVEL, predef.getCenterZ()) : getSphereCenterPosition(center, provider, rand);
+ 
+@@ -404,7 +385,7 @@
+                         int nz = chunkZ + dz;
+                         // Deterministically compute the neighbor's base sphere
+                         Random nrand = new Random(provider.getSeed() + nx * 961744153L + nz * 837971201L);
+-                        boolean nEnabled = nrand.nextFloat() < profile.CITYSPHERE_CHANCE && isOnSphereGrid(profile, nx, nz);
++                        boolean nEnabled = nrand.nextFloat() < profile.CITYSPHERE_CHANCE && isOnSphereGrid(profile, nx, nz) && !isNearSpawn(profile, nx, nz);
+                         if (!nEnabled) {
+                             continue; // Disabled neighbors cannot suppress this one
+                         }
+@@ -475,7 +456,14 @@
+                 updateCache(coord, sphere);
+                 return sphere;
+             } else {
+-                return CITY_SPHERE_CACHE.get(coord);
++                CitySphere cached = CITY_SPHERE_CACHE.get(coord);
++                if (cached != null) {
++                    return cached;
++                }
++                // The cache can be cleared by another thread between containsKey and get
++                CitySphere sphere = getSphereAtCenter(new ChunkCoord(provider.getType(), (coord.chunkX() & ~0xf) + 8, (coord.chunkZ() & ~0xf) + 8), provider, null);
++                updateCache(coord, sphere);
++                return sphere;
+             }
+         }
+     }
+--- a/src/main/java/mcjty/lostcities/worldgen/ChunkDriver.java	2026-11-24 04:11:35.372106975 -0500
++++ b/src/main/java/mcjty/lostcities/worldgen/ChunkDriver.java	2026-11-24 12:42:41.959410780 -0500
+@@ -240,6 +240,9 @@
+     }
+ 
+     private BlockState correct(BlockState state) {
++        if (state == null) {
++            return net.minecraft.world.level.block.Blocks.AIR.defaultBlockState();
++        }
+         int cx = current.getX();
+         int cy = current.getY();
+         int cz = current.getZ();
+@@ -285,6 +288,11 @@
+     }
+ 
+     public ChunkDriver add(BlockState state) {
++        if (state == null) {
++            // A part used a palette character that is not defined: leave the block alone instead of failing the chunk
++            incY();
++            return this;
++        }
+ //        validate();
+         setBlock(current, correct(state));
+         incY();

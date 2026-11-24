@@ -16,6 +16,7 @@ public final class SeaFloor {
     public static final int BASE = -15;
     public static final int MIN = -56;
     public static final int MAX = 72;
+    public static final int SAND_DEPTH = 30;
 
     private static final double GRID = 256.0;
     private static final double GRID_OFFSET = 128.0;

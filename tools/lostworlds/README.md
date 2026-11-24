@@ -5,6 +5,7 @@ The pack ships `pack/mods/lostworlds-1.21-2.0.0-packpack.jar`, a patched build o
 Two things change, only for the `spheres` generator with a custom sea level:
 
 - The sea floor outside domes comes from `SeaFloor.java`: broad plates, ridges, trenches, seamounts and hills, flat around the dome grid and around spawn.
+- Under the floor it is sand for 30 blocks (SeaFloor.SAND_DEPTH) in the chunk generator, and the pack's noise settings use sand as the default block, so there is no stone or ore and no bedrock showing on slopes.
 - Height lookups (`getBaseHeight`, `getBaseColumn`) answer from that same floor, in block coordinates.
   Upstream returns the world minimum there, which put structures in the wrong place and kept Lost Cities from generating drowned cities outside domes.
 
