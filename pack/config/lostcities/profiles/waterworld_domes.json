@@ -2,7 +2,7 @@
   "cities": {
     "cityLevel4Height": 11,
     "cityAvoidVoid": true,
-    "cityMaxRadius": 65,
+    "cityMaxRadius": 120,
     "cityMaxHeight": 75,
     "citySpawnDistance1": 32,
     "citySpawnDistance2": 48,
@@ -11,7 +11,7 @@
     "cityPerlinOffset": 0.1,
     "cityPerlinScale": 3.0,
     "cityLevel3Height": 5,
-    "cityMinRadius": 50,
+    "cityMinRadius": 100,
     "cityLevel1Height": -7,
     "cityStyleThreshold": -1.0,
     "cityLevel5Height": 17,
@@ -157,8 +157,8 @@
     "highwayHubSampleSpacing": 16
   },
   "cityspheres": {
-    "citySphereFactor": 1.2,
-    "citySphereChance": 0.5,
+    "citySphereFactor": 0.6,
+    "citySphereChance": 0.8,
     "outsideProfile": "waterworld",
     "outsideGroundLevel": -1,
     "onlyPredefined": false,
@@ -166,11 +166,11 @@
     "citySphereClearBelowUntilAir": false,
     "monorailOffset": -2,
     "outsideSurfaceVariation": 1.0,
-    "monorailChance": 1.0,
+    "monorailChance": 0.9,
     "citySphereClearAbove": 0,
     "citySphereClearAboveUntilAir": false,
     "sphereSurfaceVariation": 1.0,
-    "grid32": true
+    "grid32": false
   },
   "public": true
 }
