@@ -179,6 +179,9 @@ Tick things off when they're handled, add new ones when they come up.
 - [ ] **Same java on both machines.**
   Let prism manage java 21 on both instead of the system java, fedora's is 25.
 - [ ] **Test worlds stay out of git.** Benchmark and save upgrade worlds go in release assets or git lfs.
+- [ ] **Instance settings only apply on import.**
+  Window size, memory and the pre-launch command live in prism's `instance.cfg`, which comes from the zip when you import it and never syncs after that.
+  Mods and configs update every launch, but changing those settings means re-importing, or we find a way to sync them too.
 - [ ] **Shared test server.** Decide who hosts it and how it updates, probably packwiz on the server too.
 
 ### Players
