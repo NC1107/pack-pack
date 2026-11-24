@@ -47,6 +47,14 @@ RUNTIME_TEST_SHA256 = "95a54e65f4e4b61cf663c652f0eacefdda05ce57de25c796a6bd8d126
 NEOFORGE_MAVEN = "https://maven.neoforged.net/releases/net/neoforged/neoforge"
 
 SUCCESS_LINE = "Successfully finished."
+
+# Errors that come from the test environment rather than the pack: CI plays with an
+# offline account and has no audio device. Anything else still fails the run.
+ENVIRONMENT_ERRORS = (
+    "Failed to fetch user properties",
+    "Error starting SoundSystem",
+    "Couldn't connect to realms",
+)
 XVFB_SCREEN = "-screen 0 1920x1080x24 +extension GLX +render -noreset"
 
 
@@ -143,6 +151,8 @@ def main() -> int:
     run = launch(args.hmc_java, hmc, env, minecraft, args.memory, args.timeout)
 
     game_log = gamelog.read_log(GAME_DIR)
+    all_errors = gamelog.error_lines(game_log)
+    environment_errors = [line for line in all_errors if any(known in line for known in ENVIRONMENT_ERRORS)]
     report = {
         "pack_version": pack["version"],
         "minecraft": minecraft,
@@ -152,7 +162,8 @@ def main() -> int:
         "startup_seconds": gamelog.seconds(gamelog.GAME_TOOK, game_log),
         "menu_to_world_seconds": gamelog.seconds(gamelog.MENU_TO_WORLD, game_log),
         "client_mods": gamelog.mod_jars(GAME_DIR),
-        "error_lines": gamelog.error_lines(game_log),
+        "error_lines": [line for line in all_errors if line not in environment_errors],
+        "environment_error_lines": environment_errors,
         "crash_reports": gamelog.crash_reports(GAME_DIR),
     }
 
@@ -172,7 +183,8 @@ def main() -> int:
     REPORT.write_text(json.dumps(report, indent=2))
     log(f"report written to {REPORT.relative_to(REPO)}")
     log(f"startup {report['startup_seconds']}s, menu to world {report['menu_to_world_seconds']}s, "
-        f"{len(report['client_mods'])} client mods, {len(report['error_lines'])} error line(s)")
+        f"{len(report['client_mods'])} client mods, {len(report['error_lines'])} error line(s), "
+        f"{len(environment_errors)} environment-only")
     for line in report["error_lines"][:10]:
         log(f"error: {line}")
     for failure in failures:
