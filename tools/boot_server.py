@@ -48,6 +48,18 @@ online-mode=false
 spawn-protection=0
 """
 HEALTH_WAIT_SECONDS = 10
+
+# Aikar's G1 flags (docs.papermc.io/paper/aikars-flags), the usual baseline for
+# dedicated servers, so the boot test runs the way a host would.
+SERVER_GC_FLAGS = [
+    "-XX:+UseG1GC", "-XX:+ParallelRefProcEnabled", "-XX:MaxGCPauseMillis=200",
+    "-XX:+UnlockExperimentalVMOptions", "-XX:+DisableExplicitGC", "-XX:+AlwaysPreTouch",
+    "-XX:G1NewSizePercent=30", "-XX:G1MaxNewSizePercent=40", "-XX:G1HeapRegionSize=8M",
+    "-XX:G1ReservePercent=20", "-XX:G1HeapWastePercent=5", "-XX:G1MixedGCCountTarget=4",
+    "-XX:InitiatingHeapOccupancyPercent=15", "-XX:G1MixedGCLiveThresholdPercent=90",
+    "-XX:G1RSetUpdatingPauseTimePercent=5", "-XX:SurvivorRatio=32", "-XX:+PerfDisableSharedMem",
+    "-XX:MaxTenuringThreshold=1",
+]
 LOG_ERROR = re.compile(r"/(ERROR|FATAL)\]")
 
 
@@ -95,7 +107,7 @@ def install_pack(java: str) -> None:
 def prepare_world(memory: str) -> None:
     (SERVER / "eula.txt").write_text("eula=true\n")
     (SERVER / "server.properties").write_text(SERVER_PROPERTIES)
-    (SERVER / "user_jvm_args.txt").write_text(f"-Xms{memory}\n-Xmx{memory}\n")
+    (SERVER / "user_jvm_args.txt").write_text("\n".join([f"-Xms{memory}", f"-Xmx{memory}", *SERVER_GC_FLAGS]) + "\n")
     for stale in ("world", "logs", "crash-reports"):
         shutil.rmtree(SERVER / stale, ignore_errors=True)
 
@@ -130,7 +142,7 @@ def parse_health(lines: list[str]) -> dict:
         elif line.startswith("> Memory"):
             section = "memory"
         elif section == "tps" and (m := HEALTH_TPS.match(line)):
-            health["tps_5s"] = float(m["tps"].rstrip("*"))
+            health["tps_5s"] = float(m["tps"].strip("*"))
             section = None
         elif section == "ticks" and (m := HEALTH_TICKS.match(line)):
             health["mspt_10s"] = {k: float(m[k]) for k in ("min", "med", "p95", "max")}
