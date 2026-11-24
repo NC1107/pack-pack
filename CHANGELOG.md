@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.0](https://github.com/NC1107/pack-pack/compare/v0.3.0...v0.4.0) (2026-11-24)
+
+
+### Features
+
+* ocean world with a seabed start, domed and drowned cities, and village domes ([e8ea19b](https://github.com/NC1107/pack-pack/commit/e8ea19b0745a55f9608832d072db949a14ad0d56))
+
 ## [0.3.0](https://github.com/NC1107/pack-pack/compare/v0.2.0...v0.3.0) (2026-11-24)
 
 
