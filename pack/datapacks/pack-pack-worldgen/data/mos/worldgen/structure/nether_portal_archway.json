@@ -1,0 +1,20 @@
+{
+  "type": "moogs_structures:moogs_structures_generic_jigsaw_structure",
+  "start_pool": "mos:nether_portal_archway/below_water_bottom",
+  "size": 5,
+  "step": "surface_structures",
+  "spawn_overrides": {},
+  "start_height": {
+    "absolute": -15
+  },
+  "terrain_adaptation": "none",
+  "cannot_spawn_in_liquid": false,
+  "burying_type": "AVERAGE_LAND",
+  "y_allowance": {
+    "min_y_allowed": 55,
+    "max_y_allowed": 56
+  },
+  "terrain_height_radius_check": 1,
+  "allowed_terrain_height_range": 4,
+  "biomes": "#mos:is_shore"
+}

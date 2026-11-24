@@ -12,6 +12,7 @@ installed, so run that once first. Writes:
 from __future__ import annotations
 
 import argparse
+import collections
 import json
 import shutil
 import zipfile
@@ -190,6 +191,7 @@ def build_datapack(village_factor: float) -> str:
     write_seabed_cover()
     write_structure_overrides()
     write_ocean_biomes()
+    write_mod_structure_heights()
     return lc_villages.build(DATAPACK, vanilla_jar(), lost_cities_jar(), village_factor, DOME_CITY_FACTOR)
 
 
@@ -325,6 +327,40 @@ def write_ocean_biomes() -> None:
         biome["effects"]["sky_color"] = DEEP_WATER_COLOR
         biome["effects"]["fog_color"] = DEEP_WATER_COLOR
         write_json(DATAPACK / f"data/minecraft/worldgen/biome/{name}.json", biome)
+
+
+# Lost Worlds answers every height lookup outside a dome with the world minimum, so
+# structures that find their height by projecting onto a heightmap end up in the wrong
+# place. Mod structures get a fixed start height instead: the sea floor for underwater
+# ones, the water surface for ships.
+HEIGHTMAP_START = {
+    "OCEAN_FLOOR_WG": SEABED_Y, "OCEAN_FLOOR": SEABED_Y,
+    "WORLD_SURFACE_WG": SEA_LEVEL, "WORLD_SURFACE": SEA_LEVEL, "MOTION_BLOCKING": SEA_LEVEL,
+}
+
+
+def write_mod_structure_heights() -> None:
+    fixed = collections.Counter()
+    for jar in sorted((SERVER / "mods").glob("*.jar")):
+        with zipfile.ZipFile(jar) as z:
+            for name in z.namelist():
+                parts = name.split("/")
+                if len(parts) < 5 or parts[0] != "data" or parts[2:4] != ["worldgen", "structure"] or not name.endswith(".json"):
+                    continue
+                if parts[1] == "minecraft":
+                    continue
+                try:
+                    structure = json.loads(z.read(name))
+                except ValueError:
+                    continue
+                heightmap = structure.get("project_start_to_heightmap")
+                if heightmap not in HEIGHTMAP_START:
+                    continue
+                structure.pop("project_start_to_heightmap")
+                structure["start_height"] = {"absolute": HEIGHTMAP_START[heightmap]}
+                write_json(DATAPACK / name, structure)
+                fixed[parts[1]] += 1
+    print("structure start heights fixed:", dict(fixed))
 
 
 def write_seabed_cover() -> None:

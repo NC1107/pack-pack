@@ -29,6 +29,26 @@ file = "config/modernfix-mixins.properties"
 hash = "b55e21a78bbbebf52ed85df01b7c3a4e24ddac497462bece65ca701b2899df55"
 
 [[files]]
+file = "datapacks/pack-pack-worldgen/data/hopo/worldgen/structure/underwater/underwater_city.json"
+hash = "4860eb501b037c7afb6e0ebeab93a564801088292e95994147307777f8b83e83"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/hopo/worldgen/structure/underwater/underwater_fossils.json"
+hash = "23d8d8b82665cd73cd39b3a77a3116ee3bd10113d3de0968f93fad24f8cb1ce4"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/hopo/worldgen/structure/underwater/underwater_small_ruins.json"
+hash = "4848405372c020c31b25464b883705b02c0a3a6436898ac1fe1b64fda6681caa"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/hopo/worldgen/structure/underwater/underwater_warm_small_ruins.json"
+hash = "62414eaffbf6acbf98a05b09d904eaaa82f8449ecc49801dce06c77b5d731404"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/hybrid_aquatic/worldgen/structure/whale_fall.json"
+hash = "d97288f26d50a5ea220e54506778b926e9c9dd0027169567802994ba375557ee"
+
+[[files]]
 file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/buildings/packpack_village_plains_accessory_1.json"
 hash = "c95bc80e1b3065338cea5caae0709448b74316a1acd110122da8125a431af81c"
 
@@ -517,6 +537,110 @@ file = "datapacks/pack-pack-worldgen/data/minecraft/worldgen/world_preset/normal
 hash = "a09832d9217f98f642f0f24fc22d79a70b8138881c37e9deba04523f23a5a514"
 
 [[files]]
+file = "datapacks/pack-pack-worldgen/data/mos/worldgen/structure/atlantis_tribune.json"
+hash = "573523f245ecc119031d299c4af9dda2c506a80c2c923fb1fe655b5048b232d4"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/mos/worldgen/structure/buried_treasure.json"
+hash = "f8bf2b920987d0e9a2e9ffbb3bbc724628f6e67236eb97d68830f23ad74e195f"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/mos/worldgen/structure/conduit_arch.json"
+hash = "f473815e70fac5511adddd8aa26380767d6fa53d8d462909c5560e4fdf1e8148"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/mos/worldgen/structure/dragon_skeleton.json"
+hash = "7367d5a26e6400549a910e439f8f81bb0f6cdaa7a1494384eccb254269edc2ff"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/mos/worldgen/structure/hauling_ship_1.json"
+hash = "f6f277427a2f5c544d7231e19543ccacd43fe0ffd2dc40844d7bfe12d4267055"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/mos/worldgen/structure/long_ship.json"
+hash = "78e8f88c320f359a193ec3b77fa7105c04777a8d85194dad1fa17d36ba80f4e0"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/mos/worldgen/structure/magma_block_ravine.json"
+hash = "130e2b46aa0bb7b95ca191e622d0e8a21a205b10e5b4d955360fc41ac835af50"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/mos/worldgen/structure/nether_portal_archway.json"
+hash = "103a89b73ebe604d961d6eb434d5ccc179d60ec358a9df1441a24ab0584e1e9c"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/mos/worldgen/structure/ocean_decor.json"
+hash = "67d623e6cebf5df39343fac5388380c54f89dd3aff4d493ae4fb4ab0cbc3fcd1"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/mos/worldgen/structure/prismarine_dog_statue.json"
+hash = "9494eed15a3e50cb453b091d1f8043f9f3ee2332be3ea65658c6d87d371b0250"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/mos/worldgen/structure/rare_travel_ship.json"
+hash = "5f103e5bad6c7e7502099a3655ec650aac87b4239b7b2e6788f98827356fd45e"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/mos/worldgen/structure/ruined_archway.json"
+hash = "dd4007c4166b1b6ef34753a371d5f6ee62d8018df9e75bc260722a28748754e4"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/mos/worldgen/structure/ruined_castle.json"
+hash = "0ed915d506c6b60bc938c1fa3c2f0584076ef68d3dbc9bc93a923f5b677bf476"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/mos/worldgen/structure/ruined_church.json"
+hash = "b19f8f1a2060572b6ae0d3c967782068e8b5ceb1dc556ebd097e0e00dea75e5e"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/mos/worldgen/structure/ruined_house.json"
+hash = "c46120fb5ffdab0173576c16658321da2d88e0f36fce029c7f25f9d3f6d27b00"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/mos/worldgen/structure/ruins_atlantis.json"
+hash = "315f5810e870aa3b508c55a780340ff81982bdf52892c95db1f53b65f302dde1"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/mos/worldgen/structure/sea_dragon_skeleton.json"
+hash = "6d731058e30427c60094bdb4e24674b6faf2edf42a61e6fc7880bdf233b74557"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/mos/worldgen/structure/ship_small.json"
+hash = "07e45447135b40928c9b963233991dd59132d51b322460f3b59bb5368326d607"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/mos/worldgen/structure/ship_wreck_dark_oak.json"
+hash = "ef651823b3b2e799b92248317c37e7a070fb851192ab9e8afa014b09683800ea"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/mos/worldgen/structure/ship_wreck_oak.json"
+hash = "65fd846fe32827b34169b125ec45f0f71cd996807535eb19bf0f6592edfb00d8"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/mos/worldgen/structure/ship_wreck_spruce.json"
+hash = "dd7db9b08701edc0860a33d4865f027f8d45b45e516b6f04e460cd7b6ad6fcfe"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/mos/worldgen/structure/small_ocean_temple.json"
+hash = "0df37be108e1838803ea35e65ddefaec379d8e1f0f1fe2cd329a0b25e54380c7"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/mos/worldgen/structure/sunken_ship.json"
+hash = "6dc8cca36d4557d8cd675f0b131127512b74e92b6ae101ee5a1943eb6ef07b9f"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/mos/worldgen/structure/underwater_garden.json"
+hash = "1d6e35031d70aefd9a97b3954cc744fc57b3589ca8087bfdefb2a85e81e01f3c"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/mos/worldgen/structure/underwater_shrine.json"
+hash = "db0b39faba09526152177d1d295ebac7b05c6fd299e7794be63834275188dca9"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/mos/worldgen/structure/wanderer_raft.json"
+hash = "604b0fb69636be38438ee018d47b2ac906e5bf920ad45b55da57d656d8f307ab"
+
+[[files]]
 file = "datapacks/pack-pack-worldgen/data/packpack/function/build_start_dome.mcfunction"
 hash = "b5d6d065714d1636685fbb2ed24f2ae8b95986d705f0973739871660d68ea1e7"
 
@@ -595,6 +719,78 @@ hash = "c3e7797e503dd2ec8519b2d95996bb92b89d849cc2b39965b384585efbed936d"
 [[files]]
 file = "datapacks/pack-pack-worldgen/data/packpack/worldgen/placed_feature/seabed_sand.json"
 hash = "1fa20d4ac03b49b6e0dd8e87880f44232b44d68ed3bae2727fd07f1cf72036d1"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/underwater_village/worldgen/structure/cold_big_gate.json"
+hash = "ac308bb7fddb38ba0550d93325baaa393061f5ef45c0961028922ced6ba81ec9"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/underwater_village/worldgen/structure/cold_broken_house.json"
+hash = "ac8dc9269afff748ed1761e74f910bea5a1175684a72c2728d446e6e30fa1316"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/underwater_village/worldgen/structure/cold_fountain.json"
+hash = "6cb4d7af9360fa0e91232bfe3d3e91f59ab6b537713850ea41cbcf0cd309b9f9"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/underwater_village/worldgen/structure/cold_gate.json"
+hash = "5130848dfdb59295b01d0dd8ad2481315281ecb3e07fc6e94e0ea209cd5a5a6e"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/underwater_village/worldgen/structure/dungeon.json"
+hash = "8943189c3857f8bd7a644395ac364b31d128995b7c5f601cdcdb6966e61a54d3"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/underwater_village/worldgen/structure/library.json"
+hash = "804bd89128c46a564fb32d463b040db8d1f24c9daf0cbdba4cff2a2394c9d530"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/underwater_village/worldgen/structure/ruins.json"
+hash = "776b67ccbdac6b454697bf04ffa5daafdefc0a30e6fddd384d8d2722cc441ece"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/underwater_village/worldgen/structure/shrine.json"
+hash = "4930aef857fe552ee14fd8969a40d1bfdd0da4508f59741baa8e974b6fc538b7"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/underwater_village/worldgen/structure/small_gate.json"
+hash = "16f5a3fb3de757e0c0bd31926914acc6e623905b5e2af76c6ae3c22f5ae01c2b"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/underwater_village/worldgen/structure/temple.json"
+hash = "4abe2c009ebc8aa29242abf5cb65d5d35d2f1df939db274812f52a95dcb32cf1"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/underwater_village/worldgen/structure/temple_broken.json"
+hash = "09f224023e87a3ad43a3e1faa81448be91288a8848276271419e294d8564a21c"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/underwater_village/worldgen/structure/temple_ruins.json"
+hash = "91c11d4afe714341635faf650d77a15d3b940ffb7541ac927c8368f27902e4d6"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/underwater_village/worldgen/structure/tower.json"
+hash = "392280e9a58219d1fa12333d16888eb097d7d59f6c9a3be214992fad65dfdf4b"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/underwater_village/worldgen/structure/warm_big_gate.json"
+hash = "8b400affc581e742e5778a5c8a4fc00a4ea90165d2b3864763b9a3b7fc93c1d1"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/underwater_village/worldgen/structure/warm_broken_house.json"
+hash = "99ad1139862ebe1ca228b5a92260caf99a48ffe83c5cbd4e4df7f7f6c4c1d585"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/underwater_village/worldgen/structure/warm_fountain.json"
+hash = "26e65fe803d87317f5092c724d1cab599aa96761757465c3f3627b553b492848"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/underwater_village/worldgen/structure/warm_gate.json"
+hash = "b088da059f9ebeebd752d61c78b235deb79b383195de5402e732db429c426016"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/unwrecked_ships/worldgen/structure/ship.json"
+hash = "2bae7be5a78715329aa2eab54b3ff373e128cd300127f5bb84a795d87299ffdd"
 
 [[files]]
 file = "datapacks/pack-pack-worldgen/pack.mcmeta"
