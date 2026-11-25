@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.21.1](https://github.com/NC1107/pack-pack/compare/v0.21.0...v0.21.1) (2026-11-25)
+
+
+### Bug Fixes
+
+* no floating blocks in domes, predatory sharks only, 100 small fish ([7deec22](https://github.com/NC1107/pack-pack/commit/7deec22a827b714efe5510475e93d83efd9c3748))
+* no ring of water down to bedrock around domes ([fd26c9d](https://github.com/NC1107/pack-pack/commit/fd26c9d4763066e29a493dd7f642e2307bb6ef8c))
+* test sub with an iron door, portholes, enough ballast, and no captured water ([465e864](https://github.com/NC1107/pack-pack/commit/465e864547e65548cbdc0dd93252a9b09d139926))
+
 ## [0.21.0](https://github.com/NC1107/pack-pack/compare/v0.20.0...v0.21.0) (2026-11-25)
 
 
