@@ -245,6 +245,44 @@ def scan_logs() -> dict:
     }
 
 
+# What a freshly booted, idle server may cost. CI runners are slower than a dev machine:
+# on 2026-11-25 CI booted in 7 to 12 s at 20 TPS, median tick 1 to 2 ms, 95th percentile
+# about 3 ms and about 1 GB of heap, so these leave a lot of room and still catch a mod
+# that makes the server crawl.
+BUDGETS = {
+    "server_seconds": 60.0,
+    "min_tps": 19.5,
+    "median_mspt": 10.0,
+    "p95_mspt": 25.0,
+    "heap_mb": 3072.0,
+}
+
+
+def heap_mb(text: str) -> float | None:
+    match = re.fullmatch(r"([\d.]+)\s*(MB|GB)", text or "")
+    if not match:
+        return None
+    return float(match[1]) * (1024 if match[2] == "GB" else 1)
+
+
+def over_budget(report: dict) -> list[str]:
+    problems = []
+    if report["server_reported_seconds"] > BUDGETS["server_seconds"]:
+        problems.append(f"boot took {report['server_reported_seconds']}s (budget {BUDGETS['server_seconds']}s)")
+    health = report.get("health") or {}
+    tps, mspt = health.get("tps_5s"), health.get("mspt_10s") or {}
+    if tps is not None and tps < BUDGETS["min_tps"]:
+        problems.append(f"idle TPS {tps} (budget at least {BUDGETS['min_tps']})")
+    if mspt.get("med") is not None and mspt["med"] > BUDGETS["median_mspt"]:
+        problems.append(f"idle median tick {mspt['med']} ms (budget {BUDGETS['median_mspt']} ms)")
+    if mspt.get("p95") is not None and mspt["p95"] > BUDGETS["p95_mspt"]:
+        problems.append(f"idle 95th percentile tick {mspt['p95']} ms (budget {BUDGETS['p95_mspt']} ms)")
+    heap = heap_mb(health.get("heap_used", ""))
+    if heap is not None and heap > BUDGETS["heap_mb"]:
+        problems.append(f"heap {heap:.0f} MB after boot (budget {BUDGETS['heap_mb']:.0f} MB)")
+    return problems
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Boot the pack on a dedicated server and report the result.")
     parser.add_argument("--java", default=os.environ.get("PACK_JAVA", "java"),
@@ -288,6 +326,8 @@ def main() -> int:
         failures.append(f"{len(report['error_lines'])} error line(s) in latest.log (allowed {args.max_errors})")
     if report["reached_done"] and not report["lost_cities"].get("minecraft:overworld"):
         failures.append(f"overworld has no Lost Cities cities near spawn (city hubs per dimension: {report['lost_cities']})")
+    if report["reached_done"]:
+        failures.extend(over_budget(report))
     report["failures"] = failures
 
     REPORT.write_text(json.dumps(report, indent=2))

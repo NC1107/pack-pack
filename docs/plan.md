@@ -180,8 +180,8 @@ Tick things off when they're handled, add new ones when they come up.
 - [x] **JVM flags.**
   The server boot test runs aikar's G1 flags since that's what most hosts use.
   The client gets 2-6GB and java 21's default G1, there's no java 21 data showing custom client flags help, so we'll revisit once the pack is big.
-- [ ] **No budgets yet.**
-  The boot test records boot time, tps, tick times and heap on a fixed seed, but nothing fails when they get worse.
+- [x] **Budgets for an idle server.**
+  The boot test records boot time, tps, tick times and heap on a fixed seed, and since 2026-11-25 fails over budget: boot 60 s, idle TPS 19.5, median tick 10 ms, 95th percentile 25 ms, heap 3 GB (`BUDGETS` in `tools/boot_server.py`, set well above CI's numbers).
   Numbers so far (2026-11-23, fedora, java 21, rtx 5080):
   - server: about 4s to start, median tick 0.5ms, 95th percentile around 4-8ms
   - client with 4 mods: about 9.3s to the main menu
