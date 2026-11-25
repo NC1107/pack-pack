@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.10.0](https://github.com/NC1107/pack-pack/compare/v0.9.2...v0.10.0) (2026-11-25)
+
+
+### Features
+
+* no hostile spawns in domes, start dome at a fixed height, tests and lint for tools ([a80eb43](https://github.com/NC1107/pack-pack/commit/a80eb43241ea2e04cf60cfc46537e74e3b529dd0))
+
 ## [0.9.2](https://github.com/NC1107/pack-pack/compare/v0.9.1...v0.9.2) (2026-11-25)
 
 
