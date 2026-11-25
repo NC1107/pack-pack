@@ -33,6 +33,27 @@ def test_start_submarine_furniture_stands_on_the_deck():
         assert below not in ("minecraft:air", None), f"{block} at {(x, y, z)} has nothing under it"
 
 
+def test_start_submarine_has_no_dark_floor():
+    """Monsters spawn at block light 0, so every spot a mob could stand on in the wreck is lit."""
+    placed = start_sub.blocks()
+    open_cells = {cell for cell, block in placed.items() if block == "minecraft:air"}
+    # Light passes through the airlock doors too
+    lit_through = open_cells | {cell for cell, block in placed.items() if "_door[" in block}
+    light = {cell: 15 for cell, block in placed.items() if block == start_sub.CEILING_LIGHT}
+    todo = deque(light)
+    while todo:
+        x, y, z = todo.popleft()
+        for dx, dy, dz in ((1, 0, 0), (-1, 0, 0), (0, 1, 0), (0, -1, 0), (0, 0, 1), (0, 0, -1)):
+            n = (x + dx, y + dy, z + dz)
+            if n in lit_through and light.get(n, 0) < light[(x, y, z)] - 1:
+                light[n] = light[(x, y, z)] - 1
+                todo.append(n)
+    standing = [(x, y, z) for x, y, z in open_cells
+                if (x, y + 1, z) in open_cells and placed.get((x, y - 1, z), "minecraft:air") != "minecraft:air"]
+    dark = [cell for cell in standing if light.get(cell, 0) == 0]
+    assert not dark, f"monsters could spawn in the dark at {sorted(dark)[:5]}"
+
+
 def test_fill_runs_cover_exactly_the_cells():
     shell, _ = start_sub.hull_cells()
     covered = set()
