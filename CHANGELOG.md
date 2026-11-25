@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.22.1](https://github.com/NC1107/pack-pack/compare/v0.22.0...v0.22.1) (2026-11-25)
+
+
+### Bug Fixes
+
+* the test sub floats and its windows hold ([890cccb](https://github.com/NC1107/pack-pack/commit/890cccb5fc77d2eef3fbae10a6b7369249ad33d7))
+
 ## [0.22.0](https://github.com/NC1107/pack-pack/compare/v0.21.1...v0.22.0) (2026-11-25)
 
 
