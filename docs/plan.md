@@ -76,8 +76,9 @@ Tick things off when they're handled, add new ones when they come up.
 
 ### Water world
 
-- [ ] **Domes are dark between buildings.**
-  No skylight gets through 50+ blocks of water, so hostile mobs spawn on the open ground in a dome and go after the villagers. Needs some kind of ambient light.
+- [x] **Domes are dark between buildings.**
+  No daylight gets through the sea, so the patched lost cities puts invisible light blocks three blocks above the ground on a six block grid in every dome, and in control keeps hostile mobs out of domes.
+  Inside buildings it's still dark, which is on purpose.
 - [ ] **Loot near spawn.**
   Hopo ruins (one right at spawn), vanilla ocean ruins and a shipwreck 35 blocks out all have loot inside the 500 block ring, check those loot tables against the tier plan.
 - [ ] **Something has to gate the 500 block swim.**
