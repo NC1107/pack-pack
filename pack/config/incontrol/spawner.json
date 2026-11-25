@@ -1,25 +1,5 @@
 [
   {
-    "mobsfrombiome": "water_ambient",
-    "persecond": 1.0,
-    "attempts": 20,
-    "amount": {
-      "minimum": 3,
-      "maximum": 6,
-      "groupdistance": 4
-    },
-    "conditions": {
-      "dimension": "minecraft:overworld",
-      "inwater": true,
-      "norestrictions": true,
-      "mindist": 16,
-      "maxdist": 48,
-      "minheight": -24,
-      "maxheight": 160,
-      "maxthis": 25
-    }
-  },
-  {
     "mobsfrombiome": "water_creature",
     "persecond": 0.6,
     "attempts": 20,
@@ -34,7 +14,7 @@
       "norestrictions": true,
       "mindist": 16,
       "maxdist": 48,
-      "minheight": -24,
+      "minheight": -56,
       "maxheight": 160,
       "maxthis": 8
     }
@@ -54,7 +34,7 @@
       "norestrictions": true,
       "mindist": 16,
       "maxdist": 48,
-      "minheight": -24,
+      "minheight": -56,
       "maxheight": 46,
       "maxthis": 12
     }
@@ -87,7 +67,7 @@
       "norestrictions": true,
       "mindist": 32,
       "maxdist": 96,
-      "minheight": -24,
+      "minheight": -56,
       "maxheight": 140,
       "maxthis": 3
     }
