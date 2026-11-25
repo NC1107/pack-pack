@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.21.0](https://github.com/NC1107/pack-pack/compare/v0.20.0...v0.21.0) (2026-11-25)
+
+
+### Features
+
+* /function packpack:test_sub builds a working submarine to learn with ([0088e3e](https://github.com/NC1107/pack-pack/commit/0088e3ed3b5abcf056d3c2c7b7535a1758b3ecfd))
+
 ## [0.20.0](https://github.com/NC1107/pack-pack/compare/v0.19.0...v0.20.0) (2026-11-25)
 
 
