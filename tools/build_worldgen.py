@@ -190,6 +190,7 @@ def build_datapack(village_factor: float) -> str:
     write_ocean_biomes()
     write_structure_set_filters()
     write_underwater_air_filters()
+    write_disabled_mod_modifiers()
     return lc_villages.build(DATAPACK, vanilla_jar(), lost_cities_jar(), village_factor, DOME_CITY_FACTOR)
 
 
@@ -402,6 +403,20 @@ def write_underwater_air_filters() -> None:
         for entry in pool.get("elements", []):
             fix(entry["element"])
         write_json(DATAPACK / name, pool)
+
+
+# Hybrid Aquatic removes vanilla coral from warm oceans and kelp and seagrass from deep oceans,
+# expecting its own reef biomes to replace them. Those biomes are off in this pack, so without
+# these overrides the warm ocean has no reefs and half the sea floor has no kelp.
+DISABLED_MOD_MODIFIERS = [
+    "data/hybrid_aquatic/neoforge/biome_modifier/warm_ocean_modifiers.json",
+    "data/hybrid_aquatic/neoforge/biome_modifier/deep_ocean_modifier.json",
+]
+
+
+def write_disabled_mod_modifiers() -> None:
+    for path in DISABLED_MOD_MODIFIERS:
+        write_json(DATAPACK / path, {"type": "neoforge:none"})
 
 
 def write_seabed_cover() -> None:
