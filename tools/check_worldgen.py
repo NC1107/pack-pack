@@ -17,6 +17,7 @@ import shutil
 import subprocess
 import sys
 import threading
+import time
 import tomllib
 
 import numpy as np
@@ -53,13 +54,22 @@ def neoforge_version() -> str:
     return tomllib.loads(boot_server.PACK_TOML.read_text("utf-8"))["versions"]["neoforge"]
 
 
-def pregenerate(java: str) -> None:
+def use_seed(seed: str) -> None:
+    """Point the boot test server at another world seed for the next generation."""
+    properties = boot_server.SERVER / "server.properties"
+    text = re.sub(r"(?m)^level-seed=.*$", f"level-seed={seed}", properties.read_text())
+    properties.write_text(text)
+
+
+def pregenerate(java: str) -> float:
+    """Generate the test square and return how many chunks a second that took."""
     mods = boot_server.SERVER / "mods"
     jar = mods / "chunky.jar"
     shutil.copy(cached_download(CHUNKY_URL, CHUNKY_SHA256), jar)
     shutil.rmtree(boot_server.SERVER / "world", ignore_errors=True)
     shutil.rmtree(boot_server.SERVER / "config" / "chunky" / "tasks", ignore_errors=True)
     finished = threading.Event()
+    started = None
     try:
         proc = subprocess.Popen(boot_server.server_command(java, neoforge_version()), cwd=boot_server.SERVER,
                                 stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
@@ -67,10 +77,12 @@ def pregenerate(java: str) -> None:
         assert proc.stdin and proc.stdout
         for line in proc.stdout:
             if boot_server.DONE_LINE.search(line):
+                started = time.monotonic()
                 proc.stdin.write(f"chunky world minecraft:overworld\nchunky center {CENTRE[0]} {CENTRE[1]}\n"
                                  f"chunky radius {RADIUS}\nchunky start\n")
                 proc.stdin.flush()
             if re.search(r"\[Chunky\] Task (finished|stopped|cancelled)", line) or "Preparing crash report" in line:
+                elapsed = time.monotonic() - (started or time.monotonic())
                 finished.set()
                 proc.stdin.write("save-all flush\nstop\n")
                 proc.stdin.flush()
@@ -79,6 +91,8 @@ def pregenerate(java: str) -> None:
         jar.unlink(missing_ok=True)
     if not finished.is_set():
         raise SystemExit("pre-generation did not finish")
+    chunks = (2 * RADIUS // 16 + 1) ** 2
+    return chunks / max(elapsed, 1e-6)
 
 
 def load(region: Region, x0: int, z0: int, size: int) -> np.ndarray:
@@ -138,7 +152,8 @@ def touching(mask: np.ndarray) -> np.ndarray:
 def check_dome(region: Region, gx: int, gz: int) -> dict:
     origin = np.array([gx - WINDOW, Y_MIN, gz - WINDOW])
     blocks = load(region, gx - WINDOW, gz - WINDOW, 2 * WINDOW)
-    if (blocks == 1).sum() < 5000:
+    # Tunnels bring plenty of glass too, but they stay below y 0 while a dome rises far above.
+    if (blocks[:, -Y_MIN:, :] == 1).sum() < 5000:
         return {"dome": [gx, gz], "present": False}
     centre, radius = fit_sphere(blocks, origin)
 
@@ -192,17 +207,33 @@ def check_dome(region: Region, gx: int, gz: int) -> dict:
 
 
 def floating_blocks(region: Region) -> int:
-    """Solid blocks in the drowned city that do not connect to the sea floor."""
+    """Solid blocks in the drowned city that do not connect to the sea floor.
+
+    Contact along an edge or a corner counts: coral trees and claws branch out diagonally.
+    """
     x0, z0, size = BETWEEN
     blocks = load(region, x0, z0, size)
     solid = (blocks != 2) & (blocks != 3)
     supported = solid.copy()
     supported[:, 1:, :] = False
     while True:
-        grow = solid & ~supported & touching(supported)
+        grow = solid & ~supported & touching_any_way(supported)
         if not grow.any():
             return int((solid & ~supported).sum())
         supported |= grow
+
+
+def touching_any_way(mask: np.ndarray) -> np.ndarray:
+    """Cells with a neighbour in mask through a face, an edge or a corner."""
+    padded = np.pad(mask, 1)
+    near = np.zeros_like(mask)
+    for dx in (-1, 0, 1):
+        for dy in (-1, 0, 1):
+            for dz in (-1, 0, 1):
+                if dx or dy or dz:
+                    near |= padded[1 + dx:1 + dx + mask.shape[0], 1 + dy:1 + dy + mask.shape[1],
+                                   1 + dz:1 + dz + mask.shape[2]]
+    return near
 
 
 def foreign_biomes(region: Region) -> list[str]:
@@ -219,14 +250,19 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("--java", default="java", help="Java 21 for the server")
     parser.add_argument("--skip-generation", action="store_true", help="check the world that is already there")
+    parser.add_argument("--seed", help="generate with this seed instead of the boot test's")
     args = parser.parse_args()
+    speed = None
     if not args.skip_generation:
-        pregenerate(args.java)
+        if args.seed:
+            use_seed(args.seed)
+        speed = pregenerate(args.java)
     region = Region(boot_server.SERVER / "world" / "region")
     domes = [check_dome(region, gx, gz) for gx, gz in DOMES]
     biomes = foreign_biomes(region)
     floating = floating_blocks(region)
-    report = {"domes": domes, "foreign_biomes": biomes, "floating_blocks": floating}
+    report = {"domes": domes, "foreign_biomes": biomes, "floating_blocks": floating,
+              "chunks_per_second": round(speed, 1) if speed else None}
     (boot_server.RUN / "worldgen-report.json").write_text(json.dumps(report, indent=2) + "\n")
 
     failures = [f"dome at {d['dome']}: {p}" for d in domes for p in d.get("problems", [])]
@@ -242,6 +278,8 @@ def main() -> int:
             f"leaks {d['leaks']}, water under floor {d['water_under_floor']}")
         print(f"[worldgen] dome {d['dome']}: {state}")
     print(f"[worldgen] floating blocks between the domes: {floating}")
+    if speed:
+        print(f"[worldgen] generation: {speed:.0f} chunks a second")
     for failure in failures:
         print(f"[worldgen] FAIL: {failure}")
     return 1 if failures else 0
