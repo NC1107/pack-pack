@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.10.1](https://github.com/NC1107/pack-pack/compare/v0.10.0...v0.10.1) (2026-11-25)
+
+
+### Bug Fixes
+
+* bring back coral reefs and deep ocean kelp ([68714ac](https://github.com/NC1107/pack-pack/commit/68714ac20910563fc3ca9eaca3e2e71ff385e56c))
+
 ## [0.10.0](https://github.com/NC1107/pack-pack/compare/v0.9.2...v0.10.0) (2026-11-25)
 
 
