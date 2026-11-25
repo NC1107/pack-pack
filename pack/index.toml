@@ -26,15 +26,19 @@ hash = "4c4a57c7efb7336653a68809bbfa9a3d68e04533b51b3ca120fe0580ac78801b"
 
 [[files]]
 file = "config/lostcities/profiles/waterworld.json"
-hash = "e86a885c09e6a1cb4d2011d3311f0c91aad46449037c4847cc27a41c8999b19a"
+hash = "3d8609e66481b7d9097a68e5d33ef851c11f2e51982e5f9c5610798410e958bc"
 
 [[files]]
 file = "config/lostcities/profiles/waterworld_domes.json"
-hash = "732764075052b406650015e8171b0335c44ee0ae9a5a0104c2b9c6cd17ea2e8e"
+hash = "8827189bcad3174f62bc1b81e8402a177a2ca2ee5e3f8015c4ce74075b0eeef1"
 
 [[files]]
 file = "config/modernfix-mixins.properties"
 hash = "b55e21a78bbbebf52ed85df01b7c3a4e24ddac497462bece65ca701b2899df55"
+
+[[files]]
+file = "config/warputils_config.json"
+hash = "38c49856e0c70023a1ae62a91883a59bf0c3ce2e0977ced63f1f022d1a390a33"
 
 [[files]]
 file = "datapacks/pack-pack-worldgen/data/hopo/worldgen/template_pool/features/coral.json"
@@ -1206,6 +1210,11 @@ metafile = true
 [[files]]
 file = "mods/unwrecked-ships.pw.toml"
 hash = "2f771e0669bf6d179b40d77d295f5c0680cff28f3bd17af34093e429682f727d"
+metafile = true
+
+[[files]]
+file = "mods/warputils.pw.toml"
+hash = "b9f0c1bfa14e82018e6c603759edcbdaae73871bd9f3c9ee031d899a835f5b40"
 metafile = true
 
 [[files]]
