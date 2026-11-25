@@ -24,6 +24,10 @@ KNOWN_UPSTREAM_ERRORS = {
     # that is not in the jar. NeoForge logs it and carries on. Not reported upstream yet.
     "Access transformer file META-INF/accesstransformer.cfg provided by mod pride does not exist":
         "https://github.com/LambdAurora/LambDynamicLights/issues",
+    # Sodium Extra 0.9.3 (pinned with Sodium 0.8.12 for Veil) names an access transformer that is
+    # not in its jar. NeoForge logs it and carries on. Fixed in later Sodium Extra releases.
+    "Access transformer file accesstransformer.cfg provided by mod sodium_extra does not exist":
+        "https://github.com/FlashyReese/sodium-extra/issues",
     "Attempted to load class net/minecraft/client/Options for invalid dist DEDICATED_SERVER":
         "https://github.com/RelativityMC/C2ME-neoforge/issues",
     "Attempted to load class net/minecraft/client/renderer/LevelRenderer for invalid dist DEDICATED_SERVER":
