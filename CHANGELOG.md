@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.22.0](https://github.com/NC1107/pack-pack/compare/v0.21.1...v0.22.0) (2026-11-25)
+
+
+### Features
+
+* sea life spawns by biome, air breathers at the surface, items sink ([cda2c04](https://github.com/NC1107/pack-pack/commit/cda2c047ec2d892b391dc3de26b8c710ec638334))
+
 ## [0.21.1](https://github.com/NC1107/pack-pack/compare/v0.21.0...v0.21.1) (2026-11-25)
 
 
