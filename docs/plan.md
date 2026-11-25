@@ -85,16 +85,15 @@ Tick things off when they're handled, add new ones when they come up.
 - [x] **Coral reefs.**
   Hybrid Aquatic removed vanilla coral from warm oceans and kelp and seagrass from deep oceans, expecting its own reef biomes, which are off here.
   Those two removals are overridden, and a warm ocean sample went from 16 live coral blocks to about 30,000.
-- [ ] **Tunnels meeting domes, and air near them.**
-  A tube between domes ends with its glass walls starting a few blocks before the dome and there is a wide air gap at floor level around the junction.
-  Water gets in there, and Nick still sees air pockets near tunnels.
-  The tubes between domes are switched off for now (`monorailChance` 0), turn them back on once the junction is understood.
-- [ ] **Dome tunnels and edges still need a look.**
-  Tunnels between domes are Lost Cities monorails, they can run several hundred blocks, and Nick saw gaps where water gets in.
+- [x] **Tunnels meeting domes, and air near them.**
+  The tubes were fine, the pass that floods leftover air outside the domes ran after them and filled them with water, so every dome opened into a flooded tube.
+  It runs before the tubes now, and the tubes are back on between every pair of neighbouring domes.
+  The worldgen check counts air touching water outside every dome, which was 132 per junction before and is under 10 now.
+- [ ] **Dome edges still need a look.**
   Ocean monuments have a big box of air above their temples, and dome floors showed pools of water at the edge, none of which I could reproduce from world data yet.
 - [x] **Really tall kelp.**
   A small mod of ours (`tools/tweaks-mod`) makes generated kelp 1 to 75 blocks tall and lets it keep growing until it runs out of water.
-  Generation is measured (median 38, longest 76), the growth past the old limit is only checked by reading the game code, not by a test.
+  Generation is measured (median 38, longest 76), and planted kelp grew 174 blocks to the surface in the real client.
 - [ ] **Lost cities sometimes stalls worldgen.**
   One pre-generation hit a 60 second server tick and the watchdog killed the server, and once the client hung saving the world on quit. Both were one-offs, need a thread dump from a stalled run.
 - [ ] **Worldgen is slow.**

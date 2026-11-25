@@ -599,9 +599,8 @@ def build_profiles(dome_world_style: str, city_free_radius: int) -> None:
         "outsideProfile": "waterworld",
         "citySphereChance": 0.8,
         "citySphereFactor": DOME_SPHERE_FACTOR,
-        # Tubes between domes are off: the glass walls stop short of the dome shell and water
-        # gets in at the junction. Turn this back up once that is understood.
-        "monorailChance": 0.0,
+        # Every dome links to its neighbours, so the tubes form one network to travel by.
+        "monorailChance": 1.0,
         # Clearing above a dome carves air unless the generator reports an outer sea level,
         # which only Lost Worlds' generator does, so leave the water above domes alone.
         "citySphereClearAbove": 0,
