@@ -253,8 +253,22 @@
          setBlock(current, correct(state));
          incY();
 --- a/src/main/java/mcjty/lostcities/worldgen/gen/Spheres.java	2026-11-24 04:11:35.372840297 -0500
-+++ b/src/main/java/mcjty/lostcities/worldgen/gen/Spheres.java	2026-11-25 09:02:47.927473851 -0500
-@@ -45,6 +45,10 @@
++++ b/src/main/java/mcjty/lostcities/worldgen/gen/Spheres.java	2026-11-25 09:48:00.358290938 -0500
+@@ -11,11 +11,13 @@
+ import mcjty.lostcities.worldgen.lost.BuildingInfo;
+ import mcjty.lostcities.worldgen.lost.CitySphere;
+ import net.minecraft.core.BlockPos;
++import net.minecraft.util.Mth;
+ import net.minecraft.server.level.ServerChunkCache;
+ import net.minecraft.server.level.ServerLevel;
+ import net.minecraft.server.level.WorldGenRegion;
+ import net.minecraft.world.level.LevelAccessor;
+ import net.minecraft.world.level.block.Blocks;
++import net.minecraft.world.level.block.BushBlock;
+ import net.minecraft.world.level.block.state.BlockState;
+ import net.minecraft.world.level.chunk.ChunkAccess;
+ import net.minecraft.world.level.chunk.ChunkGenerator;
+@@ -45,6 +47,10 @@
                      fillSphere(feature, cx, profile.GROUNDLEVEL, cz, (int) radius, sphere.getGlassBlock(), sphere.getSideBlock());
                  }
  
@@ -265,7 +279,7 @@
                  if (profile.isSpace()) {
                      BuildingInfo info = BuildingInfo.getBuildingInfo(coord, provider);
                      Monorails.generateMonorails(feature, info);
-@@ -58,6 +62,97 @@
+@@ -58,6 +64,154 @@
          }
      }
  
@@ -299,6 +313,9 @@
 +                        BlockState state = driver.getBlock();
 +                        if (state.isAir()) {
 +                            driver.block(feature.liquid);
++                        } else if (state.getBlock() instanceof BushBlock && state.getFluidState().isEmpty()) {
++                            // Land plants under water render as loose sprites floating in the sea
++                            driver.block(feature.liquid);
 +                        } else if (state.is(Blocks.GRASS_BLOCK)) {
 +                            // Lawns of drowned cities have been under the sea for a long time
 +                            driver.block(Blocks.MOSS_BLOCK.defaultBlockState());
@@ -306,6 +323,60 @@
 +                    }
 +                    driver.incY();
 +                }
++            }
++        }
++        double nearX = Mth.clamp(cc.getX(), chunkX << 4, (chunkX << 4) + 15) - cc.getX();
++        double nearZ = Mth.clamp(cc.getZ(), chunkZ << 4, (chunkZ << 4) + 15) - cc.getZ();
++        if (!enabled || nearX * nearX + nearZ * nearZ > (sphere.getRadius() + 2) * (sphere.getRadius() + 2)) {
++            dropUnsupported(feature, seaLevel);
++        }
++    }
++
++    /**
++     * Ruined drowned buildings leave pieces whose support was knocked away: chains and cobwebs
++     * under missing ceilings, slabs and leaves on their own in the water. Any solid block in this
++     * chunk that does not connect to the sea floor, or to the chunk's edge where a neighbouring
++     * chunk may hold it up, becomes water. Chunks that touch a dome are left alone.
++     */
++    private static void dropUnsupported(LostCityTerrainFeature feature, int seaLevel) {
++        ChunkDriver driver = feature.getDriver();
++        int minY = feature.provider.getWorld().getMinBuildHeight();
++        int height = seaLevel - minY + 1;
++        boolean[] solid = new boolean[16 * 16 * height];
++        boolean[] supported = new boolean[solid.length];
++        java.util.ArrayDeque<Integer> queue = new java.util.ArrayDeque<>();
++        for (int x = 0; x < 16; x++) {
++            for (int z = 0; z < 16; z++) {
++                for (int y = 0; y < height; y++) {
++                    BlockState state = driver.getBlock(x, y + minY, z);
++                    int i = (y * 16 + z) * 16 + x;
++                    solid[i] = !state.isAir() && !state.is(Blocks.WATER) && !state.is(Blocks.LIGHT);
++                    if (solid[i] && (y == 0 || x == 0 || x == 15 || z == 0 || z == 15)) {
++                        supported[i] = true;
++                        queue.add(i);
++                    }
++                }
++            }
++        }
++        int[] steps = {1, -1, 16, -16, 256, -256};
++        while (!queue.isEmpty()) {
++            int i = queue.poll();
++            int x = i & 15;
++            int z = (i >> 4) & 15;
++            for (int step : steps) {
++                if ((step == 1 && x == 15) || (step == -1 && x == 0) || (step == 16 && z == 15) || (step == -16 && z == 0)) {
++                    continue;
++                }
++                int j = i + step;
++                if (j >= 0 && j < solid.length && solid[j] && !supported[j]) {
++                    supported[j] = true;
++                    queue.add(j);
++                }
++            }
++        }
++        for (int i = 0; i < solid.length; i++) {
++            if (solid[i] && !supported[i]) {
++                driver.current(i & 15, (i >> 8) + minY, (i >> 4) & 15).block(feature.liquid);
 +            }
 +        }
 +    }
@@ -349,7 +420,7 @@
 +        }
 +    }
 +
-+    private static Integer outerSeaLevel(LostCityTerrainFeature feature) {
++    public static Integer outerSeaLevel(LostCityTerrainFeature feature) {
 +        IDimensionInfo provider = feature.provider;
 +        ChunkGenerator generator;
 +        if (provider.getWorld() instanceof WorldGenRegion region) {
@@ -363,10 +434,88 @@
      private static void fillSphere(LostCityTerrainFeature feature, int centerx, int centery, int centerz, int radius,
                                     BlockState glass, BlockState sideBlock) {
          IDimensionInfo provider = feature.provider;
-@@ -165,5 +260,6 @@
+@@ -165,5 +319,6 @@
                  }
              }
          }
 +
      }
  }
+--- a/src/main/java/mcjty/lostcities/worldgen/LostCityTerrainFeature.java	2026-11-24 04:11:35.372352367 -0500
++++ b/src/main/java/mcjty/lostcities/worldgen/LostCityTerrainFeature.java	2026-11-25 09:44:56.652138692 -0500
+@@ -1,5 +1,7 @@
+ package mcjty.lostcities.worldgen;
+ 
++import mcjty.lostcities.worldgen.gen.Spheres;
++
+ import mcjty.lostcities.LostCities;
+ import mcjty.lostcities.api.ILostCities;
+ import mcjty.lostcities.api.LostCityEvent;
+@@ -1338,11 +1340,12 @@
+      * Fill from a certain lowest level with base blocks until non air is hit
+      */
+     private void fillToGroundStreetBlock(BuildingInfo info, int lowestLevel) {
++        int deepestY = underSea() ? provider.getWorld().getMinBuildHeight() : 1;
+         for (int x = 0; x < 16; ++x) {
+             for (int z = 0; z < 16; ++z) {
+                 int y = lowestLevel - 1;
+                 getDriver().current(x, y, z);
+-                while (y > 1 && getDriver().getBlock() == air) {
++                while (y > deepestY && isFillable(getDriver().getBlock())) {
+                     getDriver().block(base).decY();
+                     y--;
+                 }
+@@ -2316,6 +2319,11 @@
+                 }
+             }
+         } else { // (also for spheres)
++            if (underSea()) {
++                // pack-pack: a building raised a level for a nearby sea floor hill would otherwise
++                // hang in the water over the lower floor around it.
++                fillToGround(info, lowestLevel, borderBlock);
++            }
+             // For normal worldgen we have a thin layer of 'border' blocks because that looks nicer
+             // We try to avoid this layer in big caves though
+             for (int x = 0; x < 16; ++x) {
+@@ -2353,18 +2361,18 @@
+ 
+     // Used for space type worlds: fill underside the building/street until a block is encountered
+     public void fillToGround(BuildingInfo info, int lowestLevel, Character borderBlock) {
+-        int deepestY = Math.max(1, lowestLevel - 10);
++        int deepestY = underSea() ? provider.getWorld().getMinBuildHeight() : Math.max(1, lowestLevel - 10);
+         for (int x = 0; x < 16; ++x) {
+             for (int z = 0; z < 16; ++z) {
+                 int y = lowestLevel - 1;
+                 getDriver().current(x, y, z);
+                 if (isSide(x, z)) {
+-                    while (y > deepestY && getDriver().getBlock() == air) {
++                    while (y > deepestY && isFillable(getDriver().getBlock())) {
+                         getDriver().block(info.getCompiledPalette().get(borderBlock)).decY();
+                         y--;
+                     }
+                 } else {
+-                    while (y > deepestY && getDriver().getBlock() == air) {
++                    while (y > deepestY && isFillable(getDriver().getBlock())) {
+                         getDriver().block(base).decY();
+                         y--;
+                     }
+@@ -2373,6 +2381,19 @@
+         }
+     }
+ 
++    /**
++     * pack-pack: under a Lost Worlds outer sea the space below a city is water, not air, and the
++     * sea floor is below y 1. Foundations then have to fill through the water down to the floor,
++     * or buildings next to sea floor hills hang in the water.
++     */
++    private boolean underSea() {
++        return Spheres.outerSeaLevel(this) != null;
++    }
++
++    private boolean isFillable(BlockState state) {
++        return state == air || (state.is(Blocks.WATER) && underSea());
++    }
++
+     private static boolean isSide(int x, int z) {
+         return x == 0 || x == 15 || z == 0 || z == 15;
+     }
