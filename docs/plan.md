@@ -95,8 +95,9 @@ Tick things off when they're handled, add new ones when they come up.
   The tubes were fine, the pass that floods leftover air outside the domes ran after them and filled them with water, so every dome opened into a flooded tube.
   It runs before the tubes now, and the tubes are back on between every pair of neighbouring domes.
   The worldgen check counts air touching water outside every dome, which was 132 per junction before and is under 10 now.
-- [ ] **Dome edges still need a look.**
-  Ocean monuments have a big box of air above their temples, and dome floors showed pools of water at the edge, none of which I could reproduce from world data yet.
+- [x] **Dome edges still need a look.**
+  The pools at dome edges were a ring of water down to bedrock around every dome, fixed in 0.21.1 and checked in CI.
+  The air box above ocean monuments doesn't reproduce: the pack's Better Ocean Monuments at 800,-496 (seed pack-pack-benchmark) has no air at all in the water around it (2026-11-25).
 - [x] **Really tall kelp.**
   A small mod of ours (`tools/tweaks-mod`) makes generated kelp 1 to 75 blocks tall and lets it keep growing until it runs out of water.
   Generation is measured (median 38, longest 76), and planted kelp grew 174 blocks to the surface in the real client.
