@@ -214,8 +214,8 @@ def fill_runs(cells: list, block: str) -> list[str]:
 
 # A small working submarine for learning how Create, Aeronautics and Deep Seas fit together,
 # built near the surface (hulls implode deep down) and assembled into a ship by Sable.
-# Run with /function packpack:test_sub (needs cheats). Levers sit on top of the clutches and
-# the gearshift inside: a powered clutch disconnects, a powered gearshift reverses.
+# Run with /function packpack:test_sub (needs cheats). Levers sit on top of the clutch and
+# gearshift: a powered clutch disconnects, a powered gearshift reverses.
 PORTHOLE_GLASS = "create_submarine:iron_pressurizer"
 TEST_SUB = [
     # Cut copper: normal weight and good to about 85 m. Iron blocks count as storage blocks,
@@ -224,25 +224,26 @@ TEST_SUB = [
     # Portholes of Deep Seas' pressurized glass: plain glass gives way at about 28 m.
     *[f"setblock ~{x} ~2 ~{z} {PORTHOLE_GLASS}" for x, z in ((3, 0), (5, 0), (8, 0), (2, 4), (8, 4))],
     f"setblock ~10 ~2 ~2 {PORTHOLE_GLASS}",
-    # Stern: creative motor -> clutch -> shaft through the hull -> propeller outside
-    "setblock ~3 ~2 ~2 create:creative_motor[facing=west]",
+    # Stern: creative motor at full speed -> clutch (stop/go) -> gearshift (forward/reverse) ->
+    # shaft through the hull -> propeller outside. A propeller's thrust follows its spin.
+    "setblock ~3 ~2 ~2 create:creative_motor[facing=west]{ScrollValue:256}",
     "setblock ~2 ~2 ~2 create:clutch[axis=x,powered=true]",
     "setblock ~2 ~3 ~2 minecraft:lever[face=floor,facing=north,powered=true]",
-    "setblock ~1 ~2 ~2 create:shaft[axis=x]",
+    "setblock ~1 ~2 ~2 create:gearshift[axis=x,powered=false]",
+    "setblock ~1 ~3 ~2 minecraft:lever[face=floor,facing=north,powered=false]",
     "setblock ~0 ~2 ~2 create:andesite_encased_shaft[axis=x]",
     "setblock ~-1 ~2 ~2 create_submarine:submarine_propeller[facing=west,reversed=false]",
-    # Ballast: vent in the keel -> pump -> a column of tanks; creative motor -> clutch ->
-    # gearshift -> pump. Empty tanks lift about 75 blocks of ship each, so four more stay empty.
+    # Ballast: vent in the keel -> pump controller -> a column of tanks. The Onboard Computer
+    # drives the controller (direction and speed) to hold the depth set on its screen. Pumps
+    # turn like cogwheels, so a cogwheel beside it carries the motor's rotation in.
     "setblock ~6 ~0 ~2 create_submarine:ballast_vent",
-    "setblock ~6 ~1 ~2 create:mechanical_pump[facing=up]",
+    "setblock ~6 ~1 ~2 create_submarine:pump_controller[facing=up]",
     "setblock ~6 ~2 ~2 create_submarine:ballast_tank",
     "setblock ~6 ~3 ~2 create_submarine:ballast_tank",
     *[f"setblock ~{x} ~{y} ~{z} create_submarine:ballast_tank" for x, y, z in ((2, 1, 1), (2, 1, 3), (8, 3, 1), (8, 3, 3))],
-    "setblock ~9 ~1 ~2 create:creative_motor[facing=west]",
-    "setblock ~8 ~1 ~2 create:clutch[axis=x,powered=true]",
-    "setblock ~8 ~2 ~2 minecraft:lever[face=floor,facing=north,powered=true]",
-    "setblock ~7 ~1 ~2 create:gearshift[axis=x,powered=false]",
-    "setblock ~7 ~2 ~2 minecraft:lever[face=floor,facing=north,powered=false]",
+    "setblock ~7 ~1 ~2 create:cogwheel[axis=y]",
+    "setblock ~7 ~2 ~2 create:creative_motor[facing=down]{ScrollValue:256}",
+    "setblock ~4 ~1 ~1 create_submarine:command_sub[facing=south]",
     # Air, and an iron door with a button on each side (an oak door gives way at about 49 m)
     "setblock ~9 ~1 ~1 create_submarine:creative_oxygenator",
     "setblock ~4 ~1 ~4 minecraft:iron_door[facing=north,hinge=left,open=false,powered=false,half=lower]",
@@ -255,9 +256,9 @@ TEST_SUB = [
     "sable assemble area ~-2 ~-1 ~-1 ~11 ~5 ~5",
     "fill ~-2 ~-1 ~-1 ~11 ~5 ~5 minecraft:water replace minecraft:air",
     'tellraw @s ["",{"text":"You are inside the test sub. ","color":"aqua"},'
-    '"The lever by the stern starts the propeller. The lever on the middle clutch runs the '
-    'ballast pump, the one next to it switches between diving and rising. The shaft through '
-    'the hull holds to about 68 m, so stay above that."]',
+    '"At the stern, the lever on the clutch starts and stops the propeller and the one on the '
+    'gearshift reverses it. Use the Onboard Computer screen to set a depth and it fills and '
+    'drains the ballast to get there. The shaft through the hull holds to about 68 m."]',
 ]
 
 
