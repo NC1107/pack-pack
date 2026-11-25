@@ -193,6 +193,7 @@ def build_datapack(village_factor: float) -> str:
     write_underwater_air_filters()
     write_disabled_mod_modifiers()
     write_hapi_spawns()
+    write_entity_tags()
     return lc_villages.build(DATAPACK, vanilla_jar(), lost_cities_jar(), village_factor, DOME_CITY_FACTOR)
 
 
@@ -229,7 +230,7 @@ def write_start_functions() -> list[str]:
     build = [
         *fill_runs(clear, "minecraft:water"),
         *[line for block, cells in by_block.items() if block not in two_part for line in fill_runs(cells, block)],
-        *[f"setblock ~{x} ~{y} ~{z} {block}" for block in sorted(two_part, key=lambda b: "upper" in b or "foot" in b)
+        *[f"setblock ~{x} ~{y} ~{z} {block}" for block in sorted(two_part, key=lambda b: ("upper" in b or "foot" in b, b))
           for x, y, z in by_block[block]],
         f"setworldspawn ~ ~{start_sub.DECK_Y + 1} ~",
         f"summon minecraft:marker ~ ~{start_sub.DECK_Y + 1} ~ {{Tags:[\"packpack_start\"]}}",
@@ -425,6 +426,20 @@ def hybrid_aquatic_jar() -> Path:
     return jar
 
 
+# Big animals that read too small in a whole ocean world; the tweaks mod scales them up by 1.5.
+ENLARGED = ["whale_shark", "basking_shark", "orca", "great_white_shark", "ocean_sunfish", "manta_ray"]
+# Hybrid Aquatic's bosses only came from summoning. They now turn up rarely in the deep
+# trenches, and the tweaks mod keeps each one within 48 blocks of where it was first found.
+LAIR_BOSSES = ["karkinos", "shell_beast"]
+TRENCH_TOP_Y = -36
+
+
+def write_entity_tags() -> None:
+    tags = DATAPACK / "data/packpack/tags/entity_type"
+    write_json(tags / "enlarged.json", {"values": [f"hybrid_aquatic:{e}" for e in ENLARGED]})
+    write_json(tags / "lair_bosses.json", {"values": [f"hybrid_aquatic:{e}" for e in LAIR_BOSSES]})
+
+
 def write_hapi_spawns() -> None:
     prefix = "data/hybrid_aquatic/neoforge/biome_modifier/"
     with zipfile.ZipFile(hybrid_aquatic_jar()) as jar:
@@ -524,6 +539,8 @@ def write_incontrol_spawner() -> None:
         rule("underground_water_creature", 0.2, (1, 3), 12, SEABED_Y + 60),  # glow squid in the dark
         # Big animals, a few at a time, far enough out to see them whole
         rule(BIG_SEA_LIFE, 0.25, (1, 1), 3, SEA_LEVEL - 20, distance=(32, 96)),
+        # A boss now and then, only down in the trenches, one at a time
+        rule([f"hybrid_aquatic:{b}" for b in LAIR_BOSSES], 0.002, (1, 1), 1, TRENCH_TOP_Y, distance=(48, 96)),
     ])
 
 

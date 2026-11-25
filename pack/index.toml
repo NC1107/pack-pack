@@ -22,7 +22,7 @@ hash = "570a0cf72f4ef2b8515dc4d39adab174fa93f05ba53cacd14056fe82e2aae4b6"
 
 [[files]]
 file = "config/incontrol/spawner.json"
-hash = "35b538afebf41b6c72e1e78a5803d9d48f4dbfd11c42cd77635addfd7ed9de35"
+hash = "774e59b732a99da820a7f3749e1b16d183fc72f5bb4c6c4f259e5a54fed4fbcf"
 
 [[files]]
 file = "config/lostcities/common.toml"
@@ -838,7 +838,7 @@ hash = "8be69d5b06bbb93d1e1d5ca0b70aa4510323a5bdcf1d6de2d8a400d347e4b8b0"
 
 [[files]]
 file = "datapacks/pack-pack-worldgen/data/packpack/function/build_start.mcfunction"
-hash = "466e010bc4db14315dbcb2843f428d5b15b44f309ec8920c41ab87ea2067ea7c"
+hash = "ef22447a939c4c681816de52dea60495253c59e163fa5113356b57e66edc311d"
 
 [[files]]
 file = "datapacks/pack-pack-worldgen/data/packpack/function/place_new_player.mcfunction"
@@ -1545,6 +1545,14 @@ file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/seabe
 hash = "b831557aab9ae23983a9e020f6b0d8e5780784d25f9d42ff12e08726abf559d4"
 
 [[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/tags/entity_type/enlarged.json"
+hash = "e2bb11f099c268883c9c530b160c157e18ec7e71ef40a06b0173c5cbc4ded270"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/tags/entity_type/lair_bosses.json"
+hash = "1815179bf3ea4218971a1c66aa7af24966cfb3e070988e7049a9061775f7989d"
+
+[[files]]
 file = "datapacks/pack-pack-worldgen/data/packpack/worldgen/configured_feature/seabed_clay_patch.json"
 hash = "8abc2abad9beba0fa80e95d4317e39d21b80304b7e248981ee5395fb708e0f5b"
 
@@ -1890,7 +1898,7 @@ metafile = true
 
 [[files]]
 file = "mods/packpack-tweaks-1.0.0.jar"
-hash = "67a9f8474a02f07e6060c854564e5635eebe6ca5a7557fc7750ee7908bc79b12"
+hash = "c7b3587b25be9f065198822530613d45c94546ebb8c785d7a0542959d4e7b48c"
 
 [[files]]
 file = "mods/reeses-sodium-options.pw.toml"

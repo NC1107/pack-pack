@@ -71,5 +71,28 @@
       "maxheight": 140,
       "maxthis": 3
     }
+  },
+  {
+    "mob": [
+      "hybrid_aquatic:karkinos",
+      "hybrid_aquatic:shell_beast"
+    ],
+    "persecond": 0.002,
+    "attempts": 20,
+    "amount": {
+      "minimum": 1,
+      "maximum": 1,
+      "groupdistance": 4
+    },
+    "conditions": {
+      "dimension": "minecraft:overworld",
+      "inwater": true,
+      "norestrictions": true,
+      "mindist": 48,
+      "maxdist": 96,
+      "minheight": -56,
+      "maxheight": -36,
+      "maxthis": 1
+    }
   }
 ]

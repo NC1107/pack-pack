@@ -988,9 +988,9 @@ fill ~2 ~11 ~-1 ~2 ~11 ~1 minecraft:waxed_weathered_copper
 setblock ~6 ~2 ~3 minecraft:oak_door[facing=south,hinge=left,open=false,powered=false,half=lower]
 setblock ~6 ~2 ~7 minecraft:oak_door[facing=south,hinge=left,open=false,powered=false,half=lower]
 setblock ~-9 ~2 ~-1 minecraft:red_bed[facing=west,part=head]
-setblock ~-8 ~2 ~-1 minecraft:red_bed[facing=west,part=foot]
 setblock ~6 ~3 ~3 minecraft:oak_door[facing=south,hinge=left,open=false,powered=false,half=upper]
 setblock ~6 ~3 ~7 minecraft:oak_door[facing=south,hinge=left,open=false,powered=false,half=upper]
+setblock ~-8 ~2 ~-1 minecraft:red_bed[facing=west,part=foot]
 setworldspawn ~ ~2 ~
 summon minecraft:marker ~ ~2 ~ {Tags:["packpack_start"]}
 execute store result storage packpack:start y int 1 run data get entity @e[type=minecraft:marker,tag=packpack_start,limit=1] Pos[1]
