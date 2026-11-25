@@ -527,6 +527,9 @@ def build_profiles(dome_world_style: str, city_free_radius: int) -> None:
     # Railways are underground tunnels; with no ground outside the domes they float through
     # open water as a 160-block grid. Domes keep their own monorail links (cityspheres).
     flooded["lostcity"]["railwaysEnabled"] = False
+    # Drowned cities are what is left after the water came: most buildings have collapsed to
+    # somewhere between a fifth and four fifths of their height.
+    flooded["lostcity"].update({"ruinChance": 0.6, "ruinMinlevelPercent": 0.2, "ruinMaxlevelPercent": 0.8})
     flooded["cities"].update({
         "citySpawnDistance1": city_free_radius, "citySpawnMultiplier1": 0.0,
         "citySpawnDistance2": city_free_radius + CITY_FULL_RADIUS - CITY_FREE_RADIUS, "citySpawnMultiplier2": 1.0,
@@ -551,6 +554,9 @@ def build_profiles(dome_world_style: str, city_free_radius: int) -> None:
     # Lights in dome buildings keep their torches (and let dome villagers spawn); more
     # lots become buildings instead of lawn.
     domes["lostcity"].update({"generateLighting": True, "buildingChance": 0.6, "parkChance": 0.1})
+    # The domes are the places that survived, so their buildings stand and their streets are clean.
+    domes["lostcity"].update({"ruinChance": 0.05, "ruinMinlevelPercent": 0.8, "ruinMaxlevelPercent": 1.0,
+                              "rubbleLayer": False})
     domes["lostcity"].update({
         # "space" is Lost Cities' floating-domes landscape. It is the only one that links
         # domes with monorails; Lost Worlds still builds the sea and floor around them.
