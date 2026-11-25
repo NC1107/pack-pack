@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.14.1](https://github.com/NC1107/pack-pack/compare/v0.14.0...v0.14.1) (2026-11-25)
+
+
+### Bug Fixes
+
+* keep the tubes between domes dry and turn them back on ([565ab78](https://github.com/NC1107/pack-pack/commit/565ab786e0ec70b2133e1c60e3be13492e9df8f3))
+
 ## [0.14.0](https://github.com/NC1107/pack-pack/compare/v0.13.0...v0.14.0) (2026-11-25)
 
 
