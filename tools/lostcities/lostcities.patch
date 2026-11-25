@@ -253,18 +253,19 @@
          setBlock(current, correct(state));
          incY();
 --- a/src/main/java/mcjty/lostcities/worldgen/gen/Spheres.java	2026-11-24 04:11:35.372840297 -0500
-+++ b/src/main/java/mcjty/lostcities/worldgen/gen/Spheres.java	2026-11-25 08:31:31.308705736 -0500
-@@ -45,6 +45,9 @@
++++ b/src/main/java/mcjty/lostcities/worldgen/gen/Spheres.java	2026-11-25 09:02:47.927473851 -0500
+@@ -45,6 +45,10 @@
                      fillSphere(feature, cx, profile.GROUNDLEVEL, cz, (int) radius, sphere.getGlassBlock(), sphere.getSideBlock());
                  }
  
 +                // Flooding comes before the monorails so that their tubes keep the air inside them.
 +                floodOutsideSpheres(feature, sphere, chunkX, chunkZ);
++                lightSphere(feature, sphere, chunkX, chunkZ);
 +
                  if (profile.isSpace()) {
                      BuildingInfo info = BuildingInfo.getBuildingInfo(coord, provider);
                      Monorails.generateMonorails(feature, info);
-@@ -58,6 +61,52 @@
+@@ -58,6 +62,97 @@
          }
      }
  
@@ -277,16 +278,11 @@
 +     */
 +    private static void floodOutsideSpheres(LostCityTerrainFeature feature, CitySphere sphere, int chunkX, int chunkZ) {
 +        IDimensionInfo provider = feature.provider;
-+        ChunkGenerator generator;
-+        if (provider.getWorld() instanceof WorldGenRegion region) {
-+            generator = ((ServerChunkCache) region.getChunkSource()).getGenerator();
-+        } else {
-+            generator = ((ServerLevel) provider.getWorld()).getChunkSource().getGenerator();
-+        }
-+        if (!(generator instanceof ILostWorldsChunkGenerator lw) || lw.getOuterSeaLevel() == null) {
++        Integer outerSeaLevel = outerSeaLevel(feature);
++        if (outerSeaLevel == null) {
 +            return;
 +        }
-+        int seaLevel = Math.min(lw.getOuterSeaLevel(), provider.getWorld().getMaxBuildHeight() - 1);
++        int seaLevel = Math.min(outerSeaLevel, provider.getWorld().getMaxBuildHeight() - 1);
 +        int minY = provider.getWorld().getMinBuildHeight();
 +        ChunkDriver driver = feature.getDriver();
 +        boolean enabled = sphere.isEnabled() && sphere.getCenterPos() != null;
@@ -314,10 +310,60 @@
 +        }
 +    }
 +
++    private static final int LIGHT_SPACING = 6;
++    private static final int LIGHT_HEIGHT = 3;
++    private static final BlockState LIGHT = Blocks.LIGHT.defaultBlockState();
++
++    /**
++     * Under an outer sea no daylight reaches a dome, so its streets would be dark at noon. This
++     * places invisible light blocks a few blocks above whatever is on top of the ground (street,
++     * lawn or roof) on a regular grid inside the dome. Light blocks are replaceable, so they never
++     * get in the way of building.
++     */
++    private static void lightSphere(LostCityTerrainFeature feature, CitySphere sphere, int chunkX, int chunkZ) {
++        if (!sphere.isEnabled() || sphere.getCenterPos() == null || outerSeaLevel(feature) == null) {
++            return;
++        }
++        ChunkDriver driver = feature.getDriver();
++        BlockPos cc = sphere.getCenterPos();
++        double radius = sphere.getRadius() - 2;
++        for (int x = Math.floorMod(LIGHT_SPACING / 2 - (chunkX << 4), LIGHT_SPACING); x < 16; x += LIGHT_SPACING) {
++            double dx = (chunkX << 4) + x - cc.getX();
++            for (int z = Math.floorMod(LIGHT_SPACING / 2 - (chunkZ << 4), LIGHT_SPACING); z < 16; z += LIGHT_SPACING) {
++                double dz = (chunkZ << 4) + z - cc.getZ();
++                double up = radius * radius - dx * dx - dz * dz;
++                if (up <= 0) {
++                    continue;
++                }
++                int top = cc.getY() + (int) Math.sqrt(up);
++                int floor = cc.getY() - 2;
++                int y = top;
++                while (y >= floor && driver.getBlock(x, y, z).isAir()) {
++                    y--;
++                }
++                int light = y + LIGHT_HEIGHT;
++                if (y >= floor && light < top && driver.getBlock(x, light, z).isAir()) {
++                    driver.current(x, light, z).block(LIGHT);
++                }
++            }
++        }
++    }
++
++    private static Integer outerSeaLevel(LostCityTerrainFeature feature) {
++        IDimensionInfo provider = feature.provider;
++        ChunkGenerator generator;
++        if (provider.getWorld() instanceof WorldGenRegion region) {
++            generator = ((ServerChunkCache) region.getChunkSource()).getGenerator();
++        } else {
++            generator = ((ServerLevel) provider.getWorld()).getChunkSource().getGenerator();
++        }
++        return generator instanceof ILostWorldsChunkGenerator lw ? lw.getOuterSeaLevel() : null;
++    }
++
      private static void fillSphere(LostCityTerrainFeature feature, int centerx, int centery, int centerz, int radius,
                                     BlockState glass, BlockState sideBlock) {
          IDimensionInfo provider = feature.provider;
-@@ -165,5 +214,6 @@
+@@ -165,5 +260,6 @@
                  }
              }
          }
