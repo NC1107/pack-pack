@@ -991,6 +991,11 @@ setblock ~-9 ~2 ~-1 minecraft:red_bed[facing=west,part=head]
 setblock ~6 ~3 ~3 minecraft:oak_door[facing=south,hinge=left,open=false,powered=false,half=upper]
 setblock ~6 ~3 ~7 minecraft:oak_door[facing=south,hinge=left,open=false,powered=false,half=upper]
 setblock ~-8 ~2 ~-1 minecraft:red_bed[facing=west,part=foot]
+item replace block ~-9 ~2 ~1 container.0 with create:copper_diving_helmet
+item replace block ~-9 ~2 ~1 container.1 with create_submarine:diving_chestplate
+item replace block ~-9 ~2 ~1 container.2 with create_submarine:diving_leggings
+item replace block ~-9 ~2 ~1 container.3 with create:copper_diving_boots
+item replace block ~-9 ~2 ~1 container.4 with create:copper_backtank[create:banktank_air=900]
 setworldspawn ~ ~2 ~
 summon minecraft:marker ~ ~2 ~ {Tags:["packpack_start"]}
 execute store result storage packpack:start y int 1 run data get entity @e[type=minecraft:marker,tag=packpack_start,limit=1] Pos[1]
