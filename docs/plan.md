@@ -303,6 +303,12 @@ The sea floor needs real elevation, like ridges, trenches and plateaus.
 Xaero's World Map 1.47.0 could deadlock while quitting a world ("Saving worlds") if it was loading map regions at that moment.
 It was replaced by FTB Chunks, which also brings land claims for multiplayer.
 
+### World notes, 2026-11-25
+
+- The sky above the sea is vanilla again, only the underwater fog is the deep water colour, and it ends at 150 blocks so it closes before a normal render distance.
+- Drowned: three quarters of their natural spawns are refused, which keeps it to about 3 to 6 within 64 blocks of a player instead of 12 to 22.
+- Villages: Lost Cities picks the city style per chunk from the nearest city centre, so village houses show up 1 to 3 at a time inside ordinary domes as well as in the occasional full village dome, and drowned villages show up outside. It reads like a few survivors living in a dome, so it is left like that for now.
+
 ### Pipeline gaps
 
 - [x] Capture evidence for hangs: the server boot test now takes a thread dump before killing a hung server (boot or shutdown) and CI uploads it.

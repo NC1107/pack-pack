@@ -1,6 +1,6 @@
 {
     "rconfig:version": 0,
     "waterConfig": {
-        "fogFarPlaneWater": 190.0
+        "fogFarPlaneWater": 150.0
     }
 }
