@@ -32,6 +32,8 @@ DATA_PACK_FORMAT = 48  # Minecraft 1.21.1
 # Cities' ground level and city levels all sit on it. With the sea surface at 160 that
 # is ~175 blocks of water above the floor and ~50 blocks of rock below it.
 SEABED_Y = -14
+# The deepest trenches of the sea floor (Lost Worlds SeaFloor.MIN)
+SEA_FLOOR_MIN_Y = -56
 SEA_LEVEL = 160
 
 # Ocean variant per temperature band. Low continentalness is where vanilla puts its
@@ -496,8 +498,11 @@ def write_incontrol_spawn_rules() -> None:
 
 
 def write_incontrol_spawner() -> None:
-    # Spawned 16-48 blocks from a player, inside the 64 blocks where vanilla keeps fish
-    # around; caps are per species for the whole world.
+    # Spawned 16-48 blocks from a player, inside the 64 blocks where vanilla keeps fish around.
+    # Small fish are not here: vanilla spawns them (per player caps, biome species lists) once
+    # the tweaks mod lets them spawn under our sea, close over the floor and the reefs.
+    # max_this caps a species across the whole world, but only for rules that name their mobs;
+    # with mobsfrombiome the species is picked after the count.
     def rule(category: str | list, per_second: float, amount: tuple[int, int], max_this: int, max_height: int,
              distance: tuple[int, int] = (16, 48)) -> dict:
         return {
@@ -510,12 +515,11 @@ def write_incontrol_spawner() -> None:
                 "inwater": True,
                 "norestrictions": True,
                 "mindist": distance[0], "maxdist": distance[1],
-                "minheight": SEABED_Y - 10, "maxheight": max_height,
+                "minheight": SEA_FLOOR_MIN_Y, "maxheight": max_height,
                 "maxthis": max_this,
             },
         }
     write_json(INCONTROL_SPAWNER, [
-        rule("water_ambient", 1.0, (3, 6), 25, SEA_LEVEL),           # cod, salmon, tropical fish
         rule("water_creature", 0.6, (1, 3), 8, SEA_LEVEL),           # squid, sharks, rays, orcas, jellyfish
         rule("underground_water_creature", 0.2, (1, 3), 12, SEABED_Y + 60),  # glow squid in the dark
         # Big animals, a few at a time, far enough out to see them whole

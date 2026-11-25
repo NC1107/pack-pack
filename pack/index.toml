@@ -18,7 +18,7 @@ hash = "570a0cf72f4ef2b8515dc4d39adab174fa93f05ba53cacd14056fe82e2aae4b6"
 
 [[files]]
 file = "config/incontrol/spawner.json"
-hash = "c3c98c555d8ad07de4b2caa3cf305a591ba82ed14f3ea65161d26c7330ca1912"
+hash = "35b538afebf41b6c72e1e78a5803d9d48f4dbfd11c42cd77635addfd7ed9de35"
 
 [[files]]
 file = "config/lostcities/common.toml"
@@ -1195,7 +1195,7 @@ metafile = true
 
 [[files]]
 file = "mods/packpack-tweaks-1.0.0.jar"
-hash = "f69cec8765176633f45bdf64fc9e113067d8319e18c66bab0a46a675a10899a4"
+hash = "4ec1dc42563e4530b0d793d75030f9c84715746fe1d05dfca485d3d614bdcb61"
 
 [[files]]
 file = "mods/reeses-sodium-options.pw.toml"
