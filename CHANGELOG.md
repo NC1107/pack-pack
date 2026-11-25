@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.16.0](https://github.com/NC1107/pack-pack/compare/v0.15.0...v0.16.0) (2026-11-25)
+
+
+### Features
+
+* small fish live near the sea floor ([76679a9](https://github.com/NC1107/pack-pack/commit/76679a94ae8fb45749b6bca1fd95eec6d7e1fd31))
+
+
+### Bug Fixes
+
+* nothing floats in the drowned cities ([3f2e438](https://github.com/NC1107/pack-pack/commit/3f2e438d4f82e182ccfdf5293348cedf4dda8e65))
+
 ## [0.15.0](https://github.com/NC1107/pack-pack/compare/v0.14.1...v0.15.0) (2026-11-25)
 
 
