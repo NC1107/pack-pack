@@ -9,6 +9,10 @@ file = "config/crash_assistant/config.toml"
 hash = "c6406f3e491aef05e7cd09a3287c12b2020526757125cdc9d6aeecc03c4ba8f1"
 
 [[files]]
+file = "config/create_submarine_client_state.json"
+hash = "51b4703e09e929354b3ff5389e18af2cd2ca69c08cde2c2ff2781b61615519a7"
+
+[[files]]
 file = "config/hybrid_aquatic.json"
 hash = "7c5d7f1871a3d027d01584652e27ed143bdffc2063082f7666c31c5fe3286a4c"
 
