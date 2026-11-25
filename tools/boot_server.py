@@ -158,6 +158,20 @@ def parse_health(lines: list[str]) -> dict:
     return health
 
 
+def save_thread_dump(java: str, pid: int) -> None:
+    """Leave evidence of what a hung server was doing before it gets killed."""
+    resolved = shutil.which(java) or java
+    jcmd = Path(resolved).resolve().parent / ("jcmd.exe" if os.name == "nt" else "jcmd")
+    try:
+        result = subprocess.run([str(jcmd), str(pid), "Thread.print"], capture_output=True, text=True,
+                                timeout=60, check=False)
+        dump = result.stdout + result.stderr
+    except (OSError, subprocess.TimeoutExpired) as error:
+        dump = f"could not take a thread dump: {error}\n"
+    (RUN / "server-threads.txt").write_text(dump)
+    log("saved a thread dump of the hung server to run/server-threads.txt")
+
+
 def run_server(cmd: list[str], timeout: int, quiet: bool) -> dict:
     started = time.monotonic()
     proc = subprocess.Popen(cmd, cwd=SERVER, stdin=subprocess.PIPE, stdout=subprocess.PIPE,
@@ -175,6 +189,7 @@ def run_server(cmd: list[str], timeout: int, quiet: bool) -> dict:
             line = lines.get(timeout=max(0.1, deadline - time.monotonic()))
         except queue.Empty:
             result["timed_out"] = True
+            save_thread_dump(cmd[0], proc.pid)
             proc.kill()
             break
         if line is None:
@@ -196,7 +211,14 @@ def run_server(cmd: list[str], timeout: int, quiet: bool) -> dict:
             threading.Timer(HEALTH_WAIT_SECONDS, send, (proc, "spark health")).start()
             threading.Timer(HEALTH_WAIT_SECONDS + 5, send, (proc, "stop")).start()
 
-    proc.wait(timeout=60)
+    try:
+        proc.wait(timeout=60)
+    except subprocess.TimeoutExpired:
+        # Hung while saving or stopping.
+        result["timed_out"] = True
+        save_thread_dump(cmd[0], proc.pid)
+        proc.kill()
+        proc.wait()
     result["exit_code"] = proc.returncode
     result["clean_stop"] = result["reached_done"] and proc.returncode == 0
     result["health"] = parse_health(after_done)
