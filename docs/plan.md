@@ -47,6 +47,11 @@ Tick things off when they're handled, add new ones when they come up.
 - **2026-11-24, iris with three shader packs to try.**
   Complementary reimagined, photon, and makeup ultra fast for weaker machines, all off by default, you pick one in video settings.
   All three compile with no errors over a lost city.
+- **2026-11-25, create deep seas in, iris and the shader packs out.**
+  Veil (pulled in by create aeronautics and sable) hooks sodium's water rendering in a way that only matches sodium 0.8.12, anything newer crashes the moment water renders.
+  Sodium, sodium extra and reese's are pinned to the july builds, and iris is gone since its only sodium 0.8 build needs 0.8.13.
+  Bring iris and the three packs back once veil works with a newer sodium.
+  Sable has open issues with c2me and lithium (physics objects springing back) and with servers stalling while saving physics objects, so watch for those.
 
 ## Open questions and gaps
 

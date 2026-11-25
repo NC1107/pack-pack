@@ -1214,7 +1214,7 @@ hash = "4ec1dc42563e4530b0d793d75030f9c84715746fe1d05dfca485d3d614bdcb61"
 
 [[files]]
 file = "mods/reeses-sodium-options.pw.toml"
-hash = "0f465bf38b13f887dbde506c859c9b5439ee9151ae5f3a98078b9f6c3a2c89ad"
+hash = "3809235005361fa1c9286bca1f26cc920c4f9f4f4f94afe753c55a0ac29711e0"
 metafile = true
 
 [[files]]
@@ -1244,12 +1244,12 @@ metafile = true
 
 [[files]]
 file = "mods/sodium-extra.pw.toml"
-hash = "c490445e40a84c9e19bd3d3a7c8e8b9709b8cea0346a307eb7fb8a32a72a9504"
+hash = "232e50bdbb4eb8026ae371868fa1459d59a863c9b0ebc12aa7c2b6bae48e3717"
 metafile = true
 
 [[files]]
 file = "mods/sodium.pw.toml"
-hash = "abc285fb28b8df872e4c2bb31e04fc23e2724d9c84b4cb6fbc4320fc569c758f"
+hash = "927203e2e63fc7a9aa06ff9f74bd64aeda900a97c9cb5757dde7831336ac1d6b"
 metafile = true
 
 [[files]]
@@ -1306,18 +1306,3 @@ metafile = true
 file = "options.txt"
 hash = "dc336d80d01de45e2db17945ad6286e55d22633fa50ffe1ed035f7ea9f35b92c"
 preserve = true
-
-[[files]]
-file = "shaderpacks/complementary-reimagined.pw.toml"
-hash = "5c17de8161b06a10dbd8e59645e7d7edfc583054009b5a787086d5f4fb1a77f1"
-metafile = true
-
-[[files]]
-file = "shaderpacks/makeup-ultra-fast-shaders.pw.toml"
-hash = "0e60b67ad2358ba08dc63511c6d9fb8555103855256673c47209112b1cbf12a2"
-metafile = true
-
-[[files]]
-file = "shaderpacks/photon-shader.pw.toml"
-hash = "1e4109987a9d4b0bab4302601e08b365b0e3d5b3a39b14b7134f8655c29a6bcc"
-metafile = true
