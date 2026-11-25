@@ -1,4 +1,10 @@
 fill ~0 ~0 ~0 ~10 ~4 ~4 minecraft:iron_block hollow
+setblock ~3 ~2 ~0 minecraft:glass
+setblock ~5 ~2 ~0 minecraft:glass
+setblock ~8 ~2 ~0 minecraft:glass
+setblock ~2 ~2 ~4 minecraft:glass
+setblock ~8 ~2 ~4 minecraft:glass
+setblock ~10 ~2 ~2 minecraft:glass
 setblock ~3 ~2 ~2 create:creative_motor[facing=west]
 setblock ~2 ~2 ~2 create:clutch[axis=x,powered=true]
 setblock ~2 ~3 ~2 minecraft:lever[face=floor,facing=north,powered=true]
@@ -9,13 +15,22 @@ setblock ~6 ~0 ~2 create_submarine:ballast_vent
 setblock ~6 ~1 ~2 create:mechanical_pump[facing=up]
 setblock ~6 ~2 ~2 create_submarine:ballast_tank
 setblock ~6 ~3 ~2 create_submarine:ballast_tank
+setblock ~2 ~1 ~1 create_submarine:ballast_tank
+setblock ~2 ~1 ~3 create_submarine:ballast_tank
+setblock ~8 ~3 ~1 create_submarine:ballast_tank
+setblock ~8 ~3 ~3 create_submarine:ballast_tank
 setblock ~9 ~1 ~2 create:creative_motor[facing=west]
 setblock ~8 ~1 ~2 create:clutch[axis=x,powered=true]
 setblock ~8 ~2 ~2 minecraft:lever[face=floor,facing=north,powered=true]
 setblock ~7 ~1 ~2 create:gearshift[axis=x,powered=false]
 setblock ~7 ~2 ~2 minecraft:lever[face=floor,facing=north,powered=false]
 setblock ~9 ~1 ~1 create_submarine:creative_oxygenator
-setblock ~4 ~1 ~4 minecraft:oak_door[facing=south,hinge=left,open=false,powered=false,half=lower]
-setblock ~4 ~2 ~4 minecraft:oak_door[facing=south,hinge=left,open=false,powered=false,half=upper]
+setblock ~4 ~1 ~4 minecraft:iron_door[facing=north,hinge=left,open=false,powered=false,half=lower]
+setblock ~4 ~2 ~4 minecraft:iron_door[facing=north,hinge=left,open=false,powered=false,half=upper]
+setblock ~5 ~2 ~3 minecraft:stone_button[face=wall,facing=north]
+setblock ~5 ~2 ~5 minecraft:stone_button[face=wall,facing=south]
+fill ~-2 ~-1 ~-1 ~11 ~5 ~5 minecraft:air replace minecraft:water
+tp @s ~5 ~1 ~2
 sable assemble area ~-2 ~-1 ~-1 ~11 ~5 ~5
-tellraw @s ["",{"text":"Test sub built above you at the surface. ","color":"aqua"},"Inside: lever on the stern clutch starts the propeller, lever on the middle clutch runs the ballast pump, lever on the gearshift next to it switches between diving and rising."]
+fill ~-2 ~-1 ~-1 ~11 ~5 ~5 minecraft:water replace minecraft:air
+tellraw @s ["",{"text":"You are inside the test sub. ","color":"aqua"},"The lever by the stern starts the propeller. The lever on the middle clutch runs the ballast pump, the one next to it switches between diving and rising. The portholes give way below about 28 m."]
