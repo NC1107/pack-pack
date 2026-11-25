@@ -42,7 +42,7 @@ Tick things off when they're handled, add new ones when they come up.
   `python3 tools/build_worldgen.py --preview-villages` makes every city a village with no spawn radius, for looking at them.
 - **2026-11-24, QoL mods most packs ship.**
   Picked from the actual mod lists of the 20 most downloaded 1.21.1 neoforge packs on modrinth (61 to 311 mods each), only stuff that doesn't change gameplay:
-  jei, jade, appleskin, mouse tweaks, controlling, xaero's minimap and world map, reese's sodium options, better advancements, shulker box tooltip, clumps, badoptimizations, no chat reports, and lootr so loot chests in the cities are per player in multiplayer.
+  jei, jade, appleskin, mouse tweaks, controlling, FTB Chunks map and minimap (replaced Xaero's, see below), reese's sodium options, better advancements, shulker box tooltip, clumps, badoptimizations, no chat reports, and lootr so loot chests in the cities are per player in multiplayer.
   Left out on purpose since they're design calls: waystones, backpacks, curios, voice chat.
 - **2026-11-24, iris with three shader packs to try.**
   Complementary reimagined, photon, and makeup ultra fast for weaker machines, all off by default, you pick one in video settings.
@@ -298,22 +298,10 @@ The sea floor needs real elevation, like ridges, trenches and plateaus.
 - Pick one difficulty mode now and make the others config override folders later.
 - Worldgen datapack changes do not touch existing worlds, so decide when a release means a new world.
 
-### Known upstream hang: Xaero's World Map
+### Xaero's World Map hang (gone)
 
-Quitting a singleplayer world can freeze on "Saving worlds" when Xaero's World Map 1.47.0 is loading regions from the world save at that moment.
-A thread dump from CI shows the map's loader thread holding a lock while it waits for a task on the render thread, the render thread waiting for the server to stop, and the server thread waiting for that lock.
-It is the cause of the intermittent client boot hang.
-The client boot test now leaves that mod out, so it does not cover it.
-Players can hit it too, more rarely, when they quit while the map is busy.
-Options are to wait for a fixed version, report it to the author, or drop the world map and keep only the minimap.
-
-### Domes, 2026-11-24
-
-- Hybrid Aquatic was injecting its own biomes into our ocean, and Lost Cities only runs in overworld biomes, so domes landing in them lost their glass and city.
-  Its biomes are off in `config/hybrid_aquatic.json`, its animals and seabed features stay.
-- Domes are 61 to 69 blocks in radius (patched Lost Cities radius formula), inside the flat area around them, and the ground outside sits at the same height as inside.
-- Air pockets came from vanilla geodes and dungeons in the sand, from underwater structure templates, and from drowned city rooms. All three are handled: features removed, templates skip air, and leftover air under the sea is flooded.
-- Checked on nine domes: complete shells, matching ground, and at most 20 stray air blocks next to a shell.
+Xaero's World Map 1.47.0 could deadlock while quitting a world ("Saving worlds") if it was loading map regions at that moment.
+It was replaced by FTB Chunks, which also brings land claims for multiplayer.
 
 ### Pipeline gaps
 

@@ -13,6 +13,7 @@ You import a zip into prism launcher and it keeps itself updated from this repo.
 
 Before the game starts it pulls whatever mods the pack currently lists, so updates just show up the next time you launch.
 Shaders are off by default, there's three packs in video settings if you want to try them.
+There's a map and minimap (ftb chunks, it also does land claims for multiplayer), and `/sethome`, `/home`, `/back` and `/tpa` if you need them.
 
 ## The world
 
