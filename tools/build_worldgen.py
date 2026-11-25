@@ -232,6 +232,8 @@ def write_start_functions() -> list[str]:
         *[line for block, cells in by_block.items() if block not in two_part for line in fill_runs(cells, block)],
         *[f"setblock ~{x} ~{y} ~{z} {block}" for block in sorted(two_part, key=lambda b: ("upper" in b or "foot" in b, b))
           for x, y, z in by_block[block]],
+        *[f"item replace block ~{start_sub.starter_chest()[0]} ~{start_sub.starter_chest()[1]} ~{start_sub.starter_chest()[2]}"
+          f" container.{slot} with {item}" for slot, item in enumerate(start_sub.STARTER_KIT)],
         f"setworldspawn ~ ~{start_sub.DECK_Y + 1} ~",
         f"summon minecraft:marker ~ ~{start_sub.DECK_Y + 1} ~ {{Tags:[\"packpack_start\"]}}",
         "execute store result storage packpack:start y int 1 run data get entity"

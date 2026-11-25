@@ -118,3 +118,20 @@ def furniture(deck_y: int) -> dict[Cell, str]:
         (-LENGTH + 6, y, 1): "minecraft:crafting_table",
         (-LENGTH + 6, y, -2): "minecraft:furnace[facing=east]",
     }
+
+
+# Deep Seas crushes players swimming past 120 m (dead at 180 m) unless they wear the full
+# Copper Diving Suit, good to 280 m. The sea floor here is about 173 m down, so the wreck keeps
+# a suit and a full backtank to breathe from: suiting up is how anyone gets outside.
+STARTER_KIT = [
+    "create:copper_diving_helmet",
+    "create_submarine:diving_chestplate",
+    "create_submarine:diving_leggings",
+    "create:copper_diving_boots",
+    "create:copper_backtank[create:banktank_air=900]",
+]
+
+
+def starter_chest() -> Cell:
+    """The chest the starter kit goes in."""
+    return next(cell for cell, block in furniture(DECK_Y).items() if block.startswith("minecraft:chest"))

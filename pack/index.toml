@@ -838,7 +838,7 @@ hash = "8be69d5b06bbb93d1e1d5ca0b70aa4510323a5bdcf1d6de2d8a400d347e4b8b0"
 
 [[files]]
 file = "datapacks/pack-pack-worldgen/data/packpack/function/build_start.mcfunction"
-hash = "ef22447a939c4c681816de52dea60495253c59e163fa5113356b57e66edc311d"
+hash = "08eb5ebdd9e191f2f0964a1c6cc41d36f46d50df809536cecc9e7c6b9f07364d"
 
 [[files]]
 file = "datapacks/pack-pack-worldgen/data/packpack/function/place_new_player.mcfunction"
