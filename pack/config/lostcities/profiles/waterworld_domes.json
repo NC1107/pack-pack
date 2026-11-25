@@ -166,7 +166,7 @@
     "citySphereClearBelowUntilAir": false,
     "monorailOffset": -2,
     "outsideSurfaceVariation": 1.0,
-    "monorailChance": 0.0,
+    "monorailChance": 1.0,
     "citySphereClearAbove": 0,
     "citySphereClearAboveUntilAir": false,
     "sphereSurfaceVariation": 1.0,

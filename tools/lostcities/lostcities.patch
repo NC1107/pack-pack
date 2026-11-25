@@ -253,17 +253,18 @@
          setBlock(current, correct(state));
          incY();
 --- a/src/main/java/mcjty/lostcities/worldgen/gen/Spheres.java	2026-11-24 04:11:35.372840297 -0500
-+++ b/src/main/java/mcjty/lostcities/worldgen/gen/Spheres.java	2026-11-25 00:46:39.656184884 -0500
-@@ -50,6 +50,8 @@
-                     Monorails.generateMonorails(feature, info);
++++ b/src/main/java/mcjty/lostcities/worldgen/gen/Spheres.java	2026-11-25 08:31:31.308705736 -0500
+@@ -45,6 +45,9 @@
+                     fillSphere(feature, cx, profile.GROUNDLEVEL, cz, (int) radius, sphere.getGlassBlock(), sphere.getSideBlock());
                  }
  
++                // Flooding comes before the monorails so that their tubes keep the air inside them.
 +                floodOutsideSpheres(feature, sphere, chunkX, chunkZ);
 +
-                 driver.actuallyGenerate(chunk);
-             } finally {
-                 driver.setPrimer(oldRegion, oldChunk);
-@@ -58,6 +60,52 @@
+                 if (profile.isSpace()) {
+                     BuildingInfo info = BuildingInfo.getBuildingInfo(coord, provider);
+                     Monorails.generateMonorails(feature, info);
+@@ -58,6 +61,52 @@
          }
      }
  
@@ -316,7 +317,7 @@
      private static void fillSphere(LostCityTerrainFeature feature, int centerx, int centery, int centerz, int radius,
                                     BlockState glass, BlockState sideBlock) {
          IDimensionInfo provider = feature.provider;
-@@ -165,5 +213,6 @@
+@@ -165,5 +214,6 @@
                  }
              }
          }

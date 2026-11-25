@@ -2,9 +2,9 @@
 """Generate a patch of the ocean world and check the domes in it.
 
 Runs the server installed by boot_server.py with Chunky, pre-generates a square that holds four
-domes on Lost Cities' 256 block grid, then reads the region files and checks every dome: the glass
-shell is complete, there is no air in the water outside it, and the ground outside the rim is
-level with the ground inside. It also fails if a mod's biome shows up, since Lost Cities does not
+domes on Lost Cities' 512 block grid, then reads the region files and checks every dome: the glass
+shell is complete, no air touches the water (in the dome or in the tunnels out of it), there is no
+other air in the water outside it, and the ground outside the rim is level with the ground inside. It also fails if a mod's biome shows up, since Lost Cities does not
 build in those (that is how domes lost their glass before).
 """
 
@@ -38,6 +38,9 @@ GROUND = {"sand", "gravel", "dirt", "grass_block", "clay"}
 # What counts as a pass. A few air blocks hug a shell where its voxels meet the water.
 MAX_SHELL_MISSING = 0.01
 MAX_AIR_OUTSIDE = 200
+MAX_LEAKS = 20
+# Tunnels leave a dome along the 16 block wide chunk row and column that hold its centre.
+TUNNEL_WIDTH = 16
 RIM_GROUND = range(-15, -12)
 
 
@@ -120,6 +123,13 @@ def fit_sphere(blocks: np.ndarray, origin: np.ndarray) -> tuple[np.ndarray, floa
     return centre, radius
 
 
+def touching(mask: np.ndarray) -> np.ndarray:
+    """Cells with a face neighbour in mask."""
+    padded = np.pad(mask, 1)
+    return (padded[2:, 1:-1, 1:-1] | padded[:-2, 1:-1, 1:-1] | padded[1:-1, 2:, 1:-1]
+            | padded[1:-1, :-2, 1:-1] | padded[1:-1, 1:-1, 2:] | padded[1:-1, 1:-1, :-2])
+
+
 def check_dome(region: Region, gx: int, gz: int) -> dict:
     origin = np.array([gx - WINDOW, Y_MIN, gz - WINDOW])
     blocks = load(region, gx - WINDOW, gz - WINDOW, 2 * WINDOW)
@@ -141,7 +151,13 @@ def check_dome(region: Region, gx: int, gz: int) -> dict:
     x, y, z = np.indices(blocks.shape)
     distance = np.sqrt((x + origin[0] + 0.5 - centre[0]) ** 2 + (y + Y_MIN + 0.5 - centre[1]) ** 2
                        + (z + origin[2] + 0.5 - centre[2]) ** 2)
-    air_outside = int(((blocks == 2) & (distance > radius + 0.7) & (y + Y_MIN < 150)).sum())
+    in_tunnel = (0 <= x + origin[0] - gx) & (x + origin[0] - gx < TUNNEL_WIDTH) \
+        | (0 <= z + origin[2] - gz) & (z + origin[2] - gz < TUNNEL_WIDTH)
+    air = blocks == 2
+    outside = (distance > radius + 0.7) & (y + Y_MIN < 150)
+    air_outside = int((air & outside & ~in_tunnel).sum())
+    # Inside the shell air meets water at ponds and fountains, outside it only at a leak.
+    leaks = int((air & outside & touching(blocks == 3)).sum())
 
     rim = []
     for angle in np.radians(np.arange(0, 360, 30)):
@@ -156,10 +172,12 @@ def check_dome(region: Region, gx: int, gz: int) -> dict:
         problems.append(f"{shell_missing:.1%} of the shell is missing")
     if air_outside > MAX_AIR_OUTSIDE:
         problems.append(f"{air_outside} air blocks in the water outside the shell")
+    if leaks > MAX_LEAKS:
+        problems.append(f"{leaks} air blocks outside the shell touch the water")
     if sum(h in RIM_GROUND for h in rim if h is not None) < 10:
         problems.append(f"ground outside the rim is not level with the dome: {rim}")
     return {"dome": [gx, gz], "present": True, "radius": round(radius, 1), "shell_missing": round(shell_missing, 4),
-            "air_outside": air_outside, "rim_ground": rim, "problems": problems}
+            "air_outside": air_outside, "leaks": leaks, "rim_ground": rim, "problems": problems}
 
 
 def foreign_biomes(region: Region) -> list[str]:
@@ -191,8 +209,9 @@ def main() -> int:
     if biomes:
         failures.append(f"biomes from mods in the ocean, Lost Cities skips them: {biomes}")
     for d in domes:
-        state = "absent" if not d["present"] else \
-            f"radius {d['radius']}, shell missing {d['shell_missing']:.1%}, air outside {d['air_outside']}"
+        state = "absent" if not d["present"] else (
+            f"radius {d['radius']}, shell missing {d['shell_missing']:.1%}, air outside {d['air_outside']}, "
+            f"leaks {d['leaks']}")
         print(f"[worldgen] dome {d['dome']}: {state}")
     for failure in failures:
         print(f"[worldgen] FAIL: {failure}")

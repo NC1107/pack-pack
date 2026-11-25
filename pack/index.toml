@@ -30,7 +30,7 @@ hash = "3d8609e66481b7d9097a68e5d33ef851c11f2e51982e5f9c5610798410e958bc"
 
 [[files]]
 file = "config/lostcities/profiles/waterworld_domes.json"
-hash = "951f7d68aabcf201528b1add777697125375ec0a137303322319565fa69b4a8d"
+hash = "b6e12dbfdd2f7f237de7a3124f478a884aad6f29c6add31587456dbe8f89778a"
 
 [[files]]
 file = "config/modernfix-mixins.properties"
@@ -1152,7 +1152,7 @@ metafile = true
 
 [[files]]
 file = "mods/lostcities-1.21-8.4.8-packpack.jar"
-hash = "0a8db45dbc55a8269ade8b00201ebe878c45f95b9d864b9a962c792186d5e94a"
+hash = "133c94750e39fb474f959cc2550e14e085aece37552fd612504e8102966aafc5"
 
 [[files]]
 file = "mods/lostworlds-1.21-2.0.0-packpack.jar"
