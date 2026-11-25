@@ -102,8 +102,8 @@ Tick things off when they're handled, add new ones when they come up.
   Generation is measured (median 38, longest 76), and planted kelp grew 174 blocks to the surface in the real client.
 - [ ] **Lost cities sometimes stalls worldgen.**
   One pre-generation hit a 60 second server tick and the watchdog killed the server, and once the client hung saving the world on quit. Both were one-offs, need a thread dump from a stalled run.
-- [ ] **Worldgen is slow.**
-  Pre-generating runs around 11 to 22 chunks a second on a fast machine, exploring will lean on the cpu.
+- [x] **Worldgen is slow.**
+  It was 11 to 22 chunks a second before C2ME, the worldgen check now reports about 60 a second for its test square (2026-11-25, same machine).
 
 ### Mods
 
@@ -317,7 +317,7 @@ It was replaced by FTB Chunks, which also brings land claims for multiplayer.
 ### Pipeline gaps
 
 - [x] Capture evidence for hangs: the server boot test now takes a thread dump before killing a hung server (boot or shutdown) and CI uploads it.
-- [x] A worldgen check in CI: generates four domes and checks shell, air and ground (`tools/check_worldgen.py`). Still to do: several seeds and a longer soak for rare errors.
+- [x] A worldgen check in CI: generates four domes and checks shell, air, ground, water under the floor and floating blocks (`tools/check_worldgen.py`). It runs two seeds, the second has warm ocean and reefs. Still to do: a longer soak for rare errors.
 - [x] Tests and lint for `tools/` (pytest and ruff in the hygiene job).
 - A static check of mod metadata and dependencies before booting.
 - [x] A scheduled mod update workflow (weekly, checked before the PR opens).
