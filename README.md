@@ -17,11 +17,13 @@ There's a map and minimap (ftb chunks, it also does land claims for multiplayer)
 
 ## The world
 
-Pretty much the whole overworld is ocean, about 175 blocks deep down to the sea floor.
-You start in a small glass pod on the sea floor, there's nothing else close by.
-Past about 500 blocks out you start finding cities, some drowned and some under glass domes that keep the water out, and every so often a dome has a village with villagers in it.
+Pretty much the whole overworld is ocean, about 175 blocks of water over a sea floor with ridges, trenches and hills.
+You start in a small glass dome on the sea floor, there's nothing else close by on purpose.
+Past about 500 blocks out you start finding the domes, the last cities that kept the water out, with drowned cities around them that are mostly collapsed and overgrown.
+Some domes have a few village houses with villagers living in them.
+Under the floor it's sand down to bedrock, so there's no mining your way around anything.
 Just make a new world with the default world type, it's all set up by the pack, an old world won't change.
-The mods themselves still download from modrinth or curseforge since that's where their authors host them, but the pack itself lives here on github.
+The mods themselves still download from modrinth or curseforge since that's where their authors host them, but the pack itself lives here on github, and a few of them (lost cities, lost worlds and a small one of ours) are patched builds that live in the repo.
 
 ## Working on it
 
