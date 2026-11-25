@@ -51,6 +51,7 @@ jobs:
           name: server-boot
           path: |
             run/boot-report.json
+            run/server-threads.txt
             run/server/logs/latest.log
             run/server/crash-reports/
           if-no-files-found: ignore

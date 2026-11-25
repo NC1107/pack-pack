@@ -318,7 +318,7 @@ Options are to wait for a fixed version, report it to the author, or drop the wo
 
 ### Pipeline gaps
 
-- Capture evidence for hangs: a server thread dump on a stall, and a separate client shutdown deadline with a dump.
+- [x] Capture evidence for hangs: the server boot test now takes a thread dump before killing a hung server (boot or shutdown) and CI uploads it.
 - A nightly soak with a chunk pregen over several seeds, to ever reproduce the Lost Cities `sphere is null` error.
 - [x] Tests and lint for `tools/` (pytest and ruff in the hygiene job).
 - A static check of mod metadata and dependencies before booting.
