@@ -486,6 +486,9 @@ ENLARGED = ["whale_shark", "basking_shark", "orca", "great_white_shark", "ocean_
 # Hybrid Aquatic's bosses only came from summoning. They now turn up rarely in the deep
 # trenches, and the tweaks mod keeps each one within 48 blocks of where it was first found.
 LAIR_BOSSES = ["karkinos", "shell_beast"]
+# Sharks big and fierce enough to go after drowned; whale and basking sharks filter feed.
+DROWNED_HUNTERS = ["bull_shark", "great_white_shark", "sand_tiger_shark", "hammerhead_shark", "thresher_shark",
+                   "sixgill_shark", "sleeper_shark"]
 TRENCH_TOP_Y = -36
 
 
@@ -493,6 +496,7 @@ def write_entity_tags() -> None:
     tags = DATAPACK / "data/packpack/tags/entity_type"
     write_json(tags / "enlarged.json", {"values": [f"hybrid_aquatic:{e}" for e in ENLARGED]})
     write_json(tags / "lair_bosses.json", {"values": [f"hybrid_aquatic:{e}" for e in LAIR_BOSSES]})
+    write_json(tags / "drowned_hunters.json", {"values": [f"hybrid_aquatic:{e}" for e in DROWNED_HUNTERS]})
 
 
 def write_hapi_spawns() -> None:

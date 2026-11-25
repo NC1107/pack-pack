@@ -25,9 +25,12 @@ public final class SeaLife {
             TagKey.create(Registries.ENTITY_TYPE, ResourceLocation.fromNamespaceAndPath("packpack", "enlarged"));
     public static final double ENLARGED_SCALE = 1.5;
 
-    /** Sharks also hunt drowned, which otherwise have the sea floor to themselves. */
-    public static final TagKey<EntityType<?>> SHARKS =
-            TagKey.create(Registries.ENTITY_TYPE, ResourceLocation.fromNamespaceAndPath("hapi", "all_sharks"));
+    /**
+     * The predatory sharks also hunt drowned, which otherwise have the sea floor to themselves.
+     * Filter feeders (whale and basking sharks) and small sharks stay out of it.
+     */
+    public static final TagKey<EntityType<?>> DROWNED_HUNTERS =
+            TagKey.create(Registries.ENTITY_TYPE, ResourceLocation.fromNamespaceAndPath("packpack", "drowned_hunters"));
 
     /**
      * Rare bosses that keep to the place they were first found, so meeting one is a choice:
@@ -53,7 +56,7 @@ public final class SeaLife {
                 scale.setBaseValue(ENLARGED_SCALE);
             }
         }
-        if (type.is(SHARKS)) {
+        if (type.is(DROWNED_HUNTERS)) {
             mob.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(mob, Drowned.class, true));
         }
         if (type.is(LAIR_BOSSES) && mob instanceof PathfinderMob boss) {

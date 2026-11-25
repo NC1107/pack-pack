@@ -253,14 +253,8 @@
          setBlock(current, correct(state));
          incY();
 --- a/src/main/java/mcjty/lostcities/worldgen/gen/Spheres.java	2026-11-24 04:11:35.372840297 -0500
-+++ b/src/main/java/mcjty/lostcities/worldgen/gen/Spheres.java	2026-11-25 12:33:36.831463566 -0500
-@@ -11,11 +11,16 @@
- import mcjty.lostcities.worldgen.lost.BuildingInfo;
- import mcjty.lostcities.worldgen.lost.CitySphere;
- import net.minecraft.core.BlockPos;
-+import net.minecraft.util.Mth;
- import net.minecraft.server.level.ServerChunkCache;
- import net.minecraft.server.level.ServerLevel;
++++ b/src/main/java/mcjty/lostcities/worldgen/gen/Spheres.java	2026-11-25 16:02:24.890409493 -0500
+@@ -16,6 +16,10 @@
  import net.minecraft.server.level.WorldGenRegion;
  import net.minecraft.world.level.LevelAccessor;
  import net.minecraft.world.level.block.Blocks;
@@ -271,7 +265,7 @@
  import net.minecraft.world.level.block.state.BlockState;
  import net.minecraft.world.level.chunk.ChunkAccess;
  import net.minecraft.world.level.chunk.ChunkGenerator;
-@@ -45,6 +50,10 @@
+@@ -45,6 +49,10 @@
                      fillSphere(feature, cx, profile.GROUNDLEVEL, cz, (int) radius, sphere.getGlassBlock(), sphere.getSideBlock());
                  }
  
@@ -282,7 +276,7 @@
                  if (profile.isSpace()) {
                      BuildingInfo info = BuildingInfo.getBuildingInfo(coord, provider);
                      Monorails.generateMonorails(feature, info);
-@@ -58,6 +67,167 @@
+@@ -58,6 +66,175 @@
          }
      }
  
@@ -329,20 +323,17 @@
 +                }
 +            }
 +        }
-+        double nearX = Mth.clamp(cc.getX(), chunkX << 4, (chunkX << 4) + 15) - cc.getX();
-+        double nearZ = Mth.clamp(cc.getZ(), chunkZ << 4, (chunkZ << 4) + 15) - cc.getZ();
-+        if (!enabled || nearX * nearX + nearZ * nearZ > (sphere.getRadius() + 2) * (sphere.getRadius() + 2)) {
-+            dropUnsupported(feature, seaLevel);
-+        }
++        dropUnsupported(feature, seaLevel, enabled ? cc : null, sqradius, chunkX, chunkZ);
 +    }
 +
 +    /**
-+     * Ruined drowned buildings leave pieces whose support was knocked away: chains and cobwebs
-+     * under missing ceilings, slabs and leaves on their own in the water. Any solid block in this
-+     * chunk that does not connect to the sea floor, or to the chunk's edge where a neighbouring
-+     * chunk may hold it up, becomes water. Chunks that touch a dome are left alone.
++     * Ruined buildings leave pieces whose support was knocked away: chains and cobwebs under
++     * missing ceilings, slabs, leaves and dirt on their own. Any solid block in this chunk that
++     * does not connect to the ground, or to the chunk's edge where a neighbouring chunk may hold
++     * it up, goes: inside a dome it becomes air, outside it water.
 +     */
-+    private static void dropUnsupported(LostCityTerrainFeature feature, int seaLevel) {
++    private static void dropUnsupported(LostCityTerrainFeature feature, int seaLevel, BlockPos dome, double sqradius,
++                                        int chunkX, int chunkZ) {
 +        ChunkDriver driver = feature.getDriver();
 +        int minY = feature.provider.getWorld().getMinBuildHeight();
 +        int height = seaLevel - minY + 1;
@@ -378,9 +369,20 @@
 +                }
 +            }
 +        }
++        BlockState air = Blocks.AIR.defaultBlockState();
 +        for (int i = 0; i < solid.length; i++) {
 +            if (solid[i] && !supported[i]) {
-+                driver.current(i & 15, (i >> 8) + minY, (i >> 4) & 15).block(feature.liquid);
++                int x = i & 15;
++                int y = (i >> 8) + minY;
++                int z = (i >> 4) & 15;
++                boolean inDome = false;
++                if (dome != null) {
++                    double dx = (chunkX << 4) + x - dome.getX();
++                    double dy = y - dome.getY();
++                    double dz = (chunkZ << 4) + z - dome.getZ();
++                    inDome = dx * dx + dy * dy + dz * dz <= sqradius;
++                }
++                driver.current(x, y, z).block(inDome ? air : feature.liquid);
 +            }
 +        }
 +    }
@@ -450,7 +452,21 @@
      private static void fillSphere(LostCityTerrainFeature feature, int centerx, int centery, int centerz, int radius,
                                     BlockState glass, BlockState sideBlock) {
          IDimensionInfo provider = feature.provider;
-@@ -165,5 +335,6 @@
+@@ -156,8 +333,11 @@
+                 } else if (dxdx + dzdz <= sqradiusOuter) {
+                     // If we are in a space profile then we clear the sphere area too
+                     if (profile.isFloating() || profile.isSpace()) {
+-                        driver.current(x, minY, z);
+-                        for (int y = minY; y < maxY; y++) {
++                        // pack-pack: under an outer sea the ground below the dome floor stays.
++                        // Clearing it left a ring of water down to bedrock around every dome.
++                        int from = outerSeaLevel > -1000 ? Math.max(minY, centery) : minY;
++                        driver.current(x, from, z);
++                        for (int y = from; y < maxY; y++) {
+                             driver.block(y <= outerSeaLevel ? feature.liquid : air);
+                             driver.incY();
+                         }
+@@ -165,5 +345,6 @@
                  }
              }
          }
