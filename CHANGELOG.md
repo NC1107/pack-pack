@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.11.0](https://github.com/NC1107/pack-pack/compare/v0.10.1...v0.11.0) (2026-11-25)
+
+
+### Features
+
+* home commands, and drowned cities that look ruined ([b0285fe](https://github.com/NC1107/pack-pack/commit/b0285fe6df288997b1d38ed3fc3aa7848c2ed848))
+
 ## [0.10.1](https://github.com/NC1107/pack-pack/compare/v0.10.0...v0.10.1) (2026-11-25)
 
 
