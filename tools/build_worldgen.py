@@ -216,11 +216,14 @@ def fill_runs(cells: list, block: str) -> list[str]:
 # built near the surface (hulls implode deep down) and assembled into a ship by Sable.
 # Run with /function packpack:test_sub (needs cheats). Levers sit on top of the clutches and
 # the gearshift inside: a powered clutch disconnects, a powered gearshift reverses.
+PORTHOLE_GLASS = "create_submarine:iron_pressurizer"
 TEST_SUB = [
-    "fill ~0 ~0 ~0 ~10 ~4 ~4 minecraft:iron_block hollow",
-    # Portholes. Glass only holds about 28 m, so they also set how deep this sub can go.
-    *[f"setblock ~{x} ~2 ~{z} minecraft:glass" for x, z in ((3, 0), (5, 0), (8, 0), (2, 4), (8, 4))],
-    "setblock ~10 ~2 ~2 minecraft:glass",
+    # Cut copper: normal weight and good to about 85 m. Iron blocks count as storage blocks,
+    # which Sable makes four times heavier, and the iron hull sank whatever the ballast did.
+    "fill ~0 ~0 ~0 ~10 ~4 ~4 minecraft:waxed_cut_copper hollow",
+    # Portholes of Deep Seas' pressurized glass: plain glass gives way at about 28 m.
+    *[f"setblock ~{x} ~2 ~{z} {PORTHOLE_GLASS}" for x, z in ((3, 0), (5, 0), (8, 0), (2, 4), (8, 4))],
+    f"setblock ~10 ~2 ~2 {PORTHOLE_GLASS}",
     # Stern: creative motor -> clutch -> shaft through the hull -> propeller outside
     "setblock ~3 ~2 ~2 create:creative_motor[facing=west]",
     "setblock ~2 ~2 ~2 create:clutch[axis=x,powered=true]",
@@ -253,8 +256,8 @@ TEST_SUB = [
     "fill ~-2 ~-1 ~-1 ~11 ~5 ~5 minecraft:water replace minecraft:air",
     'tellraw @s ["",{"text":"You are inside the test sub. ","color":"aqua"},'
     '"The lever by the stern starts the propeller. The lever on the middle clutch runs the '
-    'ballast pump, the one next to it switches between diving and rising. The portholes give '
-    'way below about 28 m."]',
+    'ballast pump, the one next to it switches between diving and rising. The shaft through '
+    'the hull holds to about 68 m, so stay above that."]',
 ]
 
 
