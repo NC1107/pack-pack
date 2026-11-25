@@ -1553,6 +1553,10 @@ file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/seabe
 hash = "b831557aab9ae23983a9e020f6b0d8e5780784d25f9d42ff12e08726abf559d4"
 
 [[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/tags/entity_type/drowned_hunters.json"
+hash = "e8ebf33ca24e6ce1385ed03d5c9a96fb85961ca5b9e1784cce4f5b70f21f5079"
+
+[[files]]
 file = "datapacks/pack-pack-worldgen/data/packpack/tags/entity_type/enlarged.json"
 hash = "e2bb11f099c268883c9c530b160c157e18ec7e71ef40a06b0173c5cbc4ded270"
 
@@ -1863,7 +1867,7 @@ metafile = true
 
 [[files]]
 file = "mods/lostcities-1.21-8.4.8-packpack.jar"
-hash = "aeb2e3a217e733456489466731a3a9693c360bddcb2c69650429efcd9f471268"
+hash = "a08793020f4ce744b41f3dd31ebbd7f338c91946f40f2b22a45a26293dea995e"
 
 [[files]]
 file = "mods/lostworlds-1.21-2.0.0-packpack.jar"
@@ -1906,7 +1910,7 @@ metafile = true
 
 [[files]]
 file = "mods/packpack-tweaks-1.0.0.jar"
-hash = "c7b3587b25be9f065198822530613d45c94546ebb8c785d7a0542959d4e7b48c"
+hash = "545e8f498cf6460395ffaf5d216bb59705476726df392b7c64a6cec4c2a4ebe0"
 
 [[files]]
 file = "mods/reeses-sodium-options.pw.toml"
