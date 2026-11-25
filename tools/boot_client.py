@@ -142,7 +142,9 @@ def dump_threads(game_java: str) -> None:
 
 
 def launch(hmc_java: str, game_java: str, hmc: Path, env: dict, minecraft: str, memory: str, timeout: int) -> dict:
-    jvm = f"-Djava.awt.headless=true -Xmx{memory}"
+    # The runtime test would also run every gametest that mods register (Create and Sable ship
+    # dozens, some of which fail headless); this test only checks that the pack joins a world.
+    jvm = f"-Djava.awt.headless=true -DMcRuntimeGameTest=false -Xmx{memory}"
     cmd = ["xvfb-run", "-a", "-s", XVFB_SCREEN, hmc_java, "-Dhmc.xvfb.check=true", "-jar", str(hmc),
            "launch", "--offline", "--jvm", jvm, "neoforge", minecraft]
     log("launching the client on a virtual display")
