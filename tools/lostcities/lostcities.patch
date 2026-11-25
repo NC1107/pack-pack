@@ -253,7 +253,7 @@
          setBlock(current, correct(state));
          incY();
 --- a/src/main/java/mcjty/lostcities/worldgen/gen/Spheres.java	2026-11-24 04:11:35.372840297 -0500
-+++ b/src/main/java/mcjty/lostcities/worldgen/gen/Spheres.java	2026-11-25 12:33:36.831463566 -0500
++++ b/src/main/java/mcjty/lostcities/worldgen/gen/Spheres.java	2026-11-25 15:57:16.348500861 -0500
 @@ -11,11 +11,16 @@
  import mcjty.lostcities.worldgen.lost.BuildingInfo;
  import mcjty.lostcities.worldgen.lost.CitySphere;
@@ -450,7 +450,21 @@
      private static void fillSphere(LostCityTerrainFeature feature, int centerx, int centery, int centerz, int radius,
                                     BlockState glass, BlockState sideBlock) {
          IDimensionInfo provider = feature.provider;
-@@ -165,5 +335,6 @@
+@@ -156,8 +326,11 @@
+                 } else if (dxdx + dzdz <= sqradiusOuter) {
+                     // If we are in a space profile then we clear the sphere area too
+                     if (profile.isFloating() || profile.isSpace()) {
+-                        driver.current(x, minY, z);
+-                        for (int y = minY; y < maxY; y++) {
++                        // pack-pack: under an outer sea the ground below the dome floor stays.
++                        // Clearing it left a ring of water down to bedrock around every dome.
++                        int from = outerSeaLevel > -1000 ? Math.max(minY, centery) : minY;
++                        driver.current(x, from, z);
++                        for (int y = from; y < maxY; y++) {
+                             driver.block(y <= outerSeaLevel ? feature.liquid : air);
+                             driver.incY();
+                         }
+@@ -165,5 +338,6 @@
                  }
              }
          }
