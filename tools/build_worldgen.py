@@ -18,6 +18,7 @@ import zipfile
 from pathlib import Path
 
 import lc_villages
+import start_sub
 
 REPO = Path(__file__).resolve().parent.parent
 SERVER = REPO / "run" / "server"
@@ -60,10 +61,8 @@ DEEP_BELOW_CONTINENTALNESS = -0.3
 CITY_FREE_RADIUS = 500
 CITY_FULL_RADIUS = 600
 
-# Every new player starts under a one block thick glass half dome resting on the sea floor
-# at 0,0. It is built by a function once the chunks under it exist, because Lost Cities'
-# own spheres are whole spheres that cut a pit into the floor.
-START_DOME_RADIUS = 7
+# Every new player starts in a wrecked submarine on the sea floor at 0,0 (tools/start_sub.py).
+# It is built by a function once the chunks under it exist.
 
 # Domes sit this far above the sea floor, so their glass base is not buried in it. Lost
 # Cities centres every dome on one ground level, so this raises all domes, not just the start.
@@ -85,10 +84,10 @@ DOME_SPHERE_FACTOR = 0.62
 # In Control's spawner spawns each biome's own water mobs around players at any depth.
 INCONTROL_SPAWNER = REPO / "pack" / "config" / "incontrol" / "spawner.json"
 
-# How Lost Cities picks a city style for each domed city: mostly normal cities, sometimes
-# a village built from vanilla's plains houses.
+# How Lost Cities picks a city style for each domed city: mostly normal cities, about one
+# dome in four a village built from vanilla's plains houses (domes are 512 blocks apart).
 DOME_CITY_FACTOR = 0.5
-DOME_VILLAGE_FACTOR = 0.06
+DOME_VILLAGE_FACTOR = 0.17
 FULL = [-1.0, 1.0]
 
 
@@ -197,30 +196,6 @@ def build_datapack(village_factor: float) -> str:
     return lc_villages.build(DATAPACK, vanilla_jar(), lost_cities_jar(), village_factor, DOME_CITY_FACTOR)
 
 
-def dome_cells(radius: int) -> tuple[list, list, list]:
-    """Floor, shell and interior cells (x, y, z) of a half dome centred on x=0, z=0.
-
-    The shell is every cell inside the sphere with a face-neighbour outside it, which is
-    exactly one block thick and watertight.
-    """
-    def inside(x, y, z):
-        return y >= 0 and x * x + y * y + z * z <= radius * radius
-    floor, shell, interior = [], [], []
-    for y in range(0, radius + 1):
-        for x in range(-radius, radius + 1):
-            for z in range(-radius, radius + 1):
-                if not inside(x, y, z):
-                    continue
-                if y == 0:
-                    floor.append((x, y, z))
-                elif any(not inside(x + dx, y + dy, z + dz)
-                         for dx, dy, dz in ((1, 0, 0), (-1, 0, 0), (0, 1, 0), (0, 0, 1), (0, 0, -1))):
-                    shell.append((x, y, z))
-                else:
-                    interior.append((x, y, z))
-    return floor, shell, interior
-
-
 def fill_runs(cells: list, block: str) -> list[str]:
     """One fill command per run of cells along z."""
     lines, run = [], None
@@ -236,61 +211,45 @@ def fill_runs(cells: list, block: str) -> list[str]:
     return lines
 
 
-def airlock(radius: int) -> list[str]:
-    """A glass vestibule on the east side of the start dome with a door at each end.
-
-    A door block keeps water out even while it is open, so players can walk in and out without
-    flooding the dome.
-    """
-    wall = max(x for x in range(radius + 1) if x * x + 1 <= radius * radius)  # dome wall at y=1, z=0
-    outer = wall + 4
-    door = "minecraft:oak_door[facing=east,hinge=left,open=false,powered=false"
-    return [
-        f"fill ~{wall} ~0 ~-1 ~{outer} ~3 ~1 minecraft:glass hollow",
-        *[f"setblock ~{x} ~1 ~0 {door},half=lower]" for x in (wall, outer)],
-        *[f"setblock ~{x} ~2 ~0 {door},half=upper]" for x in (wall, outer)],
-    ]
-
-
 def write_start_functions() -> list[str]:
-    """Write the start dome functions and return the function ids the tick tag must run."""
+    """Write the start submarine functions and return the function ids the tick tag must run."""
     functions = DATAPACK / "data/packpack/function"
     functions.mkdir(parents=True, exist_ok=True)
-    r = START_DOME_RADIUS
-    floor, shell, interior = dome_cells(r)
-    lights = [(0, 0, 0), (3, 0, 0), (-3, 0, 0), (0, 0, 3), (0, 0, -3)]
-    # No light reaches the sea floor, so sea lanterns in the floor keep mobs from spawning inside.
-    # Anything already there (a ruin that generated at spawn) is washed out first, so the dome
-    # sits on bare floor.
-    clear = [(x, y, z) for y in range(0, r + 2) for x in range(-r - 1, r + 2) for z in range(-r - 1, r + 2)
-             if x * x + z * z <= (r + 1) * (r + 1)]
+    sub = start_sub.blocks()
+    # Anything already there is washed out first, so the wreck lies on bare sea floor.
+    xs, ys, zs = (sorted({c[i] for c in sub}) for i in range(3))
+    clear = [(x, y, z) for x in range(xs[0] - 2, xs[-1] + 3) for y in range(0, ys[-1] + 3)
+             for z in range(zs[0] - 2, zs[-1] + 3)]
+    by_block: dict[str, list] = {}
+    for cell, block in sub.items():
+        by_block.setdefault(block, []).append(cell)
+    # Doors and beds are two blocks that only stay when both halves exist, so they are placed
+    # one block at a time, lower half or head first, after everything around them.
+    two_part = {b for b in by_block if "_door[" in b or "_bed[" in b}
     build = [
         *fill_runs(clear, "minecraft:water"),
-        *fill_runs(interior, "minecraft:air"),
-        *fill_runs(floor, "minecraft:grass_block"),
-        *fill_runs(shell, "minecraft:glass"),
-        *[f"setblock ~{x} ~{y} ~{z} minecraft:sea_lantern" for x, y, z in lights],
-        *airlock(r),
-        "setworldspawn ~ ~1 ~",
-        "summon minecraft:marker ~ ~1 ~ {Tags:[\"packpack_dome\"]}",
+        *[line for block, cells in by_block.items() if block not in two_part for line in fill_runs(cells, block)],
+        *[f"setblock ~{x} ~{y} ~{z} {block}" for block in sorted(two_part, key=lambda b: "upper" in b or "foot" in b)
+          for x, y, z in by_block[block]],
+        f"setworldspawn ~ ~{start_sub.DECK_Y + 1} ~",
+        f"summon minecraft:marker ~ ~{start_sub.DECK_Y + 1} ~ {{Tags:[\"packpack_start\"]}}",
         "execute store result storage packpack:start y int 1 run data get entity"
-        " @e[type=minecraft:marker,tag=packpack_dome,limit=1] Pos[1]",
-        "kill @e[type=minecraft:marker,tag=packpack_dome]",
+        " @e[type=minecraft:marker,tag=packpack_start,limit=1] Pos[1]",
+        "kill @e[type=minecraft:marker,tag=packpack_start]",
         "data modify storage packpack:start built set value 1b",
-        "forceload remove -8 -8 8 8",
+        "forceload remove -16 -16 16 16",
     ]
-    (functions / "build_start_dome.mcfunction").write_text("\n".join(build) + "\n")
-    # In a new world the load tag runs before the chunks under spawn exist, so the dome is
-    # built from the tick tag instead: force-load the four chunks around 0,0, wait until
-    # they are loaded, then build once at the real sea floor (a storage flag keeps it from
-    # ever overwriting player changes) and move anyone who already joined into it.
-    corners = " ".join(f"if loaded {x} 0 {z}" for x in (-9, 9) for z in (-9, 9))
+    (functions / "build_start.mcfunction").write_text("\n".join(build) + "\n")
+    # In a new world the load tag runs before the chunks under spawn exist, so the wreck is
+    # built from the tick tag instead: force-load the chunks around 0,0, wait until they are
+    # loaded, then build once at the sea floor (a storage flag keeps it from ever overwriting
+    # player changes) and move anyone who already joined into it.
+    corners = " ".join(f"if loaded {x} 0 {z}" for x in (-17, 17) for z in (-17, 17))
     (functions / "start_tick.mcfunction").write_text("\n".join([
-        "execute unless data storage packpack:start built run forceload add -8 -8 8 8",
-        # The floor is flat around spawn, so the dome goes at a fixed height: a structure there
-        # would otherwise lift the ocean floor heightmap and float the dome.
+        "execute unless data storage packpack:start built run forceload add -16 -16 16 16",
+        # The floor is flat around spawn, so the wreck goes at a fixed height on it.
         f"execute unless data storage packpack:start built positioned 0 {DOME_FLOOR_Y} 0 {corners}"
-        " run function packpack:build_start_dome",
+        " run function packpack:build_start",
         "execute if data storage packpack:start built as @a[tag=!packpack_started]"
         " run function packpack:place_new_player with storage packpack:start",
     ]) + "\n")
