@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.17.0](https://github.com/NC1107/pack-pack/compare/v0.16.0...v0.17.0) (2026-11-25)
+
+
+### Features
+
+* **mods:** add Boids Reforged for schooling fish ([2de85e1](https://github.com/NC1107/pack-pack/commit/2de85e18dbdeb14840f393ae5c4936efa0f27832))
+
 ## [0.16.0](https://github.com/NC1107/pack-pack/compare/v0.15.0...v0.16.0) (2026-11-25)
 
 
