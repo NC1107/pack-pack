@@ -97,6 +97,14 @@ file = "datapacks/pack-pack-worldgen/data/hopo/worldgen/template_pool/underwater
 hash = "becbc86015cad0efdbcb24dd16e232d3f02a32fbafb3b0560504a611771fce23"
 
 [[files]]
+file = "datapacks/pack-pack-worldgen/data/hybrid_aquatic/neoforge/biome_modifier/deep_ocean_modifier.json"
+hash = "99b969132018e9da1071065a8593ba9564928b1ed0aa5ae3ab45f9dac071f7d5"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/hybrid_aquatic/neoforge/biome_modifier/warm_ocean_modifiers.json"
+hash = "99b969132018e9da1071065a8593ba9564928b1ed0aa5ae3ab45f9dac071f7d5"
+
+[[files]]
 file = "datapacks/pack-pack-worldgen/data/hybrid_aquatic/worldgen/template_pool/whale_fall.json"
 hash = "ed03a7979142012567995e03f9e95170e0401d1923a9cbacb11ced9f90396060"
 

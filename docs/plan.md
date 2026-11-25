@@ -82,10 +82,9 @@ Tick things off when they're handled, add new ones when they come up.
   Hopo ruins (one right at spawn), vanilla ocean ruins and a shipwreck 35 blocks out all have loot inside the 500 block ring, check those loot tables against the tier plan.
 - [ ] **Something has to gate the 500 block swim.**
   The idea is a crafted item you need before you can make it out to the cities.
-- [ ] **No coral reefs yet.**
-  Vanilla reefs barely generate on the flat sea floor, and Reef Redux made things worse: in a warm-ocean sample 4,210 of its coral blocks were dead and buried inside stone, with only 16 alive.
-  Switching vanilla features to the normal ocean floor heightmap did not help (plants disappeared), so the cause is still unknown.
-  Probably needs a custom reef feature that places coral by looking at the actual blocks.
+- [x] **Coral reefs.**
+  Hybrid Aquatic removed vanilla coral from warm oceans and kelp and seagrass from deep oceans, expecting its own reef biomes, which are off here.
+  Those two removals are overridden, and a warm ocean sample went from 16 live coral blocks to about 30,000.
 - [ ] **Tunnels meeting domes, and air near them.**
   A tube between domes ends with its glass walls starting a few blocks before the dome and there is a wide air gap at floor level around the junction.
   Water gets in there, and Nick still sees air pockets near tunnels.
