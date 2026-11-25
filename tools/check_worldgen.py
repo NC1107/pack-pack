@@ -4,7 +4,7 @@
 Runs the server installed by boot_server.py with Chunky, pre-generates a square that holds four
 domes on Lost Cities' 512 block grid, then reads the region files and checks every dome: the glass
 shell is complete, no air touches the water (in the dome or in the tunnels out of it), there is no
-other air in the water outside it, and the ground outside the rim is level with the ground inside. It also fails if a mod's biome shows up, since Lost Cities does not
+other air in the water outside it, nothing floats in the drowned city between the domes, and the ground outside the rim is level with the ground inside. It also fails if a mod's biome shows up, since Lost Cities does not
 build in those (that is how domes lost their glass before).
 """
 
@@ -42,6 +42,9 @@ MAX_LEAKS = 20
 # Tunnels leave a dome along the 16 block wide chunk row and column that hold its centre.
 TUNNEL_WIDTH = 16
 RIM_GROUND = range(-15, -12)
+# The drowned city between the four domes, clear of their shells.
+BETWEEN = (736, 736, 320)
+MAX_FLOATING = 200
 
 
 def neoforge_version() -> str:
@@ -104,7 +107,7 @@ def classify(block: str) -> int:
     name = block.split(":", 1)[1]
     if "glass" in name and "pane" not in name:
         return 1
-    if name == "air":
+    if name in ("air", "light"):
         return 2
     if name == "water":
         return 3
@@ -180,6 +183,20 @@ def check_dome(region: Region, gx: int, gz: int) -> dict:
             "air_outside": air_outside, "leaks": leaks, "rim_ground": rim, "problems": problems}
 
 
+def floating_blocks(region: Region) -> int:
+    """Solid blocks in the drowned city that do not connect to the sea floor."""
+    x0, z0, size = BETWEEN
+    blocks = load(region, x0, z0, size)
+    solid = (blocks != 2) & (blocks != 3)
+    supported = solid.copy()
+    supported[:, 1:, :] = False
+    while True:
+        grow = solid & ~supported & touching(supported)
+        if not grow.any():
+            return int((solid & ~supported).sum())
+        supported |= grow
+
+
 def foreign_biomes(region: Region) -> list[str]:
     found = set()
     for cx in range((CENTRE[0] - RADIUS) >> 4, (CENTRE[0] + RADIUS) >> 4, 4):
@@ -200,7 +217,8 @@ def main() -> int:
     region = Region(boot_server.SERVER / "world" / "region")
     domes = [check_dome(region, gx, gz) for gx, gz in DOMES]
     biomes = foreign_biomes(region)
-    report = {"domes": domes, "foreign_biomes": biomes}
+    floating = floating_blocks(region)
+    report = {"domes": domes, "foreign_biomes": biomes, "floating_blocks": floating}
     (boot_server.RUN / "worldgen-report.json").write_text(json.dumps(report, indent=2) + "\n")
 
     failures = [f"dome at {d['dome']}: {p}" for d in domes for p in d.get("problems", [])]
@@ -208,11 +226,14 @@ def main() -> int:
         failures.append("no domes generated in the test area")
     if biomes:
         failures.append(f"biomes from mods in the ocean, Lost Cities skips them: {biomes}")
+    if floating > MAX_FLOATING:
+        failures.append(f"{floating} blocks float in the water between the domes")
     for d in domes:
         state = "absent" if not d["present"] else (
             f"radius {d['radius']}, shell missing {d['shell_missing']:.1%}, air outside {d['air_outside']}, "
             f"leaks {d['leaks']}")
         print(f"[worldgen] dome {d['dome']}: {state}")
+    print(f"[worldgen] floating blocks between the domes: {floating}")
     for failure in failures:
         print(f"[worldgen] FAIL: {failure}")
     return 1 if failures else 0
