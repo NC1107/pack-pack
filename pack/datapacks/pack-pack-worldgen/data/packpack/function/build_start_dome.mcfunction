@@ -338,6 +338,11 @@ setblock ~3 ~0 ~0 minecraft:sea_lantern
 setblock ~-3 ~0 ~0 minecraft:sea_lantern
 setblock ~0 ~0 ~3 minecraft:sea_lantern
 setblock ~0 ~0 ~-3 minecraft:sea_lantern
+fill ~6 ~0 ~-1 ~10 ~3 ~1 minecraft:glass hollow
+setblock ~6 ~1 ~0 minecraft:oak_door[facing=east,hinge=left,open=false,powered=false,half=lower]
+setblock ~10 ~1 ~0 minecraft:oak_door[facing=east,hinge=left,open=false,powered=false,half=lower]
+setblock ~6 ~2 ~0 minecraft:oak_door[facing=east,hinge=left,open=false,powered=false,half=upper]
+setblock ~10 ~2 ~0 minecraft:oak_door[facing=east,hinge=left,open=false,powered=false,half=upper]
 setworldspawn ~ ~1 ~
 summon minecraft:marker ~ ~1 ~ {Tags:["packpack_dome"]}
 execute store result storage packpack:start y int 1 run data get entity @e[type=minecraft:marker,tag=packpack_dome,limit=1] Pos[1]

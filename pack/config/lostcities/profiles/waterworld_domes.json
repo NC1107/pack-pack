@@ -1,28 +1,28 @@
 {
   "cities": {
-    "cityLevel4Height": 11,
+    "cityLevel4Height": -13,
     "cityAvoidVoid": true,
     "cityMaxRadius": 120,
     "cityMaxHeight": -2,
     "citySpawnDistance1": 500,
     "citySpawnDistance2": 600,
     "cityLevel0Height": -13,
-    "cityLevel6Height": 23,
+    "cityLevel6Height": -13,
     "cityPerlinOffset": 0.1,
     "cityPerlinScale": 3.0,
-    "cityLevel3Height": 5,
+    "cityLevel3Height": -13,
     "cityMinRadius": 100,
-    "cityLevel1Height": -7,
+    "cityLevel1Height": -13,
     "cityStyleThreshold": -1.0,
-    "cityLevel5Height": 17,
+    "cityLevel5Height": -13,
     "cityChance": 1.0,
     "cityThreshold": 0.05,
     "cityStyleAlternative": "",
     "cityPerlinInnerScale": 0.1,
     "cityMinHeight": -34,
-    "cityLevel2Height": -1,
+    "cityLevel2Height": -13,
     "oceanCorrectionBorder": 4,
-    "cityLevel7Height": 29,
+    "cityLevel7Height": -13,
     "citySpawnMultiplier1": 0.0,
     "citySpawnMultiplier2": 1.0
   },
@@ -170,7 +170,7 @@
     "citySphereClearAbove": 0,
     "citySphereClearAboveUntilAir": false,
     "sphereSurfaceVariation": 1.0,
-    "grid32": false
+    "grid32": true
   },
   "public": true
 }

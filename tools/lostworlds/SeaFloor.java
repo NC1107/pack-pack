@@ -9,8 +9,8 @@ import net.minecraft.world.level.levelgen.XoroshiroRandomSource;
  * seamounts and a little fine relief. A pure function of block x and z, so chunks never
  * disagree at their borders and structure placement can ask for it before a chunk exists.
  *
- * The floor is flat around every possible dome position (Lost Cities puts a dome on a 256
- * block grid, 128 offset, when grid32 is off) and around the world origin, where players start.
+ * The floor is flat around every possible dome position (Lost Cities puts a dome on a 512
+ * block grid, 128 offset, with grid32 on) and around the world origin, where players start.
  */
 public final class SeaFloor {
     public static final int BASE = -13;
@@ -18,7 +18,7 @@ public final class SeaFloor {
     public static final int MAX = 72;
     public static final int SAND_DEPTH = 30;
 
-    private static final double GRID = 256.0;
+    private static final double GRID = 512.0;
     private static final double GRID_OFFSET = 128.0;
     private static final double DOME_FLAT = 92.0;
     private static final double DOME_BLEND = 126.0;
