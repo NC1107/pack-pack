@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.15.0](https://github.com/NC1107/pack-pack/compare/v0.14.1...v0.15.0) (2026-11-25)
+
+
+### Features
+
+* light the domes ([6f32b0f](https://github.com/NC1107/pack-pack/commit/6f32b0f6327ef2b71231f3efd13d7b6bcb198a1d))
+
 ## [0.14.1](https://github.com/NC1107/pack-pack/compare/v0.14.0...v0.14.1) (2026-11-25)
 
 
