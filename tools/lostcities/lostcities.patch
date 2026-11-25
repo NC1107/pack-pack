@@ -238,7 +238,7 @@
          setBlock(current, correct(state));
          incY();
 --- a/src/main/java/mcjty/lostcities/worldgen/gen/Spheres.java	2026-11-24 04:11:35.372840297 -0500
-+++ b/src/main/java/mcjty/lostcities/worldgen/gen/Spheres.java	2026-11-24 20:36:05.656386741 -0500
++++ b/src/main/java/mcjty/lostcities/worldgen/gen/Spheres.java	2026-11-25 00:46:39.656184884 -0500
 @@ -50,6 +50,8 @@
                      Monorails.generateMonorails(feature, info);
                  }
@@ -248,7 +248,7 @@
                  driver.actuallyGenerate(chunk);
              } finally {
                  driver.setPrimer(oldRegion, oldChunk);
-@@ -58,6 +60,47 @@
+@@ -58,6 +60,52 @@
          }
      }
  
@@ -256,7 +256,8 @@
 +     * Under an outer sea (Lost Worlds with a custom sea level) everything outside the domes is
 +     * meant to be ocean. Buildings, drowned cities and structures generated earlier can leave
 +     * air rooms there, which would stay as air pockets in the water, so this runs last and
-+     * floods any air below the sea level that is not inside an enabled sphere.
++     * floods any air below the sea level that is not inside an enabled sphere. Grass there turns
++     * to moss, since it has been underwater for a long time.
 +     */
 +    private static void floodOutsideSpheres(LostCityTerrainFeature feature, CitySphere sphere, int chunkX, int chunkZ) {
 +        IDimensionInfo provider = feature.provider;
@@ -283,8 +284,12 @@
 +                for (int y = minY; y <= seaLevel; y++) {
 +                    double dy = y - cc.getY();
 +                    if (!enabled || dx * dx + dy * dy + dz * dz > sqradius) {
-+                        if (driver.getBlock().isAir()) {
++                        BlockState state = driver.getBlock();
++                        if (state.isAir()) {
 +                            driver.block(feature.liquid);
++                        } else if (state.is(Blocks.GRASS_BLOCK)) {
++                            // Lawns of drowned cities have been under the sea for a long time
++                            driver.block(Blocks.MOSS_BLOCK.defaultBlockState());
 +                        }
 +                    }
 +                    driver.incY();
@@ -296,7 +301,7 @@
      private static void fillSphere(LostCityTerrainFeature feature, int centerx, int centery, int centerz, int radius,
                                     BlockState glass, BlockState sideBlock) {
          IDimensionInfo provider = feature.provider;
-@@ -165,5 +208,6 @@
+@@ -165,5 +213,6 @@
                  }
              }
          }
