@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.19.0](https://github.com/NC1107/pack-pack/compare/v0.18.0...v0.19.0) (2026-11-25)
+
+
+### Features
+
+* more sea life near the floor, a clear start, no washed-out string ([92f1edd](https://github.com/NC1107/pack-pack/commit/92f1edd70968bb56c61b14d4331eb534ef5105b3))
+* new worlds don't ask for a Deep Seas pressure model ([7f961e0](https://github.com/NC1107/pack-pack/commit/7f961e0cf8b4b85687635dd1ff118ad94faf1e39))
+* start in a wrecked submarine, more village domes ([7d28da0](https://github.com/NC1107/pack-pack/commit/7d28da02c2784f0aba66556fb59ce8de3637b18e))
+
+
+### Bug Fixes
+
+* new worlds open without a long spawn search ([9259346](https://github.com/NC1107/pack-pack/commit/9259346f75757d26d647d01b7618018bb907e448))
+
 ## [0.18.0](https://github.com/NC1107/pack-pack/compare/v0.17.0...v0.18.0) (2026-11-25)
 
 
