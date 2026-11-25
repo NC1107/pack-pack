@@ -9,7 +9,7 @@ Two things change, only for the `spheres` generator with a custom sea level:
 - Height lookups (`getBaseHeight`, `getBaseColumn`) answer from that same floor, in block coordinates.
   Upstream returns the world minimum there, which put structures in the wrong place and kept Lost Cities from generating drowned cities outside domes.
 
-`SeaFloor` assumes a dome every 256 blocks offset by 128, which is Lost Cities with `grid32` off.
+`SeaFloor` assumes a dome slot every 512 blocks offset by 128, which is Lost Cities with `grid32` on.
 Change both together.
 
 To rebuild: clone upstream at the commit above, copy `SeaFloor.java` into `src/main/java/mcjty/lostworlds/worldgen/`, apply `LWChunkGenerator.patch` with `patch -p1`, run `./gradlew build` with Java 21, and copy the jar from `build/libs` over the one in `pack/mods`.
