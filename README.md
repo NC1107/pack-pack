@@ -23,6 +23,7 @@ The floor is about 173 m down and the water crushes you past 120 m, so put on th
 Past about 500 blocks out you start finding the domes, the last cities that kept the water out, with drowned cities around them that are mostly collapsed and overgrown.
 Some domes have a few village houses with villagers living in them, and glass tubes with a rail in them run along the sea floor between neighbouring domes.
 Create and create deep seas are in, so submarines with pressure and oxygen are a thing, but there's no progression around them yet.
+To try one out, `/function packpack:test_sub` (cheats on) builds a small working sub at the surface above you, with creative motors, a ballast pump and levers to drive and dive.
 Under the floor it's sand down to bedrock, so there's no mining your way around anything.
 Just make a new world with the default world type, it's all set up by the pack, an old world won't change.
 The mods themselves still download from modrinth or curseforge since that's where their authors host them, but the pack itself lives here on github, and a few of them (lost cities, lost worlds and a small one of ours) are patched builds that live in the repo.

@@ -857,6 +857,14 @@ file = "datapacks/pack-pack-worldgen/data/packpack/function/start_tick.mcfunctio
 hash = "01be03161cef8e4aedde6eedcb910edc60fad0f31601f30e58ced84986c4ab96"
 
 [[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/function/test_sub.mcfunction"
+hash = "6cb60d9a9aa8b403a8ef9e03855911bbdaf5991eec3d714c93867f7b35ed98af"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/function/test_sub_build.mcfunction"
+hash = "6f41f8cd3d179ec60d680ff93aa5d0f373b91ed9fad4cbbe0b0409f208ec2e1d"
+
+[[files]]
 file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_anglerfish_all_trenches.json"
 hash = "188afa72d2dab9dd2ec374ba3ac38e0bd1a9a0a319a024058baf02c8eed4e074"
 
