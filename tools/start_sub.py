@@ -77,12 +77,13 @@ def blocks() -> dict[Cell, str]:
     top = AXIS_Y + RADIUS
     for x in LIGHT_X:
         placed[(x, top, 0)] = CEILING_LIGHT
-    # Conning tower: a closed box on top of the hull with windows, part of the silhouette.
+    # Conning tower: part of the silhouette, solid inside so that no dark, closed air pocket
+    # is left for monsters to spawn in.
     for x in range(-2, 3):
         for z in range(-1, 2):
             for y in range(top + 1, top + 4):
-                edge = x in (-2, 2) or z in (-1, 1) or y == top + 3
-                placed[(x, y, z)] = (PORTHOLE if y == top + 2 and x == 0 else TOWER) if edge else "minecraft:air"
+                window = y == top + 2 and x == 0 and z in (-1, 1)
+                placed[(x, y, z)] = PORTHOLE if window else TOWER
     placed.update(airlock(DECK_Y, shell))
     placed.update(furniture(DECK_Y))
     return placed

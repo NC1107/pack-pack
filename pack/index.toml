@@ -22,7 +22,7 @@ hash = "570a0cf72f4ef2b8515dc4d39adab174fa93f05ba53cacd14056fe82e2aae4b6"
 
 [[files]]
 file = "config/incontrol/spawner.json"
-hash = "774e59b732a99da820a7f3749e1b16d183fc72f5bb4c6c4f259e5a54fed4fbcf"
+hash = "a8f4ca5f2ac91a42b709d6a2b162746f067c1055d1e2b18df5247e1370fbe855"
 
 [[files]]
 file = "config/lostcities/common.toml"
@@ -838,7 +838,7 @@ hash = "8be69d5b06bbb93d1e1d5ca0b70aa4510323a5bdcf1d6de2d8a400d347e4b8b0"
 
 [[files]]
 file = "datapacks/pack-pack-worldgen/data/packpack/function/build_start.mcfunction"
-hash = "08eb5ebdd9e191f2f0964a1c6cc41d36f46d50df809536cecc9e7c6b9f07364d"
+hash = "556379a1976d6e400ab40663807b9aa4aaf1b250a17bd5f368ff63f5daa94c3a"
 
 [[files]]
 file = "datapacks/pack-pack-worldgen/data/packpack/function/place_new_player.mcfunction"
@@ -1910,7 +1910,7 @@ metafile = true
 
 [[files]]
 file = "mods/packpack-tweaks-1.0.0.jar"
-hash = "545e8f498cf6460395ffaf5d216bb59705476726df392b7c64a6cec4c2a4ebe0"
+hash = "2080420037f33ee7a63ff3ea329590bcbb37f96f9396096a6f0e396f3f957a27"
 
 [[files]]
 file = "mods/reeses-sodium-options.pw.toml"

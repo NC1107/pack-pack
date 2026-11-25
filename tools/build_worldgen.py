@@ -545,13 +545,6 @@ def write_seabed_cover() -> None:
         })
 
 
-BIG_SEA_LIFE = [
-    "hybrid_aquatic:orca", "hybrid_aquatic:basking_shark", "hybrid_aquatic:whale_shark",
-    "hybrid_aquatic:great_white_shark", "hybrid_aquatic:hammerhead_shark", "hybrid_aquatic:manta_ray",
-    "hybrid_aquatic:ocean_sunfish", "hybrid_aquatic:bull_shark", "hybrid_aquatic:thresher_shark",
-    "hybrid_aquatic:sand_tiger_shark", "hybrid_aquatic:giant_isopod", "minecraft:dolphin",
-]
-
 
 INCONTROL_SPAWN_RULES = REPO / "pack" / "config" / "incontrol" / "spawn.json"
 DROWNED_SPAWN_REFUSED = 0.75
@@ -572,11 +565,10 @@ def write_incontrol_spawn_rules() -> None:
 
 
 def write_incontrol_spawner() -> None:
-    # Spawned 16-48 blocks from a player, inside the 64 blocks where vanilla keeps fish around.
-    # Small fish are not here: vanilla spawns them (per player caps, biome species lists) once
-    # the tweaks mod lets them spawn under our sea, close over the floor and the reefs.
-    # max_this caps a species across the whole world, but only for rules that name their mobs;
-    # with mobsfrombiome the species is picked after the count.
+    # Sea life spawns the vanilla way, from each biome's own spawn list with per player caps,
+    # once the tweaks mod lets it spawn under our sea (see its WaterAnimalMixin and
+    # HapiSpawnRulesMixin). In Control's spawner ignores biomes, so it only handles the bosses.
+    # max_this caps a species across the whole world, but only for rules that name their mobs.
     def rule(category: str | list, per_second: float, amount: tuple[int, int], max_this: int, max_height: int,
              distance: tuple[int, int] = (16, 48)) -> dict:
         return {
@@ -594,10 +586,6 @@ def write_incontrol_spawner() -> None:
             },
         }
     write_json(INCONTROL_SPAWNER, [
-        rule("water_creature", 0.6, (1, 3), 8, SEA_LEVEL),           # squid, sharks, rays, orcas, jellyfish
-        rule("underground_water_creature", 0.2, (1, 3), 12, SEABED_Y + 60),  # glow squid in the dark
-        # Big animals, a few at a time, far enough out to see them whole
-        rule(BIG_SEA_LIFE, 0.25, (1, 1), 3, SEA_LEVEL - 20, distance=(32, 96)),
         # A boss now and then, only down in the trenches, one at a time
         rule([f"hybrid_aquatic:{b}" for b in LAIR_BOSSES], 0.002, (1, 1), 1, TRENCH_TOP_Y, distance=(48, 96)),
     ])

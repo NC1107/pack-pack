@@ -40,16 +40,25 @@ public final class OuterSea {
     private OuterSea() {
     }
 
-    public static boolean has(ChunkGenerator generator) {
+    /** The height of the sea's surface, or null when this generator has no outer sea. */
+    public static Integer level(ChunkGenerator generator) {
         Method outerSeaLevel = OUTER_SEA_LEVEL.get(generator.getClass());
         try {
-            return outerSeaLevel != null && outerSeaLevel.invoke(generator) != null;
+            return outerSeaLevel == null ? null : (Integer) outerSeaLevel.invoke(generator);
         } catch (ReflectiveOperationException e) {
-            return false;
+            return null;
         }
     }
 
+    public static Integer level(LevelAccessor level) {
+        return level instanceof ServerLevelAccessor server ? level(server.getLevel().getChunkSource().getGenerator()) : null;
+    }
+
+    public static boolean has(ChunkGenerator generator) {
+        return level(generator) != null;
+    }
+
     public static boolean has(LevelAccessor level) {
-        return level instanceof ServerLevelAccessor server && has(server.getLevel().getChunkSource().getGenerator());
+        return level(level) != null;
     }
 }
