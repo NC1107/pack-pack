@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.14.0](https://github.com/NC1107/pack-pack/compare/v0.13.0...v0.14.0) (2026-11-25)
+
+
+### Features
+
+* fewer domes with flat cities, an airlock on the start dome, zoom ([562f46a](https://github.com/NC1107/pack-pack/commit/562f46afd6ff72e0052a19a428800c20009f336d))
+
+
+### Bug Fixes
+
+* **mods:** update mods ([dd2c578](https://github.com/NC1107/pack-pack/commit/dd2c578dc0c28b269a803cdb0ac3cc00897d9de7))
+
 ## [0.13.0](https://github.com/NC1107/pack-pack/compare/v0.12.1...v0.13.0) (2026-11-25)
 
 
