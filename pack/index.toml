@@ -862,7 +862,7 @@ hash = "6cb60d9a9aa8b403a8ef9e03855911bbdaf5991eec3d714c93867f7b35ed98af"
 
 [[files]]
 file = "datapacks/pack-pack-worldgen/data/packpack/function/test_sub_build.mcfunction"
-hash = "08fc3b0e67081dba000394134769864f57e760e28e7b35f6007d331eda50f346"
+hash = "ed5f3da7712859cef6434367b6ce853beedaf8a52dfe85de272a440f1b647e6b"
 
 [[files]]
 file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_anglerfish_all_trenches.json"
