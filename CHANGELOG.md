@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.13.0](https://github.com/NC1107/pack-pack/compare/v0.12.1...v0.13.0) (2026-11-25)
+
+
+### Features
+
+* drowned city lawns are moss instead of grass ([f105fa3](https://github.com/NC1107/pack-pack/commit/f105fa326136bd812882538c813e5420e5aca86e))
+
 ## [0.12.1](https://github.com/NC1107/pack-pack/compare/v0.12.0...v0.12.1) (2026-11-25)
 
 
