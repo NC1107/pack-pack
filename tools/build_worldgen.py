@@ -212,6 +212,46 @@ def fill_runs(cells: list, block: str) -> list[str]:
     return lines
 
 
+# A small working submarine for learning how Create, Aeronautics and Deep Seas fit together,
+# built near the surface (hulls implode deep down) and assembled into a ship by Sable.
+# Run with /function packpack:test_sub (needs cheats). Levers sit on top of the clutches and
+# the gearshift inside: a powered clutch disconnects, a powered gearshift reverses.
+TEST_SUB = [
+    "fill ~0 ~0 ~0 ~10 ~4 ~4 minecraft:iron_block hollow",
+    # Stern: creative motor -> clutch -> shaft through the hull -> propeller outside
+    "setblock ~3 ~2 ~2 create:creative_motor[facing=west]",
+    "setblock ~2 ~2 ~2 create:clutch[axis=x,powered=true]",
+    "setblock ~2 ~3 ~2 minecraft:lever[face=floor,facing=north,powered=true]",
+    "setblock ~1 ~2 ~2 create:shaft[axis=x]",
+    "setblock ~0 ~2 ~2 create:andesite_encased_shaft[axis=x]",
+    "setblock ~-1 ~2 ~2 create_submarine:submarine_propeller[facing=west,reversed=false]",
+    # Ballast: vent in the keel -> pump -> tanks; creative motor -> clutch -> gearshift -> pump
+    "setblock ~6 ~0 ~2 create_submarine:ballast_vent",
+    "setblock ~6 ~1 ~2 create:mechanical_pump[facing=up]",
+    "setblock ~6 ~2 ~2 create_submarine:ballast_tank",
+    "setblock ~6 ~3 ~2 create_submarine:ballast_tank",
+    "setblock ~9 ~1 ~2 create:creative_motor[facing=west]",
+    "setblock ~8 ~1 ~2 create:clutch[axis=x,powered=true]",
+    "setblock ~8 ~2 ~2 minecraft:lever[face=floor,facing=north,powered=true]",
+    "setblock ~7 ~1 ~2 create:gearshift[axis=x,powered=false]",
+    "setblock ~7 ~2 ~2 minecraft:lever[face=floor,facing=north,powered=false]",
+    # Air, and a way in
+    "setblock ~9 ~1 ~1 create_submarine:creative_oxygenator",
+    "setblock ~4 ~1 ~4 minecraft:oak_door[facing=south,hinge=left,open=false,powered=false,half=lower]",
+    "setblock ~4 ~2 ~4 minecraft:oak_door[facing=south,hinge=left,open=false,powered=false,half=upper]",
+    "sable assemble area ~-2 ~-1 ~-1 ~11 ~5 ~5",
+    'tellraw @s ["",{"text":"Test sub built above you at the surface. ","color":"aqua"},'
+    '"Inside: lever on the stern clutch starts the propeller, lever on the middle clutch runs the '
+    'ballast pump, lever on the gearshift next to it switches between diving and rising."]',
+]
+
+
+def write_test_sub(functions: Path) -> None:
+    (functions / "test_sub_build.mcfunction").write_text("\n".join(TEST_SUB) + "\n")
+    (functions / "test_sub.mcfunction").write_text(
+        "execute at @s positioned ~ 150 ~ run function packpack:test_sub_build\n")
+
+
 def write_start_functions() -> list[str]:
     """Write the start submarine functions and return the function ids the tick tag must run."""
     functions = DATAPACK / "data/packpack/function"
@@ -262,6 +302,7 @@ def write_start_functions() -> list[str]:
         "tag @s add packpack_started",
     ]) + "\n")
     (functions / "start.mcfunction").write_text("gamerule spawnRadius 0\n")
+    write_test_sub(functions)
     write_json(DATAPACK / "data/minecraft/tags/function/load.json", {"values": ["packpack:start"]})
     return ["packpack:start_tick"]
 
