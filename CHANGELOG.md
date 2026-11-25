@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.22.2](https://github.com/NC1107/pack-pack/compare/v0.22.1...v0.22.2) (2026-11-25)
+
+
+### Bug Fixes
+
+* test sub dives with Deep Seas' pump controller and computer, full speed motors ([2db8ad7](https://github.com/NC1107/pack-pack/commit/2db8ad7fe5a96b185146dfbdb3a01a854f59eda5))
+
 ## [0.22.1](https://github.com/NC1107/pack-pack/compare/v0.22.0...v0.22.1) (2026-11-25)
 
 
