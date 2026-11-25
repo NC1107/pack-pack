@@ -39,6 +39,8 @@ GROUND = {"sand", "gravel", "dirt", "grass_block", "clay"}
 MAX_SHELL_MISSING = 0.01
 MAX_AIR_OUTSIDE = 200
 MAX_LEAKS = 20
+# The floor is flat around a dome, so there is no water below it around the dome's edge.
+MAX_WATER_UNDER_FLOOR = 20
 # Tunnels leave a dome along the 16 block wide chunk row and column that hold its centre.
 TUNNEL_WIDTH = 16
 RIM_GROUND = range(-15, -12)
@@ -161,6 +163,10 @@ def check_dome(region: Region, gx: int, gz: int) -> dict:
     air_outside = int((air & outside & ~in_tunnel).sum())
     # Inside the shell air meets water at ponds and fountains, outside it only at a leak.
     leaks = int((air & outside & touching(blocks == 3)).sum())
+    horizontal = np.sqrt((x + origin[0] + 0.5 - centre[0]) ** 2 + (z + origin[2] + 0.5 - centre[2]) ** 2)
+    # Only around the edge: inside, cellars and pools of the city's buildings hold water.
+    edge = (horizontal > radius - 2) & (horizontal < radius + 10)
+    under_floor = int(((blocks == 3) & (y + Y_MIN < RIM_GROUND.start) & edge).sum())
 
     rim = []
     for angle in np.radians(np.arange(0, 360, 30)):
@@ -177,10 +183,12 @@ def check_dome(region: Region, gx: int, gz: int) -> dict:
         problems.append(f"{air_outside} air blocks in the water outside the shell")
     if leaks > MAX_LEAKS:
         problems.append(f"{leaks} air blocks outside the shell touch the water")
+    if under_floor > MAX_WATER_UNDER_FLOOR:
+        problems.append(f"{under_floor} water blocks below the floor around the dome")
     if sum(h in RIM_GROUND for h in rim if h is not None) < 10:
         problems.append(f"ground outside the rim is not level with the dome: {rim}")
     return {"dome": [gx, gz], "present": True, "radius": round(radius, 1), "shell_missing": round(shell_missing, 4),
-            "air_outside": air_outside, "leaks": leaks, "rim_ground": rim, "problems": problems}
+            "air_outside": air_outside, "leaks": leaks, "water_under_floor": under_floor, "rim_ground": rim, "problems": problems}
 
 
 def floating_blocks(region: Region) -> int:
@@ -231,7 +239,7 @@ def main() -> int:
     for d in domes:
         state = "absent" if not d["present"] else (
             f"radius {d['radius']}, shell missing {d['shell_missing']:.1%}, air outside {d['air_outside']}, "
-            f"leaks {d['leaks']}")
+            f"leaks {d['leaks']}, water under floor {d['water_under_floor']}")
         print(f"[worldgen] dome {d['dome']}: {state}")
     print(f"[worldgen] floating blocks between the domes: {floating}")
     for failure in failures:
