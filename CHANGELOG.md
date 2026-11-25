@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.20.0](https://github.com/NC1107/pack-pack/compare/v0.19.0...v0.20.0) (2026-11-25)
+
+
+### Features
+
+* a copper diving suit and full backtank in the start wreck ([95f6139](https://github.com/NC1107/pack-pack/commit/95f613928c608d65f97bc81093c79346f7206009))
+* bigger large sea animals, sharks hunt drowned, trench bosses with lairs ([5e30d9b](https://github.com/NC1107/pack-pack/commit/5e30d9b9922c7578b956662b277e9422409463aa))
+
 ## [0.19.0](https://github.com/NC1107/pack-pack/compare/v0.18.0...v0.19.0) (2026-11-25)
 
 
