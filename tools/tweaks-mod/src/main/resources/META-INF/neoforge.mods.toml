@@ -6,7 +6,7 @@ license = "MIT"
 modId = "packpack_tweaks"
 version = "${version}"
 displayName = "pack-pack tweaks"
-description = "Small gameplay tweaks for the pack-pack modpack: very tall kelp."
+description = "Small gameplay tweaks for the pack-pack modpack: tall kelp, sea life that lives near the floor, bigger large animals, sharks that hunt drowned, bosses that keep to their lair."
 
 [[mixins]]
 config = "packpack_tweaks.mixins.json"
