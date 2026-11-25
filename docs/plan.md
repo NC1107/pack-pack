@@ -318,7 +318,7 @@ Options are to wait for a fixed version, report it to the author, or drop the wo
 ### Pipeline gaps
 
 - [x] Capture evidence for hangs: the server boot test now takes a thread dump before killing a hung server (boot or shutdown) and CI uploads it.
-- A nightly soak with a chunk pregen over several seeds, to ever reproduce the Lost Cities `sphere is null` error.
+- [x] A worldgen check in CI: generates four domes and checks shell, air and ground (`tools/check_worldgen.py`). Still to do: several seeds and a longer soak for rare errors.
 - [x] Tests and lint for `tools/` (pytest and ruff in the hygiene job).
 - A static check of mod metadata and dependencies before booting.
 - [x] A scheduled mod update workflow (weekly, checked before the PR opens).

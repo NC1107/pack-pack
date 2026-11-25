@@ -67,6 +67,41 @@ jobs:
             run/server/crash-reports/
           if-no-files-found: ignore
 
+  worldgen:
+    # Generates a patch of the ocean with four domes and checks them, since a broken dome or an
+    # air pocket only shows up in generated chunks.
+    needs: repo-hygiene
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ inputs.ref }}
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.13"
+      - uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: "21"
+      - uses: actions/cache@v6
+        with:
+          path: .cache
+          key: worldgen-${{ hashFiles('pack/pack.toml', 'tools/*.py') }}
+          restore-keys: worldgen-
+      - run: python -m pip install --quiet numpy==2.5.5
+      - run: python tools/boot_server.py --java java --quiet
+      - run: python tools/check_worldgen.py --java java
+      - if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: worldgen
+          path: |
+            run/worldgen-report.json
+            run/server/logs/latest.log
+            run/server/crash-reports/
+          if-no-files-found: ignore
+
   client-boot:
     needs: repo-hygiene
     runs-on: ubuntu-latest
