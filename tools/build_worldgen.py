@@ -12,7 +12,6 @@ installed, so run that once first. Writes:
 from __future__ import annotations
 
 import argparse
-import collections
 import json
 import shutil
 import zipfile
@@ -241,7 +240,12 @@ def write_start_functions() -> list[str]:
     floor, shell, interior = dome_cells(r)
     lights = [(0, 0, 0), (3, 0, 0), (-3, 0, 0), (0, 0, 3), (0, 0, -3)]
     # No light reaches the sea floor, so sea lanterns in the floor keep mobs from spawning inside.
+    # Anything already there (a ruin that generated at spawn) is washed out first, so the dome
+    # sits on bare floor.
+    clear = [(x, y, z) for y in range(0, r + 2) for x in range(-r - 1, r + 2) for z in range(-r - 1, r + 2)
+             if x * x + z * z <= (r + 1) * (r + 1)]
     build = [
+        *fill_runs(clear, "minecraft:water"),
         *fill_runs(interior, "minecraft:air"),
         *fill_runs(floor, "minecraft:grass_block"),
         *fill_runs(shell, "minecraft:glass"),
@@ -259,11 +263,13 @@ def write_start_functions() -> list[str]:
     # built from the tick tag instead: force-load the four chunks around 0,0, wait until
     # they are loaded, then build once at the real sea floor (a storage flag keeps it from
     # ever overwriting player changes) and move anyone who already joined into it.
-    corners = " ".join(f"if loaded {x} 0 {z}" for x in (-8, 8) for z in (-8, 8))
+    corners = " ".join(f"if loaded {x} 0 {z}" for x in (-9, 9) for z in (-9, 9))
     (functions / "start_tick.mcfunction").write_text("\n".join([
         "execute unless data storage packpack:start built run forceload add -8 -8 8 8",
-        f"execute unless data storage packpack:start built positioned 0 0 0 {corners}"
-        " positioned over ocean_floor run function packpack:build_start_dome",
+        # The floor is flat around spawn, so the dome goes at a fixed height: a structure there
+        # would otherwise lift the ocean floor heightmap and float the dome.
+        f"execute unless data storage packpack:start built positioned 0 {DOME_FLOOR_Y} 0 {corners}"
+        " run function packpack:build_start_dome",
         "execute if data storage packpack:start built as @a[tag=!packpack_started]"
         " run function packpack:place_new_player with storage packpack:start",
     ]) + "\n")
@@ -438,6 +444,17 @@ BIG_SEA_LIFE = [
 ]
 
 
+INCONTROL_SPAWN_RULES = REPO / "pack" / "config" / "incontrol" / "spawn.json"
+
+
+def write_incontrol_spawn_rules() -> None:
+    # Dome ground between buildings is too dark to stop hostile spawns, and domes are where the
+    # last people live. In Control's Lost Cities condition keeps hostiles out of every sphere.
+    write_json(INCONTROL_SPAWN_RULES, [
+        {"dimension": "minecraft:overworld", "hostile": True, "insphere": True, "result": "deny"},
+    ])
+
+
 def write_incontrol_spawner() -> None:
     # Spawned 16-48 blocks from a player, inside the 64 blocks where vanilla keeps fish
     # around; caps are per species for the whole world.
@@ -558,6 +575,7 @@ def main() -> None:
     dome_world_style = build_datapack(village_factor)
     build_profiles(dome_world_style, city_free_radius)
     write_incontrol_spawner()
+    write_incontrol_spawn_rules()
     mode = " (village preview)" if args.preview_villages else ""
     print(f"sea level {SEA_LEVEL}{mode}: {DATAPACK.relative_to(REPO)} and profiles in {PROFILES_OUT.relative_to(REPO)}")
 

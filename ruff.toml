@@ -1,0 +1,7 @@
+line-length = 120
+target-version = "py311"
+
+[lint]
+# Real bugs and footguns, not style: pyflakes, pycodestyle errors, bugbear, subprocess
+# without an explicit check, shebangs on files that are not executable.
+select = ["E4", "E7", "E9", "F", "B", "PLW1510", "EXE"]
