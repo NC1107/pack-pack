@@ -853,6 +853,682 @@ file = "datapacks/pack-pack-worldgen/data/packpack/function/start_tick.mcfunctio
 hash = "94e76ac0362ec450854a4b3e7893309031e98a1335b0478abb17eb16d23d1014"
 
 [[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_anglerfish_all_trenches.json"
+hash = "188afa72d2dab9dd2ec374ba3ac38e0bd1a9a0a319a024058baf02c8eed4e074"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_arrow_squid_temperate_trench.json"
+hash = "4a7e462c26b6d47264a660b2a4bef84709db2ea85b11b4361c66123a2084eb3b"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_barrel_jellyfish_red_meadow.json"
+hash = "0ce2e62aba6b119f55e36aef4d7526c4f4aa1bb4eecad32bf637df15889748f3"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_barrel_jellyfish_seagrass_bed.json"
+hash = "085f68912178650d9593735a6f397e3275eef330dd20902fceada240fec579ac"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_barreleye_lukewarm_trench.json"
+hash = "95ff3652163ccd2fb1119ffd1e2f76f6c243a0300854ff442f015d7f73919fd3"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_barreleye_temperate_trench.json"
+hash = "17f039dd775e062b2fccde9ba1c729996c07c45731ac71a5fe6b2ad3ffac7578"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_barreleye_warm_trench.json"
+hash = "95ff3652163ccd2fb1119ffd1e2f76f6c243a0300854ff442f015d7f73919fd3"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_big_red_jellyfish_cold_trench.json"
+hash = "c7d87a2f7f18667a74af17c4ad791cfaac5a0eae7dad2fff2a13720e324c4051"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_big_red_jellyfish_frozen_trench.json"
+hash = "3f7dac893c7a141a2e864add00d6b5e2881dd0f33eeed45700db8c799ba9a6f1"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_big_red_jellyfish_lukewarm_trench.json"
+hash = "96740037d830497ac5ea9ae52a15a388a386c2d32e25e3c32b94167c3ab16c56"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_big_red_jellyfish_temperate_trench.json"
+hash = "9c009e5f8b9e84691143e4cc414ce62e6e348cccc857540f24c7eca13e7f9172"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_big_red_jellyfish_warm_trench.json"
+hash = "96740037d830497ac5ea9ae52a15a388a386c2d32e25e3c32b94167c3ab16c56"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_blobfish_all_trenches.json"
+hash = "975d02eeec0f22a121659e6077a318f1f1ef13e0493d393f48009798ffbda431"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_blowfish_coral_reef.json"
+hash = "414f92a10b678bde3116c347ae5162b879fd0e63114325199f4a2e92f3dc4291"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_blowfish_seagrass_bed.json"
+hash = "d0b5fc77476029c17a1458bdcb066702c7214bb561a9ed1a48340b00b2347b35"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_box_jellyfish_coral_reef.json"
+hash = "d86fc6158b913aece1502b6defe4d0b0f5d06310c2b6c22c5c0eae14a2c6c40d"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_boxfish_coral_reef.json"
+hash = "b8b9e575bc456a49be220d52afb12a8724be9c3086ea40e2fa4000f3ada4293a"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_cepheidae_jellyfish_seagrass_bed.json"
+hash = "b279a804f63e1edd86611ae02c2312d9907d33d176bba241503a03cb424dfda7"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_clownfish_coral_reef.json"
+hash = "d4409346f91dd6c4eeb3e2a5fa50d850a318d9fd155be408b756a0ca09b64d7e"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_coelacanth_deep_reef.json"
+hash = "0ef3a03eb516c092db94d3b93d8eb1efbbb5ee09b88a5a37e64d2f75f3290452"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_coelacanth_lukewarm_trench.json"
+hash = "0ef3a03eb516c092db94d3b93d8eb1efbbb5ee09b88a5a37e64d2f75f3290452"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_coelacanth_temperate_trench.json"
+hash = "036ef8e810fcd06db0911f31044e3cbd8e0b3591c3f73187a17717d6633d33b5"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_coelacanth_warm_trench.json"
+hash = "0ef3a03eb516c092db94d3b93d8eb1efbbb5ee09b88a5a37e64d2f75f3290452"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_colossal_squid_cold_trench.json"
+hash = "dcc9becb56eafb9c4c39695d8f7a991300dbd1106021c7130a614529b805a040"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_colossal_squid_frozen_trench.json"
+hash = "60f9eda168d721998aaba4e9c13c696e7cc24335bcd569be6dc125d54fcc25de"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_colossal_squid_temperate_trench.json"
+hash = "e0e5e462d8fc53ab26ac403b5a36d15a4cf28b165e451677b1316a849fed0a92"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_comb_jelly_all_trenches.json"
+hash = "6257e8632fccfc307df621d25d2da96156bfef2310d515703024c0b1bdbc1d0c"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_comb_jelly_deep_reef.json"
+hash = "6ee7e0295169175d206ae709ab492162d992718b19d74cc9ea50b38bfd8ff93b"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_cosmic_jellyfish_cold_trench.json"
+hash = "e2d0d749ac167c031998a11a952461105bf0488ccf10fb22d9a430c1cbd5ff0e"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_cosmic_jellyfish_deep_reef.json"
+hash = "440c83e5aee35c056348f05ba12815f2563bf1ad341b33958374ec1d8ac2cd93"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_cosmic_jellyfish_frozen_trench.json"
+hash = "c7971b5fc63980f6057c1d52dc5609de787809b23ac603bf6ed34c37092c9611"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_cosmic_jellyfish_lukewarm_trench.json"
+hash = "440c83e5aee35c056348f05ba12815f2563bf1ad341b33958374ec1d8ac2cd93"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_cosmic_jellyfish_temperate_trench.json"
+hash = "7014dad9201023d3a0a1b5456ca4a84bc5fa76585f43eb0b9d45a30b447c16b7"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_cosmic_jellyfish_warm_trench.json"
+hash = "440c83e5aee35c056348f05ba12815f2563bf1ad341b33958374ec1d8ac2cd93"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_crown_jellyfish_cold_trench.json"
+hash = "eff061f1e44ea5357d944748c5d28bd0d73122ba511088a104783e6428d2689f"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_crown_jellyfish_frozen_trench.json"
+hash = "d27a0a2ff88ffa8fd423638c6c3c9f62ecfc61285807a002c81b0a4f0126ddca"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_crown_jellyfish_lukewarm_trench.json"
+hash = "dc3a907775683d08d464bd4bf4b9ddf16c64fd7fd104eac9e26b24b0ef8831d8"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_crown_jellyfish_temperate_trench.json"
+hash = "8aaff42b96c0158bd45c36dc768a4aeff1f09b3ccb0180b44916db4f59681821"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_crown_jellyfish_warm_trench.json"
+hash = "dc3a907775683d08d464bd4bf4b9ddf16c64fd7fd104eac9e26b24b0ef8831d8"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_cuttlefish_coral_reef.json"
+hash = "3bc55289a8c5a4a4005ae2e5f7eeda61807d44ebd8106b3566ac3c28b6bca8cb"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_damselfish_coral_reef.json"
+hash = "9301ed4c0425fc0ede369d8a852565d9fd557da0237743a952e1f399302c1cf3"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_decorator_crab_coral_reef.json"
+hash = "ce76679ee252240c4a812396eb4f686272c8dbd0a2d3f3b9580f723dcc86c31f"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_decorator_crab_red_meadow.json"
+hash = "5a65d58b89b5cbd12695cf2a64346c88e40308d45530f20229f16798e56cecf1"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_dragonfish_lukewarm_trench.json"
+hash = "9ca32ba54ab442cb8c45f6d02d286419d22632dd99781fa635cefdad6fe2a5cd"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_dragonfish_temperate_trench.json"
+hash = "5bb79bf3219a1669d880be4d59a9cf3ddf2070dbd8f8ad8c7a081a2f7cad7285"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_dragonfish_warm_trench.json"
+hash = "9ca32ba54ab442cb8c45f6d02d286419d22632dd99781fa635cefdad6fe2a5cd"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_dugong_seagrass_bed.json"
+hash = "4b9b11c26fda118ec27474610f28d062294316a394c4dcacb02fcabd043e380f"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_fangtooth_all_trenches.json"
+hash = "bfe0cf123d5f20901d3056849a48fa38af44f2a74820e5a1724d349a43247414"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_firefly_squid_coral_reef.json"
+hash = "0aaa5448716448f4801d32cae057f602b3f5e58e358d924b61416ff1046f77b6"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_firefly_squid_lukewarm_trench.json"
+hash = "1b575ab9e59a3aef501d770271ed1a49130c535eb8645db7d7781d8b965ff39a"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_firefly_squid_warm_trench.json"
+hash = "1b575ab9e59a3aef501d770271ed1a49130c535eb8645db7d7781d8b965ff39a"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_firework_jellyfish_cold_trench.json"
+hash = "e2c5730f459c203af6453f6b7c1b5637d5d548b7ca036d1eeb5c64c4405cb60b"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_firework_jellyfish_deep_reef.json"
+hash = "e158297eb2a16e4dd42277a29fa5faf56309470df0fe1bdc3a2be43430ff3464"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_firework_jellyfish_frozen_trench.json"
+hash = "4dbbe9e68f77b5c0ff66431ec16118b81072cbb03f60029fb350a2d82bdea085"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_firework_jellyfish_lukewarm_trench.json"
+hash = "e158297eb2a16e4dd42277a29fa5faf56309470df0fe1bdc3a2be43430ff3464"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_firework_jellyfish_temperate_trench.json"
+hash = "8aae0a22b57d30dfc551214520c3cf548c628ae001f6ffa7764da9cb63a34052"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_firework_jellyfish_warm_trench.json"
+hash = "e158297eb2a16e4dd42277a29fa5faf56309470df0fe1bdc3a2be43430ff3464"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_flashlight_fish_coral_reef.json"
+hash = "a191a39d72f94ddae902b350123c42974ed27b948cc4bb19ea65c0395e3a7b51"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_flashlight_fish_deep_reef.json"
+hash = "8b9736b691c474700e07b057715172b002c6e5e2cf13890fea35fda2d31cdc32"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_flower_crab_red_meadow.json"
+hash = "839076061aaa292d5f9cc0614a7adbf9d30a1be94032ffae5adffd316649e490"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_flower_crab_seagrass_bed.json"
+hash = "6d25953354ff16c977616f7147bf56310487b58b5e88616560ca036616b455d8"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_frilled_shark_deep_reef.json"
+hash = "ca052a0f802689d1be9cc5bd8d18bd92c0126eb874c2084ef58c1c6542f4d102"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_frilled_shark_lukewarm_trench.json"
+hash = "ca052a0f802689d1be9cc5bd8d18bd92c0126eb874c2084ef58c1c6542f4d102"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_frilled_shark_warm_trench.json"
+hash = "ca052a0f802689d1be9cc5bd8d18bd92c0126eb874c2084ef58c1c6542f4d102"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_garden_eel_seagrass_bed.json"
+hash = "ddb60e8fd1e0b19f79c3fc570df1a8e143017dd32caf683a51ad6e5b94dc9cbc"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_giant_isopod_cold_trench.json"
+hash = "bb66097532a025c7722e9b702bf0a54377012ae49a0854c51531861e9e0a8d65"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_giant_isopod_deep_reef.json"
+hash = "b8f6e2078ee85e0453b459ca116f63d0c0efe99a8b059245c5383b5c8756a12a"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_giant_isopod_temperate_trench.json"
+hash = "6802cf2341f7d43e1abcdd349aad9f223bee6caac058addb1f5a5a63d71fbd11"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_giant_isopod_warm_trench.json"
+hash = "b8f6e2078ee85e0453b459ca116f63d0c0efe99a8b059245c5383b5c8756a12a"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_giant_squid_cold_trench.json"
+hash = "7766d109a3ef4149f967981b3a7d2c3958860c9d711d8d6fb1bce86ca45afc43"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_giant_squid_lukewarm_trench.json"
+hash = "6b5210e80473653da88c6cd3963bf64760e82b124594fcd8dc0ed594097369ad"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_giant_squid_temperate_trench.json"
+hash = "4e0f18549505e693ea9178ef35be2a9b6015f3067fd752637676c11e4ab13d3a"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_giant_squid_warm_trench.json"
+hash = "6b5210e80473653da88c6cd3963bf64760e82b124594fcd8dc0ed594097369ad"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_goblin_shark_cold_trench.json"
+hash = "7f7fe684578a396ced84688e4fc3bab0b6fcefdf714a134adb53f4e4771ebd76"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_goblin_shark_lukewarm_trench.json"
+hash = "b2afa4d387b65755bb9840f7d9515c2f2c745860f366cf482f8c2e8ef6154bad"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_goblin_shark_temperate_trench.json"
+hash = "7e7dfc40156a539187ce9415440057d354702ec1607ffd60e41131c2bc49afb3"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_goblin_shark_warm_trench.json"
+hash = "b2afa4d387b65755bb9840f7d9515c2f2c745860f366cf482f8c2e8ef6154bad"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_hammerhead_shark_seagrass_bed.json"
+hash = "e5314b3580ca8758bd13b1b5b650b3e9986f0198ed7b65a0bb33245c11b915b2"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_hatchetfish_all_trenches.json"
+hash = "f6664918ea4de7b6d8f77aaa8b0f8c0bd169b893cc1c261464364dd52fdfcaf4"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_hermit_crab_red_meadow.json"
+hash = "214e2daeede0e3e953193c1080ff2f753ffb8d00c9e8d4a2470160977ea768ae"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_hermit_crab_seagrass_bed.json"
+hash = "3b1e54e51825a4c2cc4f988a9178ff5e22b7dc7204ae0ae4a487575ec9354756"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_horseshoe_crab_red_meadow.json"
+hash = "ff4d275d299d4b06a741946b323a528ef1b675bb13545d94c5978d3342db1412"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_horseshoe_crab_seagrass_bed.json"
+hash = "e87757b1ee487fde876b716df35653c68a4ff0acfd9347649310f170e5593c57"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_john_dory_deep_reef.json"
+hash = "f2e9a6560f692d9710f907964b309b437bffaf10a753198789b3e92ba303de8b"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_john_dory_lukewarm_trench.json"
+hash = "f2e9a6560f692d9710f907964b309b437bffaf10a753198789b3e92ba303de8b"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_john_dory_temperate_trench.json"
+hash = "7c3c9a51fe18f71df00b45899196eb682e78f4cfbc3e6f6db99b862e545f5d42"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_john_dory_warm_trench.json"
+hash = "f2e9a6560f692d9710f907964b309b437bffaf10a753198789b3e92ba303de8b"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_lantern_shark_deep_reef.json"
+hash = "9f6b4635c63053d985b384dddc1b153dcd336745ec71a23ac6eab1334fd1ca82"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_lantern_shark_lukewarm_trench.json"
+hash = "9f6b4635c63053d985b384dddc1b153dcd336745ec71a23ac6eab1334fd1ca82"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_lantern_shark_temperate_trench.json"
+hash = "1fb3ddd37eda97ed7417c689199cb1a736b3a59a7fb31637099949ed8f118d61"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_lantern_shark_warm_trench.json"
+hash = "9f6b4635c63053d985b384dddc1b153dcd336745ec71a23ac6eab1334fd1ca82"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_lionfish_coral_reef.json"
+hash = "a33035c0acc48c577d2ee480dacf9195254151b09e412a2706b5a4e78887e69d"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_lionfish_red_meadow.json"
+hash = "d2113ca547f15b54a02edae664ef32ae9f129479e4dd6c8bffb047f6f87876e2"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_lobster_coral_reef.json"
+hash = "16716d3c9568fc1ea5a2219649582f00d02bf6d1a05b151dfa78d56d6f94615b"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_lobster_deep_reef.json"
+hash = "d0d0c7b7b7cd931c022157116516d9220fcfe8d7e5320fa535cdd4d7cfb8c299"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_lobster_red_meadow.json"
+hash = "7a7f627019ba990034b10893a263668b311e8c5888999975f865274c00295080"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_lobster_seagrass_bed.json"
+hash = "2e3aa89038afc96489ab0ddb162c971974a5d4540e3310132ed4a5a68a3917ce"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_manatee_seagrass_bed.json"
+hash = "d04e3e41cbd14e6b7f9d2d0d6054456a0355e6e9fb2a6a33359919ecae30d431"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_mauve_stinger_cold_trench.json"
+hash = "bac532725ae831c8c1f272f1aff9ea340a65c4567011487daa9e0eb4a92f04cb"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_mauve_stinger_deep_reef.json"
+hash = "01b6be5d4d3e6189d903daa8096928def8645a04951d8c89af8b104a3a4a8a7a"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_mauve_stinger_frozen_trench.json"
+hash = "5814af798e9f9dd5258ae593f830c27594fe0fb47afb152af28074285aadb4af"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_mauve_stinger_lukewarm_trench.json"
+hash = "01b6be5d4d3e6189d903daa8096928def8645a04951d8c89af8b104a3a4a8a7a"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_mauve_stinger_temperate_trench.json"
+hash = "f1038df20be75c6ec15f74f8cb3c35e8d485b3d2f7ea1bdb4143ff4e888be269"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_mauve_stinger_warm_trench.json"
+hash = "01b6be5d4d3e6189d903daa8096928def8645a04951d8c89af8b104a3a4a8a7a"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_moon_jellyfish_coral_reef.json"
+hash = "7c488268953c5eeb6eff81c641e7020cf1b919d5deb1d9b47961f51e12dcc3b2"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_moon_jellyfish_red_meadow.json"
+hash = "1da95bbcd51799f4b9788b21467dc37e5c05016a71f95846c57e3af0518cc8ca"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_moon_jellyfish_seagrass_bed.json"
+hash = "6e78dc5f0a738fa01f5bf223f0f3352753f4aa5e9e3e214a095295b597d54858"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_moray_eel_coral_reef.json"
+hash = "297a6546d6878fb13e10af22a5879fb62b516bc531f37b45c664cf11c03e989b"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_moray_eel_seagrass_bed.json"
+hash = "4f00c682309ce53d04dbdf0fa89e2ae2e4ac7cc00a49689f31be79b6dd226fea"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_needlefish_seagrass_bed.json"
+hash = "a9b4b2054846f0ae1a7c14e9fea12f3bc8f668bf9684ba8d7359c3ea0fc2e293"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_oarfish_lukewarm_trench.json"
+hash = "23d71a3f7e27cd5e38fa17023a5eb5ada83a197016b058619b2e34b1a76469ed"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_oarfish_temperate_trench.json"
+hash = "3e4d4ffaeff9fc7c0b6eaec25990993dc26672f3777e8796e05b520d77de318c"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_oarfish_warm_trench.json"
+hash = "23d71a3f7e27cd5e38fa17023a5eb5ada83a197016b058619b2e34b1a76469ed"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_octopus_coral_reef.json"
+hash = "3e495aee24072456ad724256dc13e5d650bbf276fdb20f977bdfdf88c51d4633"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_octopus_red_meadow.json"
+hash = "24a87e894b590cab1cf5fdacf62b67a26c1ce81f8120fabf635889cf7c4e6d93"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_parrotfish_coral_reef.json"
+hash = "11594c0fcb6145ee134efa36a2397d5cbd93709fc66354313979498ac7944615"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_ratfish_all_trenches.json"
+hash = "299082fc224710e535823ffe50b9c209a6fe16fdd46a35242da1b6f05059d276"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_ratfish_deep_reef.json"
+hash = "a778d4d1b5d356d68e5021e8f69ec8a5a0d9fbcd302f46b3ab806403df14e8d4"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_rockfish_deep_reef.json"
+hash = "4f08d80216ba2771f5dd60a797075998a14385305f923668282a10653f1ea8e2"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_sand_tiger_shark_seagrass_bed.json"
+hash = "1833902c0f043d709f751eb5095435103c2606a71448526edd2a97b71d9ac103"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_sea_angel_cold_trench.json"
+hash = "668a1909d27f14c202db91248416bb3c794b28bef4f38d63b2d01b38e437a7a0"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_sea_angel_frozen_trench.json"
+hash = "7074f7a960e8547638267c699c1b5a3819a3a8393f2bfff54fc18ad412fd196c"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_sea_angel_temperate_trench.json"
+hash = "828cb62f9fefa0017e95cd2ec58d1bc22e27172c408ba7e4b8b1fda3a1637f4a"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_sea_bass_deep_reef.json"
+hash = "ed2b9054a6b54d04d99ab42f69251e7c8174c50d15af9359b8688aa5286182d2"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_sea_cucumber_all_trenches.json"
+hash = "3c8bacad31ac030f5861179d7347982595390cc7af04a222113b6b58385dd825"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_sea_cucumber_red_meadow.json"
+hash = "58ef8c821cc1c81b11dc1adedb756eccf4cac3a2460e91223df78272e978f0a2"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_sea_slug_coral_reef.json"
+hash = "35785572b2931cbf24fb890722963c5d9d970e42dd24be6e444960f07ded4a9e"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_sea_slug_red_meadow.json"
+hash = "3461d79c5c3e55cb8905ce940f0f67c4a768d3781435acd0b7551fa301c5e9d7"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_sea_slug_seagrass_bed.json"
+hash = "ebdaeb254b2d4d3a9c91c85b2d9c8f7a66a429ac90ec82c3f175cb3143b1060c"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_sea_urchin_all_trenches.json"
+hash = "d401120cfe443bcd73f0cc9238fc204a8b1e30f47113a65053b2f79222d2478c"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_sea_urchin_red_meadow.json"
+hash = "eea7bb96164594918c4a44b91fb624ad495d4856e7d0fa4b71fda80e48b9f2e2"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_seadragon_seagrass_bed.json"
+hash = "1001a2076976b6f4fc8fbfb5b76ecd7cb9b3047fb188501e4e4497513b66b312"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_seahorse_coral_reef.json"
+hash = "73582f25ceef2b4c23bff69ede17da668d75e6150f8ce8d0d0044854d6d4c4e1"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_seahorse_seagrass_bed.json"
+hash = "ca9fc285d2cfc9d3379459c255552f64d64ac72b77cf8f76016fd9650a352ca6"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_shrimp_coral_reef.json"
+hash = "fa2bbabc7978c58812b453ca6751359ce78d04d524e46b6e65da1db7b03a0278"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_shrimp_deep_reef.json"
+hash = "6f35e0a7dbd4bcb6fa0bdee65610a5ea0a4b69c814dac144d14a307bbe2c2000"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_shrimp_red_meadow.json"
+hash = "d66d4d487ae28e934706983147faa9779ed9599cdb3603139d39dd4a446d21e0"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_shrimp_seagrass_bed.json"
+hash = "3bac00c5e5c9f70639e920cce56786947fa3f46fcb0382cf2ffa139863d88f84"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_sixgill_shark_lukewarm_trench.json"
+hash = "01ea381cbd6cfd3f20c936a8a460828ffe675684b68a69b32f56ddcc65763135"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_sixgill_shark_temperate_trench.json"
+hash = "a07043252288bb2e789a8029e25b94b382fa367f7e1200ccc3f62872bff04552"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_sixgill_shark_warm_trench.json"
+hash = "01ea381cbd6cfd3f20c936a8a460828ffe675684b68a69b32f56ddcc65763135"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_sleeper_shark_cold_trench.json"
+hash = "7468079e92782fd12a16824768e74d07fab2ae3991c9e4654267a54d95c1c38b"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_sleeper_shark_frozen_trench.json"
+hash = "2921afc15878572126fa4f37c27424d595b20e574c3b641eec05c8c76f679372"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_slickhead_cold_trench.json"
+hash = "dfca07a1a67352aceb52455baa754b60331246e8462001c560249c6430cd724d"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_slickhead_temperate_trench.json"
+hash = "47f7fad3635433a35cb94aff3290e487df72c369c7a5cdfb08c6ce40712a50d3"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_snailfish_all_trenches.json"
+hash = "0733877dddac818be2d9154a1d880ee37cceaaaa1ab62df0259d0eb3f47ae8f4"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_spider_crab_cold_trench.json"
+hash = "f1bb4e6fb39fc70eca2574b5828b41054d44c73c6064e51969c9b8b82473bcc5"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_spider_crab_deep_reef.json"
+hash = "c7e1ed556ee0163d85dcf4c2ef68e59b1909d7613f4107b316244ac58d3fde89"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_spider_crab_temperate_trench.json"
+hash = "b1ab0841e0f955bd7cfbca61b46b1c68e9714964f90006eaa630c5084b3ffcf5"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_spider_crab_warm_trench.json"
+hash = "c7e1ed556ee0163d85dcf4c2ef68e59b1909d7613f4107b316244ac58d3fde89"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_squirrelfish_coral_reef.json"
+hash = "b8c3d891e43a5bbae17e28d688ef8c438fc377fb5db71dee8f831fd4bf63e1f8"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_squirrelfish_deep_reef.json"
+hash = "13ed04b1c7e8fead5ebdec2d65a87bdb607887872d800bd8ac4d414f38f3efbb"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_squirrelfish_red_meadow.json"
+hash = "951acb351053c2c95db3f94206d725278ee75acb92e43c53f2f9396f4f908f7f"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_starfish_all_trenches.json"
+hash = "503ccdbca769d6efb231e666a5a87174263b7816e9afef2a783497c453df3ff0"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_stingray_coral_reef.json"
+hash = "35d76f61f9468acc38acf9242b8d557898335f4f643dc34add3ab32253d69b03"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_stingray_red_meadow.json"
+hash = "db84ee9d3aec16cffeb9fabf539a3e2aee3cb1925b04ccb6479ed99ed24997ab"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_stingray_seagrass_bed.json"
+hash = "9c85e29b9d20cb53b8b4cac127d583b271beda18e31ee855b79cbb19eb43754c"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_stonefish_coral_reef.json"
+hash = "8454d56221012ce1a4ca696990535f4f1a017074a588516e07b39c3a16048318"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_stonefish_seagrass_bed.json"
+hash = "e9768a83ca9c329a0a03ef703dafb713b1b06ebb9c3cbf1cb0447158ede3ceac"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_surgeonfish_coral_reef.json"
+hash = "83de6b3c1cc95042ce739e09c1805e69ec25c3d6f76cc7d22b5fec4a8119efd1"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_surgeonfish_seagrass_bed.json"
+hash = "5365b5f0f36695c0b591befae46e46f8f04af42e230ffbc3e69b4a70a1e7ebd3"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_trevally_coral_reef.json"
+hash = "cc6102f93e21447136fd690ad91bc4cec7b059b7d64b33aa3f3238557f0b5dc5"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_trevally_seagrass_bed.json"
+hash = "14693061d629960c85f2978b0f9ec3a42aca5426820d8aed31c67765e03f8890"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_triggerfish_coral_reef.json"
+hash = "77f00fd89207034d083062d30f9c95725d740910a9bdd7180411b45cc99f3c71"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_triggerfish_seagrass_bed.json"
+hash = "46a0763193cefd61a5f8b62070e02efeb3fff50ecf46028828f7027e6a288943"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_tripod_fish_all_trenches.json"
+hash = "01daf226f7dd86bdc2d6994b83028756987d22a90af836d1523d24e65e3f6c80"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_viperfish_all_trenches.json"
+hash = "b4807fdd9c84237e64ac4631ca799fac3c4eb88db412658e23784ad8c58f65ea"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_yeti_crab_cold_trench.json"
+hash = "779fdfbcf9762695a0c6e74bcb82142ee4456ebd25155e2933869a746c3bc752"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_yeti_crab_frozen_trench.json"
+hash = "92ea4ff1994fd45ac0e0e57ba186fa9d12ffae06d961899d1366f80cc7e0e0c3"
+
+[[files]]
 file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/seabed_gravel.json"
 hash = "089e1138888d1000fd86aee08d180815af1aed1a5927fddaa994308ebba817e7"
 
@@ -1167,11 +1843,11 @@ metafile = true
 
 [[files]]
 file = "mods/lostcities-1.21-8.4.8-packpack.jar"
-hash = "80e95e6cc7402f4dda80a648034cbb5fb11c79da58afebf791173034d07f4efd"
+hash = "5d61aa921a7fcfa62efc9789e0d5607df06406708909a8a094c2a211fad3ef6c"
 
 [[files]]
 file = "mods/lostworlds-1.21-2.0.0-packpack.jar"
-hash = "07033d4a964f1be0f2082c0fb60427399e45d0c2ba8af53e4db3052ce2557871"
+hash = "77bfcf95517e7739d0b7de32cc850b94b1bddc6ad54a6b684e6bdfdc9ad9757b"
 
 [[files]]
 file = "mods/mezzconfig.pw.toml"
@@ -1210,7 +1886,7 @@ metafile = true
 
 [[files]]
 file = "mods/packpack-tweaks-1.0.0.jar"
-hash = "4ec1dc42563e4530b0d793d75030f9c84715746fe1d05dfca485d3d614bdcb61"
+hash = "67a9f8474a02f07e6060c854564e5635eebe6ca5a7557fc7750ee7908bc79b12"
 
 [[files]]
 file = "mods/reeses-sodium-options.pw.toml"

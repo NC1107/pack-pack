@@ -2,6 +2,6 @@
   "required": true,
   "package": "dev.nc1107.packpack.mixin",
   "compatibilityLevel": "JAVA_21",
-  "mixins": ["KelpFeatureMixin", "GrowingPlantHeadBlockMixin", "WaterAnimalMixin"],
+  "mixins": ["KelpFeatureMixin", "GrowingPlantHeadBlockMixin", "WaterAnimalMixin", "HapiSpawnRulesMixin", "MobCategoryMixin"],
   "injectors": { "defaultRequire": 1 }
 }

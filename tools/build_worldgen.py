@@ -193,6 +193,7 @@ def build_datapack(village_factor: float) -> str:
     write_structure_set_filters()
     write_underwater_air_filters()
     write_disabled_mod_modifiers()
+    write_hapi_spawns()
     return lc_villages.build(DATAPACK, vanilla_jar(), lost_cities_jar(), village_factor, DOME_CITY_FACTOR)
 
 
@@ -437,6 +438,46 @@ DISABLED_MOD_MODIFIERS = [
 def write_disabled_mod_modifiers() -> None:
     for path in DISABLED_MOD_MODIFIERS:
         write_json(DATAPACK / path, {"type": "neoforge:none"})
+
+
+# Hybrid Aquatic hands out its richest spawn lists (reef fish, seagrass, the deep trench animals)
+# by its own biome tags, which only hold its own biomes, and those are off here. The same spawns
+# go to the vanilla oceans that suit them; the whole sea floor is deep, so the deep oceans count
+# as trenches too. Only the spawns are copied: adding vanilla biomes to the tags themselves also
+# brings Hybrid Aquatic's reef features along, which breaks feature ordering in warm oceans.
+HAPI_BIOME_TAGS = {
+    "coral_reef": ["warm_ocean"],
+    "seagrass_bed": ["lukewarm_ocean", "ocean"],
+    "red_meadow": ["lukewarm_ocean"],
+    "deep_reef": ["deep_lukewarm_ocean"],
+    "all_trenches": ["deep_ocean", "deep_cold_ocean", "deep_frozen_ocean", "deep_lukewarm_ocean"],
+    "cold_trench": ["deep_cold_ocean"],
+    "frozen_trench": ["deep_frozen_ocean"],
+    "temperate_trench": ["deep_ocean"],
+    "lukewarm_trench": ["deep_lukewarm_ocean"],
+    "warm_trench": ["deep_lukewarm_ocean"],
+}
+
+
+def hybrid_aquatic_jar() -> Path:
+    jar = next((SERVER / "mods").glob("hybrid_aquatic-*.jar"), None)
+    if jar is None:
+        raise SystemExit("run tools/boot_server.py once first, it installs Hybrid Aquatic")
+    return jar
+
+
+def write_hapi_spawns() -> None:
+    prefix = "data/hybrid_aquatic/neoforge/biome_modifier/"
+    with zipfile.ZipFile(hybrid_aquatic_jar()) as jar:
+        for name in sorted(n for n in jar.namelist() if n.startswith(prefix) and n.endswith(".json")):
+            modifier = json.loads(jar.read(name))
+            tag = modifier.get("biomes")
+            if modifier.get("type") != "neoforge:add_spawns" or not isinstance(tag, str):
+                continue
+            biomes = HAPI_BIOME_TAGS.get(tag.removeprefix("#hapi:"))
+            if biomes:
+                write_json(DATAPACK / f"data/packpack/neoforge/biome_modifier/ha_{name.removeprefix(prefix)}",
+                           {**modifier, "biomes": [f"minecraft:{b}" for b in biomes]})
 
 
 def write_seabed_cover() -> None:
