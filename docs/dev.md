@@ -75,6 +75,7 @@ cd pack && packwiz refresh
 ## What the tools do
 
 - `tools/check_repo.py` checks line endings, case collisions, windows-reserved names, path length, and that the packwiz index matches the files. `--json` gives output an agent can read.
+- Every Monday the `mod updates` workflow runs `packwiz update --all`, runs the full checks on the result, and opens a PR if they pass. It can pick beta builds, so read the list before merging. The patched jars in `pack/mods` are plain files and never get updated by it.
 - `tests/` has pytest tests for the tools (the start dome is watertight, the fill commands cover it exactly, log and spark parsing). Run `python3 -m pytest -q tests` and `python3 -m ruff check tools tests`, CI runs both.
 - `tools/boot_server.py` installs neoforge and the server side of the pack into `run/server`, boots it on a fixed seed, grabs a spark health report, and writes `run/boot-report.json`.
 - `tools/boot_client.py` does the same for the client, it launches the game with headlessmc on a virtual display, mc-runtime-test makes a world and joins it, then it writes `run/client-report.json`.

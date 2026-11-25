@@ -1,0 +1,67 @@
+name: mod updates
+
+on:
+  schedule:
+    - cron: "0 6 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    outputs:
+      changed: ${{ steps.update.outputs.changed }}
+    steps:
+      - uses: actions/checkout@v7
+      - run: go install github.com/packwiz/packwiz@latest
+      - id: update
+        working-directory: pack
+        run: |
+          ~/go/bin/packwiz update --all -y
+          ~/go/bin/packwiz refresh
+          if git diff --quiet; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git switch -c bot/mod-updates
+          git commit -qam "fix(mods): update mods"
+          git push -f origin bot/mod-updates
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+
+  checks:
+    needs: update
+    if: needs.update.outputs.changed == 'true'
+    uses: ./.github/workflows/checks.yml
+    with:
+      ref: bot/mod-updates
+
+  pull-request:
+    # Opened only after the full checks pass on the branch. Updates can be betas, so a person
+    # reads and merges it.
+    needs: [update, checks]
+    if: needs.update.outputs.changed == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: bot/mod-updates
+          fetch-depth: 0
+      - env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          {
+            echo "Weekly mod update. The repo checks, server boot and client boot all passed on this branch."
+            echo
+            echo "Changed mods:"
+            echo
+            git diff --name-only origin/main -- pack/mods | sed 's|^| - |'
+            echo
+            echo "Some of these can be beta builds, so read the list before merging."
+          } > body.md
+          gh pr create --base main --head bot/mod-updates --title "fix(mods): update mods" --body-file body.md \
+            || gh pr edit bot/mod-updates --body-file body.md
