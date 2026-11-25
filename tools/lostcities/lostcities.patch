@@ -535,3 +535,31 @@
      private static boolean isSide(int x, int z) {
          return x == 0 || x == 15 || z == 0 || z == 15;
      }
+--- a/src/main/java/mcjty/lostcities/setup/ForgeEventHandlers.java	2026-11-24 04:11:35.371908621 -0500
++++ b/src/main/java/mcjty/lostcities/setup/ForgeEventHandlers.java	2026-11-25 13:43:36.763284702 -0500
+@@ -1,5 +1,7 @@
+ package mcjty.lostcities.setup;
+ 
++import mcjty.lostcities.api.ILostWorldsChunkGenerator;
++
+ import mcjty.lostcities.LostCities;
+ import mcjty.lostcities.api.LostChunkCharacteristics;
+ import mcjty.lostcities.commands.ModCommands;
+@@ -244,6 +246,17 @@
+             Predicate<BlockPos> isSuitable,
+             Predicate<ChunkCoord> isSuitableChunk
+     ) {
++        if (serverLevel.getChunkSource().getGenerator() instanceof ILostWorldsChunkGenerator lw && lw.getOuterSeaLevel() != null) {
++            // pack-pack: under an outer sea there is no dry ground to look for, and the search
++            // generates chunks hundreds of blocks out on the main thread before the world opens.
++            // The pack builds the start at 0,0 and moves players there itself.
++            BlockPos start = new BlockPos(0, dimensionInfo.getProfile().GROUNDLEVEL + 1, 0);
++            event.getSettings().setSpawn(start, 0.0f);
++            serverLevel.setDefaultSpawnPos(start, 0.0f);
++            spawnPositions.put(serverLevel.dimension(), start);
++            event.setCanceled(true);
++            return;
++        }
+         BlockPos pos = findSafeSpawnPoint(serverLevel, dimensionInfo, isSuitable, isSuitableChunk);
+         boolean cavern = dimensionInfo.getProfile().isCavern();
+         if (pos == null) {
