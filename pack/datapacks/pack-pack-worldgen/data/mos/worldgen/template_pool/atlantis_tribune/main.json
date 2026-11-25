@@ -1,0 +1,59 @@
+{
+  "name": "mos:atlantis_tribune/main",
+  "fallback": "minecraft:empty",
+  "elements": [
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "moogs_structures:versioned_single_pool_element",
+        "location": "mos:1_21_9/atlantis_tribune/main",
+        "locations": {
+          "1.21-1.21.8": "mos:1_21_0/atlantis_tribune/main",
+          "1.21.9-26.3": "mos:1_21_9/atlantis_tribune/main"
+        },
+        "projection": "rigid",
+        "processors": {
+          "processors": [
+            {
+              "processor_type": "moogs_structures:spawner_randomizing_processor",
+              "weighted_entities": [
+                {
+                  "entity": "minecraft:guardian",
+                  "weight": 5
+                },
+                {
+                  "entity": "minecraft:drowned",
+                  "weight": 4
+                }
+              ],
+              "min_spawn_delay": 200,
+              "max_spawn_delay": 800,
+              "spawn_count": 3,
+              "max_nearby_entities": 5,
+              "required_player_range": 16,
+              "spawn_range": 4
+            },
+            {
+              "processor_type": "moogs_structures:trial_spawner_randomizing_processor",
+              "normal_config": "mos:atlantis_tribune/normal",
+              "ominous_config": "mos:atlantis_tribune/ominous"
+            },
+            {
+              "processor_type": "moogs_structures:vault_randomizing_processor",
+              "loot_table": "mos:vaults/atlantis_tribune/main",
+              "ominous_loot_table": "mos:vaults/atlantis_tribune/main_ominous"
+            },
+            {
+              "processor_type": "minecraft:block_ignore",
+              "blocks": [
+                {
+                  "Name": "minecraft:air"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

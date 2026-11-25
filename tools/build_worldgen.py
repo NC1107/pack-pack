@@ -190,6 +190,7 @@ def build_datapack(village_factor: float) -> str:
     write_structure_overrides()
     write_ocean_biomes()
     write_structure_set_filters()
+    write_underwater_air_filters()
     return lc_villages.build(DATAPACK, vanilla_jar(), lost_cities_jar(), village_factor, DOME_CITY_FACTOR)
 
 
@@ -315,6 +316,12 @@ def write_structure_overrides() -> None:
 DEEP_WATER_COLOR = 0x0b3c6b
 
 
+AIR_CARVING_FEATURES = {
+    "minecraft:amethyst_geode", "minecraft:monster_room", "minecraft:monster_room_deep",
+    "minecraft:spring_water", "minecraft:spring_lava", "minecraft:spring_lava_frozen",
+}
+
+
 def write_ocean_biomes() -> None:
     """Override the vanilla ocean biomes: no caves, and sky and fog the colour of deep water."""
     ocean_biomes = sorted({b for _, deep, shallow in TEMPERATURE_BANDS for b in (deep, shallow)})
@@ -322,6 +329,9 @@ def write_ocean_biomes() -> None:
         biome = vanilla(f"data/minecraft/worldgen/biome/{name}.json")
         # Carvers cut air pockets into the water column because the aquifers are switched off.
         biome["carvers"] = {}
+        # Features that hollow out air under the floor: geodes and dungeons leave air pockets in
+        # the sand that show up as bubbles where they break through, springs pour out of them.
+        biome["features"] = [[f for f in step if f not in AIR_CARVING_FEATURES] for step in biome["features"]]
         biome["effects"]["sky_color"] = DEEP_WATER_COLOR
         biome["effects"]["fog_color"] = DEEP_WATER_COLOR
         # Vanilla ocean water fog is almost black, which hides everything past a few chunks.
@@ -345,6 +355,47 @@ def write_structure_set_filters() -> None:
                 if len(kept) != len(structure_set["structures"]):
                     structure_set["structures"] = kept
                     write_json(DATAPACK / name, structure_set)
+
+
+# Underwater structure mods whose templates place air blocks. Placed under water, that air
+# becomes floating air pockets, so their pieces skip air the way vanilla ocean ruins do.
+UNDERWATER_STRUCTURE_MODS = {"underwater_village", "hopo", "mos", "hybrid_aquatic"}
+IGNORE_AIR = {"processor_type": "minecraft:block_ignore", "blocks": [{"Name": "minecraft:air"}]}
+
+
+def write_underwater_air_filters() -> None:
+    jars = {}
+    for jar in sorted((SERVER / "mods").glob("*.jar")):
+        with zipfile.ZipFile(jar) as z:
+            for name in z.namelist():
+                if name.endswith(".json") and ("/worldgen/template_pool/" in name or "/worldgen/processor_list/" in name):
+                    jars[name] = z.read(name)
+
+    def processor_list(ref) -> object:
+        if isinstance(ref, dict):
+            return {"processors": [*ref.get("processors", []), IGNORE_AIR]}
+        namespace, path = (ref.split(":", 1) + [""])[:2] if ":" in ref else ("minecraft", ref)
+        source = f"data/{namespace}/worldgen/processor_list/{path}.json"
+        base = json.loads(jars[source])["processors"] if source in jars else []
+        if ref == "minecraft:empty":
+            base = []
+        return {"processors": [*base, IGNORE_AIR]}
+
+    def fix(element: dict) -> None:
+        if "elements" in element:
+            for inner in element["elements"]:
+                fix(inner)
+        if "processors" in element:
+            element["processors"] = processor_list(element["processors"])
+
+    for name, data in jars.items():
+        parts = name.split("/")
+        if "/worldgen/template_pool/" not in name or parts[1] not in UNDERWATER_STRUCTURE_MODS:
+            continue
+        pool = json.loads(data)
+        for entry in pool.get("elements", []):
+            fix(entry["element"])
+        write_json(DATAPACK / name, pool)
 
 
 def write_seabed_cover() -> None:

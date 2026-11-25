@@ -1,0 +1,63 @@
+{
+  "name": "mos:nether_portal_archway/abovewater_bottom_side",
+  "fallback": "minecraft:empty",
+  "elements": [
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "moogs_structures:versioned_single_pool_element",
+        "location": "mos:1_21_0/nether_portal_archway/abovewater_bottom_side",
+        "locations": {
+          "1.21-26.3": "mos:1_21_0/nether_portal_archway/abovewater_bottom_side"
+        },
+        "projection": "rigid",
+        "processors": {
+          "processors": [
+            {
+              "processor_type": "moogs_structures:pillar_processor",
+              "direction": "down",
+              "pillar_length": 40,
+              "pillar_trigger_and_replacements": [
+                {
+                  "trigger": {
+                    "Name": "minecraft:purple_stained_glass"
+                  },
+                  "replacement": {
+                    "Name": "minecraft:stone"
+                  }
+                },
+                {
+                  "trigger": {
+                    "Name": "minecraft:pink_stained_glass"
+                  },
+                  "replacement": {
+                    "Name": "minecraft:deepslate",
+                    "Properties": {
+                      "axis": "y"
+                    }
+                  }
+                },
+                {
+                  "trigger": {
+                    "Name": "minecraft:light_blue_stained_glass"
+                  },
+                  "replacement": {
+                    "Name": "minecraft:tuff"
+                  }
+                }
+              ]
+            },
+            {
+              "processor_type": "minecraft:block_ignore",
+              "blocks": [
+                {
+                  "Name": "minecraft:air"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

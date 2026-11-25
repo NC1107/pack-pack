@@ -1,0 +1,29 @@
+{
+  "name": "mos:conduit_arch_pool",
+  "fallback": "minecraft:empty",
+  "elements": [
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "moogs_structures:versioned_single_pool_element",
+        "location": "mos:1_21_0/conduit_arch",
+        "locations": {
+          "1.21-26.3": "mos:1_21_0/conduit_arch"
+        },
+        "projection": "rigid",
+        "processors": {
+          "processors": [
+            {
+              "processor_type": "minecraft:block_ignore",
+              "blocks": [
+                {
+                  "Name": "minecraft:air"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -19,13 +19,8 @@
       "minecraft:lake_lava_underground",
       "minecraft:lake_lava_surface"
     ],
-    [
-      "minecraft:amethyst_geode"
-    ],
-    [
-      "minecraft:monster_room",
-      "minecraft:monster_room_deep"
-    ],
+    [],
+    [],
     [],
     [],
     [
@@ -60,10 +55,7 @@
       "minecraft:disk_gravel"
     ],
     [],
-    [
-      "minecraft:spring_water",
-      "minecraft:spring_lava"
-    ],
+    [],
     [
       "minecraft:glow_lichen",
       "minecraft:trees_water",

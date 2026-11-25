@@ -1,0 +1,53 @@
+{
+  "name": "mos:mobs/drowned",
+  "fallback": "minecraft:empty",
+  "elements": [
+    {
+      "weight": 9,
+      "element": {
+        "element_type": "moogs_structures:versioned_single_pool_element",
+        "location": "mos:1_21_0/mobs/drowned",
+        "locations": {
+          "1.21-26.3": "mos:1_21_0/mobs/drowned"
+        },
+        "processors": {
+          "processors": [
+            {
+              "processor_type": "minecraft:block_ignore",
+              "blocks": [
+                {
+                  "Name": "minecraft:air"
+                }
+              ]
+            }
+          ]
+        },
+        "projection": "rigid"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "moogs_structures:versioned_single_pool_element",
+        "location": "mos:1_21_5/mobs/drowned_trident",
+        "locations": {
+          "1.21-1.21.4": "mos:1_21_0/mobs/drowned_trident",
+          "1.21.5-26.3": "mos:1_21_5/mobs/drowned_trident"
+        },
+        "processors": {
+          "processors": [
+            {
+              "processor_type": "minecraft:block_ignore",
+              "blocks": [
+                {
+                  "Name": "minecraft:air"
+                }
+              ]
+            }
+          ]
+        },
+        "projection": "rigid"
+      }
+    }
+  ]
+}
