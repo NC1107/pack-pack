@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.12.1](https://github.com/NC1107/pack-pack/compare/v0.12.0...v0.12.1) (2026-11-25)
+
+
+### Bug Fixes
+
+* daytime sky over the sea, fewer drowned, underwater fog inside the render distance ([dde8421](https://github.com/NC1107/pack-pack/commit/dde8421bedd91a07181ba4dac742da6a44a562d0))
+
 ## [0.12.0](https://github.com/NC1107/pack-pack/compare/v0.11.0...v0.12.0) (2026-11-25)
 
 
