@@ -986,6 +986,11 @@ hash = "93c4acd165a291c6d1e69c27b05b2747afc926b38a414712263fbc95f42da323"
 metafile = true
 
 [[files]]
+file = "mods/boids-reforged.pw.toml"
+hash = "71df8ab189b1ab63fcd9248a32da10fe3e90872a731fcd9a8e244522bd07c2ea"
+metafile = true
+
+[[files]]
 file = "mods/c2me-neoforge.pw.toml"
 hash = "97c1ad521ac48aaf6c07a54339dc94ba400df670ec5d98f3d81d14bd728586e4"
 metafile = true
@@ -1260,6 +1265,11 @@ metafile = true
 [[files]]
 file = "mods/warputils.pw.toml"
 hash = "b9f0c1bfa14e82018e6c603759edcbdaae73871bd9f3c9ee031d899a835f5b40"
+metafile = true
+
+[[files]]
+file = "mods/yacl.pw.toml"
+hash = "492daa3391b6079b541685db276007b286774bab3b9881505127b7aef6b3f16c"
 metafile = true
 
 [[files]]
