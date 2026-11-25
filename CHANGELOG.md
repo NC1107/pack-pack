@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.12.0](https://github.com/NC1107/pack-pack/compare/v0.11.0...v0.12.0) (2026-11-25)
+
+
+### Features
+
+* underwater sound and ambience, dynamic lights, faster chunk generation, FTB Chunks map ([785e305](https://github.com/NC1107/pack-pack/commit/785e3057ae43eb8c0a4dc8ac2a824f9fd6cce580))
+
 ## [0.11.0](https://github.com/NC1107/pack-pack/compare/v0.10.1...v0.11.0) (2026-11-25)
 
 
