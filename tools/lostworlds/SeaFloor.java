@@ -13,15 +13,15 @@ import net.minecraft.world.level.levelgen.XoroshiroRandomSource;
  * block grid, 128 offset, when grid32 is off) and around the world origin, where players start.
  */
 public final class SeaFloor {
-    public static final int BASE = -15;
+    public static final int BASE = -13;
     public static final int MIN = -56;
     public static final int MAX = 72;
     public static final int SAND_DEPTH = 30;
 
     private static final double GRID = 256.0;
     private static final double GRID_OFFSET = 128.0;
-    private static final double DOME_FLAT = 82.0;
-    private static final double DOME_BLEND = 112.0;
+    private static final double DOME_FLAT = 92.0;
+    private static final double DOME_BLEND = 126.0;
     private static final double SPAWN_FLAT = 45.0;
     private static final double SPAWN_BLEND = 90.0;
 
@@ -67,7 +67,7 @@ public final class SeaFloor {
         return Math.sqrt(dx * dx + dz * dz);
     }
 
-    /** The y of the top solid block of the sea floor at this column. */
+    /** The y of the first water block above the sea floor at this column (the floor's top block is one below). */
     public static int height(int blockX, int blockZ) {
         double flat = smooth(DOME_FLAT, DOME_BLEND, distanceToGridPoint(blockX, blockZ))
                 * smooth(SPAWN_FLAT, SPAWN_BLEND, Math.sqrt((double) blockX * blockX + (double) blockZ * blockZ));

@@ -1,0 +1,30 @@
+{
+  "name": "mos:nether_portal_archway/abovewater_bottom",
+  "fallback": "minecraft:empty",
+  "elements": [
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "moogs_structures:versioned_single_pool_element",
+        "location": "mos:1_21_9/nether_portal_archway/abovewater_bottom",
+        "locations": {
+          "1.21-1.21.8": "mos:1_21_0/nether_portal_archway/abovewater_bottom",
+          "1.21.9-26.3": "mos:1_21_9/nether_portal_archway/abovewater_bottom"
+        },
+        "projection": "rigid",
+        "processors": {
+          "processors": [
+            {
+              "processor_type": "minecraft:block_ignore",
+              "blocks": [
+                {
+                  "Name": "minecraft:air"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

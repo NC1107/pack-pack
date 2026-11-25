@@ -9,8 +9,12 @@ file = "config/crash_assistant/config.toml"
 hash = "c6406f3e491aef05e7cd09a3287c12b2020526757125cdc9d6aeecc03c4ba8f1"
 
 [[files]]
+file = "config/hybrid_aquatic.json"
+hash = "7c5d7f1871a3d027d01584652e27ed143bdffc2063082f7666c31c5fe3286a4c"
+
+[[files]]
 file = "config/incontrol/spawner.json"
-hash = "f449f8bfc01244fad7d3926d9767c8ce5cb049bfea846f6a6551324afbaf7b2f"
+hash = "c3c98c555d8ad07de4b2caa3cf305a591ba82ed14f3ea65161d26c7330ca1912"
 
 [[files]]
 file = "config/lostcities/common.toml"
@@ -18,15 +22,79 @@ hash = "4c4a57c7efb7336653a68809bbfa9a3d68e04533b51b3ca120fe0580ac78801b"
 
 [[files]]
 file = "config/lostcities/profiles/waterworld.json"
-hash = "b215ac4cfcc91a6bed7a7dc84d14b81f704fa3084a3a06fce21a700535728750"
+hash = "e86a885c09e6a1cb4d2011d3311f0c91aad46449037c4847cc27a41c8999b19a"
 
 [[files]]
 file = "config/lostcities/profiles/waterworld_domes.json"
-hash = "83594989373c03a79bd03ec480c042a54de2fe9d1e5744b68ac04c923dc26d33"
+hash = "732764075052b406650015e8171b0335c44ee0ae9a5a0104c2b9c6cd17ea2e8e"
 
 [[files]]
 file = "config/modernfix-mixins.properties"
 hash = "b55e21a78bbbebf52ed85df01b7c3a4e24ddac497462bece65ca701b2899df55"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/hopo/worldgen/template_pool/features/coral.json"
+hash = "20c567e66465752ce8cc5a71ade51289bdce88838b8d9d27a3c6f8825c4d4406"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/hopo/worldgen/template_pool/features/pickle.json"
+hash = "749636af4d27b6813f613461f870be282e55d51e3c11cf92330d3f254a4912e7"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/hopo/worldgen/template_pool/mobs/dolphin.json"
+hash = "e485adfb3796cd176487449f27d02628a3377c75cb8cb56487daa758dba4d914"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/hopo/worldgen/template_pool/mobs/drowned.json"
+hash = "5a791290890f3a62ef9cf6fde37e68b5ee286bb0a47e19e428773fd378df546d"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/hopo/worldgen/template_pool/mobs/drowned_trident.json"
+hash = "e20317b527dde5690f2c7579f8450760233818427257ca7b61dfe97ffa154879"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/hopo/worldgen/template_pool/mobs/fast_drowned.json"
+hash = "96282c72410204e73f11407bff38cb07a21a7ba05fd16981e9a9f67e9acb22ab"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/hopo/worldgen/template_pool/mobs/gold_drowned.json"
+hash = "0999bc2e4132bbf76c882add37938dc6a33dcab60606203bd7a98f3d67281842"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/hopo/worldgen/template_pool/mobs/guardian.json"
+hash = "c8b27eb41d48bbc4aad5247b5b4f49b203ee5a72ad0c7ef3e21fc4b7c4343d81"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/hopo/worldgen/template_pool/mobs/pufferfish.json"
+hash = "edf937be676e9b8eb31785a158802d3fbf7c6460cb962dfa5e69328f62a77b04"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/hopo/worldgen/template_pool/mobs/skeleton.json"
+hash = "bdd07f3e6f434ec372f3328a5237ccf25d721ec20db5a4df85efa79c586b7758"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/hopo/worldgen/template_pool/mobs/turtle.json"
+hash = "eb33d4baff631d2aafe0435feae389e8d33d061ae72bda9ccd559f2eb399d8ec"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/hopo/worldgen/template_pool/underwater_city.json"
+hash = "d3e465f69836aa01e1b9d3a07932b34b1244c25d70a46418d7f36887f9590a0a"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/hopo/worldgen/template_pool/underwater_fossils.json"
+hash = "2e420f2cb96023b624ce6965cc59eade9d34664bbb7d07e5a6a46bfb0f4ef9b8"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/hopo/worldgen/template_pool/underwater_small_ruins.json"
+hash = "1c5a2e5e497994407ebb4c04545e18f86fa7fd9e5f0edff63e92503d5bd3b8c6"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/hopo/worldgen/template_pool/underwater_warm_small_ruins.json"
+hash = "becbc86015cad0efdbcb24dd16e232d3f02a32fbafb3b0560504a611771fce23"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/hybrid_aquatic/worldgen/template_pool/whale_fall.json"
+hash = "ed03a7979142012567995e03f9e95170e0401d1923a9cbacb11ced9f90396060"
 
 [[files]]
 file = "datapacks/pack-pack-worldgen/data/lostcities/lostcities/buildings/packpack_village_plains_accessory_1.json"
@@ -478,39 +546,39 @@ hash = "f57815d1c8d41f574c13bb0a9e0b4cd80a22f62a098f0a4527d1f79a4439234b"
 
 [[files]]
 file = "datapacks/pack-pack-worldgen/data/minecraft/worldgen/biome/cold_ocean.json"
-hash = "2cce8ceccbd5d549be311ab58df13f5833cd793f1455ee3984b7f73b28c21e59"
+hash = "3e1be8417ca21166373d43ba5a9da8da9406b23d5574ac9ceffb574a12ada271"
 
 [[files]]
 file = "datapacks/pack-pack-worldgen/data/minecraft/worldgen/biome/deep_cold_ocean.json"
-hash = "a2bfc82a6e3f59ba41aa964763edd1be07657d32ace14d7b4b966b286856fb26"
+hash = "41b4ed3face01272297d250cbb679aa7c65c4be503b1e923b37da9a2e95e9bbd"
 
 [[files]]
 file = "datapacks/pack-pack-worldgen/data/minecraft/worldgen/biome/deep_frozen_ocean.json"
-hash = "ecbfbdb55198c90c7c394c8d54561030756c7d75bb8d2df818158415faad32ca"
+hash = "1f9a25894a46b1c1cb9af7f2fe1769d6428b63ad69d28a58d55acf0cb9223722"
 
 [[files]]
 file = "datapacks/pack-pack-worldgen/data/minecraft/worldgen/biome/deep_lukewarm_ocean.json"
-hash = "781a60ffddf44511f92162d7d5664b7ab7e051f2469faa2f30672956e2467e46"
+hash = "7f1aed77ff893fbcfbd653a2c48b9510ad5d9276238fa76c82a0dcf0c6966d38"
 
 [[files]]
 file = "datapacks/pack-pack-worldgen/data/minecraft/worldgen/biome/deep_ocean.json"
-hash = "f8efc749b704c082ad7d084acb234fa9570e0e181e5969d1af5b204c42386658"
+hash = "d7404e5929cab635e4b129489c38fe95d64337b6ef4be5833fd32fb8506b945b"
 
 [[files]]
 file = "datapacks/pack-pack-worldgen/data/minecraft/worldgen/biome/frozen_ocean.json"
-hash = "5def6268eaa05a79e04a0e41b7c638a3068748ed10871fafc416db7006677e3a"
+hash = "99605803bd5f253bb47954adb4cb7ef9f4502891c73e8837e90ce8d778a5d2bc"
 
 [[files]]
 file = "datapacks/pack-pack-worldgen/data/minecraft/worldgen/biome/lukewarm_ocean.json"
-hash = "e851099f1d5945ad9d1ba1a1de52bd628c8322ca14e835ddf07270488e3fc8ae"
+hash = "41b6dc5dd8ec09b065c50ffac5bd327e43194cad404f664b84b0675692fa7f1e"
 
 [[files]]
 file = "datapacks/pack-pack-worldgen/data/minecraft/worldgen/biome/ocean.json"
-hash = "1645179f3d49bc161d6f2dc10e5dd0a4ebf91895103b16e9d69fa40512747406"
+hash = "1fc7620a45d6e71fad71d00d002518c01b222657523408f607ce71af2bebc626"
 
 [[files]]
 file = "datapacks/pack-pack-worldgen/data/minecraft/worldgen/biome/warm_ocean.json"
-hash = "060cc455f3c06e4a428a37ccac1333c2ed8d1560082b518e9cf630f509036503"
+hash = "246d8c9900a2ce725fe3414ae3992cc7daa0b04dc694c48c23d701cf52ea3c90"
 
 [[files]]
 file = "datapacks/pack-pack-worldgen/data/minecraft/worldgen/noise_settings/overworld.json"
@@ -531,6 +599,222 @@ hash = "a09832d9217f98f642f0f24fc22d79a70b8138881c37e9deba04523f23a5a514"
 [[files]]
 file = "datapacks/pack-pack-worldgen/data/mos/worldgen/structure_set/ocean_oddities.json"
 hash = "66dfd67e47598d349a069002370a6f46970be8c839db5f383366fcc603f3cabc"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/mos/worldgen/template_pool/acacia_long_ship/left_sail.json"
+hash = "48353cd8f8756b97f5598125fff00b65327513c79af277f2a9e0990ee000ed6d"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/mos/worldgen/template_pool/acacia_long_ship/rear.json"
+hash = "a67fe9d94e1ac88f7b2eeca6b60416dc48f8b0793a1c7ed6b5accb393e595a9e"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/mos/worldgen/template_pool/acacia_long_ship/right_sail.json"
+hash = "dfe7eba1fe2d6053f3b25335edb3dc0687d38e46ee634a9f671280ab8c791385"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/mos/worldgen/template_pool/atlantis_tribune/main.json"
+hash = "00fe07738348049df2e24f580ed768e56020e152e1e1441bebf716e2b8f19bfc"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/mos/worldgen/template_pool/atlantis_tribune/wing_a.json"
+hash = "0094fa8f7b786f9e185ea00e4e293bc8e232e22753b5281a9ab2b850854874cc"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/mos/worldgen/template_pool/atlantis_tribune/wing_b.json"
+hash = "448691fb5cfbd4637c57794cc5cace49cc86ac14534518f6510f6878fd152193"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/mos/worldgen/template_pool/buried_treasure.json"
+hash = "bfd9e8e2a69383013adf657eaa324e937a610fb0f61d58a8d4b12825131c5990"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/mos/worldgen/template_pool/cherry_long_ship/left_sail.json"
+hash = "400aa6c2d81aa8fe3e767b928f5e6035712a55c59c717e61e7b9ebb1b1a8be92"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/mos/worldgen/template_pool/cherry_long_ship/rear.json"
+hash = "0b328939d7de5099fe348ef16a9245294823edc028cac6371b203d120e6e807e"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/mos/worldgen/template_pool/cherry_long_ship/right_sail.json"
+hash = "3dbf93fa6dc721b75501600d914b1d6d55a798cb87464b80cc6adf619a9c8583"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/mos/worldgen/template_pool/conduit_arch_pool.json"
+hash = "547eb113dea4c558fa10ffc6b77a01ee81dc1ad4c325c1f126955ea06aedf366"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/mos/worldgen/template_pool/dark_oak_long_ship/left_sail.json"
+hash = "6abad355de793a75d2a8c5c238629f728e1eeb39cf7713a0b63c756a0711b069"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/mos/worldgen/template_pool/dark_oak_long_ship/rear.json"
+hash = "3f444b9b8df2efb2732578570141f9a547f01061c4ca2099f8c0bafa7f5723ec"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/mos/worldgen/template_pool/dark_oak_long_ship/right_sail.json"
+hash = "3deb3e89eeb7427027ce9fb69adea7ffe115abcb02fb006293ea39c469445e22"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/mos/worldgen/template_pool/dragon_skeleton_pool.json"
+hash = "1ec88315e36b33426a74de215ea5656d48f396dc14160e80cb66c2970203704f"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/mos/worldgen/template_pool/hauling_ship_1_pool.json"
+hash = "7f424857f5fa70686f2cb668212b9de62787ff3bfe0aae1ed7ec46accb1b8b41"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/mos/worldgen/template_pool/long_ship.json"
+hash = "0655de78219db4ddc98431808f389db2123c7ec29172bc2b49c83270f5dcf7cd"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/mos/worldgen/template_pool/magma_block_ravine_pool.json"
+hash = "5a5d52f0ec9417db96b0267c0c299618c2166dc23370825df09107ec732e05f0"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/mos/worldgen/template_pool/mobs/axolotl.json"
+hash = "f947c28bc686e7038c654d07e0157e3a7e1e180380e48465080c7f41a7d0d855"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/mos/worldgen/template_pool/mobs/captain.json"
+hash = "414c4acc77ce1675a6e0147fbf877adeaf1a320b7398e91ac0422233fe648fb5"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/mos/worldgen/template_pool/mobs/cat.json"
+hash = "cd5d862ead220c93d7eeeb1658c024e9b090465545131ad17399f33e1a43c124"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/mos/worldgen/template_pool/mobs/drowned.json"
+hash = "da371cac8465747241696b4c086e9d20837ca21c97411670d19728d6c16134f6"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/mos/worldgen/template_pool/mobs/elder_guardian.json"
+hash = "6ccde47494c1013194045b77f43abfd7e380bc192bd65165531abfa3583c7a85"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/mos/worldgen/template_pool/mobs/raider.json"
+hash = "8ca858549a0fd32a34775998c8924a640319fb05053638dc1c4cf02466b6e46a"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/mos/worldgen/template_pool/mobs/wandering_trader.json"
+hash = "2977db3f16c65660abe1156d41e34a1a9946763dfbe74df31505946fbdcc5172"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/mos/worldgen/template_pool/nether_portal_archway/abovewater_bottom.json"
+hash = "0db8679d49c7c35cd73a2b823264299ef7b7c13d33a52d3acc5a3b6e041259b7"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/mos/worldgen/template_pool/nether_portal_archway/abovewater_bottom_side.json"
+hash = "60ee354383a28ef10072a9ec26f0929099618571847b0cd03a13c39d2f884ecd"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/mos/worldgen/template_pool/nether_portal_archway/abovewater_left.json"
+hash = "e4bd1bb412cc926898b767092f97126cce9ea26ce7b855d1501fc2fef27ee32b"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/mos/worldgen/template_pool/nether_portal_archway/abovewater_top.json"
+hash = "6f7045dffa98f4161e10ad46d544273bf133ee937158afab52177651249f263b"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/mos/worldgen/template_pool/nether_portal_archway/below_water_bottom.json"
+hash = "35f6c0f80fed00063ac320372fae5b3e52187873d8b6f673dcef810052876edd"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/mos/worldgen/template_pool/oak_long_ship/left_sail.json"
+hash = "cb4273bc2d499faaf7e153030e2dced3710661dadc4282f29e4137e43eec5e64"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/mos/worldgen/template_pool/oak_long_ship/rear.json"
+hash = "15cd3898558eb0e70a9e84bac9eac382f3f439466fab9cef7caad506c4c5ea3d"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/mos/worldgen/template_pool/oak_long_ship/right_sail.json"
+hash = "bb0169113496599418bfdef9e0a2e0f19e4a6a4e4f89040bbb30fd8f63945cc0"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/mos/worldgen/template_pool/ocean_decor_pool.json"
+hash = "0504303cd68d14e1fb52065bf3fee564853abcb0aed57d5985ceee194fe7331b"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/mos/worldgen/template_pool/prismarine_dog_statue_pool.json"
+hash = "467654ac8280cfe0cf5971edfee90bcb7e623b64d64e178405deee00a1b6264a"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/mos/worldgen/template_pool/rare_travel_ship/front.json"
+hash = "bc9fed813e8e8d20fed39da72d6f53cf12b0e7d94acc55cbff2721205e01bec9"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/mos/worldgen/template_pool/rare_travel_ship/rear.json"
+hash = "e57911be0b4dc88e3ed29c73bbec58bfd4ef230dc9ca76b598915d1dda366e05"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/mos/worldgen/template_pool/ruined_archway_pool.json"
+hash = "14ddc875d02135fd8608a9801f44a5bd6a213cdd7b5e1a1d23c7dcc3dbfa9e2b"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/mos/worldgen/template_pool/ruined_castle_pool.json"
+hash = "2dc51ca23cba0a39171c959455f9c31cd4a35b317577ad2eaab35ddb4987fc31"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/mos/worldgen/template_pool/ruined_church_pool.json"
+hash = "9919b774c76bcdb56b6ca60fc0bec4385a62eb43f149a9cf58fd7071e18a75ad"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/mos/worldgen/template_pool/ruined_house_pool.json"
+hash = "0d50de53d10e5a506e6ba2c82524fca75217d374a32be8c01f23169906de94eb"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/mos/worldgen/template_pool/ruins_atlantis_pool.json"
+hash = "f59f3d601933de357e3e8319ce9c9c7b33fdaae07d54a11635e0071bb01cfa9b"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/mos/worldgen/template_pool/sea_dragon_skeleton_pool.json"
+hash = "f5508e3e23bee02823f411e09325b52616579d223aecadac3f4cdca2add02938"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/mos/worldgen/template_pool/ship_small_pool.json"
+hash = "108b8c5d5520b1e44b13050e447f3c80a89e5744579d0055eabc4476bbcc7408"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/mos/worldgen/template_pool/ship_wreck_dark_oak_pool.json"
+hash = "d3d96e44d0b0666da1d7957b6ca3167a777e82be296d74c0fa195b0b7679ac12"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/mos/worldgen/template_pool/ship_wreck_oak_pool.json"
+hash = "980050a0c7c34dbb451f352feed5ed5ce36a9615c89602923f0c5abf3979ca30"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/mos/worldgen/template_pool/ship_wreck_spruce_pool.json"
+hash = "1ba0f4e5894b96d993559d31633f181d34ba280b81203d3e563a9286775e6d19"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/mos/worldgen/template_pool/small_ocean_temple.json"
+hash = "83180ef176561a8c852757981c1e007e9ce721e9ae356e034cf1681cbe716a29"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/mos/worldgen/template_pool/sunken_birch_ship/front.json"
+hash = "3fbb35898958567b0dd460726a432bc790dbe05b6cac71f837919fecb819998d"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/mos/worldgen/template_pool/sunken_ship.json"
+hash = "b7dfcaec49bbef39debdd46a31203b8930be686d6e13cf23f8ced84d472a9028"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/mos/worldgen/template_pool/sunken_spruce_ship/front.json"
+hash = "93918f72be3f54fcb4c64049f08929edb58d048fe069d5a5c7726b746217fc7c"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/mos/worldgen/template_pool/underwater_garden_pool.json"
+hash = "2af02bf2b91eb90ad13d86f0eb202daf2a9d87d051cb2b286687570222629438"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/mos/worldgen/template_pool/underwater_shrine_pool.json"
+hash = "92bd384284def51f64af0a3e580caea08f8b4948776e0f73942e3122a6d11d29"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/mos/worldgen/template_pool/wanderer_raft_pool.json"
+hash = "8be69d5b06bbb93d1e1d5ca0b70aa4510323a5bdcf1d6de2d8a400d347e4b8b0"
 
 [[files]]
 file = "datapacks/pack-pack-worldgen/data/packpack/function/build_start_dome.mcfunction"
@@ -587,6 +871,74 @@ hash = "f5ce1f554a769ad34d40fd2cfb164b11cf2534dedefcfb3a331ad6fec43f98da"
 [[files]]
 file = "datapacks/pack-pack-worldgen/data/packpack/worldgen/placed_feature/seabed_gravel_patch.json"
 hash = "9aad253b50aa762825587120214a2c0ca66330fcef14487efbe6ce7c05c3f8d6"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/underwater_village/worldgen/template_pool/cold_big_gate.json"
+hash = "e8c49219c03c13046cd0808a395017d04f726d08a55ada1b6d441061e04317ad"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/underwater_village/worldgen/template_pool/cold_broken_house.json"
+hash = "5cf001a8a49fd9095e1014c88b34ded884bd00eb470c0eb239e82c607bd534c2"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/underwater_village/worldgen/template_pool/cold_fountain.json"
+hash = "2b5ff05455c2f16fd92c0e157b05b9213a4a99323f5caf5f6a7ac3003a8cfd1c"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/underwater_village/worldgen/template_pool/cold_gate.json"
+hash = "6e63d0758b62d4da49e126809d08e2652b3a292a319175322d7a973794b1b78d"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/underwater_village/worldgen/template_pool/dungeon.json"
+hash = "fd9ef9ce3dffd67c9f7775cfb05eb2c2fbf63124728d306c0948c14ca8678d6c"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/underwater_village/worldgen/template_pool/library.json"
+hash = "bdaa9a9151f5136a6b52d5908b9d284474f1859e762b2aaa9ba03dea0b681ccb"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/underwater_village/worldgen/template_pool/ruins.json"
+hash = "5cd955c5f7ec71fc28bc04912c5e09c97221c19a8743f417ca755c4a45d98219"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/underwater_village/worldgen/template_pool/shrine.json"
+hash = "b57b0cc0cd4c6a8531f179d179e3177af55752f7f59f43765b44d21c7295cf59"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/underwater_village/worldgen/template_pool/small_gate.json"
+hash = "2b8ae1a29788f4feb0e96baa6e82c6e37916d29c8d13161c90993e3679cc2005"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/underwater_village/worldgen/template_pool/temple.json"
+hash = "d98dffe5ecc868c2f6c537a94cb7b871403a4891bef79cebfb0abe0cbf63e299"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/underwater_village/worldgen/template_pool/temple_broken.json"
+hash = "8f832cc76d8f3b450eab7fe1273151dce1a5965803fd006a60156dbae2c203b3"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/underwater_village/worldgen/template_pool/temple_ruins.json"
+hash = "f58af51c89c9cbe4b3e410e4ca9e0d0eec76e61e038c08b248ae8e1db0c62239"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/underwater_village/worldgen/template_pool/tower.json"
+hash = "bf161010fddba634928647a952c53fd82afcf9c6767ea7462c6398c56e3d828a"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/underwater_village/worldgen/template_pool/warm_big_gate.json"
+hash = "e3dbeb483b667406a0938cb82fb9695556f3cb1593de063111900fead8fbbd9b"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/underwater_village/worldgen/template_pool/warm_broken_house.json"
+hash = "c9abd0b3c79ff2b762f4611d0e3e2f881530c84f02c419ce404fc47fa7ac1963"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/underwater_village/worldgen/template_pool/warm_fountain.json"
+hash = "3359c237666bb00ba09811bad4eee454cc11bd1404bcd8e65bedeb7a14813da4"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/underwater_village/worldgen/template_pool/warm_gate.json"
+hash = "83abe6342bc7b5577e63d36226dca2299bb6d86e1f9d337f78776a3085c1f4f3"
 
 [[files]]
 file = "datapacks/pack-pack-worldgen/pack.mcmeta"
@@ -749,11 +1101,11 @@ metafile = true
 
 [[files]]
 file = "mods/lostcities-1.21-8.4.8-packpack.jar"
-hash = "0a753a9f2ce2e30cb3084f0bbcfdf8571089f22eb0f07f0effe79d977f517dc7"
+hash = "8a44c507eca2de66381dc073a125ab56ecf44851ef63f4e95d2fd08d6349c5ba"
 
 [[files]]
 file = "mods/lostworlds-1.21-2.0.0-packpack.jar"
-hash = "33f5413db4367995278b2e7a47e509b3fbd42d87d33ba71d6fda98cec7feb254"
+hash = "c35250ed590b7ea5d634eef1dc9ccf66ec97784213acbfd79aae5a56ee812900"
 
 [[files]]
 file = "mods/mezzconfig.pw.toml"

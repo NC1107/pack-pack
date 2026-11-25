@@ -308,6 +308,14 @@ The client boot test now leaves that mod out, so it does not cover it.
 Players can hit it too, more rarely, when they quit while the map is busy.
 Options are to wait for a fixed version, report it to the author, or drop the world map and keep only the minimap.
 
+### Domes, 2026-11-24
+
+- Hybrid Aquatic was injecting its own biomes into our ocean, and Lost Cities only runs in overworld biomes, so domes landing in them lost their glass and city.
+  Its biomes are off in `config/hybrid_aquatic.json`, its animals and seabed features stay.
+- Domes are 61 to 69 blocks in radius (patched Lost Cities radius formula), inside the flat area around them, and the ground outside sits at the same height as inside.
+- Air pockets came from vanilla geodes and dungeons in the sand, from underwater structure templates, and from drowned city rooms. All three are handled: features removed, templates skip air, and leftover air under the sea is flooded.
+- Checked on nine domes: complete shells, matching ground, and at most 20 stray air blocks next to a shell.
+
 ### Pipeline gaps
 
 - Capture evidence for hangs: a server thread dump on a stall, and a separate client shutdown deadline with a dump.

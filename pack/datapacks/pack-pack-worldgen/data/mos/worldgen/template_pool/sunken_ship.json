@@ -1,0 +1,92 @@
+{
+  "name": "mos:sunken_ship",
+  "fallback": "minecraft:empty",
+  "elements": [
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "moogs_structures:versioned_single_pool_element",
+        "location": "mos:1_21_9/sunken_spruce_ship/rear",
+        "locations": {
+          "1.21-1.21.8": "mos:1_21_0/sunken_spruce_ship/rear",
+          "1.21.9-26.3": "mos:1_21_9/sunken_spruce_ship/rear"
+        },
+        "projection": "rigid",
+        "processors": {
+          "processors": [
+            {
+              "processor_type": "moogs_structures:spawner_randomizing_processor",
+              "weighted_entities": [
+                {
+                  "entity": "minecraft:drowned",
+                  "weight": 8
+                },
+                {
+                  "entity": "minecraft:guardian",
+                  "weight": 1
+                }
+              ],
+              "min_spawn_delay": 200,
+              "max_spawn_delay": 800,
+              "spawn_count": 3,
+              "max_nearby_entities": 5,
+              "required_player_range": 14,
+              "spawn_range": 4
+            },
+            {
+              "processor_type": "minecraft:block_ignore",
+              "blocks": [
+                {
+                  "Name": "minecraft:air"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "moogs_structures:versioned_single_pool_element",
+        "location": "mos:1_21_9/sunken_birch_ship/rear",
+        "locations": {
+          "1.21-1.21.8": "mos:1_21_0/sunken_birch_ship/rear",
+          "1.21.9-26.3": "mos:1_21_9/sunken_birch_ship/rear"
+        },
+        "projection": "rigid",
+        "processors": {
+          "processors": [
+            {
+              "processor_type": "moogs_structures:spawner_randomizing_processor",
+              "weighted_entities": [
+                {
+                  "entity": "minecraft:drowned",
+                  "weight": 8
+                },
+                {
+                  "entity": "minecraft:guardian",
+                  "weight": 1
+                }
+              ],
+              "min_spawn_delay": 200,
+              "max_spawn_delay": 800,
+              "spawn_count": 3,
+              "max_nearby_entities": 5,
+              "required_player_range": 14,
+              "spawn_range": 4
+            },
+            {
+              "processor_type": "minecraft:block_ignore",
+              "blocks": [
+                {
+                  "Name": "minecraft:air"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

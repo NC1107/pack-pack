@@ -32,7 +32,7 @@ DATA_PACK_FORMAT = 48  # Minecraft 1.21.1
 # y=-15 plus a little noise (hardcoded), so that is the reference: dome floors, Lost
 # Cities' ground level and city levels all sit on it. With the sea surface at 160 that
 # is ~175 blocks of water above the floor and ~50 blocks of rock below it.
-SEABED_Y = -15
+SEABED_Y = -14
 SEA_LEVEL = 160
 
 # Ocean variant per temperature band. Low continentalness is where vanilla puts its
@@ -66,7 +66,7 @@ START_DOME_RADIUS = 7
 
 # Domes sit this far above the sea floor, so their glass base is not buried in it. Lost
 # Cities centres every dome on one ground level, so this raises all domes, not just the start.
-DOME_RAISE = 2
+DOME_RAISE = 1
 
 # Terrain only exists inside domes (Lost Worlds makes its own seabed outside them). Inside
 # a dome it is a flat floor level with the sea floor, so domes sit on the bottom like a
@@ -74,9 +74,10 @@ DOME_RAISE = 2
 DOME_FLOOR_Y = SEABED_Y + DOME_RAISE
 # Lost Cities can put a dome every 32 chunks (512 blocks) instead of every 16.
 DOME_GRID_32 = False
-# City radius in blocks and the fraction of it that becomes the dome radius (60 to 72).
+# City radius in blocks and the fraction of it that becomes the dome radius (62 to 74 with the
+# patched Lost Cities; upstream only scaled the random part, which made domes 100+ blocks wide).
 DOME_CITY_RADIUS = (100, 120)
-DOME_SPHERE_FACTOR = 0.6
+DOME_SPHERE_FACTOR = 0.62
 
 # Vanilla only spawns fish, squid and dolphins in the top 13 blocks of water, and they
 # despawn when no player is within 128 blocks, so nothing swims near the sea floor.
@@ -189,6 +190,7 @@ def build_datapack(village_factor: float) -> str:
     write_structure_overrides()
     write_ocean_biomes()
     write_structure_set_filters()
+    write_underwater_air_filters()
     return lc_villages.build(DATAPACK, vanilla_jar(), lost_cities_jar(), village_factor, DOME_CITY_FACTOR)
 
 
@@ -314,6 +316,12 @@ def write_structure_overrides() -> None:
 DEEP_WATER_COLOR = 0x0b3c6b
 
 
+AIR_CARVING_FEATURES = {
+    "minecraft:amethyst_geode", "minecraft:monster_room", "minecraft:monster_room_deep",
+    "minecraft:spring_water", "minecraft:spring_lava", "minecraft:spring_lava_frozen",
+}
+
+
 def write_ocean_biomes() -> None:
     """Override the vanilla ocean biomes: no caves, and sky and fog the colour of deep water."""
     ocean_biomes = sorted({b for _, deep, shallow in TEMPERATURE_BANDS for b in (deep, shallow)})
@@ -321,6 +329,9 @@ def write_ocean_biomes() -> None:
         biome = vanilla(f"data/minecraft/worldgen/biome/{name}.json")
         # Carvers cut air pockets into the water column because the aquifers are switched off.
         biome["carvers"] = {}
+        # Features that hollow out air under the floor: geodes and dungeons leave air pockets in
+        # the sand that show up as bubbles where they break through, springs pour out of them.
+        biome["features"] = [[f for f in step if f not in AIR_CARVING_FEATURES] for step in biome["features"]]
         biome["effects"]["sky_color"] = DEEP_WATER_COLOR
         biome["effects"]["fog_color"] = DEEP_WATER_COLOR
         # Vanilla ocean water fog is almost black, which hides everything past a few chunks.
@@ -344,6 +355,47 @@ def write_structure_set_filters() -> None:
                 if len(kept) != len(structure_set["structures"]):
                     structure_set["structures"] = kept
                     write_json(DATAPACK / name, structure_set)
+
+
+# Underwater structure mods whose templates place air blocks. Placed under water, that air
+# becomes floating air pockets, so their pieces skip air the way vanilla ocean ruins do.
+UNDERWATER_STRUCTURE_MODS = {"underwater_village", "hopo", "mos", "hybrid_aquatic"}
+IGNORE_AIR = {"processor_type": "minecraft:block_ignore", "blocks": [{"Name": "minecraft:air"}]}
+
+
+def write_underwater_air_filters() -> None:
+    jars = {}
+    for jar in sorted((SERVER / "mods").glob("*.jar")):
+        with zipfile.ZipFile(jar) as z:
+            for name in z.namelist():
+                if name.endswith(".json") and ("/worldgen/template_pool/" in name or "/worldgen/processor_list/" in name):
+                    jars[name] = z.read(name)
+
+    def processor_list(ref) -> object:
+        if isinstance(ref, dict):
+            return {"processors": [*ref.get("processors", []), IGNORE_AIR]}
+        namespace, path = (ref.split(":", 1) + [""])[:2] if ":" in ref else ("minecraft", ref)
+        source = f"data/{namespace}/worldgen/processor_list/{path}.json"
+        base = json.loads(jars[source])["processors"] if source in jars else []
+        if ref == "minecraft:empty":
+            base = []
+        return {"processors": [*base, IGNORE_AIR]}
+
+    def fix(element: dict) -> None:
+        if "elements" in element:
+            for inner in element["elements"]:
+                fix(inner)
+        if "processors" in element:
+            element["processors"] = processor_list(element["processors"])
+
+    for name, data in jars.items():
+        parts = name.split("/")
+        if "/worldgen/template_pool/" not in name or parts[1] not in UNDERWATER_STRUCTURE_MODS:
+            continue
+        pool = json.loads(data)
+        for entry in pool.get("elements", []):
+            fix(entry["element"])
+        write_json(DATAPACK / name, pool)
 
 
 def write_seabed_cover() -> None:
@@ -427,7 +479,8 @@ def build_profiles(dome_world_style: str, city_free_radius: int) -> None:
     # Flooded cities: what generates outside the domes.
     flooded = read_only_copy("atlantis")
     flooded["lostcity"]["seaLevel"] = SEA_LEVEL
-    flooded["lostcity"]["groundLevel"] = SEABED_Y
+    # The street level of a city is one above the top block of the floor.
+    flooded["lostcity"]["groundLevel"] = DOME_FLOOR_Y
     flooded["cities"].update({
         **{f"cityLevel{i}Height": SEABED_Y + 8 * i for i in range(8)},
         # Drowned cities only on the low plains: not on ridges, seamounts or in trenches.

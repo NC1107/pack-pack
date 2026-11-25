@@ -1,5 +1,5 @@
 --- a/src/main/java/mcjty/lostcities/worldgen/lost/CitySphere.java	2026-11-24 04:11:35.373332294 -0500
-+++ b/src/main/java/mcjty/lostcities/worldgen/lost/CitySphere.java	2026-11-24 12:47:23.778528506 -0500
++++ b/src/main/java/mcjty/lostcities/worldgen/lost/CitySphere.java	2026-11-24 16:26:19.632128580 -0500
 @@ -157,98 +157,68 @@
       * Return true if there is a horizontal monorail here. This is the case if this chunk is on a city center multiple
       * (i.e. multiple of 16) and if there are cities left and right that both want a monorail in the correct direction
@@ -151,7 +151,17 @@
      }
  
      /**
-@@ -364,6 +334,16 @@
+@@ -260,7 +230,8 @@
+         if (city != null) {
+             return city.getRadius() * profile.CITYSPHERE_FACTOR;
+         }
+-        return profile.CITY_MINRADIUS + rand.nextInt(profile.CITY_MAXRADIUS - profile.CITY_MINRADIUS) * profile.CITYSPHERE_FACTOR;
++        // The sphere factor scales the whole city radius (upstream scaled only the random part)
++        return (profile.CITY_MINRADIUS + rand.nextInt(profile.CITY_MAXRADIUS - profile.CITY_MINRADIUS)) * profile.CITYSPHERE_FACTOR;
+     }
+ 
+ 
+@@ -364,6 +335,16 @@
          return (cx-x)*(cx-x) + (cz-z)*(cz-z);
      }
  
@@ -168,7 +178,7 @@
      private static boolean isOnSphereGrid(LostCityProfile profile, int chunkX, int chunkZ) {
          if (profile.CITYSPHERE_32GRID) {
              return (chunkX & 0x1f) == 8 && (chunkZ & 0x1f) == 8;
-@@ -384,7 +364,8 @@
+@@ -384,7 +365,8 @@
          LostCityProfile profile = provider.getProfile();
  
          // First compute the base properties (chance, radius, center position)
@@ -178,7 +188,7 @@
          float radius = predef != null ? predef.getRadius() : getSphereRadius(center, provider, rand);
          BlockPos centerPosition = predef != null ? new BlockPos(predef.getCenterX(), profile.GROUNDLEVEL, predef.getCenterZ()) : getSphereCenterPosition(center, provider, rand);
  
-@@ -404,7 +385,7 @@
+@@ -404,7 +386,7 @@
                          int nz = chunkZ + dz;
                          // Deterministically compute the neighbor's base sphere
                          Random nrand = new Random(provider.getSeed() + nx * 961744153L + nz * 837971201L);
@@ -187,7 +197,7 @@
                          if (!nEnabled) {
                              continue; // Disabled neighbors cannot suppress this one
                          }
-@@ -475,7 +456,14 @@
+@@ -475,7 +457,14 @@
                  updateCache(coord, sphere);
                  return sphere;
              } else {
@@ -227,3 +237,69 @@
  //        validate();
          setBlock(current, correct(state));
          incY();
+--- a/src/main/java/mcjty/lostcities/worldgen/gen/Spheres.java	2026-11-24 04:11:35.372840297 -0500
++++ b/src/main/java/mcjty/lostcities/worldgen/gen/Spheres.java	2026-11-24 20:36:05.656386741 -0500
+@@ -50,6 +50,8 @@
+                     Monorails.generateMonorails(feature, info);
+                 }
+ 
++                floodOutsideSpheres(feature, sphere, chunkX, chunkZ);
++
+                 driver.actuallyGenerate(chunk);
+             } finally {
+                 driver.setPrimer(oldRegion, oldChunk);
+@@ -58,6 +60,47 @@
+         }
+     }
+ 
++    /**
++     * Under an outer sea (Lost Worlds with a custom sea level) everything outside the domes is
++     * meant to be ocean. Buildings, drowned cities and structures generated earlier can leave
++     * air rooms there, which would stay as air pockets in the water, so this runs last and
++     * floods any air below the sea level that is not inside an enabled sphere.
++     */
++    private static void floodOutsideSpheres(LostCityTerrainFeature feature, CitySphere sphere, int chunkX, int chunkZ) {
++        IDimensionInfo provider = feature.provider;
++        ChunkGenerator generator;
++        if (provider.getWorld() instanceof WorldGenRegion region) {
++            generator = ((ServerChunkCache) region.getChunkSource()).getGenerator();
++        } else {
++            generator = ((ServerLevel) provider.getWorld()).getChunkSource().getGenerator();
++        }
++        if (!(generator instanceof ILostWorldsChunkGenerator lw) || lw.getOuterSeaLevel() == null) {
++            return;
++        }
++        int seaLevel = Math.min(lw.getOuterSeaLevel(), provider.getWorld().getMaxBuildHeight() - 1);
++        int minY = provider.getWorld().getMinBuildHeight();
++        ChunkDriver driver = feature.getDriver();
++        boolean enabled = sphere.isEnabled() && sphere.getCenterPos() != null;
++        BlockPos cc = enabled ? sphere.getCenterPos() : BlockPos.ZERO;
++        double sqradius = enabled ? sphere.getRadius() * sphere.getRadius() : 0;
++        for (int x = 0; x < 16; x++) {
++            double dx = (chunkX << 4) + x - cc.getX();
++            for (int z = 0; z < 16; z++) {
++                double dz = (chunkZ << 4) + z - cc.getZ();
++                driver.current(x, minY, z);
++                for (int y = minY; y <= seaLevel; y++) {
++                    double dy = y - cc.getY();
++                    if (!enabled || dx * dx + dy * dy + dz * dz > sqradius) {
++                        if (driver.getBlock().isAir()) {
++                            driver.block(feature.liquid);
++                        }
++                    }
++                    driver.incY();
++                }
++            }
++        }
++    }
++
+     private static void fillSphere(LostCityTerrainFeature feature, int centerx, int centery, int centerz, int radius,
+                                    BlockState glass, BlockState sideBlock) {
+         IDimensionInfo provider = feature.provider;
+@@ -165,5 +208,6 @@
+                 }
+             }
+         }
++
+     }
+ }

@@ -1,0 +1,30 @@
+{
+  "name": "mos:oak_long_ship/right_sail",
+  "fallback": "minecraft:empty",
+  "elements": [
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "moogs_structures:versioned_single_pool_element",
+        "location": "mos:1_21_9/oak_long_ship/right_sail",
+        "locations": {
+          "1.21-1.21.8": "mos:1_21_0/oak_long_ship/right_sail",
+          "1.21.9-26.3": "mos:1_21_9/oak_long_ship/right_sail"
+        },
+        "projection": "rigid",
+        "processors": {
+          "processors": [
+            {
+              "processor_type": "minecraft:block_ignore",
+              "blocks": [
+                {
+                  "Name": "minecraft:air"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

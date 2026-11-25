@@ -1,0 +1,31 @@
+{
+  "name": "mos:rare_travel_ship/rear",
+  "fallback": "minecraft:empty",
+  "elements": [
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "moogs_structures:versioned_single_pool_element",
+        "location": "mos:1_21_9/rare_travel_ship/rear",
+        "locations": {
+          "1.21-1.21.4": "mos:1_21_0/rare_travel_ship/rear",
+          "1.21.5-1.21.8": "mos:1_21_5/rare_travel_ship/rear",
+          "1.21.9-26.3": "mos:1_21_9/rare_travel_ship/rear"
+        },
+        "projection": "rigid",
+        "processors": {
+          "processors": [
+            {
+              "processor_type": "minecraft:block_ignore",
+              "blocks": [
+                {
+                  "Name": "minecraft:air"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

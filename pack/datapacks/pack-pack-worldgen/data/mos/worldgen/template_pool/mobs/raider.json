@@ -1,0 +1,77 @@
+{
+  "name": "mos:mobs/raider",
+  "fallback": "minecraft:empty",
+  "elements": [
+    {
+      "weight": 5,
+      "element": {
+        "element_type": "moogs_structures:versioned_single_pool_element",
+        "location": "mos:1_21_5/mobs/pillager",
+        "locations": {
+          "1.21-1.21.4": "mos:1_21_0/mobs/pillager",
+          "1.21.5-26.3": "mos:1_21_5/mobs/pillager"
+        },
+        "processors": {
+          "processors": [
+            {
+              "processor_type": "minecraft:block_ignore",
+              "blocks": [
+                {
+                  "Name": "minecraft:air"
+                }
+              ]
+            }
+          ]
+        },
+        "projection": "rigid"
+      }
+    },
+    {
+      "weight": 3,
+      "element": {
+        "element_type": "moogs_structures:versioned_single_pool_element",
+        "location": "mos:1_21_5/mobs/vindicator",
+        "locations": {
+          "1.21-1.21.4": "mos:1_21_0/mobs/vindicator",
+          "1.21.5-26.3": "mos:1_21_5/mobs/vindicator"
+        },
+        "processors": {
+          "processors": [
+            {
+              "processor_type": "minecraft:block_ignore",
+              "blocks": [
+                {
+                  "Name": "minecraft:air"
+                }
+              ]
+            }
+          ]
+        },
+        "projection": "rigid"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "moogs_structures:versioned_single_pool_element",
+        "location": "mos:1_21_0/mobs/evoker",
+        "locations": {
+          "1.21-26.3": "mos:1_21_0/mobs/evoker"
+        },
+        "processors": {
+          "processors": [
+            {
+              "processor_type": "minecraft:block_ignore",
+              "blocks": [
+                {
+                  "Name": "minecraft:air"
+                }
+              ]
+            }
+          ]
+        },
+        "projection": "rigid"
+      }
+    }
+  ]
+}
