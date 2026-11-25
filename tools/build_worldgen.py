@@ -72,7 +72,7 @@ DOME_RAISE = 1
 # city that survived the water rising.
 DOME_FLOOR_Y = SEABED_Y + DOME_RAISE
 # Lost Cities can put a dome every 32 chunks (512 blocks) instead of every 16.
-DOME_GRID_32 = False
+DOME_GRID_32 = True
 # City radius in blocks and the fraction of it that becomes the dome radius (62 to 74 with the
 # patched Lost Cities; upstream only scaled the random part, which made domes 100+ blocks wide).
 DOME_CITY_RADIUS = (100, 120)
@@ -233,6 +233,22 @@ def fill_runs(cells: list, block: str) -> list[str]:
     return lines
 
 
+def airlock(radius: int) -> list[str]:
+    """A glass vestibule on the east side of the start dome with a door at each end.
+
+    A door block keeps water out even while it is open, so players can walk in and out without
+    flooding the dome.
+    """
+    wall = max(x for x in range(radius + 1) if x * x + 1 <= radius * radius)  # dome wall at y=1, z=0
+    outer = wall + 4
+    door = "minecraft:oak_door[facing=east,hinge=left,open=false,powered=false"
+    return [
+        f"fill ~{wall} ~0 ~-1 ~{outer} ~3 ~1 minecraft:glass hollow",
+        *[f"setblock ~{x} ~1 ~0 {door},half=lower]" for x in (wall, outer)],
+        *[f"setblock ~{x} ~2 ~0 {door},half=upper]" for x in (wall, outer)],
+    ]
+
+
 def write_start_functions() -> list[str]:
     """Write the start dome functions and return the function ids the tick tag must run."""
     functions = DATAPACK / "data/packpack/function"
@@ -251,6 +267,7 @@ def write_start_functions() -> list[str]:
         *fill_runs(floor, "minecraft:grass_block"),
         *fill_runs(shell, "minecraft:glass"),
         *[f"setblock ~{x} ~{y} ~{z} minecraft:sea_lantern" for x, y, z in lights],
+        *airlock(r),
         "setworldspawn ~ ~1 ~",
         "summon minecraft:marker ~ ~1 ~ {Tags:[\"packpack_dome\"]}",
         "execute store result storage packpack:start y int 1 run data get entity"
@@ -558,7 +575,9 @@ def build_profiles(dome_world_style: str, city_free_radius: int) -> None:
     domes["cities"]["cityChance"] = 1.0
     # The patched Lost Cities also keeps domes themselves out of the city free radius, so
     # nothing is visible from spawn: players find the first dome by swimming out.
-    domes["cities"].update({f"cityLevel{i}Height": DOME_FLOOR_Y + 6 * i for i in range(8)})
+    # A dome's ground is flat, so every city level sits on it. Raised levels follow hills in
+    # Lost Cities, and on flat ground they left lawns and plazas floating over open pits.
+    domes["cities"].update({f"cityLevel{i}Height": DOME_FLOOR_Y for i in range(8)})
     # Lights in dome buildings keep their torches (and let dome villagers spawn); more
     # lots become buildings instead of lawn.
     domes["lostcity"].update({"generateLighting": True, "buildingChance": 0.6, "parkChance": 0.1})

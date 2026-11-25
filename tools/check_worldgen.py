@@ -27,10 +27,11 @@ from region import Region, section_ids
 
 CHUNKY_URL = "https://cdn.modrinth.com/data/fALzjamp/versions/LuFhm4eU/Chunky-NeoForge-1.4.23.jar"
 CHUNKY_SHA256 = "d72f235cf1f56f2c374f52c00bdda5034524b28142305a84cfc123a3f92ad274"
-# A square with four domes (grid points at 640 and 896), with room for each dome's window.
-CENTRE = (768, 768)
-RADIUS = 300
-DOMES = [(640, 640), (640, 896), (896, 640), (896, 896)]
+# A square holding four dome slots on the 512 block grid (128 + 512k), with room for each
+# dome's window. Each slot has a dome about 80% of the time.
+CENTRE = (896, 896)
+RADIUS = 420
+DOMES = [(640, 640), (640, 1152), (1152, 640), (1152, 1152)]
 WINDOW = 135
 Y_MIN, Y_MAX = -70, 125
 GROUND = {"sand", "gravel", "dirt", "grass_block", "clay"}

@@ -30,7 +30,7 @@ hash = "3d8609e66481b7d9097a68e5d33ef851c11f2e51982e5f9c5610798410e958bc"
 
 [[files]]
 file = "config/lostcities/profiles/waterworld_domes.json"
-hash = "8827189bcad3174f62bc1b81e8402a177a2ca2ee5e3f8015c4ce74075b0eeef1"
+hash = "951f7d68aabcf201528b1add777697125375ec0a137303322319565fa69b4a8d"
 
 [[files]]
 file = "config/modernfix-mixins.properties"
@@ -834,7 +834,7 @@ hash = "8be69d5b06bbb93d1e1d5ca0b70aa4510323a5bdcf1d6de2d8a400d347e4b8b0"
 
 [[files]]
 file = "datapacks/pack-pack-worldgen/data/packpack/function/build_start_dome.mcfunction"
-hash = "033b636bbae2d73bd6a9e90cefb7fb5be263fadc69a5084e804e09e01c71bdb8"
+hash = "6ed7eb4d76eb96ad487ca8a1997924a71e90259bb5924beb055ddb71cf679b0c"
 
 [[files]]
 file = "datapacks/pack-pack-worldgen/data/packpack/function/place_new_player.mcfunction"
@@ -1152,11 +1152,11 @@ metafile = true
 
 [[files]]
 file = "mods/lostcities-1.21-8.4.8-packpack.jar"
-hash = "be4727d9d71ae1e542a7f8408aa18933d30c50e810677a4f8dd2a3b6fab56eb5"
+hash = "0a8db45dbc55a8269ade8b00201ebe878c45f95b9d864b9a962c792186d5e94a"
 
 [[files]]
 file = "mods/lostworlds-1.21-2.0.0-packpack.jar"
-hash = "c35250ed590b7ea5d634eef1dc9ccf66ec97784213acbfd79aae5a56ee812900"
+hash = "07033d4a964f1be0f2082c0fb60427399e45d0c2ba8af53e4db3052ce2557871"
 
 [[files]]
 file = "mods/mezzconfig.pw.toml"
@@ -1270,6 +1270,11 @@ metafile = true
 [[files]]
 file = "mods/yungs-better-ocean-monuments.pw.toml"
 hash = "a2d7176026abf4a68a663b375811a603c508f36062cc7fb5b45416e1462682a8"
+metafile = true
+
+[[files]]
+file = "mods/zume.pw.toml"
+hash = "165466fe8e528309d95875396f2a5e13c0bab7bcb0c1134d1fd5f3a935d488f5"
 metafile = true
 
 [[files]]

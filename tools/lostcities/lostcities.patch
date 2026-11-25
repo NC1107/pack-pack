@@ -213,6 +213,21 @@
              }
          }
      }
+--- a/src/main/java/mcjty/lostcities/worldgen/lost/BuildingInfo.java	2026-11-24 04:11:35.373332294 -0500
++++ b/src/main/java/mcjty/lostcities/worldgen/lost/BuildingInfo.java	2026-11-25 08:07:01.012921691 -0500
+@@ -1239,6 +1239,12 @@
+ 
+ 
+     private static int getCityLevelSpace(ChunkCoord coord, IDimensionInfo provider) {
++        if (CitySphere.intersectsWithCitySphere(coord, provider) && provider.getProfile().GROUNDLEVEL < 0) {
++            // pack-pack: domes sit on a flat sea floor, so their cities are flat too. The stepped
++            // levels below are meant for floating spheres with filled ground under them, and on
++            // flat ground they leave retaining walls and overhangs.
++            return 0;
++        }
+         if (CitySphere.intersectsWithCitySphere(coord, provider)) {
+             // In the sphere
+             int chunkX = coord.chunkX();
 --- a/src/main/java/mcjty/lostcities/worldgen/ChunkDriver.java	2026-11-24 04:11:35.372106975 -0500
 +++ b/src/main/java/mcjty/lostcities/worldgen/ChunkDriver.java	2026-11-24 12:42:41.959410780 -0500
 @@ -240,6 +240,9 @@

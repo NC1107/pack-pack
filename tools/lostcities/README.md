@@ -13,4 +13,6 @@ What changes:
 - The sphere factor scales the whole city radius. Upstream only scaled the random part, which made our domes over 100 blocks wide.
 - Under an outer sea, any air left below sea level outside a dome (rooms of drowned cities, structure templates) is flooded as the last step of generation, so there are no air pockets in the water. Grass there turns to moss.
 
+- Cities inside domes are all on one level. Upstream steps them up towards the middle of a sphere, which on a flat dome floor left retaining walls and overhangs.
+
 To rebuild: clone upstream at 1.21-8.4.8, apply `lostcities.patch` with `patch -p1`, run `./gradlew build` with Java 21, copy `build/libs/lostcities-1.21-8.4.8.jar` over the one in `pack/mods`.
