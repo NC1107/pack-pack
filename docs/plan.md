@@ -321,6 +321,6 @@ Options are to wait for a fixed version, report it to the author, or drop the wo
 - A nightly soak with a chunk pregen over several seeds, to ever reproduce the Lost Cities `sphere is null` error.
 - [x] Tests and lint for `tools/` (pytest and ruff in the hygiene job).
 - A static check of mod metadata and dependencies before booting.
-- A scheduled mod update workflow.
+- [x] A scheduled mod update workflow (weekly, checked before the PR opens).
 - Performance budgets with baselines.
 - Recipe dump, overlap report, progression solvability graph and quest validator, in that order, once the tier map exists.
