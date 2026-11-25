@@ -71,21 +71,6 @@ def java_home(java: str) -> Path:
     return Path(resolved).resolve().parent.parent
 
 
-# Xaero's World Map 1.47.0 deadlocks when the world unloads while it is loading regions from the
-# world save: its loader thread holds a lock and waits for a task on the render thread, which is
-# blocked waiting for the server thread, which waits for that lock. The test quits right after
-# joining, so it hits this almost every time. The thread dump is in the plan. Players can hit it
-# too, only less often, so this is a test workaround and not a fix.
-KNOWN_HANG_MODS = ["xaeroworldmap"]
-
-
-def exclude_known_hang_mods() -> None:
-    for prefix in KNOWN_HANG_MODS:
-        for jar in (GAME_DIR / "mods").glob(f"{prefix}*.jar"):
-            jar.unlink()
-            log(f"excluded {jar.name} from the client test, known shutdown deadlock (docs/plan.md)")
-
-
 def install_pack(java: str) -> None:
     if GAME_DIR.exists():
         shutil.rmtree(GAME_DIR)
@@ -95,7 +80,6 @@ def install_pack(java: str) -> None:
     subprocess.run([java, "-jar", str(packwiz_bootstrap()), "--bootstrap-no-update", "-g", "-s", "client",
                     PACK_TOML.as_uri()], cwd=GAME_DIR, check=True)
     shutil.copy(cached_download(RUNTIME_TEST_URL, RUNTIME_TEST_SHA256), GAME_DIR / "mods")
-    exclude_known_hang_mods()
     with (GAME_DIR / "options.txt").open("a") as options:
         # An unfocused virtual display would otherwise pause the game before the test can finish.
         options.write("pauseOnLostFocus:false\n")

@@ -17,6 +17,17 @@ KNOWN_UPSTREAM_ERRORS = {
     # water (its ruin pass on drowned buildings); vanilla throws the block entity away.
     "Failed to create block entity minecraft:mob_spawner": "https://github.com/McJty/LostCities/issues/786",
     "Failed to create block entity minecraft:trial_spawner": "https://github.com/McJty/LostCities/issues/786",
+    # C2ME ships a client module (uncapped view distance) whose mixins name client classes; on a
+    # dedicated server NeoForge refuses to load them and logs it, then the server runs normally.
+    # Not reported upstream yet.
+    # LambDynamicLights bundles its pridelib library with an access transformer entry for a file
+    # that is not in the jar. NeoForge logs it and carries on. Not reported upstream yet.
+    "Access transformer file META-INF/accesstransformer.cfg provided by mod pride does not exist":
+        "https://github.com/LambdAurora/LambDynamicLights/issues",
+    "Attempted to load class net/minecraft/client/Options for invalid dist DEDICATED_SERVER":
+        "https://github.com/RelativityMC/C2ME-neoforge/issues",
+    "Attempted to load class net/minecraft/client/renderer/LevelRenderer for invalid dist DEDICATED_SERVER":
+        "https://github.com/RelativityMC/C2ME-neoforge/issues",
 }
 
 
