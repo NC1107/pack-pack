@@ -6,11 +6,7 @@ pack-format = "packwiz:1.1.0"
 [index]
 file = "index.toml"
 hash-format = "sha256"
-<<<<<<< HEAD
-hash = "3806b61ccd0c09801cadd972d3b38ecb9a1aff597ab16116c73353c52f056d1c"
-=======
-hash = "9eb9a87c2a1dcd7914c9c977ac3e2a9f879d48670c6c8c3ae57271250a904226"
->>>>>>> f25fbf1 (feat: fewer domes with flat cities, an airlock on the start dome, zoom)
+hash = "a0b655ce9a24f64980e54a0e43f36b72a8bd918844a28571f601eb4205ebf7c8"
 
 [versions]
 minecraft = "1.21.1"
