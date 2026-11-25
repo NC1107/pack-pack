@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.18.0](https://github.com/NC1107/pack-pack/compare/v0.17.0...v0.18.0) (2026-11-25)
+
+
+### Features
+
+* **mods:** add Create Deep Seas, pin Sodium 0.8.12, drop Iris ([69f6e30](https://github.com/NC1107/pack-pack/commit/69f6e30aa9049f087a48c97f6fb63e6733e45678))
+
 ## [0.17.0](https://github.com/NC1107/pack-pack/compare/v0.16.0...v0.17.0) (2026-11-25)
 
 
