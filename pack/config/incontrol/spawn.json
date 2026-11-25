@@ -4,5 +4,11 @@
     "hostile": true,
     "insphere": true,
     "result": "deny"
+  },
+  {
+    "dimension": "minecraft:overworld",
+    "mob": "minecraft:drowned",
+    "random": 0.75,
+    "result": "deny"
   }
 ]

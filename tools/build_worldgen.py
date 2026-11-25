@@ -330,7 +330,10 @@ AIR_CARVING_FEATURES = {
 
 
 def write_ocean_biomes() -> None:
-    """Override the vanilla ocean biomes: no caves, and sky and fog the colour of deep water."""
+    """Override the vanilla ocean biomes: no caves, and underwater fog the colour of deep water.
+
+    The sky and air fog stay vanilla, so the surface still looks like daytime.
+    """
     ocean_biomes = sorted({b for _, deep, shallow in TEMPERATURE_BANDS for b in (deep, shallow)})
     for name in ocean_biomes:
         biome = vanilla(f"data/minecraft/worldgen/biome/{name}.json")
@@ -339,8 +342,6 @@ def write_ocean_biomes() -> None:
         # Features that hollow out air under the floor: geodes and dungeons leave air pockets in
         # the sand that show up as bubbles where they break through, springs pour out of them.
         biome["features"] = [[f for f in step if f not in AIR_CARVING_FEATURES] for step in biome["features"]]
-        biome["effects"]["sky_color"] = DEEP_WATER_COLOR
-        biome["effects"]["fog_color"] = DEEP_WATER_COLOR
         # Vanilla ocean water fog is almost black, which hides everything past a few chunks.
         biome["effects"]["water_fog_color"] = DEEP_WATER_COLOR
         write_json(DATAPACK / f"data/minecraft/worldgen/biome/{name}.json", biome)
@@ -460,6 +461,7 @@ BIG_SEA_LIFE = [
 
 
 INCONTROL_SPAWN_RULES = REPO / "pack" / "config" / "incontrol" / "spawn.json"
+DROWNED_SPAWN_REFUSED = 0.75
 
 
 def write_incontrol_spawn_rules() -> None:
@@ -467,6 +469,12 @@ def write_incontrol_spawn_rules() -> None:
     # last people live. In Control's Lost Cities condition keeps hostiles out of every sphere.
     write_json(INCONTROL_SPAWN_RULES, [
         {"dimension": "minecraft:overworld", "hostile": True, "insphere": True, "result": "deny"},
+        # The whole sea floor is dark, so drowned spawn everywhere and pile up around a player
+        # (12 to 22 within 64 blocks after a few minutes in testing). Most spawn attempts are
+        # refused so despawning keeps it to a handful. A count limit does not work here: it
+        # counts the whole dimension, including drowned that ocean ruins place when they generate.
+        {"dimension": "minecraft:overworld", "mob": "minecraft:drowned", "random": DROWNED_SPAWN_REFUSED,
+         "result": "deny"},
     ])
 
 
