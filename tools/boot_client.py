@@ -151,7 +151,7 @@ def dump_threads(game_java: str) -> None:
     jcmd = java_home(game_java) / "bin" / "jcmd"
     dumps = []
     for pid in game_pids():
-        result = subprocess.run([str(jcmd), str(pid), "Thread.print"], capture_output=True, text=True, timeout=60)
+        result = subprocess.run([str(jcmd), str(pid), "Thread.print"], capture_output=True, text=True, timeout=60, check=False)
         dumps.append(f"===== pid {pid} =====\n{result.stdout}{result.stderr}")
     (RUN / "client-threads.txt").write_text("\n".join(dumps) or "no game JVM found\n")
     log(f"saved thread dumps of {len(dumps)} JVM(s) to run/client-threads.txt")

@@ -13,6 +13,10 @@ file = "config/hybrid_aquatic.json"
 hash = "7c5d7f1871a3d027d01584652e27ed143bdffc2063082f7666c31c5fe3286a4c"
 
 [[files]]
+file = "config/incontrol/spawn.json"
+hash = "d7d7bca340dc98516514593c51145183065d872b582561062e9beed37b36c405"
+
+[[files]]
 file = "config/incontrol/spawner.json"
 hash = "c3c98c555d8ad07de4b2caa3cf305a591ba82ed14f3ea65161d26c7330ca1912"
 
@@ -818,7 +822,7 @@ hash = "8be69d5b06bbb93d1e1d5ca0b70aa4510323a5bdcf1d6de2d8a400d347e4b8b0"
 
 [[files]]
 file = "datapacks/pack-pack-worldgen/data/packpack/function/build_start_dome.mcfunction"
-hash = "b5d6d065714d1636685fbb2ed24f2ae8b95986d705f0973739871660d68ea1e7"
+hash = "033b636bbae2d73bd6a9e90cefb7fb5be263fadc69a5084e804e09e01c71bdb8"
 
 [[files]]
 file = "datapacks/pack-pack-worldgen/data/packpack/function/place_new_player.mcfunction"
@@ -834,7 +838,7 @@ hash = "1251e9d34ba489c3d88ab8e11c17bf94e64a5671b251fe6b7245f836b0c28fc4"
 
 [[files]]
 file = "datapacks/pack-pack-worldgen/data/packpack/function/start_tick.mcfunction"
-hash = "d7c8a1d3539149cc7cb5a6ef6fd97aafcb873b2d859e70798cd4aaf0f43e9bff"
+hash = "94e76ac0362ec450854a4b3e7893309031e98a1335b0478abb17eb16d23d1014"
 
 [[files]]
 file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/seabed_gravel.json"

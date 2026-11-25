@@ -79,7 +79,7 @@ def neoforge_installer(version: str) -> Path:
 
 
 def java_major_version(java: str) -> int | None:
-    out = subprocess.run([java, "-version"], capture_output=True, text=True).stderr
+    out = subprocess.run([java, "-version"], capture_output=True, text=True, check=False).stderr
     match = re.search(r'version "(\d+)', out)
     return int(match[1]) if match else None
 

@@ -320,7 +320,7 @@ Options are to wait for a fixed version, report it to the author, or drop the wo
 
 - Capture evidence for hangs: a server thread dump on a stall, and a separate client shutdown deadline with a dump.
 - A nightly soak with a chunk pregen over several seeds, to ever reproduce the Lost Cities `sphere is null` error.
-- Tests and lint for `tools/`.
+- [x] Tests and lint for `tools/` (pytest and ruff in the hygiene job).
 - A static check of mod metadata and dependencies before booting.
 - A scheduled mod update workflow.
 - Performance budgets with baselines.
