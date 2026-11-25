@@ -253,8 +253,8 @@
          setBlock(current, correct(state));
          incY();
 --- a/src/main/java/mcjty/lostcities/worldgen/gen/Spheres.java	2026-11-24 04:11:35.372840297 -0500
-+++ b/src/main/java/mcjty/lostcities/worldgen/gen/Spheres.java	2026-11-25 09:48:00.358290938 -0500
-@@ -11,11 +11,13 @@
++++ b/src/main/java/mcjty/lostcities/worldgen/gen/Spheres.java	2026-11-25 12:33:36.831463566 -0500
+@@ -11,11 +11,16 @@
  import mcjty.lostcities.worldgen.lost.BuildingInfo;
  import mcjty.lostcities.worldgen.lost.CitySphere;
  import net.minecraft.core.BlockPos;
@@ -264,11 +264,14 @@
  import net.minecraft.server.level.WorldGenRegion;
  import net.minecraft.world.level.LevelAccessor;
  import net.minecraft.world.level.block.Blocks;
-+import net.minecraft.world.level.block.BushBlock;
++import net.minecraft.tags.BlockTags;
++import net.minecraft.world.level.block.Block;
++import net.minecraft.world.level.block.DoorBlock;
++import net.minecraft.world.level.block.LiquidBlockContainer;
  import net.minecraft.world.level.block.state.BlockState;
  import net.minecraft.world.level.chunk.ChunkAccess;
  import net.minecraft.world.level.chunk.ChunkGenerator;
-@@ -45,6 +47,10 @@
+@@ -45,6 +50,10 @@
                      fillSphere(feature, cx, profile.GROUNDLEVEL, cz, (int) radius, sphere.getGlassBlock(), sphere.getSideBlock());
                  }
  
@@ -279,7 +282,7 @@
                  if (profile.isSpace()) {
                      BuildingInfo info = BuildingInfo.getBuildingInfo(coord, provider);
                      Monorails.generateMonorails(feature, info);
-@@ -58,6 +64,154 @@
+@@ -58,6 +67,167 @@
          }
      }
  
@@ -313,8 +316,9 @@
 +                        BlockState state = driver.getBlock();
 +                        if (state.isAir()) {
 +                            driver.block(feature.liquid);
-+                        } else if (state.getBlock() instanceof BushBlock && state.getFluidState().isEmpty()) {
-+                            // Land plants under water render as loose sprites floating in the sea
++                        } else if (state.getFluidState().isEmpty() && washesAway(state)) {
++                            // Water would break these (plants, tripwire, torches) and drop them as
++                            // items floating around the ruins, so they are water from the start.
 +                            driver.block(feature.liquid);
 +                        } else if (state.is(Blocks.GRASS_BLOCK)) {
 +                            // Lawns of drowned cities have been under the sea for a long time
@@ -381,6 +385,18 @@
 +        }
 +    }
 +
++    /** Mirrors which blocks vanilla's flowing water replaces (FlowingFluid.canHoldFluid). */
++    private static boolean washesAway(BlockState state) {
++        Block block = state.getBlock();
++        if (block instanceof LiquidBlockContainer || block instanceof DoorBlock || state.is(BlockTags.SIGNS)
++                || state.is(Blocks.LADDER) || state.is(Blocks.SUGAR_CANE) || state.is(Blocks.BUBBLE_COLUMN)
++                || state.is(Blocks.NETHER_PORTAL) || state.is(Blocks.END_PORTAL) || state.is(Blocks.END_GATEWAY)
++                || state.is(Blocks.STRUCTURE_VOID)) {
++            return false;
++        }
++        return !state.blocksMotion();
++    }
++
 +    private static final int LIGHT_SPACING = 6;
 +    private static final int LIGHT_HEIGHT = 3;
 +    private static final BlockState LIGHT = Blocks.LIGHT.defaultBlockState();
@@ -434,7 +450,7 @@
      private static void fillSphere(LostCityTerrainFeature feature, int centerx, int centery, int centerz, int radius,
                                     BlockState glass, BlockState sideBlock) {
          IDimensionInfo provider = feature.provider;
-@@ -165,5 +319,6 @@
+@@ -165,5 +335,6 @@
                  }
              }
          }

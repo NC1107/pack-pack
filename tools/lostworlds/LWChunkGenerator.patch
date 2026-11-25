@@ -1,5 +1,5 @@
 --- a/src/main/java/mcjty/lostworlds/worldgen/LWChunkGenerator.java	2026-11-24 04:57:59.552682855 -0500
-+++ b/src/main/java/mcjty/lostworlds/worldgen/LWChunkGenerator.java	2026-11-24 16:28:37.074757912 -0500
++++ b/src/main/java/mcjty/lostworlds/worldgen/LWChunkGenerator.java	2026-11-25 13:17:19.989431362 -0500
 @@ -19,6 +19,7 @@
  import net.minecraft.world.level.LevelHeightAccessor;
  import net.minecraft.world.level.StructureManager;
@@ -119,3 +119,20 @@
                                      } else {
                                          levelchunksection.setBlockState(x, y & 15, z, block, false);
                                      }
+@@ -397,7 +438,16 @@
+         });
+     }
+ 
++    /**
++     * pack-pack: players start in a small dome at 0,0 under the outer sea, and ruins, wrecks and
++     * mod structures generated right through it. None may start this many chunks from spawn.
++     */
++    private static final int SPAWN_CLEAR_CHUNKS = 10;
++
+     private boolean tryGenerateStructure(StructureSet.StructureSelectionEntry entry, StructureManager structureManager, RegistryAccess registryAccess, RandomState rnd, StructureTemplateManager templateManager, long seed, ChunkAccess chunk, ChunkPos cp, SectionPos sp) {
++        if (getOuterSeaLevel() != null && cp.x * cp.x + cp.z * cp.z <= SPAWN_CLEAR_CHUNKS * SPAWN_CLEAR_CHUNKS) {
++            return false;
++        }
+         Structure structure = entry.structure().value();
+         StructureStart start = structureManager.getStartForStructure(sp, structure, chunk);
+         int references = start != null ? start.getReferences() : 0;

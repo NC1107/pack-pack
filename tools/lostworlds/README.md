@@ -13,3 +13,5 @@ Two things change, only for the `spheres` generator with a custom sea level:
 Change both together.
 
 To rebuild: clone upstream at the commit above, copy `SeaFloor.java` into `src/main/java/mcjty/lostworlds/worldgen/`, apply `LWChunkGenerator.patch` with `patch -p1`, run `./gradlew build` with Java 21, and copy the jar from `build/libs` over the one in `pack/mods`.
+
+No structure may start within 10 chunks of 0,0 under the outer sea (in `LWChunkGenerator.tryGenerateStructure`, Lost Worlds' own copy of the vanilla method), so nothing generates through the start dome.
