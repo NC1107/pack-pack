@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.9.2](https://github.com/NC1107/pack-pack/compare/v0.9.1...v0.9.2) (2026-11-25)
+
+
+### Bug Fixes
+
+* complete domes level with the sea floor, no air pockets ([#31](https://github.com/NC1107/pack-pack/issues/31)) ([09739df](https://github.com/NC1107/pack-pack/commit/09739df371fb28df6cbcafdad8e4dc287474b62f))
+
 ## [0.9.1](https://github.com/NC1107/pack-pack/compare/v0.9.0...v0.9.1) (2026-11-24)
 
 
