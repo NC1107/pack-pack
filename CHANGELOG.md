@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.22.5](https://github.com/NC1107/pack-pack/compare/v0.22.4...v0.22.5) (2026-11-26)
+
+
+### Bug Fixes
+
+* sand under domes no longer drains out of the bottom of the world ([ada72f4](https://github.com/NC1107/pack-pack/commit/ada72f4c85b72a3cb332449269158786b7d4301c))
+* the start sub's walls show from inside on the first join ([a523c29](https://github.com/NC1107/pack-pack/commit/a523c29b08428a8eb894e14b3f8b64e5d71f5299))
+* village domes are whole villages, and no more holes in dome glass ([3a4f33d](https://github.com/NC1107/pack-pack/commit/3a4f33d19ebf39ee2c96468529bc37d9536234b0))
+
 ## [0.22.4](https://github.com/NC1107/pack-pack/compare/v0.22.3...v0.22.4) (2026-11-26)
 
 
