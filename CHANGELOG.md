@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.22.3](https://github.com/NC1107/pack-pack/compare/v0.22.2...v0.22.3) (2026-11-26)
+
+
+### Bug Fixes
+
+* the test sub drives at a useful speed and dives to the set depth ([a186858](https://github.com/NC1107/pack-pack/commit/a1868582567f183407a19aecebf2173d7ac57ab7))
+
 ## [0.22.2](https://github.com/NC1107/pack-pack/compare/v0.22.1...v0.22.2) (2026-11-25)
 
 
