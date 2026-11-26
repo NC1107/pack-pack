@@ -842,7 +842,15 @@ hash = "556379a1976d6e400ab40663807b9aa4aaf1b250a17bd5f368ff63f5daa94c3a"
 
 [[files]]
 file = "datapacks/pack-pack-worldgen/data/packpack/function/place_new_player.mcfunction"
-hash = "8ad3a07047f7d3af12225e348980f16bee1dee7dc73b10da1fcff5eb98477c69"
+hash = "6547ecc7e6323f15714efa4a704f0f367ba8c3d06d133732d298f4b9f3f9c5b6"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/function/refresh_start.mcfunction"
+hash = "07e57c708e57410b130233814ce0ff5904fa4f8fb94886d049014725582458bf"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/function/refresh_start_done.mcfunction"
+hash = "50bfa5efbfd1190181435ae5e983c408337428643c53010e7fdd6c1a5ff7010c"
 
 [[files]]
 file = "datapacks/pack-pack-worldgen/data/packpack/function/settle_new_villagers.mcfunction"

@@ -275,6 +275,28 @@ def write_test_sub(functions: Path) -> None:
         "execute at @s positioned ~ 150 ~ run function packpack:test_sub_build\n")
 
 
+# The wreck is usually built in the same tick the first player joins, after their client has
+# the chunks: the client then holds the wreck's blocks but keeps drawing the old sea floor
+# (the hull is invisible from inside). Any later block change in a section redraws it, so a
+# little after a player is placed, one water block in every section the wreck touches becomes
+# an invisible light block for a moment.
+REFRESH_DELAY_TICKS = 60
+
+
+def write_start_refresh(functions: Path, water: list) -> None:
+    cells = {}
+    for x, y, z in sorted(water):
+        cells.setdefault((x >> 4, (DOME_FLOOR_Y + y) >> 4, z >> 4), (x, DOME_FLOOR_Y + y, z))
+    (functions / "refresh_start.mcfunction").write_text("\n".join([
+        *[f"execute if block {x} {y} {z} minecraft:water run setblock {x} {y} {z} minecraft:light[level=0,waterlogged=true]"
+          for x, y, z in cells.values()],
+        "schedule function packpack:refresh_start_done 5t",
+    ]) + "\n")
+    (functions / "refresh_start_done.mcfunction").write_text("\n".join(
+        f"execute if block {x} {y} {z} minecraft:light run setblock {x} {y} {z} minecraft:water"
+        for x, y, z in cells.values()) + "\n")
+
+
 def write_start_functions() -> list[str]:
     """Write the start submarine functions and return the function ids the tick tag must run."""
     functions = DATAPACK / "data/packpack/function"
@@ -306,6 +328,7 @@ def write_start_functions() -> list[str]:
         "forceload remove -16 -16 16 16",
     ]
     (functions / "build_start.mcfunction").write_text("\n".join(build) + "\n")
+    write_start_refresh(functions, [cell for cell in clear if cell not in sub])
     # In a new world the load tag runs before the chunks under spawn exist, so the wreck is
     # built from the tick tag instead: force-load the chunks around 0,0, wait until they are
     # loaded, then build once at the sea floor (a storage flag keeps it from ever overwriting
@@ -323,6 +346,7 @@ def write_start_functions() -> list[str]:
         "$tp @s 0.5 $(y) 0.5",
         "give @s ftbquests:book",
         "tag @s add packpack_started",
+        f"schedule function packpack:refresh_start {REFRESH_DELAY_TICKS}t",
     ]) + "\n")
     (functions / "start.mcfunction").write_text("gamerule spawnRadius 0\n")
     write_test_sub(functions)

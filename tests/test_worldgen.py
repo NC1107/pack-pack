@@ -69,3 +69,14 @@ def test_ocean_temperature_bands_cover_the_whole_range():
     assert bands[0][0] == -1.0 and bands[-1][1] == 1.0
     for (_, end), (start, _) in zip(bands, bands[1:], strict=False):
         assert end == start
+
+
+def test_start_refresh_touches_every_section_of_the_wreck(tmp_path):
+    wg.write_start_refresh(tmp_path, [(x, y, z) for x in range(-20, 20) for y in range(0, 20) for z in range(-8, 10)])
+    lines = (tmp_path / "refresh_start.mcfunction").read_text().splitlines()
+    done = (tmp_path / "refresh_start_done.mcfunction").read_text().splitlines()
+    cells = [tuple(map(int, re.search(r"setblock (-?\d+) (-?\d+) (-?\d+)", line).groups())) for line in lines[:-1]]
+    sections = {(x >> 4, (wg.DOME_FLOOR_Y + y) >> 4, z >> 4) for x, y, z in start_sub.blocks()}
+    assert sections <= {(x >> 4, y >> 4, z >> 4) for x, y, z in cells}
+    assert lines[-1].startswith("schedule function packpack:refresh_start_done")
+    assert len(done) == len(cells) and all("minecraft:water" in line for line in done)
