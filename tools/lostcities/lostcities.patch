@@ -253,7 +253,7 @@
          setBlock(current, correct(state));
          incY();
 --- a/src/main/java/mcjty/lostcities/worldgen/gen/Spheres.java	2026-11-24 04:11:35.372840297 -0500
-+++ b/src/main/java/mcjty/lostcities/worldgen/gen/Spheres.java	2026-11-25 19:29:28.409101322 -0500
++++ b/src/main/java/mcjty/lostcities/worldgen/gen/Spheres.java	2026-11-25 19:37:39.271943198 -0500
 @@ -1,5 +1,6 @@
  package mcjty.lostcities.worldgen.gen;
  
@@ -272,7 +272,7 @@
  import net.minecraft.world.level.block.state.BlockState;
  import net.minecraft.world.level.chunk.ChunkAccess;
  import net.minecraft.world.level.chunk.ChunkGenerator;
-@@ -45,6 +50,10 @@
+@@ -45,9 +50,16 @@
                      fillSphere(feature, cx, profile.GROUNDLEVEL, cz, (int) radius, sphere.getGlassBlock(), sphere.getSideBlock());
                  }
  
@@ -283,7 +283,13 @@
                  if (profile.isSpace()) {
                      BuildingInfo info = BuildingInfo.getBuildingInfo(coord, provider);
                      Monorails.generateMonorails(feature, info);
-@@ -58,6 +67,190 @@
++                    if (info.hasMonorail()) {
++                        lightTube(feature, sphere, chunkX, chunkZ);
++                    }
+                 }
+ 
+                 driver.actuallyGenerate(chunk);
+@@ -58,6 +70,235 @@
          }
      }
  
@@ -421,6 +427,51 @@
 +        return !state.blocksMotion();
 +    }
 +
++    private static final int TUBE_LIGHT_SPACING = 4;
++
++    /**
++     * The glass tubes between domes are the only air outside them, and without daylight they were
++     * dark enough for zombies, skeletons and creepers to spawn in. Light blocks go in the middle
++     * of the air inside the tube every few blocks; inside domes the dome lights already cover it.
++     */
++    private static void lightTube(LostCityTerrainFeature feature, CitySphere sphere, int chunkX, int chunkZ) {
++        if (outerSeaLevel(feature) == null) {
++            return;
++        }
++        ChunkDriver driver = feature.getDriver();
++        int ground = feature.profile.GROUNDLEVEL;
++        boolean enabled = sphere.isEnabled() && sphere.getCenterPos() != null;
++        BlockPos cc = enabled ? sphere.getCenterPos() : BlockPos.ZERO;
++        double sqradius = enabled ? sphere.getRadius() * sphere.getRadius() : 0;
++        for (int x = TUBE_LIGHT_SPACING / 2; x < 16; x += TUBE_LIGHT_SPACING) {
++            for (int z = TUBE_LIGHT_SPACING / 2; z < 16; z += TUBE_LIGHT_SPACING) {
++                double dx = (chunkX << 4) + x - cc.getX();
++                double dz = (chunkZ << 4) + z - cc.getZ();
++                // The tallest run of air in the column is the inside of the tube (there can be a
++                // gap under its floor too).
++                int best = 0;
++                int bestMiddle = 0;
++                int run = 0;
++                for (int y = ground - 6; y <= ground + 17; y++) {
++                    double dy = y - cc.getY();
++                    boolean inDome = enabled && dx * dx + dy * dy + dz * dz <= sqradius;
++                    if (y <= ground + 16 && !inDome && driver.getBlock(x, y, z).isAir()) {
++                        run++;
++                    } else {
++                        if (run > best) {
++                            best = run;
++                            bestMiddle = y - 1 - run / 2;
++                        }
++                        run = 0;
++                    }
++                }
++                if (best >= 2) {
++                    driver.current(x, bestMiddle, z).block(LIGHT);
++                }
++            }
++        }
++    }
++
 +    private static final int LIGHT_SPACING = 6;
 +    private static final int LIGHT_HEIGHT = 3;
 +    private static final BlockState LIGHT = Blocks.LIGHT.defaultBlockState();
@@ -474,7 +525,7 @@
      private static void fillSphere(LostCityTerrainFeature feature, int centerx, int centery, int centerz, int radius,
                                     BlockState glass, BlockState sideBlock) {
          IDimensionInfo provider = feature.provider;
-@@ -156,8 +349,11 @@
+@@ -156,8 +397,11 @@
                  } else if (dxdx + dzdz <= sqradiusOuter) {
                      // If we are in a space profile then we clear the sphere area too
                      if (profile.isFloating() || profile.isSpace()) {
@@ -488,7 +539,7 @@
                              driver.block(y <= outerSeaLevel ? feature.liquid : air);
                              driver.incY();
                          }
-@@ -165,5 +361,6 @@
+@@ -165,5 +409,6 @@
                  }
              }
          }
