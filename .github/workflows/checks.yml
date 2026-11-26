@@ -4,6 +4,10 @@ on:
   push:
     branches: [main]
   pull_request:
+    # Release PRs only change the version and changelog, and GitHub does not run workflows for
+    # pull requests its own token opens, so they showed a failed run that never ran anything.
+    # The push to main that follows is what checks a release.
+    branches-ignore: ["release-please--**"]
   # The mod update workflow calls this on its branch, because pull requests opened with the
   # Actions token do not start other workflows.
   workflow_call:
@@ -34,6 +38,29 @@ jobs:
       - run: python -m pip install --quiet pytest==9.2.0 ruff==0.17.6 numpy==2.5.5
       - run: python -m ruff check tools tests
       - run: python -m pytest -q tests
+
+  tweaks-mod:
+    # The mod ships as a jar built by hand, so rebuild it and make sure the jar is this source.
+    needs: repo-hygiene
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ inputs.ref }}
+      - uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: "21"
+      - uses: actions/cache@v6
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: tweaks-mod-${{ hashFiles('tools/tweaks-mod/build.gradle', 'tools/tweaks-mod/gradle/wrapper/gradle-wrapper.properties') }}
+      - working-directory: tools/tweaks-mod
+        run: ./gradlew build --no-daemon
+      - run: cmp tools/tweaks-mod/build/libs/packpack-tweaks-1.0.0.jar pack/mods/packpack-tweaks-1.0.0.jar
 
   server-boot:
     needs: repo-hygiene
@@ -91,6 +118,9 @@ jobs:
           restore-keys: worldgen-
       - run: python -m pip install --quiet numpy==2.5.5
       - run: python tools/boot_server.py --java java --quiet
+      # The datapack and profiles in the repo have to be what the generator writes
+      - run: python tools/build_worldgen.py
+      - run: git diff --exit-code -- pack
       - run: python tools/check_worldgen.py --java java
       # A second seed with warm ocean between its domes, so reefs are covered too
       - run: python tools/check_worldgen.py --java java --seed 5512634387803135143

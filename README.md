@@ -1,7 +1,7 @@
 # pack-pack
 
 A long, hard tech modpack for minecraft 1.21.1 on neoforge.
-It's early, there's pretty much nothing to play yet, it's just the setup so far.
+It's early, the world and the start are there but there's no progression to play through yet.
 
 ## Playing it
 
@@ -38,13 +38,16 @@ Setup and the day to day stuff is in [docs/dev.md](docs/dev.md).
 
 ## How it's checked
 
-Every push and PR runs three checks on github:
+Every push and PR runs these on github:
 
 - `tools/check_repo.py` looks for stuff that breaks between linux and windows, like crlf line endings, file names that only differ by case, paths that are too long, and a mod index that's out of date.
 - `tools/boot_server.py` installs the pack on a real dedicated server and boots it.
   It fails if the server crashes, logs errors, or never finishes starting, and it records boot time and tick times so we can see when something gets slower.
 - `tools/boot_client.py` installs the client side of the pack and launches the actual game on a virtual display.
   It creates a world, joins it, lets it tick for a bit, then quits, and fails on the same stuff as the server one.
+- `tools/check_worldgen.py` generates a patch of ocean with four domes on two seeds and fails on broken glass, leaks, air pockets, floating blocks, or a chunk that failed to generate.
+  The same job regenerates the datapack and fails if it isn't what's committed.
+- Our own small mod gets rebuilt from source and has to come out byte for byte the same as the jar in `pack/mods`.
 
 The bigger checks (recipe overlap, dupes, quests you can't finish, etc) come later once there's content to check.
 

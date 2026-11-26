@@ -24,3 +24,10 @@ tasks.withType(ProcessResources).configureEach {
     inputs.properties props
     filesMatching('META-INF/neoforge.mods.toml') { expand props }
 }
+
+// CI rebuilds the jar and compares it with the one in pack/mods, so the same source has to
+// give the same bytes on any machine.
+tasks.withType(AbstractArchiveTask).configureEach {
+    preserveFileTimestamps = false
+    reproducibleFileOrder = true
+}
