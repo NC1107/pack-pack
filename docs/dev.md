@@ -72,6 +72,19 @@ cd pack && packwiz refresh
 
 `--preview-villages` makes every city a village and allows them near spawn, handy for looking at villages, just don't commit that build.
 
+### Things that fooled us when testing world generation
+
+- A pregenerated world never ticks, so nothing falls or flows in it.
+  Sand that only falls once a player is near (like the sand under domes that drained into the void) only shows up in a live game, flying through fresh chunks while counting `falling_block` entities.
+- Look at the whole height.
+  The worldgen check reads y -70 to 125, and the bottom layer at y -64 has its own bedrock check because a hole there drains everything above it.
+- A chunk that fails to generate is left out of the world, and its crash report used to end the pregeneration early.
+  The check now fails on any `Error generating chunk` line, look for it in the server log whenever a dome looks broken.
+- `tools/region.py` only returns fully generated block chunks, so it reads nothing from `world/entities`.
+- Dome villagers don't exist until a player comes near, their houses spawn them from a trial spawner, so count trial spawners to find village domes.
+- Villagers, pillagers and evokers at the sea surface are the crews of the ship structures, and the skeletons on the sea floor belong to underwater ruins.
+- The four domes the check looks at are too few for anything rare: the village style and a dome missing part of its glass only showed up across 25 dome slots.
+
 ## What the tools do
 
 - `tools/check_repo.py` checks line endings, case collisions, windows-reserved names, path length, and that the packwiz index matches the files. `--json` gives output an agent can read.
