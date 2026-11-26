@@ -48,6 +48,7 @@ RIM_GROUND = range(-15, -12)
 # The drowned city between the four domes, clear of their shells.
 BETWEEN = (736, 736, 320)
 MAX_FLOATING = 200
+CHUNK_ERROR = re.compile(r"Error generating chunk -?\d+,-?\d+: .{0,160}")
 # Sand or gravel resting on water or air falls as soon as its chunk updates: thousands of
 # falling block entities once hills in drowned cities hung over flooded ruins.
 MAX_LOOSE_OVER_WATER = 20
@@ -64,8 +65,9 @@ def use_seed(seed: str) -> None:
     properties.write_text(text)
 
 
-def pregenerate(java: str) -> float:
-    """Generate the test square and return how many chunks a second that took."""
+def pregenerate(java: str) -> tuple[float, list[str]]:
+    """Generate the test square; return how many chunks a second that took and the chunks that
+    failed to generate (a failed chunk is left out of the world, e.g. a hole in a dome)."""
     mods = boot_server.SERVER / "mods"
     jar = mods / "chunky.jar"
     shutil.copy(cached_download(CHUNKY_URL, CHUNKY_SHA256), jar)
@@ -73,12 +75,15 @@ def pregenerate(java: str) -> float:
     shutil.rmtree(boot_server.SERVER / "config" / "chunky" / "tasks", ignore_errors=True)
     finished = threading.Event()
     started = None
+    failed = []
     try:
         proc = subprocess.Popen(boot_server.server_command(java, neoforge_version()), cwd=boot_server.SERVER,
                                 stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
                                 text=True, encoding="utf-8", errors="replace")
         assert proc.stdin and proc.stdout
         for line in proc.stdout:
+            if error := CHUNK_ERROR.search(line):
+                failed.append(error.group(0))
             if boot_server.DONE_LINE.search(line):
                 started = time.monotonic()
                 proc.stdin.write(f"chunky world minecraft:overworld\nchunky center {CENTRE[0]} {CENTRE[1]}\n"
@@ -95,7 +100,7 @@ def pregenerate(java: str) -> float:
     if not finished.is_set():
         raise SystemExit("pre-generation did not finish")
     chunks = (2 * RADIUS // 16 + 1) ** 2
-    return chunks / max(elapsed, 1e-6)
+    return chunks / max(elapsed, 1e-6), failed
 
 
 def load(region: Region, x0: int, z0: int, size: int, classify=None) -> np.ndarray:
@@ -153,6 +158,12 @@ def touching(mask: np.ndarray) -> np.ndarray:
             | padded[1:-1, :-2, 1:-1] | padded[1:-1, 1:-1, 2:] | padded[1:-1, 1:-1, :-2])
 
 
+def open_to_sea(blocks: np.ndarray) -> np.ndarray:
+    """Cells with nothing but water between them and the top of the box."""
+    water = blocks == 3
+    return np.flip(np.logical_and.accumulate(np.flip(water, 1), 1), 1)
+
+
 def check_dome(region: Region, gx: int, gz: int) -> dict:
     origin = np.array([gx - WINDOW, Y_MIN, gz - WINDOW])
     blocks = load(region, gx - WINDOW, gz - WINDOW, 2 * WINDOW)
@@ -183,12 +194,14 @@ def check_dome(region: Region, gx: int, gz: int) -> dict:
     # Inside the shell air meets water at ponds and fountains, outside it only at a leak.
     leaks = int((air & outside & touching(blocks == 3)).sum())
     horizontal = np.sqrt((x + origin[0] + 0.5 - centre[0]) ** 2 + (z + origin[2] + 0.5 - centre[2]) ** 2)
-    # Only around the edge: inside, cellars and pools of the city's buildings hold water.
+    # Only around the edge: inside, cellars and pools of the city's buildings hold water. A gap
+    # under the floor is open to the sea above; flooded rooms of a buried building are not.
     edge = (horizontal > radius - 2) & (horizontal < radius + 10)
-    under_floor = int(((blocks == 3) & (y + Y_MIN < RIM_GROUND.start) & edge).sum())
+    under_floor = int(((blocks == 3) & open_to_sea(blocks) & (y + Y_MIN < RIM_GROUND.start) & edge).sum())
 
     rim = []
-    for angle in np.radians(np.arange(0, 360, 30)):
+    # Between the tunnels, which leave the dome at 0, 90, 180 and 270 degrees.
+    for angle in np.radians(np.arange(15, 360, 30)):
         column = blocks[int(centre[0] + (radius + 6) * np.cos(angle) - origin[0]), :,
                         int(centre[2] + (radius + 6) * np.sin(angle) - origin[2])]
         ground = np.where(column == 4)[0]
@@ -272,11 +285,11 @@ def main() -> int:
     parser.add_argument("--skip-generation", action="store_true", help="check the world that is already there")
     parser.add_argument("--seed", help="generate with this seed instead of the boot test's")
     args = parser.parse_args()
-    speed = None
+    speed, failed = None, []
     if not args.skip_generation:
         if args.seed:
             use_seed(args.seed)
-        speed = pregenerate(args.java)
+        speed, failed = pregenerate(args.java)
     region = Region(boot_server.SERVER / "world" / "region")
     domes = [check_dome(region, gx, gz) for gx, gz in DOMES]
     biomes = foreign_biomes(region)
@@ -287,6 +300,8 @@ def main() -> int:
     (boot_server.RUN / "worldgen-report.json").write_text(json.dumps(report, indent=2) + "\n")
 
     failures = [f"dome at {d['dome']}: {p}" for d in domes for p in d.get("problems", [])]
+    if failed:
+        failures.append(f"{len(failed)} chunks failed to generate, the first: {failed[0]}")
     if not any(d["present"] for d in domes):
         failures.append("no domes generated in the test area")
     if biomes:
