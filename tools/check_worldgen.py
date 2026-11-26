@@ -239,6 +239,21 @@ def loose_over_water(region: Region) -> int:
     return int(((blocks[:, 1:, :] == 1) & (blocks[:, :-1, :] == 2)).sum())
 
 
+def holes_in_bedrock(region: Region) -> int:
+    """Blocks of the world's bottom layer in the test area that are not bedrock. Sand there has
+    the void under it and falls out of the world with everything above it."""
+    holes = 0
+    for cx in range((CENTRE[0] - RADIUS) >> 4, ((CENTRE[0] + RADIUS) >> 4) + 1):
+        for cz in range((CENTRE[1] - RADIUS) >> 4, ((CENTRE[1] + RADIUS) >> 4) + 1):
+            chunk = region.chunk(cx, cz)
+            if not chunk:
+                continue
+            bottom = min(chunk["sections"], key=lambda section: section["Y"])
+            palette, ids = section_ids(bottom)
+            holes += int((np.array([b.split("[")[0] != "minecraft:bedrock" for b in palette])[ids[0]]).sum())
+    return holes
+
+
 def floating_blocks(region: Region) -> int:
     """Solid blocks in the drowned city that do not connect to the sea floor.
 
@@ -295,7 +310,9 @@ def main() -> int:
     biomes = foreign_biomes(region)
     floating = floating_blocks(region)
     loose = loose_over_water(region)
+    holes = holes_in_bedrock(region)
     report = {"domes": domes, "foreign_biomes": biomes, "floating_blocks": floating, "loose_over_water": loose,
+              "holes_in_bedrock": holes,
               "chunks_per_second": round(speed, 1) if speed else None}
     (boot_server.RUN / "worldgen-report.json").write_text(json.dumps(report, indent=2) + "\n")
 
@@ -308,6 +325,8 @@ def main() -> int:
         failures.append(f"biomes from mods in the ocean, Lost Cities skips them: {biomes}")
     if floating > MAX_FLOATING:
         failures.append(f"{floating} blocks float in the water between the domes")
+    if holes:
+        failures.append(f"{holes} blocks of the bottom layer are not bedrock, sand there falls out of the world")
     if loose > MAX_LOOSE_OVER_WATER:
         failures.append(f"{loose} sand or gravel blocks rest on water between the domes, they will fall")
     for d in domes:
@@ -315,7 +334,8 @@ def main() -> int:
             f"radius {d['radius']}, shell missing {d['shell_missing']:.1%}, air outside {d['air_outside']}, "
             f"leaks {d['leaks']}, water under floor {d['water_under_floor']}")
         print(f"[worldgen] dome {d['dome']}: {state}")
-    print(f"[worldgen] floating blocks between the domes: {floating}, loose ground over water: {loose}")
+    print(f"[worldgen] floating blocks between the domes: {floating}, loose ground over water: {loose}, "
+          f"holes in the bedrock: {holes}")
     if speed:
         print(f"[worldgen] generation: {speed:.0f} chunks a second")
     for failure in failures:
