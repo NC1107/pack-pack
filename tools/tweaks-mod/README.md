@@ -19,6 +19,7 @@ A small NeoForge mod with seven mixins and two event handlers, shipped as `pack/
   - bosses tagged `packpack:lair_bosses` (Karkinos, Shell Beast) remember where they first appeared, stay within 48 blocks of it and never despawn.
   The tags come from `tools/build_worldgen.py`, and In Control spawns the bosses rarely, only in trenches below y -36.
 - `LostSub` runs when a player respawns: if they come back under the sea (the start sub is flooded or gone) they are moved to a random spot in one of the nearest domes with a diving suit and a full backtank, and that becomes their spawn.
+  Someone whose own bed is under water is moved the same way but gets no suit, or a wet bed would hand one out on every death.
   It asks Lost Cities where the domes are through its API.
 
 To rebuild: run `./gradlew build` here with `JAVA_HOME` pointing at Java 21, copy `build/libs/packpack-tweaks-1.0.0.jar` over the one in `pack/mods`, and run `packwiz refresh` in `pack/`.

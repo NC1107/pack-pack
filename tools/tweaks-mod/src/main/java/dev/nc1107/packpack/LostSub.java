@@ -81,14 +81,29 @@ public final class LostSub {
                     player.getName().getString(), lostCities == null ? "missing" : "present");
             return;
         }
-        LOGGER.info("{} respawned in the sea, the start sub is gone: moved to a dome at {}", player.getName().getString(), spot);
+        boolean ownSpawn = hasOwnSpawn(player);
+        LOGGER.info("{} respawned in the sea ({}): moved to a dome at {}", player.getName().getString(),
+                ownSpawn ? "their bed is under water" : "the start sub is gone", spot);
         player.teleportTo(level, spot.getX() + 0.5, spot.getY(), spot.getZ() + 0.5, Set.of(), player.getYRot(), 0);
         player.setRespawnPosition(level.dimension(), spot, 0, true, false);
-        for (String id : KIT) {
-            player.getInventory().placeItemBackInInventory(kitItem(id));
+        if (!ownSpawn) {
+            for (String id : KIT) {
+                player.getInventory().placeItemBackInInventory(kitItem(id));
+            }
         }
-        player.sendSystemMessage(Component.literal(
-                "Your sub is gone. Someone pulled you out of the water and brought you to a dome."));
+        player.sendSystemMessage(Component.literal(ownSpawn
+                ? "Your bed is under water. Someone pulled you out and brought you to a dome."
+                : "Your sub is gone. Someone pulled you out of the water and brought you to a dome."));
+    }
+
+    /**
+     * Anyone who respawns under the sea is moved, or they would die there forever. The suit is
+     * only for those the pack put there: the world spawn (no respawn position) and the dome
+     * spot set here (forced). A bed is the player's own doing, and one left under water would
+     * otherwise hand out a fresh suit on every death.
+     */
+    private static boolean hasOwnSpawn(ServerPlayer player) {
+        return player.getRespawnPosition() != null && !player.isRespawnForced();
     }
 
     private static ItemStack kitItem(String id) {
