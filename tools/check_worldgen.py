@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Generate a patch of the ocean world and check the domes in it.
 
-Runs the server installed by boot_server.py with Chunky, pre-generates a square that holds four
+Runs the server installed by boot_server.py with Chunky, pre-generates a square of dome slots (four by default) holding
 domes on Lost Cities' 512 block grid, then reads the region files and checks every dome: the glass
 shell is complete, no air touches the water (in the dome or in the tunnels out of it), there is no
 other air in the water outside it, nothing floats in the drowned city between the domes, and the ground outside the rim is level with the ground inside. It also fails if a mod's biome shows up, since Lost Cities does not
@@ -19,6 +19,7 @@ import sys
 import threading
 import time
 import tomllib
+from dataclasses import dataclass
 
 import numpy as np
 
@@ -28,11 +29,11 @@ from region import Region, section_ids
 
 CHUNKY_URL = "https://cdn.modrinth.com/data/fALzjamp/versions/LuFhm4eU/Chunky-NeoForge-1.4.23.jar"
 CHUNKY_SHA256 = "d72f235cf1f56f2c374f52c00bdda5034524b28142305a84cfc123a3f92ad274"
-# A square holding four dome slots on the 512 block grid (128 + 512k), with room for each
-# dome's window. Each slot has a dome about 80% of the time.
-CENTRE = (896, 896)
-RADIUS = 420
-DOMES = [(640, 640), (640, 1152), (1152, 640), (1152, 1152)]
+# Dome slots sit on a 512 block grid starting at 640, and each has a dome about 80% of the time.
+FIRST_SLOT = 640
+SLOT_SPACING = 512
+# Around the outermost slots, room for a dome's window.
+MARGIN = 164
 WINDOW = 135
 Y_MIN, Y_MAX = -70, 125
 GROUND = {"sand", "gravel", "dirt", "grass_block", "clay"}
@@ -48,6 +49,33 @@ RIM_GROUND = range(-15, -12)
 # The drowned city between the four domes, clear of their shells.
 BETWEEN = (736, 736, 320)
 MAX_FLOATING = 200
+
+
+@dataclass(frozen=True)
+class Area:
+    """The square that is generated and checked: `slots` dome slots along each side. Two is
+    enough for every pull request, the rare things (a village dome, a dome missing glass) need
+    the wider square of the weekly soak."""
+    slots: int = 2
+
+    @property
+    def centre(self) -> int:
+        return FIRST_SLOT + SLOT_SPACING * (self.slots - 1) // 2
+
+    @property
+    def radius(self) -> int:
+        return SLOT_SPACING * (self.slots - 1) // 2 + MARGIN
+
+    @property
+    def domes(self) -> list[tuple[int, int]]:
+        along = [FIRST_SLOT + SLOT_SPACING * i for i in range(self.slots)]
+        return [(x, z) for x in along for z in along]
+
+    def chunks(self, step: int = 1):
+        low, high = (self.centre - self.radius) >> 4, (self.centre + self.radius) >> 4
+        return ((cx, cz) for cx in range(low, high + 1, step) for cz in range(low, high + 1, step))
+
+
 CHUNK_ERROR = re.compile(r"Error generating chunk -?\d+,-?\d+: .{0,160}")
 # Sand or gravel resting on water or air falls as soon as its chunk updates: thousands of
 # falling block entities once hills in drowned cities hung over flooded ruins.
@@ -65,7 +93,7 @@ def use_seed(seed: str) -> None:
     properties.write_text(text)
 
 
-def pregenerate(java: str) -> tuple[float, list[str]]:
+def pregenerate(java: str, area: Area) -> tuple[float, list[str]]:
     """Generate the test square; return how many chunks a second that took and the chunks that
     failed to generate (a failed chunk is left out of the world, e.g. a hole in a dome)."""
     mods = boot_server.SERVER / "mods"
@@ -86,8 +114,8 @@ def pregenerate(java: str) -> tuple[float, list[str]]:
                 failed.append(error.group(0))
             if boot_server.DONE_LINE.search(line):
                 started = time.monotonic()
-                proc.stdin.write(f"chunky world minecraft:overworld\nchunky center {CENTRE[0]} {CENTRE[1]}\n"
-                                 f"chunky radius {RADIUS}\nchunky start\n")
+                proc.stdin.write(f"chunky world minecraft:overworld\nchunky center {area.centre} {area.centre}\n"
+                                 f"chunky radius {area.radius}\nchunky start\n")
                 proc.stdin.flush()
             if re.search(r"\[Chunky\] Task (finished|stopped|cancelled)", line) or "Preparing crash report" in line:
                 elapsed = time.monotonic() - (started or time.monotonic())
@@ -99,7 +127,7 @@ def pregenerate(java: str) -> tuple[float, list[str]]:
         jar.unlink(missing_ok=True)
     if not finished.is_set():
         raise SystemExit("pre-generation did not finish")
-    chunks = (2 * RADIUS // 16 + 1) ** 2
+    chunks = (2 * area.radius // 16 + 1) ** 2
     return chunks / max(elapsed, 1e-6), failed
 
 
@@ -239,18 +267,17 @@ def loose_over_water(region: Region) -> int:
     return int(((blocks[:, 1:, :] == 1) & (blocks[:, :-1, :] == 2)).sum())
 
 
-def holes_in_bedrock(region: Region) -> int:
+def holes_in_bedrock(region: Region, area: Area) -> int:
     """Blocks of the world's bottom layer in the test area that are not bedrock. Sand there has
     the void under it and falls out of the world with everything above it."""
     holes = 0
-    for cx in range((CENTRE[0] - RADIUS) >> 4, ((CENTRE[0] + RADIUS) >> 4) + 1):
-        for cz in range((CENTRE[1] - RADIUS) >> 4, ((CENTRE[1] + RADIUS) >> 4) + 1):
-            chunk = region.chunk(cx, cz)
-            if not chunk:
-                continue
-            bottom = min(chunk["sections"], key=lambda section: section["Y"])
-            palette, ids = section_ids(bottom)
-            holes += int((np.array([b.split("[")[0] != "minecraft:bedrock" for b in palette])[ids[0]]).sum())
+    for cx, cz in area.chunks():
+        chunk = region.chunk(cx, cz)
+        if not chunk:
+            continue
+        bottom = min(chunk["sections"], key=lambda section: section["Y"])
+        palette, ids = section_ids(bottom)
+        holes += int((np.array([b.split("[")[0] != "minecraft:bedrock" for b in palette])[ids[0]]).sum())
     return holes
 
 
@@ -284,13 +311,12 @@ def touching_any_way(mask: np.ndarray) -> np.ndarray:
     return near
 
 
-def foreign_biomes(region: Region) -> list[str]:
+def foreign_biomes(region: Region, area: Area) -> list[str]:
     found = set()
-    for cx in range((CENTRE[0] - RADIUS) >> 4, (CENTRE[0] + RADIUS) >> 4, 4):
-        for cz in range((CENTRE[1] - RADIUS) >> 4, (CENTRE[1] + RADIUS) >> 4, 4):
-            chunk = region.chunk(cx, cz)
-            for section in (chunk or {}).get("sections", []):
-                found.update(b for b in section.get("biomes", {}).get("palette", []) if not b.startswith("minecraft:"))
+    for cx, cz in area.chunks(step=4):
+        chunk = region.chunk(cx, cz)
+        for section in (chunk or {}).get("sections", []):
+            found.update(b for b in section.get("biomes", {}).get("palette", []) if not b.startswith("minecraft:"))
     return sorted(found)
 
 
@@ -299,18 +325,21 @@ def main() -> int:
     parser.add_argument("--java", default="java", help="Java 21 for the server")
     parser.add_argument("--skip-generation", action="store_true", help="check the world that is already there")
     parser.add_argument("--seed", help="generate with this seed instead of the boot test's")
+    parser.add_argument("--slots", type=int, default=2, choices=range(2, 9), metavar="N",
+                        help="dome slots along each side of the square (default 2, so four domes)")
     args = parser.parse_args()
+    area = Area(args.slots)
     speed, failed = None, []
     if not args.skip_generation:
         if args.seed:
             use_seed(args.seed)
-        speed, failed = pregenerate(args.java)
+        speed, failed = pregenerate(args.java, area)
     region = Region(boot_server.SERVER / "world" / "region")
-    domes = [check_dome(region, gx, gz) for gx, gz in DOMES]
-    biomes = foreign_biomes(region)
+    domes = [check_dome(region, gx, gz) for gx, gz in area.domes]
+    biomes = foreign_biomes(region, area)
     floating = floating_blocks(region)
     loose = loose_over_water(region)
-    holes = holes_in_bedrock(region)
+    holes = holes_in_bedrock(region, area)
     report = {"domes": domes, "foreign_biomes": biomes, "floating_blocks": floating, "loose_over_water": loose,
               "holes_in_bedrock": holes,
               "chunks_per_second": round(speed, 1) if speed else None}

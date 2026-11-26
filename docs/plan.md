@@ -322,7 +322,7 @@ It was replaced by FTB Chunks, which also brings land claims for multiplayer.
 ### Pipeline gaps
 
 - [x] Capture evidence for hangs: the server boot test now takes a thread dump before killing a hung server (boot or shutdown) and CI uploads it.
-- [x] A worldgen check in CI: generates four domes and checks shell, air, ground, water under the floor and floating blocks (`tools/check_worldgen.py`). It runs two seeds, the second has warm ocean and reefs. Still to do: a longer soak for rare errors.
+- [x] A worldgen check in CI: generates four domes and checks shell, air, ground, water under the floor and floating blocks (`tools/check_worldgen.py`). It runs two seeds, the second has warm ocean and reefs. A weekly soak runs it over 25 dome slots for the rare errors.
 - [x] Tests and lint for `tools/` (pytest and ruff in the hygiene job).
 - A static check of mod metadata and dependencies before booting.
 - [x] A scheduled mod update workflow (weekly, checked before the PR opens).

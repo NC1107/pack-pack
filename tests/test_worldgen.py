@@ -2,6 +2,7 @@ import re
 from collections import deque
 
 import build_worldgen as wg
+import check_worldgen
 import start_sub
 
 
@@ -97,3 +98,15 @@ def test_expedition_log_fits_the_lectern_command():
     for page in start_sub.LOG_PAGES:
         assert "'" not in page and '"' not in page
         assert len(page) <= 256
+
+
+def test_worldgen_area_holds_every_dome_window():
+    for slots in (2, 5):
+        area = check_worldgen.Area(slots)
+        assert len(area.domes) == slots * slots
+        chunks = set(area.chunks())
+        for gx, gz in area.domes:
+            for x in (gx - check_worldgen.WINDOW, gx + check_worldgen.WINDOW - 1):
+                for z in (gz - check_worldgen.WINDOW, gz + check_worldgen.WINDOW - 1):
+                    assert (x >> 4, z >> 4) in chunks
+    assert (check_worldgen.Area().centre, check_worldgen.Area().radius) == (896, 420)
