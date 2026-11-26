@@ -325,7 +325,7 @@ def write_start_functions() -> list[str]:
         " @e[type=minecraft:marker,tag=packpack_start,limit=1] Pos[1]",
         "kill @e[type=minecraft:marker,tag=packpack_start]",
         "data modify storage packpack:start built set value 1b",
-        "forceload remove -16 -16 16 16",
+        "forceload remove -17 -17 17 17",
     ]
     (functions / "build_start.mcfunction").write_text("\n".join(build) + "\n")
     write_start_refresh(functions, [cell for cell in clear if cell not in sub])
@@ -335,7 +335,7 @@ def write_start_functions() -> list[str]:
     # player changes) and move anyone who already joined into it.
     corners = " ".join(f"if loaded {x} 0 {z}" for x in (-17, 17) for z in (-17, 17))
     (functions / "start_tick.mcfunction").write_text("\n".join([
-        "execute unless data storage packpack:start built run forceload add -16 -16 16 16",
+        "execute unless data storage packpack:start built run forceload add -17 -17 17 17",
         # The floor is flat around spawn, so the wreck goes at a fixed height on it.
         f"execute unless data storage packpack:start built positioned 0 {DOME_FLOOR_Y} 0 {corners}"
         " run function packpack:build_start",

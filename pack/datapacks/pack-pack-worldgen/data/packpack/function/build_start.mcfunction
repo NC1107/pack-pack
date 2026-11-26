@@ -991,4 +991,4 @@ summon minecraft:marker ~ ~2 ~ {Tags:["packpack_start"]}
 execute store result storage packpack:start y int 1 run data get entity @e[type=minecraft:marker,tag=packpack_start,limit=1] Pos[1]
 kill @e[type=minecraft:marker,tag=packpack_start]
 data modify storage packpack:start built set value 1b
-forceload remove -16 -16 16 16
+forceload remove -17 -17 17 17

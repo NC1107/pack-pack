@@ -838,7 +838,7 @@ hash = "8be69d5b06bbb93d1e1d5ca0b70aa4510323a5bdcf1d6de2d8a400d347e4b8b0"
 
 [[files]]
 file = "datapacks/pack-pack-worldgen/data/packpack/function/build_start.mcfunction"
-hash = "556379a1976d6e400ab40663807b9aa4aaf1b250a17bd5f368ff63f5daa94c3a"
+hash = "f97584760fb5721cee743208c6b9f6fe8bf97d71017705938250659712007f90"
 
 [[files]]
 file = "datapacks/pack-pack-worldgen/data/packpack/function/place_new_player.mcfunction"
@@ -862,7 +862,7 @@ hash = "1251e9d34ba489c3d88ab8e11c17bf94e64a5671b251fe6b7245f836b0c28fc4"
 
 [[files]]
 file = "datapacks/pack-pack-worldgen/data/packpack/function/start_tick.mcfunction"
-hash = "01be03161cef8e4aedde6eedcb910edc60fad0f31601f30e58ced84986c4ab96"
+hash = "bcb238038fa1d11bc37ed6861dd680680a79868155573e772422147e8a4ed1f2"
 
 [[files]]
 file = "datapacks/pack-pack-worldgen/data/packpack/function/test_sub.mcfunction"
