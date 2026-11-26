@@ -224,26 +224,32 @@ TEST_SUB = [
     # Portholes of Deep Seas' pressurized glass: plain glass gives way at about 28 m.
     *[f"setblock ~{x} ~2 ~{z} {PORTHOLE_GLASS}" for x, z in ((3, 0), (5, 0), (8, 0), (2, 4), (8, 4))],
     f"setblock ~10 ~2 ~2 {PORTHOLE_GLASS}",
-    # Stern: creative motor at full speed -> clutch (stop/go) -> gearshift (forward/reverse) ->
-    # shaft through the hull -> propeller outside. A propeller's thrust follows its spin.
-    "setblock ~3 ~2 ~2 create:creative_motor[facing=west]{ScrollValue:256}",
+    # Stern: creative motor -> clutch (stop/go) -> gearshift (forward/reverse) -> shaft through the
+    # hull -> a 3x3 of propellers outside, which merge into one 81 times stronger. Centred on the
+    # hull so it pushes straight; at 64 RPM it cruises at about 8 to 10 blocks a second (a single
+    # propeller at 256 RPM managed about 1, a 2x2 off centre spun the sub around).
+    "setblock ~3 ~2 ~2 create:creative_motor[facing=west]{ScrollValue:64}",
     "setblock ~2 ~2 ~2 create:clutch[axis=x,powered=true]",
     "setblock ~2 ~3 ~2 minecraft:lever[face=floor,facing=north,powered=true]",
     "setblock ~1 ~2 ~2 create:gearshift[axis=x,powered=false]",
     "setblock ~1 ~3 ~2 minecraft:lever[face=floor,facing=north,powered=false]",
     "setblock ~0 ~2 ~2 create:andesite_encased_shaft[axis=x]",
-    "setblock ~-1 ~2 ~2 create_submarine:submarine_propeller[facing=west,reversed=false]",
-    # Ballast: vent in the keel -> pump controller -> a column of tanks. The Onboard Computer
+    *[f"setblock ~-1 ~{y} ~{z} create_submarine:submarine_propeller[facing=west,reversed=false]"
+      for y in (1, 2, 3) for z in (1, 2, 3)],
+    # Ballast: vent in the keel -> pump controller -> the two tanks above it. The Onboard Computer
     # drives the controller (direction and speed) to hold the depth set on its screen. Pumps
-    # turn like cogwheels, so a cogwheel beside it carries the motor's rotation in.
+    # turn like cogwheels, so a cogwheel beside it carries the motor's rotation in. Ballast goes
+    # by how full the tanks are on average, so every tank must be fed; floaters carry the rest
+    # of the hull's weight instead of extra tanks that would never fill.
     "setblock ~6 ~0 ~2 create_submarine:ballast_vent",
     "setblock ~6 ~1 ~2 create_submarine:pump_controller[facing=up]",
     "setblock ~6 ~2 ~2 create_submarine:ballast_tank",
     "setblock ~6 ~3 ~2 create_submarine:ballast_tank",
-    *[f"setblock ~{x} ~{y} ~{z} create_submarine:ballast_tank" for x, y, z in ((2, 1, 1), (2, 1, 3), (8, 3, 1), (8, 3, 3))],
+    *[f"setblock ~{x} ~{y} ~{z} create_submarine:floater" for x, y, z in ((2, 1, 1), (2, 1, 3), (8, 3, 1), (8, 3, 3))],
     "setblock ~7 ~1 ~2 create:cogwheel[axis=y]",
     "setblock ~7 ~2 ~2 create:creative_motor[facing=down]{ScrollValue:256}",
-    "setblock ~4 ~1 ~1 create_submarine:command_sub[facing=south]",
+    # Starts at depth 0 so the sub waits at the surface until a depth is set.
+    "setblock ~4 ~1 ~1 create_submarine:command_sub[facing=south]{TargetDepth:0}",
     # Air, and an iron door with a button on each side (an oak door gives way at about 49 m)
     "setblock ~9 ~1 ~1 create_submarine:creative_oxygenator",
     "setblock ~4 ~1 ~4 minecraft:iron_door[facing=north,hinge=left,open=false,powered=false,half=lower]",
@@ -256,9 +262,10 @@ TEST_SUB = [
     "sable assemble area ~-2 ~-1 ~-1 ~11 ~5 ~5",
     "fill ~-2 ~-1 ~-1 ~11 ~5 ~5 minecraft:water replace minecraft:air",
     'tellraw @s ["",{"text":"You are inside the test sub. ","color":"aqua"},'
-    '"At the stern, the lever on the clutch starts and stops the propeller and the one on the '
-    'gearshift reverses it. Use the Onboard Computer screen to set a depth and it fills and '
-    'drains the ballast to get there. The shaft through the hull holds to about 68 m."]',
+    '"At the stern, the lever on the clutch starts and stops the propeller (about 8 blocks a '
+    'second) and the one on the gearshift reverses it. It waits at the surface: set a depth on '
+    'the Onboard Computer screen and it fills and drains the ballast to get there. The shaft '
+    'through the hull holds to about 68 m."]',
 ]
 
 
