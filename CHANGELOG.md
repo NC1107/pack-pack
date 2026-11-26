@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.22.4](https://github.com/NC1107/pack-pack/compare/v0.22.3...v0.22.4) (2026-11-26)
+
+
+### Bug Fixes
+
+* exploring no longer stalls the server for seconds at a time ([d93ec33](https://github.com/NC1107/pack-pack/commit/d93ec334db61fc8c15d6de5a0cd5002144a7d5d5))
+* light the tubes between domes so monsters don't spawn in them ([04af9d5](https://github.com/NC1107/pack-pack/commit/04af9d51e4790c05ac8e9709716425ac99a78520))
+* no sand hanging over flooded ruins (thousands of falling blocks) ([5244300](https://github.com/NC1107/pack-pack/commit/5244300062baaa38afa7bcf944561e7a66967801))
+
 ## [0.22.3](https://github.com/NC1107/pack-pack/compare/v0.22.2...v0.22.3) (2026-11-26)
 
 
