@@ -1,5 +1,20 @@
 # Changelog
 
+## [0.23.0](https://github.com/NC1107/pack-pack/compare/v0.22.5...v0.23.0) (2026-11-26)
+
+
+### Features
+
+* an expedition log on the start sub's bridge tells your story ([8e1df5b](https://github.com/NC1107/pack-pack/commit/8e1df5b8b1004c4fab83ee8fdbd089cfdccedce0))
+* if the start sub is gone you wake up in a dome instead ([275f742](https://github.com/NC1107/pack-pack/commit/275f742544c53bc0cc3a7fc0b5a8e222cf6bb111))
+* more Hybrid Aquatic fish in cold oceans, where the start is ([6c166d3](https://github.com/NC1107/pack-pack/commit/6c166d3edbfd2758f45fb63865db869e3a4c3085))
+
+
+### Bug Fixes
+
+* Hybrid Aquatic fish spawn around the start, half the small fish are theirs ([26d8082](https://github.com/NC1107/pack-pack/commit/26d8082085c68673c34138a9caab8caec1dd4617))
+* the start wreck is built before anyone joins ([5c0e8bc](https://github.com/NC1107/pack-pack/commit/5c0e8bc8d2c2ebe7ad8f5ea1adc4139cf56338f2))
+
 ## [0.22.5](https://github.com/NC1107/pack-pack/compare/v0.22.4...v0.22.5) (2026-11-26)
 
 
