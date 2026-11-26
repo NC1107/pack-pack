@@ -214,8 +214,20 @@
          }
      }
 --- a/src/main/java/mcjty/lostcities/worldgen/lost/BuildingInfo.java	2026-11-24 04:11:35.373332294 -0500
-+++ b/src/main/java/mcjty/lostcities/worldgen/lost/BuildingInfo.java	2026-11-25 08:07:01.012921691 -0500
-@@ -1239,6 +1239,12 @@
++++ b/src/main/java/mcjty/lostcities/worldgen/lost/BuildingInfo.java	2026-11-25 21:35:41.394243659 -0500
+@@ -873,7 +873,10 @@
+             fountainType = topleft.fountainType;
+             parkType = topleft.parkType;
+             floors = topleft.floors;
+-            cellars = topleft.cellars;
++            // pack-pack: the top-left chunk can belong to another building (across a dome's edge),
++            // and a building given more cellars than it allows has no parts for them, so the
++            // whole chunk failed to generate (holes in dome glass).
++            cellars = buildingType == null || buildingType.getMaxCellars() == -1 ? topleft.cellars : Math.min(topleft.cellars, buildingType.getMaxCellars());
+             doorBlock = topleft.doorBlock;
+             bridgeType = topleft.bridgeType;
+             largeBridgeType = topleft.largeBridgeType;
+@@ -1239,6 +1242,12 @@
  
  
      private static int getCityLevelSpace(ChunkCoord coord, IDimensionInfo provider) {
@@ -228,6 +240,23 @@
          if (CitySphere.intersectsWithCitySphere(coord, provider)) {
              // In the sphere
              int chunkX = coord.chunkX();
+--- a/src/main/java/mcjty/lostcities/worldgen/lost/City.java	2026-11-24 04:11:35.373332294 -0500
++++ b/src/main/java/mcjty/lostcities/worldgen/lost/City.java	2026-11-25 21:19:50.307958235 -0500
+@@ -250,6 +250,14 @@
+     }
+ 
+     private static CityStyle getCityStyleInt(ChunkCoord coord, IDimensionInfo provider, LostCityProfile profile) {
++        // pack-pack: a dome is one city. Without this every chunk picks among the overlapping
++        // city centres in it, so a village dome came out as a few houses among city blocks.
++        if (provider.getProfile().isSpheres() || provider.getProfile().isSpace()) {
++            CitySphere sphere = CitySphere.getCitySphere(coord, provider);
++            if (sphere.isEnabled() && CitySphere.intersectsWithCitySphere(coord, provider)) {
++                return AssetRegistries.CITYSTYLES.get(provider.getWorld(), getCityStyleForCityCenter(sphere.getCenter(), provider));
++            }
++        }
+         List<Pair<Float, String>> styles = new ArrayList<>();
+         int chunkX = coord.chunkX();
+         int chunkZ = coord.chunkZ();
 --- a/src/main/java/mcjty/lostcities/worldgen/ChunkDriver.java	2026-11-24 04:11:35.372106975 -0500
 +++ b/src/main/java/mcjty/lostcities/worldgen/ChunkDriver.java	2026-11-24 12:42:41.959410780 -0500
 @@ -240,6 +240,9 @@

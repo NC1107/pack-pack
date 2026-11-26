@@ -21,6 +21,8 @@ What changes:
 - Sand, gravel and clay right above water or air outside domes collapse into water in the flood pass. Lost Worlds keeps its sea floor hills inside cities, and over ruined, flooded buildings that sand hung in the water and fell as soon as its chunk updated, thousands of falling blocks around a player.
 - The glass tubes between domes get light blocks every four blocks along their middle. They were the only air outside domes, and dark enough for zombies, skeletons and creepers to spawn in them.
 - The deferred sapling growth only runs once its chunk and the ones around it are fully loaded (`getChunkNow`). Upstream checks `isAreaLoaded`, which with C2ME can be true for a chunk still generating, and then blocked the server thread until it finished: 2 to 10 second stalls while exploring.
+- Every chunk inside a dome takes the city style of the dome's centre. Upstream picks a style per chunk from all the city centres around it, so a village dome came out as a few village houses mixed into a normal city (19 of 21 domes had some, none was a village).
+- A chunk of a multi building no longer gets more cellars than its own building allows. It copies the top-left chunk's count, which across a dome's edge can be another building's, and then had no parts for those cellars: `Misconfiguration! No part condition matches`, the chunk failed and left a hole in the dome glass.
 - Domes are lit: invisible light blocks sit three blocks above the street, lawn or roof on a six block grid, since no daylight gets through the sea above them.
 - Cities inside domes are all on one level. Upstream steps them up towards the middle of a sphere, which on a flat dome floor left retaining walls and overhangs.
 
