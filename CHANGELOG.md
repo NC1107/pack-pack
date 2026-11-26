@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.24.0](https://github.com/NC1107/pack-pack/compare/v0.23.0...v0.24.0) (2026-11-26)
+
+
+### Features
+
+* a hand pump in the start sub refills the backtank ([cd8cdc9](https://github.com/NC1107/pack-pack/commit/cd8cdc9fa89db0e09c92e51050ceec06554f2cbb))
+
+
+### Bug Fixes
+
+* a bed under water no longer hands out a free diving suit ([efc6066](https://github.com/NC1107/pack-pack/commit/efc6066acad4e3261655a9a0cdbc0c67a0f50201))
+
 ## [0.23.0](https://github.com/NC1107/pack-pack/compare/v0.22.5...v0.23.0) (2026-11-26)
 
 
