@@ -19,6 +19,7 @@ There's a map and minimap (ftb chunks, it also does land claims for multiplayer)
 
 Pretty much the whole overworld is ocean, about 175 blocks of water over a sea floor with ridges, trenches and hills.
 You start in a wrecked submarine lying on the sea floor, with an airlock on the side that keeps the water out, and there's nothing else close by on purpose.
+It's your own sub, the log on the bridge lectern tells how you ended up down there.
 The floor is about 173 m down and the water crushes you past 120 m, so put on the copper diving suit from the chest (and keep the backtank in your inventory) before you go out.
 Past about 500 blocks out you start finding the domes, the last cities that kept the water out, with drowned cities around them that are mostly collapsed and overgrown.
 About one dome in four has a village in it, the domes and the glass tubes with a rail that run between neighbouring domes are lit, and no monsters spawn in either.
