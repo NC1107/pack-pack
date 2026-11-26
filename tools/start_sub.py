@@ -133,6 +133,31 @@ STARTER_KIT = [
 ]
 
 
+# The story, on the bridge lectern: you are a scientist who left your dome to explore, ran out
+# of fuel, and sank when something broke. No quotes or apostrophes, it is embedded in SNBT.
+LOG_TITLE = "Expedition Log"
+LOG_AUTHOR = "You"
+LOG_PAGES = [
+    "Day 1. Left the dome at first light. The council says there is nothing left out past the glass. "
+    "I mean to prove them wrong. Fuel for nine days, air for twenty.",
+    "Day 6. Past the last of the drowned towers. Kelp and sand in every direction. "
+    "Fuel is lower than it should be. Turning for home.",
+    "Day 7. Out of fuel, drifting. Then a bang from the stern and water in the engine bay. "
+    "Sealed it off, but she would not hold her trim. Going down.",
+    "Day 7, later. On the bottom, about 170 metres down. The hull held. "
+    "The lights are gone and the motor with them. The airlock still works.",
+    "The diving suit and the backtank are in the chest by the bunks. Wear all of it outside, "
+    "the water crushes anyone without it this deep. The tank holds about fifteen minutes of air.",
+    "The domes are out there, the nearest more than five hundred blocks away. Too far on one tank. "
+    "First air, then power, then get this boat moving again.",
+]
+
+
+def lectern() -> tuple[Cell, str]:
+    """Where the log goes and the lectern block it sits on."""
+    return next((cell, block) for cell, block in furniture(DECK_Y).items() if block.startswith("minecraft:lectern"))
+
+
 def starter_chest() -> Cell:
     """The chest the starter kit goes in."""
     return next(cell for cell, block in furniture(DECK_Y).items() if block.startswith("minecraft:chest"))

@@ -297,6 +297,14 @@ def write_start_refresh(functions: Path, water: list) -> None:
         for x, y, z in cells.values()) + "\n")
 
 
+def expedition_log() -> str:
+    (x, y, z), block = start_sub.lectern()
+    pages = ",".join(f"'{json.dumps(page)}'" for page in start_sub.LOG_PAGES)
+    book = (f'{{id:"minecraft:written_book",count:1,components:{{"minecraft:written_book_content":'
+            f'{{title:"{start_sub.LOG_TITLE}",author:"{start_sub.LOG_AUTHOR}",pages:[{pages}]}}}}}}')
+    return f"setblock ~{x} ~{y} ~{z} {block.replace(']', ',has_book=true]')}{{Book:{book},Page:0}} replace"
+
+
 def write_start_functions() -> list[str]:
     """Write the start submarine functions and return the function ids the tick tag must run."""
     functions = DATAPACK / "data/packpack/function"
@@ -319,6 +327,7 @@ def write_start_functions() -> list[str]:
           for x, y, z in by_block[block]],
         *[f"item replace block ~{start_sub.starter_chest()[0]} ~{start_sub.starter_chest()[1]} ~{start_sub.starter_chest()[2]}"
           f" container.{slot} with {item}" for slot, item in enumerate(start_sub.STARTER_KIT)],
+        expedition_log(),
         f"setworldspawn ~ ~{start_sub.DECK_Y + 1} ~",
         f"summon minecraft:marker ~ ~{start_sub.DECK_Y + 1} ~ {{Tags:[\"packpack_start\"]}}",
         "execute store result storage packpack:start y int 1 run data get entity"

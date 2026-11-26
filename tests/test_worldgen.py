@@ -89,3 +89,11 @@ def test_only_water_open_to_the_sea_counts_as_under_the_floor():
     column = np.array([[[3], [0], [3], [4], [3], [3], [3]]])
     open_cells = check_worldgen.open_to_sea(column)[0, :, 0].tolist()
     assert open_cells == [False, False, False, False, True, True, True]
+
+
+def test_expedition_log_fits_the_lectern_command():
+    command = wg.expedition_log()
+    assert command.startswith("setblock ") and "has_book=true" in command
+    for page in start_sub.LOG_PAGES:
+        assert "'" not in page and '"' not in page
+        assert len(page) <= 256
