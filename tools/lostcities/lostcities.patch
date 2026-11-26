@@ -282,7 +282,7 @@
          setBlock(current, correct(state));
          incY();
 --- a/src/main/java/mcjty/lostcities/worldgen/gen/Spheres.java	2026-11-24 04:11:35.372840297 -0500
-+++ b/src/main/java/mcjty/lostcities/worldgen/gen/Spheres.java	2026-11-25 19:37:39.271943198 -0500
++++ b/src/main/java/mcjty/lostcities/worldgen/gen/Spheres.java	2026-11-25 22:18:27.155972871 -0500
 @@ -1,5 +1,6 @@
  package mcjty.lostcities.worldgen.gen;
  
@@ -554,7 +554,22 @@
      private static void fillSphere(LostCityTerrainFeature feature, int centerx, int centery, int centerz, int radius,
                                     BlockState glass, BlockState sideBlock) {
          IDimensionInfo provider = feature.provider;
-@@ -156,8 +397,11 @@
+@@ -99,7 +340,13 @@
+                             if (y < bottom) {
+                                 bottom = y - 1;
+                             }
+-                            driver.block(sideBlock);
++                            // pack-pack: a big dome's lower shell reaches the bottom of the world.
++                            // Our shell is sand, and sand in place of the bottom bedrock has the void
++                            // under it: one update and the whole column drained out of the world
++                            // (thousands of falling blocks near a dome while its chunks generate).
++                            if (!driver.getBlock().is(Blocks.BEDROCK)) {
++                                driver.block(sideBlock);
++                            }
+                         }
+                         driver.incY();
+                     }
+@@ -156,8 +403,11 @@
                  } else if (dxdx + dzdz <= sqradiusOuter) {
                      // If we are in a space profile then we clear the sphere area too
                      if (profile.isFloating() || profile.isSpace()) {
@@ -568,7 +583,7 @@
                              driver.block(y <= outerSeaLevel ? feature.liquid : air);
                              driver.incY();
                          }
-@@ -165,5 +409,6 @@
+@@ -165,5 +415,6 @@
                  }
              }
          }
