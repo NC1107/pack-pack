@@ -547,7 +547,7 @@
      }
  }
 --- a/src/main/java/mcjty/lostcities/worldgen/LostCityTerrainFeature.java	2026-11-24 04:11:35.372352367 -0500
-+++ b/src/main/java/mcjty/lostcities/worldgen/LostCityTerrainFeature.java	2026-11-25 09:44:56.652138692 -0500
++++ b/src/main/java/mcjty/lostcities/worldgen/LostCityTerrainFeature.java	2026-11-25 19:49:29.581417548 -0500
 @@ -1,5 +1,7 @@
  package mcjty.lostcities.worldgen;
  
@@ -556,7 +556,15 @@
  import mcjty.lostcities.LostCities;
  import mcjty.lostcities.api.ILostCities;
  import mcjty.lostcities.api.LostCityEvent;
-@@ -1338,11 +1340,12 @@
+@@ -15,6 +17,7 @@
+ import mcjty.lostcities.worldgen.lost.regassets.data.CitySphereSettings;
+ import mcjty.lostcities.worldgen.lost.regassets.data.ScatteredSettings;
+ import mcjty.lostcities.worldgen.lost.regassets.data.StreetParts;
++import net.minecraft.server.level.ServerLevel;
+ import net.minecraft.core.BlockPos;
+ import net.minecraft.core.Holder;
+ import net.minecraft.core.registries.BuiltInRegistries;
+@@ -1338,11 +1341,12 @@
       * Fill from a certain lowest level with base blocks until non air is hit
       */
      private void fillToGroundStreetBlock(BuildingInfo info, int lowestLevel) {
@@ -570,7 +578,40 @@
                      getDriver().block(base).decY();
                      y--;
                  }
-@@ -2316,6 +2319,11 @@
+@@ -1975,7 +1979,11 @@
+                     if (Config.FORCE_SAPLING_GROWTH.get()) {
+                         RandomSource forkedRand = GenerationContext.current().random().fork();
+                         GlobalTodo.get(world.getLevel()).addTodo(pos, (level) -> {
+-                            if (level.isAreaLoaded(pos, 1) && level.getBlockState(pos).getBlock() instanceof SaplingBlock) {
++                            // pack-pack: isAreaLoaded can be true for a chunk that is still being
++                            // generated (C2ME), and getBlockState then blocked the server thread
++                            // until it finished: multi-second lag while exploring. The tree reaches
++                            // into the chunks around it too, so all of them must be ready now.
++                            if (chunksReadyAround(level, pos) && level.getBlockState(pos).getBlock() instanceof SaplingBlock) {
+                                 level.setBlock(pos, finalB, Block.UPDATE_CLIENTS);
+                                 // Use a fork so deferred growth never shares the generation context's random source
+                                 saplingBlock.advanceTree(level, pos, finalB, forkedRand);
+@@ -1994,6 +2002,19 @@
+         return b;
+     }
+ 
++    private static boolean chunksReadyAround(ServerLevel level, BlockPos pos) {
++        int cx = pos.getX() >> 4;
++        int cz = pos.getZ() >> 4;
++        for (int dx = -1; dx <= 1; dx++) {
++            for (int dz = -1; dz <= 1; dz++) {
++                if (level.getChunkSource().getChunkNow(cx + dx, cz + dz) == null) {
++                    return false;
++                }
++            }
++        }
++        return true;
++    }
++
+     public BlockState transformBlockState(Transform transform, BlockState b) {
+         if (Tools.hasTag(b.getBlock(), LostTags.ROTATABLE_TAG)) {
+             b = b.rotate(transform.getMcRotation());
+@@ -2316,6 +2337,11 @@
                  }
              }
          } else { // (also for spheres)
@@ -582,7 +623,7 @@
              // For normal worldgen we have a thin layer of 'border' blocks because that looks nicer
              // We try to avoid this layer in big caves though
              for (int x = 0; x < 16; ++x) {
-@@ -2353,18 +2361,18 @@
+@@ -2353,18 +2379,18 @@
  
      // Used for space type worlds: fill underside the building/street until a block is encountered
      public void fillToGround(BuildingInfo info, int lowestLevel, Character borderBlock) {
@@ -604,7 +645,7 @@
                          getDriver().block(base).decY();
                          y--;
                      }
-@@ -2373,6 +2381,19 @@
+@@ -2373,6 +2399,19 @@
          }
      }
  
