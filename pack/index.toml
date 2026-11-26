@@ -1934,7 +1934,7 @@ metafile = true
 
 [[files]]
 file = "mods/packpack-tweaks-1.0.0.jar"
-hash = "a68e8cac97608c8111043c707cdac32bdd2cb86ebd857b6027e2bc14262460da"
+hash = "ecd759b13b33e1cc7a64c6cd5a1c675c03b114e5cad4a0f189b08404ce7b1693"
 
 [[files]]
 file = "mods/reeses-sodium-options.pw.toml"

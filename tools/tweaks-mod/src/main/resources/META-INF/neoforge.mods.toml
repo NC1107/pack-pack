@@ -24,3 +24,10 @@ type = "required"
 versionRange = "[1.21.1]"
 ordering = "NONE"
 side = "BOTH"
+
+[[dependencies.packpack_tweaks]]
+modId = "lostcities"
+type = "optional"
+versionRange = "[1.21-8.4,)"
+ordering = "NONE"
+side = "BOTH"
