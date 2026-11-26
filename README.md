@@ -21,10 +21,12 @@ Pretty much the whole overworld is ocean, about 175 blocks of water over a sea f
 You start in a wrecked submarine lying on the sea floor, with an airlock on the side that keeps the water out, and there's nothing else close by on purpose.
 The floor is about 173 m down and the water crushes you past 120 m, so put on the copper diving suit from the chest (and keep the backtank in your inventory) before you go out.
 Past about 500 blocks out you start finding the domes, the last cities that kept the water out, with drowned cities around them that are mostly collapsed and overgrown.
-Some domes have a few village houses with villagers living in them, and glass tubes with a rail in them run along the sea floor between neighbouring domes.
+About one dome in four has a village in it, the domes and the glass tubes with a rail that run between neighbouring domes are lit, and no monsters spawn in either.
 Create and create deep seas are in, so submarines with pressure and oxygen are a thing, but there's no progression around them yet.
-To try one out, `/function packpack:test_sub` (cheats on) builds a small working sub at the surface above you, with creative motors, a ballast pump and levers to drive and dive (good to about 68 m).
+To try one out, `/function packpack:test_sub` (cheats on) builds a small working sub at the surface above you: levers at the stern start and reverse the propeller, and the onboard computer screen sets how deep it goes (good to about 68 m).
 Under the floor it's sand down to bedrock, so there's no mining your way around anything.
+The sea life spawns by biome, reef fish over the warm reefs, deep species down in the trenches, dolphins and orcas up at the surface, and now and then a boss in a trench that stays near where you found it.
+Dropped items sink to the floor instead of floating off to the surface.
 Just make a new world with the default world type, it's all set up by the pack, an old world won't change.
 The mods themselves still download from modrinth or curseforge since that's where their authors host them, but the pack itself lives here on github, and a few of them (lost cities, lost worlds and a small one of ours) are patched builds that live in the repo.
 
