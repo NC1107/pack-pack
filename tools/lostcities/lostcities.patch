@@ -253,8 +253,15 @@
          setBlock(current, correct(state));
          incY();
 --- a/src/main/java/mcjty/lostcities/worldgen/gen/Spheres.java	2026-11-24 04:11:35.372840297 -0500
-+++ b/src/main/java/mcjty/lostcities/worldgen/gen/Spheres.java	2026-11-25 16:02:24.890409493 -0500
-@@ -16,6 +16,10 @@
++++ b/src/main/java/mcjty/lostcities/worldgen/gen/Spheres.java	2026-11-25 19:29:28.409101322 -0500
+@@ -1,5 +1,6 @@
+ package mcjty.lostcities.worldgen.gen;
+ 
++
+ import mcjty.lostcities.api.ILostWorldsChunkGenerator;
+ import mcjty.lostcities.config.LostCityProfile;
+ import mcjty.lostcities.varia.ChunkCoord;
+@@ -16,6 +17,10 @@
  import net.minecraft.server.level.WorldGenRegion;
  import net.minecraft.world.level.LevelAccessor;
  import net.minecraft.world.level.block.Blocks;
@@ -265,7 +272,7 @@
  import net.minecraft.world.level.block.state.BlockState;
  import net.minecraft.world.level.chunk.ChunkAccess;
  import net.minecraft.world.level.chunk.ChunkGenerator;
-@@ -45,6 +49,10 @@
+@@ -45,6 +50,10 @@
                      fillSphere(feature, cx, profile.GROUNDLEVEL, cz, (int) radius, sphere.getGlassBlock(), sphere.getSideBlock());
                  }
  
@@ -276,7 +283,7 @@
                  if (profile.isSpace()) {
                      BuildingInfo info = BuildingInfo.getBuildingInfo(coord, provider);
                      Monorails.generateMonorails(feature, info);
-@@ -58,6 +66,175 @@
+@@ -58,6 +67,190 @@
          }
      }
  
@@ -304,11 +311,19 @@
 +            for (int z = 0; z < 16; z++) {
 +                double dz = (chunkZ << 4) + z - cc.getZ();
 +                driver.current(x, minY, z);
++                boolean openBelow = false;
 +                for (int y = minY; y <= seaLevel; y++) {
 +                    double dy = y - cc.getY();
 +                    if (!enabled || dx * dx + dy * dy + dz * dz > sqradius) {
 +                        BlockState state = driver.getBlock();
-+                        if (state.isAir()) {
++                        // Lost Worlds' sea floor keeps its hills inside cities, which Lost Cities'
++                        // own landscapes would have flattened. Over ruined, flooded buildings the
++                        // sand hangs in the water and falls the moment its chunk updates
++                        // (thousands of falling blocks around a player), so it collapses here.
++                        if (openBelow && isLooseGround(state)) {
++                            driver.block(feature.liquid);
++                            state = feature.liquid;
++                        } else if (state.isAir()) {
 +                            driver.block(feature.liquid);
 +                        } else if (state.getFluidState().isEmpty() && washesAway(state)) {
 +                            // Water would break these (plants, tripwire, torches) and drop them as
@@ -319,6 +334,8 @@
 +                            driver.block(Blocks.MOSS_BLOCK.defaultBlockState());
 +                        }
 +                    }
++                    BlockState now = driver.getBlock();
++                    openBelow = now.isAir() || now.is(Blocks.WATER);
 +                    driver.incY();
 +                }
 +            }
@@ -387,6 +404,11 @@
 +        }
 +    }
 +
++    private static boolean isLooseGround(BlockState state) {
++        return state.is(Blocks.SAND) || state.is(Blocks.RED_SAND) || state.is(Blocks.GRAVEL) || state.is(Blocks.CLAY)
++                || state.is(Blocks.SUSPICIOUS_SAND) || state.is(Blocks.SUSPICIOUS_GRAVEL);
++    }
++
 +    /** Mirrors which blocks vanilla's flowing water replaces (FlowingFluid.canHoldFluid). */
 +    private static boolean washesAway(BlockState state) {
 +        Block block = state.getBlock();
@@ -452,7 +474,7 @@
      private static void fillSphere(LostCityTerrainFeature feature, int centerx, int centery, int centerz, int radius,
                                     BlockState glass, BlockState sideBlock) {
          IDimensionInfo provider = feature.provider;
-@@ -156,8 +333,11 @@
+@@ -156,8 +349,11 @@
                  } else if (dxdx + dzdz <= sqradiusOuter) {
                      // If we are in a space profile then we clear the sphere area too
                      if (profile.isFloating() || profile.isSpace()) {
@@ -466,7 +488,7 @@
                              driver.block(y <= outerSeaLevel ? feature.liquid : air);
                              driver.incY();
                          }
-@@ -165,5 +345,6 @@
+@@ -165,5 +361,6 @@
                  }
              }
          }

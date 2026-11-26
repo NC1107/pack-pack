@@ -48,6 +48,9 @@ RIM_GROUND = range(-15, -12)
 # The drowned city between the four domes, clear of their shells.
 BETWEEN = (736, 736, 320)
 MAX_FLOATING = 200
+# Sand or gravel resting on water or air falls as soon as its chunk updates: thousands of
+# falling block entities once hills in drowned cities hung over flooded ruins.
+MAX_LOOSE_OVER_WATER = 20
 
 
 def neoforge_version() -> str:
@@ -95,8 +98,9 @@ def pregenerate(java: str) -> float:
     return chunks / max(elapsed, 1e-6)
 
 
-def load(region: Region, x0: int, z0: int, size: int) -> np.ndarray:
-    """Block classes in a box: 0 other, 1 glass, 2 air, 3 water, 4 ground."""
+def load(region: Region, x0: int, z0: int, size: int, classify=None) -> np.ndarray:
+    """Block classes in a box: 0 other, 1 glass, 2 air, 3 water, 4 ground (or classify's own)."""
+    classify = classify or classify_block
     blocks = np.zeros((size, Y_MAX - Y_MIN, size), np.uint8)
     for cx in range(x0 >> 4, ((x0 + size - 1) >> 4) + 1):
         for cz in range(z0 >> 4, ((z0 + size - 1) >> 4) + 1):
@@ -119,7 +123,7 @@ def load(region: Region, x0: int, z0: int, size: int) -> np.ndarray:
     return blocks
 
 
-def classify(block: str) -> int:
+def classify_block(block: str) -> int:
     name = block.split(":", 1)[1]
     if "glass" in name and "pane" not in name:
         return 1
@@ -206,6 +210,22 @@ def check_dome(region: Region, gx: int, gz: int) -> dict:
             "air_outside": air_outside, "leaks": leaks, "water_under_floor": under_floor, "rim_ground": rim, "problems": problems}
 
 
+FALLING_GROUND = {"sand", "red_sand", "gravel", "suspicious_sand", "suspicious_gravel"}
+
+
+def falls_or_open(block: str) -> int:
+    """1 for blocks that fall when nothing holds them up, 2 for air and water, 0 otherwise."""
+    name = block.split(":", 1)[1]
+    return 1 if name in FALLING_GROUND else 2 if name in ("air", "water") else 0
+
+
+def loose_over_water(region: Region) -> int:
+    """Sand and gravel in the drowned city with water or air directly below them."""
+    x0, z0, size = BETWEEN
+    blocks = load(region, x0, z0, size, falls_or_open)
+    return int(((blocks[:, 1:, :] == 1) & (blocks[:, :-1, :] == 2)).sum())
+
+
 def floating_blocks(region: Region) -> int:
     """Solid blocks in the drowned city that do not connect to the sea floor.
 
@@ -261,7 +281,8 @@ def main() -> int:
     domes = [check_dome(region, gx, gz) for gx, gz in DOMES]
     biomes = foreign_biomes(region)
     floating = floating_blocks(region)
-    report = {"domes": domes, "foreign_biomes": biomes, "floating_blocks": floating,
+    loose = loose_over_water(region)
+    report = {"domes": domes, "foreign_biomes": biomes, "floating_blocks": floating, "loose_over_water": loose,
               "chunks_per_second": round(speed, 1) if speed else None}
     (boot_server.RUN / "worldgen-report.json").write_text(json.dumps(report, indent=2) + "\n")
 
@@ -272,12 +293,14 @@ def main() -> int:
         failures.append(f"biomes from mods in the ocean, Lost Cities skips them: {biomes}")
     if floating > MAX_FLOATING:
         failures.append(f"{floating} blocks float in the water between the domes")
+    if loose > MAX_LOOSE_OVER_WATER:
+        failures.append(f"{loose} sand or gravel blocks rest on water between the domes, they will fall")
     for d in domes:
         state = "absent" if not d["present"] else (
             f"radius {d['radius']}, shell missing {d['shell_missing']:.1%}, air outside {d['air_outside']}, "
             f"leaks {d['leaks']}, water under floor {d['water_under_floor']}")
         print(f"[worldgen] dome {d['dome']}: {state}")
-    print(f"[worldgen] floating blocks between the domes: {floating}")
+    print(f"[worldgen] floating blocks between the domes: {floating}, loose ground over water: {loose}")
     if speed:
         print(f"[worldgen] generation: {speed:.0f} chunks a second")
     for failure in failures:

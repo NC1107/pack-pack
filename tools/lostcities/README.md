@@ -18,6 +18,7 @@ What changes:
 - After flooding, any block that doesn't connect to the ground or the chunk edge goes, inside domes too (air in a dome, water outside), which clears ruin debris like chains, cobwebs and lone slabs, and anything flowing water would wash away (plants, tripwire, torches) becomes water too, so it never drops as items floating around the ruins.
 - Under the outer sea the spawn point is set at 0,0 right away. Upstream searches for dry ground to stand on, and in an ocean world it generated chunks hundreds of blocks out on the main thread before a new world opened (a minute or more in singleplayer).
 - The ring Lost Cities clears around each sphere in the space landscape only goes from the dome floor up under the outer sea. Cleared all the way, it left a ring of water down to bedrock around every dome.
+- Sand, gravel and clay right above water or air outside domes collapse into water in the flood pass. Lost Worlds keeps its sea floor hills inside cities, and over ruined, flooded buildings that sand hung in the water and fell as soon as its chunk updated, thousands of falling blocks around a player.
 - Domes are lit: invisible light blocks sit three blocks above the street, lawn or roof on a six block grid, since no daylight gets through the sea above them.
 - Cities inside domes are all on one level. Upstream steps them up towards the middle of a sphere, which on a flat dome floor left retaining walls and overhangs.
 
