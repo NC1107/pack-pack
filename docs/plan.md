@@ -29,8 +29,9 @@ Tick things off when they're handled, add new ones when they come up.
   - All biomes are ocean variants picked by temperature, deep ones where vanilla has ocean basins.
   - Terrain is flattened to a floor at y=64, which only matters inside domes, so an empty dome is a dry floor and not a hill filling the glass.
   - Cities inside domes are dry, cities between them are drowned, nothing within 500 blocks of spawn, and lost cities' railway tunnels are off since they floated through open water as a grid.
-  - You start in a 6x6x5 glass pod with a sea lantern floor on the sea floor under spawn.
-    A tick function builds it once (a storage flag keeps it from ever overwriting changes), sets spawn there, and moves anyone who joined before it existed.
+  - You start in a wrecked copper submarine on the sea floor under spawn (`tools/start_sub.py`), with an airlock, a diving suit and the expedition log.
+    It's built once when the server starts (a storage flag keeps it from ever overwriting changes) and spawn is set inside it.
+    The plan is to swap it for a real create sub later.
   - New players default to "bright" brightness and clear water removes the underwater fog, so it's readable without shaders.
 - **2026-11-24, ocean structures.**
   Moog's ocean structures, unwrecked ships, YUNG's better ocean monuments and hopo better underwater ruins.
@@ -102,7 +103,9 @@ Tick things off when they're handled, add new ones when they come up.
   A small mod of ours (`tools/tweaks-mod`) makes generated kelp 1 to 75 blocks tall and lets it keep growing until it runs out of water.
   Generation is measured (median 38, longest 76), and planted kelp grew 174 blocks to the surface in the real client.
 - [ ] **Lost cities sometimes stalls worldgen.**
-  One pre-generation hit a 60 second server tick and the watchdog killed the server, and once the client hung saving the world on quit. Both were one-offs, need a thread dump from a stalled run.
+  One pre-generation hit a 60 second server tick and the watchdog killed the server, and once the client hung saving the world on quit.
+  Two causes are fixed since: the quit hang was xaero's world map (gone), and lost cities growing saplings into chunks that weren't loaded stalled exploring (patched).
+  Leave this open until a long soak comes back clean.
 - [x] **Worldgen is slow.**
   It was 11 to 22 chunks a second before C2ME, the worldgen check now reports about 60 a second for its test square (2026-11-25, same machine).
 
@@ -169,7 +172,8 @@ Tick things off when they're handled, add new ones when they come up.
 - [x] **Performance mods.**
   Client: sodium, sodium extra, immediatelyfast, entityculling, moreculling, dynamic fps. Both sides: modernfix, ferritecore, lithium, spark.
   That's pretty much the set big 1.21.1 neoforge packs like atm10 ship.
-  Skipped for now: c2me and scalablelux (still alpha), noisium (abandoned), krypton (no real neoforge build), alltheleaks (curseforge only).
+  C2ME went in on 2026-11-25 for worldgen speed.
+  Skipped for now: scalablelux (still alpha), noisium (abandoned), krypton (no real neoforge build), alltheleaks (curseforge only).
   Later once there's content: fastsuite/fastworkbench/fastfurnace, polymorph, packet fixer, servercore.
 - [x] **Modernfix dynamic resources is on.**
   It loads models when they're needed instead of baking all of them at startup.
