@@ -8,15 +8,22 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 /**
- * Vanilla allows 20 small fish around each player, this allows 100. In a world that is almost all ocean, with
- * dozens of species from Hybrid Aquatic sharing that cap, schools stay sparse and most species
- * are rarely seen, so the cap is higher.
+ * Small fish caps around each player. Hybrid Aquatic spawns its fish in a category of its own
+ * (cap 10), not vanilla's WATER_AMBIENT, so with WATER_AMBIENT raised alone cod and salmon made
+ * up about 100 of every 110 fish. About 100 small fish in all, most of them Hybrid Aquatic's.
  */
 @Mixin(MobCategory.class)
 public abstract class MobCategoryMixin {
 
+    /** Cod, salmon, tropical fish and pufferfish; vanilla allows 20. */
     @Unique
-    private static final int PACKPACK_WATER_AMBIENT_CAP = 100;
+    private static final int PACKPACK_WATER_AMBIENT_CAP = 40;
+
+    @Unique
+    private static final String PACKPACK_HYBRID_AQUATIC_FISH = "hybrid_aquatic:fish";
+
+    @Unique
+    private static final int PACKPACK_HYBRID_AQUATIC_FISH_CAP = 60;
 
     /** Squid, sharks, rays and the other bigger animals share this one; vanilla allows 5. */
     @Unique
@@ -24,10 +31,13 @@ public abstract class MobCategoryMixin {
 
     @Inject(method = "getMaxInstancesPerChunk", at = @At("HEAD"), cancellable = true)
     private void packpack$moreFish(CallbackInfoReturnable<Integer> cir) {
-        if ((Object) this == MobCategory.WATER_AMBIENT) {
+        MobCategory self = (MobCategory) (Object) this;
+        if (self == MobCategory.WATER_AMBIENT) {
             cir.setReturnValue(PACKPACK_WATER_AMBIENT_CAP);
-        } else if ((Object) this == MobCategory.WATER_CREATURE) {
+        } else if (self == MobCategory.WATER_CREATURE) {
             cir.setReturnValue(PACKPACK_WATER_CREATURE_CAP);
+        } else if (self.getName().equals(PACKPACK_HYBRID_AQUATIC_FISH)) {
+            cir.setReturnValue(PACKPACK_HYBRID_AQUATIC_FISH_CAP);
         }
     }
 }
