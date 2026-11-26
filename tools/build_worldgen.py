@@ -193,6 +193,7 @@ def build_datapack(village_factor: float) -> str:
     write_underwater_air_filters()
     write_disabled_mod_modifiers()
     write_hapi_spawns()
+    write_cold_water_spawns()
     write_entity_tags()
     return lc_villages.build(DATAPACK, vanilla_jar(), lost_cities_jar(), village_factor, DOME_CITY_FACTOR)
 
@@ -532,6 +533,28 @@ def write_entity_tags() -> None:
     write_json(tags / "enlarged.json", {"values": [f"hybrid_aquatic:{e}" for e in ENLARGED]})
     write_json(tags / "lair_bosses.json", {"values": [f"hybrid_aquatic:{e}" for e in LAIR_BOSSES]})
     write_json(tags / "drowned_hunters.json", {"values": [f"hybrid_aquatic:{e}" for e in DROWNED_HUNTERS]})
+
+
+# Vanilla cod and salmon (weight 15 each) crowded out Hybrid Aquatic's few cold water fish, so
+# the start, which is in cold ocean, was nearly all cod and salmon. More Hybrid Aquatic species
+# that live in cold water: (entity, weight, min, max) per biome.
+COLD_WATER_SPAWNS = {
+    "cold_ocean": [("herring", 10, 4, 12), ("mackerel", 10, 4, 12), ("rockfish", 5, 1, 4), ("octopus", 6, 1, 1),
+                   ("sea_bass", 4, 1, 3), ("wrasse", 3, 1, 2), ("arrow_squid", 6, 1, 2), ("sea_nettle", 3, 1, 4)],
+    "deep_cold_ocean": [("rockfish", 4, 1, 4), ("john_dory", 3, 1, 2), ("mackerel", 5, 4, 12)],
+    "frozen_ocean": [("herring", 8, 4, 12), ("mackerel", 6, 4, 12)],
+    "deep_frozen_ocean": [("herring", 5, 4, 12)],
+}
+
+
+def write_cold_water_spawns() -> None:
+    for biome, spawns in COLD_WATER_SPAWNS.items():
+        write_json(DATAPACK / f"data/packpack/neoforge/biome_modifier/cold_water_{biome}.json", {
+            "type": "neoforge:add_spawns",
+            "biomes": f"minecraft:{biome}",
+            "spawners": [{"type": f"hybrid_aquatic:{entity}", "weight": weight, "minCount": low, "maxCount": high}
+                         for entity, weight, low, high in spawns],
+        })
 
 
 def write_hapi_spawns() -> None:

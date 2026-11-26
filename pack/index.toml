@@ -873,6 +873,22 @@ file = "datapacks/pack-pack-worldgen/data/packpack/function/test_sub_build.mcfun
 hash = "9a46e876e16ed29a82581e14e6ef93727023504d8e704ebb661cbe03ff784339"
 
 [[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/cold_water_cold_ocean.json"
+hash = "ee5a4739d2a300f49334842dec359367e1d999c5394094165e0238afe406465b"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/cold_water_deep_cold_ocean.json"
+hash = "ee608986be60f7b5a8a67bd8ff4a3b949e7a4d5ccf0facd8116bc81fde104f67"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/cold_water_deep_frozen_ocean.json"
+hash = "209d180d77a2eded9526613e4df4373212413588a044886d96a07432ee6e0f7f"
+
+[[files]]
+file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/cold_water_frozen_ocean.json"
+hash = "9477e77907d8a1925f9ea1123ef6058544456f786f5ded0585c75a4c55cebb0c"
+
+[[files]]
 file = "datapacks/pack-pack-worldgen/data/packpack/neoforge/biome_modifier/ha_anglerfish_all_trenches.json"
 hash = "188afa72d2dab9dd2ec374ba3ac38e0bd1a9a0a319a024058baf02c8eed4e074"
 
