@@ -34,6 +34,16 @@ def test_start_submarine_furniture_stands_on_the_deck():
         assert below not in ("minecraft:air", None), f"{block} at {(x, y, z)} has nothing under it"
 
 
+def test_start_submarine_air_pump_crank_drives_the_tank():
+    """A backtank only takes rotation from above, and a hand crank's shaft is opposite its handle."""
+    furniture = start_sub.furniture(start_sub.DECK_Y)
+    (x, y, z), = [cell for cell, block in furniture.items() if block == start_sub.AIR_PUMP_TANK]
+    assert furniture[(x, y + 1, z)] == start_sub.AIR_PUMP_CRANK
+    assert start_sub.AIR_PUMP_CRANK.endswith("[facing=up]")
+    # Room to stand next to it and reach the crank
+    assert any(start_sub.blocks().get((x + dx, y, z + dz)) == "minecraft:air" for dx, dz in ((1, 0), (-1, 0), (0, 1), (0, -1)))
+
+
 def test_start_submarine_has_no_dark_floor():
     """Monsters spawn at block light 0, so every spot a mob could stand on in the wreck is lit."""
     placed = start_sub.blocks()

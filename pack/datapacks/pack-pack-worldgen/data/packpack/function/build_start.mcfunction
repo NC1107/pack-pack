@@ -456,8 +456,10 @@ fill ~-9 ~5 ~-2 ~-9 ~5 ~2 minecraft:air
 fill ~-9 ~6 ~-2 ~-9 ~6 ~2 minecraft:air
 fill ~-9 ~7 ~0 ~-9 ~7 ~0 minecraft:air
 fill ~-8 ~2 ~-2 ~-8 ~2 ~-2 minecraft:air
-fill ~-8 ~2 ~0 ~-8 ~2 ~2 minecraft:air
-fill ~-8 ~3 ~-2 ~-8 ~3 ~2 minecraft:air
+fill ~-8 ~2 ~0 ~-8 ~2 ~0 minecraft:air
+fill ~-8 ~2 ~2 ~-8 ~2 ~2 minecraft:air
+fill ~-8 ~3 ~-2 ~-8 ~3 ~0 minecraft:air
+fill ~-8 ~3 ~2 ~-8 ~3 ~2 minecraft:air
 fill ~-8 ~4 ~-3 ~-8 ~4 ~3 minecraft:air
 fill ~-8 ~5 ~-2 ~-8 ~5 ~2 minecraft:air
 fill ~-8 ~6 ~-2 ~-8 ~6 ~2 minecraft:air
@@ -887,9 +889,11 @@ fill ~13 ~3 ~-2 ~13 ~3 ~2 minecraft:waxed_weathered_cut_copper
 fill ~13 ~4 ~-2 ~13 ~4 ~2 minecraft:waxed_weathered_cut_copper
 fill ~13 ~5 ~-2 ~13 ~5 ~2 minecraft:waxed_weathered_cut_copper
 fill ~9 ~2 ~1 ~9 ~2 ~1 minecraft:redstone_lamp[lit=false]
+fill ~-8 ~2 ~1 ~-8 ~2 ~1 create:copper_backtank
 fill ~9 ~2 ~0 ~9 ~2 ~0 minecraft:lectern[facing=east]
 fill ~-7 ~2 ~-2 ~-7 ~2 ~-2 minecraft:furnace[facing=east]
 fill ~8 ~2 ~-2 ~8 ~2 ~-2 minecraft:barrel[facing=up]
+fill ~-8 ~3 ~1 ~-8 ~3 ~1 create:hand_crank[facing=up]
 fill ~-9 ~2 ~1 ~-9 ~2 ~1 minecraft:chest[facing=north]
 fill ~9 ~2 ~-1 ~9 ~2 ~-1 minecraft:polished_blackstone_button[face=floor,facing=west]
 fill ~-13 ~6 ~-1 ~-13 ~6 ~1 minecraft:waxed_oxidized_cut_copper
@@ -986,7 +990,7 @@ item replace block ~-9 ~2 ~1 container.1 with create_submarine:diving_chestplate
 item replace block ~-9 ~2 ~1 container.2 with create_submarine:diving_leggings
 item replace block ~-9 ~2 ~1 container.3 with create:copper_diving_boots
 item replace block ~-9 ~2 ~1 container.4 with create:copper_backtank[create:banktank_air=900]
-setblock ~9 ~2 ~0 minecraft:lectern[facing=east,has_book=true]{Book:{id:"minecraft:written_book",count:1,components:{"minecraft:written_book_content":{title:"Expedition Log",author:"You",pages:['"Day 1. Left the dome at first light. The council says there is nothing left out past the glass. I mean to prove them wrong. Fuel for nine days, air for twenty."','"Day 6. Past the last of the drowned towers. Kelp and sand in every direction. Fuel is lower than it should be. Turning for home."','"Day 7. Out of fuel, drifting. Then a bang from the stern and water in the engine bay. Sealed it off, but she would not hold her trim. Going down."','"Day 7, later. On the bottom, about 170 metres down. The hull held. The lights are gone and the motor with them. The airlock still works."','"The diving suit and the backtank are in the chest by the bunks. Wear all of it outside, the water crushes anyone without it this deep. The tank holds about fifteen minutes of air."','"The domes are out there, the nearest more than five hundred blocks away. Too far on one tank. First air, then power, then get this boat moving again."']}}},Page:0} replace
+setblock ~9 ~2 ~0 minecraft:lectern[facing=east,has_book=true]{Book:{id:"minecraft:written_book",count:1,components:{"minecraft:written_book_content":{title:"Expedition Log",author:"You",pages:['"Day 1. Left the dome at first light. The council says there is nothing left out past the glass. I mean to prove them wrong. Fuel for nine days, air for twenty."','"Day 6. Past the last of the drowned towers. Kelp and sand in every direction. Fuel is lower than it should be. Turning for home."','"Day 7. Out of fuel, drifting. Then a bang from the stern and water in the engine bay. Sealed it off, but she would not hold her trim. Going down."','"Day 7, later. On the bottom, about 170 metres down. The hull held. The lights are gone and the motor with them. The airlock still works."','"The diving suit and the backtank are in the chest by the bunks. Wear all of it outside, the water crushes anyone without it this deep. The tank holds about fifteen minutes of air."','"The hand pump by the bunks still works, there is a spare tank standing on it. Hold the crank and it fills, a couple of minutes for a full tank. Break a tank to pick it up, set an empty one under the crank to fill it again."','"The domes are out there, the nearest more than five hundred blocks away. Too far on one tank. First air, then power, then get this boat moving again."']}}},Page:0} replace
 setworldspawn ~ ~2 ~
 summon minecraft:marker ~ ~2 ~ {Tags:["packpack_start"]}
 execute store result storage packpack:start y int 1 run data get entity @e[type=minecraft:marker,tag=packpack_start,limit=1] Pos[1]

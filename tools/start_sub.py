@@ -28,6 +28,10 @@ TOWER = "minecraft:waxed_weathered_copper"
 PORTHOLE_X = (-8, -4, 0, 4, 8)
 LIGHT_X = (-9, -5, 5, 9)
 AIRLOCK_X = 6
+# The only air supply there is at the start: a spare backtank standing under a hand crank.
+# A placed backtank takes rotation from above and fills from it.
+AIR_PUMP_TANK = "create:copper_backtank"
+AIR_PUMP_CRANK = "create:hand_crank[facing=up]"
 DOOR = "minecraft:oak_door[facing=south,hinge=left,open=false,powered=false"
 
 Cell = tuple[int, int, int]
@@ -106,9 +110,11 @@ def airlock(deck_y: int, shell: set[Cell]) -> dict[Cell, str]:
 
 
 def furniture(deck_y: int) -> dict[Cell, str]:
-    """A cramped, dead control room at the bow and bunks at the stern."""
+    """A cramped, dead control room at the bow, bunks and the air pump at the stern."""
     y = deck_y + 1
     return {
+        (-LENGTH + 5, y, 1): AIR_PUMP_TANK,
+        (-LENGTH + 5, y + 1, 1): AIR_PUMP_CRANK,
         (LENGTH - 4, y, 0): "minecraft:lectern[facing=east]",
         (LENGTH - 4, y, -1): "minecraft:polished_blackstone_button[face=floor,facing=west]",
         (LENGTH - 4, y, 1): "minecraft:redstone_lamp[lit=false]",
@@ -148,6 +154,9 @@ LOG_PAGES = [
     "The lights are gone and the motor with them. The airlock still works.",
     "The diving suit and the backtank are in the chest by the bunks. Wear all of it outside, "
     "the water crushes anyone without it this deep. The tank holds about fifteen minutes of air.",
+    "The hand pump by the bunks still works, there is a spare tank standing on it. "
+    "Hold the crank and it fills, a couple of minutes for a full tank. Break a tank to pick it up, "
+    "set an empty one under the crank to fill it again.",
     "The domes are out there, the nearest more than five hundred blocks away. Too far on one tank. "
     "First air, then power, then get this boat moving again.",
 ]

@@ -1,6 +1,6 @@
 # pack-pack tweaks
 
-A small NeoForge mod with seven mixins and two event handlers, shipped as `pack/mods/packpack-tweaks-1.0.0.jar`.
+A small NeoForge mod with eight mixins and two event handlers, shipped as `pack/mods/packpack-tweaks-1.0.0.jar`.
 
 - `KelpFeatureMixin` makes generated kelp up to 75 blocks tall instead of 10.
 - `GrowingPlantHeadBlockMixin` keeps a growing kelp head from reaching the maximum age, so kelp keeps growing until it runs out of water.
@@ -13,6 +13,8 @@ A small NeoForge mod with seven mixins and two event handlers, shipped as `pack/
 - `WaterAnimalMixin` also lets vanilla dolphins spawn just under the real surface and squid anywhere in the water.
 - `ItemEntityMixin` makes items sink slowly (about a block a second) instead of floating up, so drops end up on the floor below.
 - `MobCategoryMixin` raises the small fish caps per player to 40 for vanilla's `water_ambient` and 60 for Hybrid Aquatic's own fish category (10 by default, which left the sea all cod and salmon), and the water creature cap (squid, sharks, rays) from 5 to 10.
+- `BacktankFillMixin` makes a placed Create backtank fill faster from slow rotation: a full tank takes a bit over 2 minutes on a hand crank instead of 10 and a half.
+  The hand pump in the start sub is the only air at first. Fast shafts fill as quickly as before.
 - `SeaLife` runs when a mob enters the world:
   - mobs tagged `packpack:enlarged` (the big sharks, orca, sunfish, manta) get scale 1.5;
   - the predatory sharks (`packpack:drowned_hunters`, not whale or basking sharks) also target drowned;
