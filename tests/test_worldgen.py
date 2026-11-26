@@ -80,3 +80,12 @@ def test_start_refresh_touches_every_section_of_the_wreck(tmp_path):
     assert sections <= {(x >> 4, y >> 4, z >> 4) for x, y, z in cells}
     assert lines[-1].startswith("schedule function packpack:refresh_start_done")
     assert len(done) == len(cells) and all("minecraft:water" in line for line in done)
+
+
+def test_only_water_open_to_the_sea_counts_as_under_the_floor():
+    import numpy as np
+    import check_worldgen
+    # From the bottom: water under ground, ground, a sealed pocket, a slab, then open water.
+    column = np.array([[[3], [0], [3], [4], [3], [3], [3]]])
+    open_cells = check_worldgen.open_to_sea(column)[0, :, 0].tolist()
+    assert open_cells == [False, False, False, False, True, True, True]
