@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.25.0](https://github.com/NC1107/pack-pack/compare/v0.24.0...v0.25.0) (2026-11-27)
+
+
+### Features
+
+* add gregtech modern as the tech backbone ([5812c20](https://github.com/NC1107/pack-pack/commit/5812c20dc4f8fe005810c1995b5862e29c680780))
+
+
+### Bug Fixes
+
+* pin jei to 19.50 for gregtech's bundled modularui ([0672e31](https://github.com/NC1107/pack-pack/commit/0672e31f9a309a1800d1f0c13bd9420209d7c428))
+
 ## [0.24.0](https://github.com/NC1107/pack-pack/compare/v0.23.0...v0.24.0) (2026-11-26)
 
 
