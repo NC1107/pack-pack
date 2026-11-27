@@ -45,6 +45,10 @@ file = "config/warputils_config.json"
 hash = "38c49856e0c70023a1ae62a91883a59bf0c3ce2e0977ced63f1f022d1a390a33"
 
 [[files]]
+file = "datapacks/pack-pack-worldgen/data/gtceu/neoforge/biome_modifier/raw_oil_sprout.json"
+hash = "99b969132018e9da1071065a8593ba9564928b1ed0aa5ae3ab45f9dac071f7d5"
+
+[[files]]
 file = "datapacks/pack-pack-worldgen/data/hopo/worldgen/template_pool/features/coral.json"
 hash = "20c567e66465752ce8cc5a71ade51289bdce88838b8d9d27a3c6f8825c4d4406"
 
@@ -1823,6 +1827,10 @@ metafile = true
 file = "mods/globalpacks.pw.toml"
 hash = "a7f2ae8ea415e95ce1a3518b66edcaf124d8903ff9101d07331f7fec92b3400f"
 metafile = true
+
+[[files]]
+file = "mods/gtceu-1.21.1-8.0.0-snapshot-20261124-ddc74f1.jar"
+hash = "fb93fddab0dbcd6e8bdf3f6dd09c30b0ed6f3cfccf9c4dba843f71c66200b2cc"
 
 [[files]]
 file = "mods/hide-experimental-warning.pw.toml"
