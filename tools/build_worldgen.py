@@ -489,9 +489,12 @@ def write_underwater_air_filters() -> None:
 # Hybrid Aquatic removes vanilla coral from warm oceans and kelp and seagrass from deep oceans,
 # expecting its own reef biomes to replace them. Those biomes are off in this pack, so without
 # these overrides the warm ocean has no reefs and half the sea floor has no kelp.
+# GregTech's raw oil sprout is a column of oil fluid from the ground up to the surface, which here
+# stands 175 blocks tall in open water. Oil still comes from GregTech's underground fluid veins.
 DISABLED_MOD_MODIFIERS = [
     "data/hybrid_aquatic/neoforge/biome_modifier/warm_ocean_modifiers.json",
     "data/hybrid_aquatic/neoforge/biome_modifier/deep_ocean_modifier.json",
+    "data/gtceu/neoforge/biome_modifier/raw_oil_sprout.json",
 ]
 
 

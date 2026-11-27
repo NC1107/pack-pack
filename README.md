@@ -26,12 +26,14 @@ A tank is about 15 minutes of air, and the hand pump by the bunks fills one agai
 Past about 500 blocks out you start finding the domes, the last cities that kept the water out, with drowned cities around them that are mostly collapsed and overgrown.
 About one dome in four has a village in it, the domes and the glass tubes with a rail that run between neighbouring domes are lit, and no monsters spawn in either.
 Create and create deep seas are in, so submarines with pressure and oxygen are a thing, but there's no progression around them yet.
+GregTech Modern is in too as the tech backbone, the 8.0 beta for 1.21.1, but nothing is gated around it yet either.
 To try one out, `/function packpack:test_sub` (cheats on) builds a small working sub at the surface above you: levers at the stern start and reverse the propeller, and the onboard computer screen sets how deep it goes (good to about 68 m).
 Under the floor it's sand down to bedrock, so there's no mining your way around anything.
 The sea life spawns by biome, reef fish over the warm reefs, deep species down in the trenches, dolphins and orcas up at the surface, and now and then a boss in a trench that stays near where you found it.
 Dropped items sink to the floor instead of floating off to the surface.
 Just make a new world with the default world type, it's all set up by the pack, an old world won't change.
 The mods themselves still download from modrinth or curseforge since that's where their authors host them, but the pack itself lives here on github, and a few of them (lost cities, lost worlds and a small one of ours) are patched builds that live in the repo.
+GregTech lives in the repo too, unpatched, since its 1.21.1 beta is a rolling snapshot whose download link changes every few days.
 
 ## Working on it
 

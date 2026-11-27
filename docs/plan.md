@@ -65,10 +65,14 @@ Tick things off when they're handled, add new ones when they come up.
 - [ ] **(critical) No progression design yet.**
   We need a tier map, which mods show up at which tier, what each tier's challenge is, and what the end goal is.
   Pretty much every check in the pipeline needs this to know what "too early" means.
-- [ ] **(critical) Pick the backbone.**
-  gtnh, nomifactory and monifactory get their length from gregtech's voltage tiers, but we don't have to use gregtech.
-  Could also be a create or mekanism chain with heavy kubejs gating, or a few mid-size tech mods stitched together.
-  This decides the mod list, ore gen, and how much of the length comes from mods vs our own scripts.
+- [x] **(critical) Pick the backbone.**
+  Gregtech's voltage tiers, like gtnh, nomifactory and monifactory (2026-11-27), with create alongside.
+  Early power should feel like the ocean, a kelp boiler or gregtech's solar boiler.
+  Where we need a machine gregtech doesn't have (like filling backtanks with oxygen), we make our own on gregtech's machine api, from kubejs or our mod.
+  Metals come from mob drops and city loot, plus some way of our own to pull elements out of the minerals around you.
+  Gregtech's own ore veins still generate where there's stone or tuff under the sea floor, keeping or dropping them is still open.
+  Its raw oil sprouts are off, in open water they were oil columns 175 blocks tall, oil comes from its underground fluid veins instead.
+  The tier map and the open questions are on the pack-pack canvas board for now.
 - [ ] **(critical) Why play this over monifactory, star technology, gregtech odyssey or atm.**
   There's already a bunch of good expert tech packs, so it needs some kind of hook, a theme, a mechanic, a mod mix nobody else has, etc.
 - [ ] **(critical) Content vs team size.**
@@ -113,10 +117,10 @@ Tick things off when they're handled, add new ones when they come up.
 ### Mods
 
 - [x] **Pick the version.** 1.21.1 neoforge.
-- [ ] **(critical, if gregtech) Which gregtech line.**
-  7.0.2 is the last tagged 1.21.1 release (2025-07), 8.0.0 is a rolling pre-release on github with a rewritten ui and pipes.
-  7.0.2 is stable but means a big migration later, 8.0.0 means less migration but scripts that break as the api moves.
-  Since the pack is github only, pinning a github build by hash with packwiz should just work.
+- [x] **(critical) Which gregtech line.**
+  The 8.0 beta (2026-11-27), the rolling `latest-1.21` snapshot, over 7.0.2 from 2025-07.
+  It means less migration later but scripts that break as the api moves.
+  The jar lives in `pack/mods`, see `docs/dev.md` for moving to a newer build.
 - [ ] **Check every mod we want actually exists on 1.21.1 neoforge.**
   Thermal has no 1.21.1 release, immersive engineering hasn't been updated since mid 2025.
 - [ ] **Who owns ore gen.**
