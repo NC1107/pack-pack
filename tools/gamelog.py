@@ -32,6 +32,10 @@ KNOWN_UPSTREAM_ERRORS = {
         "https://github.com/RelativityMC/C2ME-neoforge/issues",
     "Attempted to load class net/minecraft/client/renderer/LevelRenderer for invalid dist DEDICATED_SERVER":
         "https://github.com/RelativityMC/C2ME-neoforge/issues",
+    # GregTech's 1.21.1 snapshot ships a font licence inside its textures; vanilla rejects the
+    # upper-case file name as a resource path, logs it and skips the file. Not reported upstream yet.
+    "Invalid path in pack: gtceu:textures/font/LICENSE.txt":
+        "https://github.com/GregTechCEu/GregTech-Modern/issues",
 }
 
 
