@@ -170,7 +170,10 @@
     "citySphereClearAbove": 0,
     "citySphereClearAboveUntilAir": false,
     "sphereSurfaceVariation": 1.0,
-    "grid32": true
+    "grid32": false,
+    "gridChunks": 64,
+    "gridOffsetX": 40,
+    "gridOffsetZ": 8
   },
   "public": true
 }

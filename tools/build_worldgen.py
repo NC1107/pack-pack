@@ -72,8 +72,12 @@ DOME_RAISE = 1
 # a dome it is a flat floor level with the sea floor, so domes sit on the bottom like a
 # city that survived the water rising.
 DOME_FLOOR_Y = SEABED_Y + DOME_RAISE
-# Lost Cities can put a dome every 32 chunks (512 blocks) instead of every 16.
-DOME_GRID_32 = True
+# A dome every 64 chunks (1024 blocks), with the patched Lost Cities' gridChunks: fewer domes, each
+# one worth the trip. The grid sits on chunk (40, 8), so the nearest dome is ~660 blocks east of
+# spawn (648, 136) and always there; the one at chunk x -24 falls inside the empty ring around spawn.
+# Sphere centres must be 8 mod 16 chunks, Lost Cities looks spheres up by 16 chunk cells.
+DOME_GRID_CHUNKS = 64
+DOME_GRID_OFFSET = (40, 8)
 # City radius in blocks and the fraction of it that becomes the dome radius (62 to 74 with the
 # patched Lost Cities; upstream only scaled the random part, which made domes 100+ blocks wide).
 DOME_CITY_RADIUS = (100, 120)
@@ -85,7 +89,7 @@ DOME_SPHERE_FACTOR = 0.62
 INCONTROL_SPAWNER = REPO / "pack" / "config" / "incontrol" / "spawner.json"
 
 # How Lost Cities picks a city style for each domed city: mostly normal cities, about one
-# dome in four a village built from vanilla's plains houses (domes are 512 blocks apart).
+# dome in four a village built from vanilla's plains houses (domes are 1024 blocks apart).
 DOME_CITY_FACTOR = 0.5
 DOME_VILLAGE_FACTOR = 0.17
 FULL = [-1.0, 1.0]
@@ -737,13 +741,16 @@ def build_profiles(dome_world_style: str, city_free_radius: int) -> None:
         "outsideProfile": "waterworld",
         "citySphereChance": 0.8,
         "citySphereFactor": DOME_SPHERE_FACTOR,
-        # Every dome links to its neighbours, so the tubes form one network to travel by.
+        # Tubes join neighbouring domes, but Lost Cities only looks 63 chunks along a row for a
+        # neighbour, so domes on the 64 chunk grid stand alone. Linked clusters come separately.
         "monorailChance": 1.0,
         # Clearing above a dome carves air unless the generator reports an outer sea level,
         # which only Lost Worlds' generator does, so leave the water above domes alone.
         "citySphereClearAbove": 0,
         "citySphereClearAboveUntilAir": False,
-        "grid32": DOME_GRID_32,
+        "gridChunks": DOME_GRID_CHUNKS,
+        "gridOffsetX": DOME_GRID_OFFSET[0],
+        "gridOffsetZ": DOME_GRID_OFFSET[1],
     })
     write_json(PROFILES_OUT / "waterworld_domes.json", domes)
 

@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Generate a patch of the ocean world and check the domes in it.
 
-Runs the server installed by boot_server.py with Chunky, pre-generates a square of dome slots (four by default) holding
-domes on Lost Cities' 512 block grid, then reads the region files and checks every dome: the glass
+Runs the server installed by boot_server.py with Chunky, pre-generates a rectangle of dome slots (two side by side by
+default) holding domes on the patched Lost Cities' 1024 block grid, then reads the region files and checks every dome: the glass
 shell is complete, no air touches the water (in the dome or in the tunnels out of it), there is no
 other air in the water outside it, nothing floats in the drowned city between the domes, and the ground outside the rim is level with the ground inside. It also fails if a mod's biome shows up, since Lost Cities does not
 build in those (that is how domes lost their glass before).
@@ -29,9 +29,11 @@ from region import Region, section_ids
 
 CHUNKY_URL = "https://cdn.modrinth.com/data/fALzjamp/versions/LuFhm4eU/Chunky-NeoForge-1.4.23.jar"
 CHUNKY_SHA256 = "d72f235cf1f56f2c374f52c00bdda5034524b28142305a84cfc123a3f92ad274"
-# Dome slots sit on a 512 block grid starting at 640, and each has a dome about 80% of the time.
-FIRST_SLOT = 640
-SLOT_SPACING = 512
+# Each slot has a dome about 80% of the time, except the first, which always has one.
+# Dome slots on the patched Lost Cities' 64 chunk grid (build_worldgen.DOME_GRID_*): the first is at
+# chunk (40, 8), the one nearest spawn, and they repeat every 1024 blocks.
+FIRST_SLOT = (640, 128)
+SLOT_SPACING = 1024
 # Around the outermost slots, room for a dome's window.
 MARGIN = 164
 WINDOW = 135
@@ -46,34 +48,35 @@ MAX_WATER_UNDER_FLOOR = 20
 # Tunnels leave a dome along the 16 block wide chunk row and column that hold its centre.
 TUNNEL_WIDTH = 16
 RIM_GROUND = range(-15, -12)
-# The drowned city between the four domes, clear of their shells.
-BETWEEN = (736, 736, 320)
+# The drowned city between the first two domes, clear of their shells.
+BETWEEN = (992, -32, 320)
 MAX_FLOATING = 200
 
 
 @dataclass(frozen=True)
 class Area:
-    """The square that is generated and checked: `slots` dome slots along each side. Two is
-    enough for every pull request, the rare things (a village dome, a dome missing glass) need
-    the wider square of the weekly soak."""
-    slots: int = 2
+    """The rectangle that is generated and checked: `across` dome slots east and `down` south.
+    Two side by side is enough for every pull request, the rare things (a village dome, a dome
+    missing glass) need the wider square of the weekly soak."""
+    across: int = 2
+    down: int = 1
 
     @property
-    def centre(self) -> int:
-        return FIRST_SLOT + SLOT_SPACING * (self.slots - 1) // 2
-
-    @property
-    def radius(self) -> int:
-        return SLOT_SPACING * (self.slots - 1) // 2 + MARGIN
+    def bounds(self) -> tuple[int, int, int, int]:
+        """min x, min z, max x, max z in blocks."""
+        x0, z0 = FIRST_SLOT
+        return (x0 - MARGIN, z0 - MARGIN,
+                x0 + SLOT_SPACING * (self.across - 1) + MARGIN, z0 + SLOT_SPACING * (self.down - 1) + MARGIN)
 
     @property
     def domes(self) -> list[tuple[int, int]]:
-        along = [FIRST_SLOT + SLOT_SPACING * i for i in range(self.slots)]
-        return [(x, z) for x in along for z in along]
+        x0, z0 = FIRST_SLOT
+        return [(x0 + SLOT_SPACING * i, z0 + SLOT_SPACING * j) for i in range(self.across) for j in range(self.down)]
 
     def chunks(self, step: int = 1):
-        low, high = (self.centre - self.radius) >> 4, (self.centre + self.radius) >> 4
-        return ((cx, cz) for cx in range(low, high + 1, step) for cz in range(low, high + 1, step))
+        min_x, min_z, max_x, max_z = self.bounds
+        return ((cx, cz) for cx in range(min_x >> 4, (max_x >> 4) + 1, step)
+                for cz in range(min_z >> 4, (max_z >> 4) + 1, step))
 
 
 CHUNK_ERROR = re.compile(r"Error generating chunk -?\d+,-?\d+: .{0,160}")
@@ -114,8 +117,10 @@ def pregenerate(java: str, area: Area) -> tuple[float, list[str]]:
                 failed.append(error.group(0))
             if boot_server.DONE_LINE.search(line):
                 started = time.monotonic()
-                proc.stdin.write(f"chunky world minecraft:overworld\nchunky center {area.centre} {area.centre}\n"
-                                 f"chunky radius {area.radius}\nchunky start\n")
+                min_x, min_z, max_x, max_z = area.bounds
+                proc.stdin.write(f"chunky world minecraft:overworld\nchunky shape rectangle\n"
+                                 f"chunky center {(min_x + max_x) // 2} {(min_z + max_z) // 2}\n"
+                                 f"chunky radius {(max_x - min_x) // 2} {(max_z - min_z) // 2}\nchunky start\n")
                 proc.stdin.flush()
             if re.search(r"\[Chunky\] Task (finished|stopped|cancelled)", line) or "Preparing crash report" in line:
                 elapsed = time.monotonic() - (started or time.monotonic())
@@ -127,7 +132,7 @@ def pregenerate(java: str, area: Area) -> tuple[float, list[str]]:
         jar.unlink(missing_ok=True)
     if not finished.is_set():
         raise SystemExit("pre-generation did not finish")
-    chunks = (2 * area.radius // 16 + 1) ** 2
+    chunks = sum(1 for _ in area.chunks())
     return chunks / max(elapsed, 1e-6), failed
 
 
@@ -325,10 +330,10 @@ def main() -> int:
     parser.add_argument("--java", default="java", help="Java 21 for the server")
     parser.add_argument("--skip-generation", action="store_true", help="check the world that is already there")
     parser.add_argument("--seed", help="generate with this seed instead of the boot test's")
-    parser.add_argument("--slots", type=int, default=2, choices=range(2, 9), metavar="N",
-                        help="dome slots along each side of the square (default 2, so four domes)")
+    parser.add_argument("--slots", type=int, choices=range(2, 9), metavar="N",
+                        help="check a square of N by N dome slots instead of the first two side by side")
     args = parser.parse_args()
-    area = Area(args.slots)
+    area = Area(args.slots, args.slots) if args.slots else Area()
     speed, failed = None, []
     if not args.skip_generation:
         if args.seed:

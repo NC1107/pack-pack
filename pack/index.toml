@@ -38,7 +38,7 @@ hash = "1895a6bc7d6e5933348cd21dbe05c0e06c4f82d29ab923c95c7db5fea3177511"
 
 [[files]]
 file = "config/lostcities/profiles/waterworld_domes.json"
-hash = "b6e12dbfdd2f7f237de7a3124f478a884aad6f29c6add31587456dbe8f89778a"
+hash = "343170d5f61dd725a7e060cc475b4d61b7321698fe8b98b304510f269abdb008"
 
 [[files]]
 file = "config/modernfix-mixins.properties"
@@ -850,7 +850,7 @@ hash = "8be69d5b06bbb93d1e1d5ca0b70aa4510323a5bdcf1d6de2d8a400d347e4b8b0"
 
 [[files]]
 file = "datapacks/pack-pack-worldgen/data/packpack/function/build_start.mcfunction"
-hash = "3780d5cfb3eab09c16096015bf09b5cc5b60606f8c6d3cf04a22ebc3a49b6e37"
+hash = "18bda0b63e0b538ba5545637cde68ed6fd9d5e08246c487288b94188a2e28eac"
 
 [[files]]
 file = "datapacks/pack-pack-worldgen/data/packpack/function/place_new_player.mcfunction"
@@ -1907,7 +1907,7 @@ metafile = true
 
 [[files]]
 file = "mods/lostcities-1.21-8.4.8-packpack.jar"
-hash = "b7674c6f582547d30e6922dcb1126e8b99beb13682cdafa7bfcb31851deb4a41"
+hash = "2860eb3b75e737aa1882b47dade6d9c418912d4013172486760248e35c2d0d06"
 
 [[files]]
 file = "mods/lostworlds-1.21-2.0.0-packpack.jar"

@@ -25,8 +25,8 @@ You respawn in it when you die, and if it's ever flooded or gone you wake up in 
 The floor is 200 m down and the water crushes you past 120 m, so put on the copper diving suit from the chest (and keep the backtank in your inventory) before you go out.
 The suit is good to 220 m, so the floor but not the deeper trenches, and the air above the water is toxic, you run out of breath up there in about 15 seconds.
 A tank is about 15 minutes of air, and the hand pump by the bunks fills one again: stand a tank under the crank and hold the crank, a full tank takes a bit over two minutes.
-Past about 500 blocks out you start finding the domes, the last cities that kept the water out, with drowned cities around them that are mostly collapsed and overgrown.
-About one dome in four has a village in it, the domes and the glass tubes with a rail that run between neighbouring domes are lit, and no monsters spawn in either.
+The nearest dome is about 660 blocks east of where you start, and the rest are about 1000 blocks apart, the last cities that kept the water out, with drowned cities around them that are mostly collapsed and overgrown.
+About one dome in four has a village in it, the domes are lit, and no monsters spawn in them.
 Create and create deep seas are in, so submarines with pressure and oxygen are a thing, but there's no progression around them yet.
 GregTech Modern is in too as the tech backbone, the 8.0 beta for 1.21.1, but nothing is gated around it yet either.
 To try one out, `/function packpack:test_sub` (cheats on) builds a small working sub at the surface above you: levers at the stern start and reverse the propeller, and the onboard computer screen sets how deep it goes (good to about 68 m).
@@ -52,7 +52,7 @@ Every push and PR runs these on github:
   It runs on linux and windows, because that library has failed to load on windows before.
 - `tools/boot_client.py` installs the client side of the pack and launches the actual game on a virtual display.
   It creates a world, joins it, lets it tick for a bit, then quits, and fails on the same stuff as the server one.
-- `tools/check_worldgen.py` generates a patch of ocean with four domes on two seeds and fails on broken glass, leaks, air pockets, floating blocks, or a chunk that failed to generate.
+- `tools/check_worldgen.py` generates a patch of ocean with the first two domes on two seeds and fails on broken glass, leaks, air pockets, floating blocks, or a chunk that failed to generate.
   The same job regenerates the datapack and fails if it isn't what's committed.
 - Our own small mod gets rebuilt from source and has to come out byte for byte the same as the jar in `pack/mods`.
 
