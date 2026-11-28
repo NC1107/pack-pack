@@ -34,11 +34,11 @@ hash = "4c4a57c7efb7336653a68809bbfa9a3d68e04533b51b3ca120fe0580ac78801b"
 
 [[files]]
 file = "config/lostcities/profiles/waterworld.json"
-hash = "1895a6bc7d6e5933348cd21dbe05c0e06c4f82d29ab923c95c7db5fea3177511"
+hash = "f5b50b22e0f08473ebf2ed91cccced83a0eb52d139c3f7c13924278ac600e3e5"
 
 [[files]]
 file = "config/lostcities/profiles/waterworld_domes.json"
-hash = "343170d5f61dd725a7e060cc475b4d61b7321698fe8b98b304510f269abdb008"
+hash = "6862cbf19a82f7444aa4fc32a46dfea6c689b7425d915670c9b07747e79b75cc"
 
 [[files]]
 file = "config/modernfix-mixins.properties"
