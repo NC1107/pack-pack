@@ -23,6 +23,10 @@ A small NeoForge mod with eight mixins and two event handlers, shipped as `pack/
 - `LostSub` runs when a player respawns: if they come back under the sea (the start sub is flooded or gone) they are moved to a random spot in one of the nearest domes with a diving suit and a full backtank, and that becomes their spawn.
   Someone whose own bed is under water is moved the same way but gets no suit, or a wet bed would hand one out on every death.
   It asks Lost Cities where the domes are through its API.
+- `RelicBlocks` adds the start sub's relic hull plating and relic pressure glass, made by the civilisation that built the domes.
+  They're as hard as obsidian and drop nothing, so the start sub can't be stripped for deep-rated plating, and they're not unbreakable because the sub has to assemble into a Sable ship later.
+  Deep Seas would rate the glass like normal glass (30 m), so `pack/config/submarine_hull.json` sets both to 400 m, the most it allows for blocks from other mods. Deep Seas fills in every other block itself.
+  `art/relic_textures.py` draws their textures.
 
 To rebuild: run `./gradlew build` here with `JAVA_HOME` pointing at Java 21, copy `build/libs/packpack-tweaks-1.0.0.jar` over the one in `pack/mods`, and run `packwiz refresh` in `pack/`.
 The build is reproducible and CI compares its own build with the committed jar, so a jar that doesn't match the source fails.

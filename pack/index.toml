@@ -41,6 +41,10 @@ file = "config/modernfix-mixins.properties"
 hash = "b55e21a78bbbebf52ed85df01b7c3a4e24ddac497462bece65ca701b2899df55"
 
 [[files]]
+file = "config/submarine_hull.json"
+hash = "c431bf4ffb3aaeba371a55b2c3d366291fb0fe7c984fb8c963ef5674dd7e58d1"
+
+[[files]]
 file = "config/warputils_config.json"
 hash = "38c49856e0c70023a1ae62a91883a59bf0c3ce2e0977ced63f1f022d1a390a33"
 
@@ -1942,7 +1946,7 @@ metafile = true
 
 [[files]]
 file = "mods/packpack-tweaks-1.0.0.jar"
-hash = "e4290730cbc9d287bb3a4b50bcc1ababf0cbc018c1c97644898dbd507b0fa1eb"
+hash = "f055902b8c2d142e71dfff8eac9dfc73e84960d21976de63306d53f7c39c8e6f"
 
 [[files]]
 file = "mods/reeses-sodium-options.pw.toml"
