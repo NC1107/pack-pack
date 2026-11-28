@@ -161,15 +161,18 @@
     "citySphereChance": 0.8,
     "outsideProfile": "waterworld",
     "outsideGroundLevel": -1,
+    "gridOffsetZ": 8,
     "onlyPredefined": false,
     "citySphereClearBelow": 0,
     "citySphereClearBelowUntilAir": false,
     "monorailOffset": -2,
     "outsideSurfaceVariation": 1.0,
     "monorailChance": 1.0,
+    "gridOffsetX": 8,
     "citySphereClearAbove": 0,
     "citySphereClearAboveUntilAir": false,
     "sphereSurfaceVariation": 1.0,
+    "gridChunks": 0,
     "grid32": true
   },
   "public": true

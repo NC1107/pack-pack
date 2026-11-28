@@ -139,3 +139,14 @@ def test_start_saucer_has_glass_all_the_way_round():
             if block != "minecraft:air":
                 break
         assert block == start_sub.WINDOW or cell in airlock, f"{block} blocks the view at {angle:.2f} rad"
+
+
+def test_escape_pod_offset_matches_the_tweaks_mod():
+    """LostSub moves players to the pod by an offset from the world spawn; it must be the pod."""
+    from pathlib import Path
+    java = (Path(__file__).resolve().parents[1] / "tools/tweaks-mod/src/main/java/dev/nc1107/packpack/LostSub.java").read_text()
+    offset = tuple(int(v) for v in re.search(r"POD_OFFSET = new BlockPos\((-?\d+), (-?\d+), (-?\d+)\)", java).groups())
+    x, y, z = start_sub.pod_feet()
+    assert offset == (x, y - (start_sub.DECK_Y + 1), z)
+    placed = start_sub.blocks()
+    assert placed[(x, y, z)] == "minecraft:air" and placed[(x, y + 1, z)] == "minecraft:air"

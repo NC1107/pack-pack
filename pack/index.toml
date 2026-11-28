@@ -34,11 +34,11 @@ hash = "4c4a57c7efb7336653a68809bbfa9a3d68e04533b51b3ca120fe0580ac78801b"
 
 [[files]]
 file = "config/lostcities/profiles/waterworld.json"
-hash = "1895a6bc7d6e5933348cd21dbe05c0e06c4f82d29ab923c95c7db5fea3177511"
+hash = "f5b50b22e0f08473ebf2ed91cccced83a0eb52d139c3f7c13924278ac600e3e5"
 
 [[files]]
 file = "config/lostcities/profiles/waterworld_domes.json"
-hash = "b6e12dbfdd2f7f237de7a3124f478a884aad6f29c6add31587456dbe8f89778a"
+hash = "d9bd51724329e36cef817b760372441e3e8c4beb5692692ec97322397b8961ef"
 
 [[files]]
 file = "config/modernfix-mixins.properties"
@@ -850,7 +850,7 @@ hash = "8be69d5b06bbb93d1e1d5ca0b70aa4510323a5bdcf1d6de2d8a400d347e4b8b0"
 
 [[files]]
 file = "datapacks/pack-pack-worldgen/data/packpack/function/build_start.mcfunction"
-hash = "3780d5cfb3eab09c16096015bf09b5cc5b60606f8c6d3cf04a22ebc3a49b6e37"
+hash = "28828f33f99e7d16ba4a353539ad4d7e4e8374ba00ac47d5a01db3249e85f3fb"
 
 [[files]]
 file = "datapacks/pack-pack-worldgen/data/packpack/function/place_new_player.mcfunction"
@@ -858,11 +858,11 @@ hash = "6547ecc7e6323f15714efa4a704f0f367ba8c3d06d133732d298f4b9f3f9c5b6"
 
 [[files]]
 file = "datapacks/pack-pack-worldgen/data/packpack/function/refresh_start.mcfunction"
-hash = "04d1b8e82c2afe4d0951050bfd0b11a8707609a8586c4c3beebeb0cf5095727d"
+hash = "9153f6ab2f66ce13a1052c8384167798c9e7f858cd3f2ca361752170ab436cd7"
 
 [[files]]
 file = "datapacks/pack-pack-worldgen/data/packpack/function/refresh_start_done.mcfunction"
-hash = "758158757e83da26f6f55758c0ca79f688be8d37f29d045249096a202b9ab2f1"
+hash = "991e6f196c8bbb602b5baba6380c3b110be4f8cbd8407a30cc0687f4c377f7e3"
 
 [[files]]
 file = "datapacks/pack-pack-worldgen/data/packpack/function/settle_new_villagers.mcfunction"
@@ -1950,7 +1950,7 @@ metafile = true
 
 [[files]]
 file = "mods/packpack-tweaks-1.0.0.jar"
-hash = "df05498ee54cb4b534b35ffab60ee039f8c8d2b5c841ab7d73c54122cf80ccef"
+hash = "51d2d65f9e407ba87b09d493a63f25cfc4e9d5b0f54f67d296b48c3e817a9e03"
 
 [[files]]
 file = "mods/reeses-sodium-options.pw.toml"

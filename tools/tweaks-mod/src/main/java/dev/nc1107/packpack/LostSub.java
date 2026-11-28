@@ -23,14 +23,17 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.InterModComms;
 import net.neoforged.fml.event.lifecycle.InterModEnqueueEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
+import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import org.slf4j.Logger;
 import com.mojang.logging.LogUtils;
 
 /**
  * Players respawn at the world spawn, which is inside the start sub on the sea floor. If the sub
  * has been flooded or taken apart that spot is under 200 metres of water and the player would die
- * again at once, forever. Then they wake up in a dome instead, somewhere random in one of the
- * nearest few, with a diving suit and a full backtank, and that dome becomes their spawn.
+ * again at once, forever. Until they have reached a dome they wake up in the escape pod beside the
+ * sub instead, so wrecking it isn't a free trip to the domes; after that, or if the pod is flooded
+ * too, somewhere random in one of the nearest few domes, which becomes their spawn. Either way
+ * with a diving suit and a full backtank.
  */
 public final class LostSub {
 
@@ -42,6 +45,10 @@ public final class LostSub {
     private static final int SEARCH_OFFSET = 128;
     private static final int SEARCH_RINGS = 24;
     private static final int DOMES_TO_PICK_FROM = 4;
+    /** Where a player stands in the escape pod, from the world spawn (tools/start_sub.py pod_feet). */
+    private static final BlockPos POD_OFFSET = new BlockPos(-16, -1, 0);
+    static final String REACHED_DOME = "packpack_reached_dome";
+    private static final int DOME_CHECK_TICKS = 100;
 
     private static final String[] KIT = {
             "create:copper_diving_helmet", "create_submarine:diving_chestplate",
@@ -75,25 +82,62 @@ public final class LostSub {
                 || !level.getFluidState(BlockPos.containing(player.getEyePosition())).is(FluidTags.WATER)) {
             return;
         }
+        boolean ownSpawn = hasOwnSpawn(player);
+        BlockPos pod = level.getSharedSpawnPos().offset(POD_OFFSET);
+        if (!player.getTags().contains(REACHED_DOME) && isDry(level, pod)) {
+            LOGGER.info("{} respawned in the sea before reaching a dome: moved to the escape pod at {}",
+                    player.getName().getString(), pod);
+            player.teleportTo(level, pod.getX() + 0.5, pod.getY(), pod.getZ() + 0.5, Set.of(), player.getYRot(), 0);
+            if (!ownSpawn) {
+                giveKit(player);
+            }
+            player.sendSystemMessage(Component.literal(ownSpawn
+                    ? "Your bed is under water. You came to in the escape pod beside your sub."
+                    : "Your sub is flooded. You came to in the escape pod beside it."));
+            return;
+        }
         BlockPos spot = domeSpot(level, player.getRandom());
         if (spot == null) {
             LOGGER.warn("{} respawned in the sea and no dome was found to move them to (Lost Cities API {})",
                     player.getName().getString(), lostCities == null ? "missing" : "present");
             return;
         }
-        boolean ownSpawn = hasOwnSpawn(player);
         LOGGER.info("{} respawned in the sea ({}): moved to a dome at {}", player.getName().getString(),
                 ownSpawn ? "their bed is under water" : "the start sub is gone", spot);
         player.teleportTo(level, spot.getX() + 0.5, spot.getY(), spot.getZ() + 0.5, Set.of(), player.getYRot(), 0);
         player.setRespawnPosition(level.dimension(), spot, 0, true, false);
         if (!ownSpawn) {
-            for (String id : KIT) {
-                player.getInventory().placeItemBackInInventory(kitItem(id));
-            }
+            giveKit(player);
         }
         player.sendSystemMessage(Component.literal(ownSpawn
                 ? "Your bed is under water. Someone pulled you out and brought you to a dome."
                 : "Your sub is gone. Someone pulled you out of the water and brought you to a dome."));
+    }
+
+    /** Marks players once they've been inside a dome, after which a lost sub sends them to the domes. */
+    @SubscribeEvent
+    public static void onPlayerTick(PlayerTickEvent.Post event) {
+        if (!(event.getEntity() instanceof ServerPlayer player) || player.tickCount % DOME_CHECK_TICKS != 0
+                || player.getTags().contains(REACHED_DOME)) {
+            return;
+        }
+        ILostCityInformation info = lostCities == null ? null : lostCities.getLostInfo(player.serverLevel());
+        ILostSphere sphere = info == null ? null : info.getSphere(player.getBlockX(), player.getBlockZ());
+        if (sphere != null && sphere.isEnabled() && sphere.getCenterPos() != null
+                && sphere.getCenterPos().distSqr(player.blockPosition()) < sphere.getRadius() * sphere.getRadius()) {
+            player.addTag(REACHED_DOME);
+            LOGGER.info("{} reached a dome at {}", player.getName().getString(), sphere.getCenterPos());
+        }
+    }
+
+    private static boolean isDry(ServerLevel level, BlockPos feet) {
+        return level.getBlockState(feet).isAir() && level.getBlockState(feet.above()).isAir();
+    }
+
+    private static void giveKit(ServerPlayer player) {
+        for (String id : KIT) {
+            player.getInventory().placeItemBackInInventory(kitItem(id));
+        }
     }
 
     /**

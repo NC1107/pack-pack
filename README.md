@@ -21,7 +21,8 @@ Pretty much the whole overworld is ocean, 200 blocks of water over a sea floor w
 You start in your own sub lying dead on the sea floor, a dark relic saucer with pressure glass all the way round so you can see out in every direction, and an airlock on the side that keeps the water out.
 There's nothing else close by on purpose.
 It's your own sub, the log on the bridge lectern tells how you ended up down there.
-You respawn in it when you die, and if it's ever flooded or gone you wake up in one of the nearest domes with a fresh diving suit instead.
+You respawn in it when you die.
+If it's ever flooded or gone you wake up in the escape pod next to it with a fresh diving suit, and once you've made it to a dome, in one of the nearest domes instead.
 The floor is 200 m down and the water crushes you past 120 m, so put on the copper diving suit from the chest (and keep the backtank in your inventory) before you go out.
 The suit is good to 220 m, so the floor but not the deeper trenches, and the air above the water is toxic, you run out of breath up there in about 15 seconds.
 A tank is about 15 minutes of air, and the hand pump by the bunks fills one again: stand a tank under the crank and hold the crank, a full tank takes a bit over two minutes.
