@@ -56,6 +56,8 @@ The client one needs `xvfb-run` (fedora: `sudo dnf install xorg-x11-server-Xvfb`
 If packwiz says a mod is marked for both sides but only needs one, pick on purpose and set `side` in its `.pw.toml`.
 A client-only mod on the server crashes it.
 
+Recipe and gregtech tweaks are kubejs scripts in `pack/kubejs/server_scripts/`, the server writes their log to `logs/kubejs/server.log`.
+
 GregTech Modern for 1.21.1 only exists as the rolling `latest-1.21` snapshot on github, and each new build replaces the jar under that tag, so a download link would break.
 The jar we use sits in `pack/mods` under a name without the `+` (`gtceu-1.21.1-8.0.0-snapshot-<date>-<commit>.jar`), the same file as upstream otherwise (LGPL-3.0, https://github.com/GregTechCEu/GregTech-Modern).
 To move to a newer build: `gh release download latest-1.21 -R GregTechCEu/GregTech-Modern -p 'gtceu-1.21.1-*[0-9a-f].jar'`, swap it in under the new name, `packwiz refresh`, and run the boot and worldgen checks, since the beta's api and configs still move.
