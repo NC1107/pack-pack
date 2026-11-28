@@ -46,6 +46,8 @@ Every push and PR runs these on github:
 - `tools/check_repo.py` looks for stuff that breaks between linux and windows, like crlf line endings, file names that only differ by case, paths that are too long, and a mod index that's out of date.
 - `tools/boot_server.py` installs the pack on a real dedicated server and boots it.
   It fails if the server crashes, logs errors, or never finishes starting, and it records boot time and tick times so we can see when something gets slower.
+  It also turns a small block into a sable ship, since sable's physics only loads its native library once a ship exists.
+  It runs on linux and windows, because that library has failed to load on windows before.
 - `tools/boot_client.py` installs the client side of the pack and launches the actual game on a virtual display.
   It creates a world, joins it, lets it tick for a bit, then quits, and fails on the same stuff as the server one.
 - `tools/check_worldgen.py` generates a patch of ocean with four domes on two seeds and fails on broken glass, leaks, air pockets, floating blocks, or a chunk that failed to generate.

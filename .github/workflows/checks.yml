@@ -64,7 +64,14 @@ jobs:
 
   server-boot:
     needs: repo-hygiene
-    runs-on: ubuntu-latest
+    # Windows too, since Sable loads a native physics library that has failed to load there
+    # (Sable #1307, #1616) and half of us play on Windows. The server loads it the same way
+    # the client does; a Windows client boot can't render on a runner without a GPU.
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v7
@@ -80,13 +87,13 @@ jobs:
       - uses: actions/cache@v6
         with:
           path: .cache
-          key: server-boot-${{ hashFiles('pack/pack.toml', 'tools/*.py') }}
-          restore-keys: server-boot-
+          key: server-boot-${{ runner.os }}-${{ hashFiles('pack/pack.toml', 'tools/*.py') }}
+          restore-keys: server-boot-${{ runner.os }}-
       - run: python tools/boot_server.py --java java --quiet
       - if: always()
         uses: actions/upload-artifact@v7
         with:
-          name: server-boot
+          name: server-boot-${{ matrix.os }}
           path: |
             run/boot-report.json
             run/server-threads.txt
