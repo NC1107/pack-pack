@@ -18,7 +18,8 @@ There's a map and minimap (ftb chunks, it also does land claims for multiplayer)
 ## The world
 
 Pretty much the whole overworld is ocean, 200 blocks of water over a sea floor with ridges, trenches and hills.
-You start in a wrecked submarine lying on the sea floor, with an airlock on the side that keeps the water out, and there's nothing else close by on purpose.
+You start in your own sub lying dead on the sea floor, a dark relic saucer with pressure glass all the way round so you can see out in every direction, and an airlock on the side that keeps the water out.
+There's nothing else close by on purpose.
 It's your own sub, the log on the bridge lectern tells how you ended up down there.
 You respawn in it when you die, and if it's ever flooded or gone you wake up in one of the nearest domes with a fresh diving suit instead.
 The floor is 200 m down and the water crushes you past 120 m, so put on the copper diving suit from the chest (and keep the backtank in your inventory) before you go out.
