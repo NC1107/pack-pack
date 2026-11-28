@@ -7,7 +7,7 @@
         "lwsettings": {
           "type": "spheres",
           "fog": "None",
-          "sea_level": 160
+          "sea_level": 186
         },
         "biome_source": {
           "type": "minecraft:multi_noise",

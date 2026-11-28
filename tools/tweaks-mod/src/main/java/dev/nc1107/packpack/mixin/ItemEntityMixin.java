@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 /**
- * In vanilla, items in water float up. With 175 blocks of sea, anything dropped (or lost on
+ * In vanilla, items in water float up. With 200 blocks of sea, anything dropped (or lost on
  * death) ends up at the surface out of reach, so items sink slowly instead and come to rest on
  * the floor below where they were dropped. Applies to all water on both sides, so the client
  * predicts the same motion as the server.

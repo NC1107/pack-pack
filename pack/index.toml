@@ -30,7 +30,7 @@ hash = "4c4a57c7efb7336653a68809bbfa9a3d68e04533b51b3ca120fe0580ac78801b"
 
 [[files]]
 file = "config/lostcities/profiles/waterworld.json"
-hash = "3d8609e66481b7d9097a68e5d33ef851c11f2e51982e5f9c5610798410e958bc"
+hash = "1895a6bc7d6e5933348cd21dbe05c0e06c4f82d29ab923c95c7db5fea3177511"
 
 [[files]]
 file = "config/lostcities/profiles/waterworld_domes.json"
@@ -618,7 +618,7 @@ hash = "936ed918e05ae21586a3f5fc2d3f0204de841e718b95fa552f569394847dba0c"
 
 [[files]]
 file = "datapacks/pack-pack-worldgen/data/minecraft/worldgen/world_preset/normal.json"
-hash = "a09832d9217f98f642f0f24fc22d79a70b8138881c37e9deba04523f23a5a514"
+hash = "cd3ed2c00abd6ed95d4d90d962fcdc27ffa0f458405d722d9f60360dd18a8dac"
 
 [[files]]
 file = "datapacks/pack-pack-worldgen/data/mos/worldgen/structure_set/ocean_oddities.json"
@@ -842,7 +842,7 @@ hash = "8be69d5b06bbb93d1e1d5ca0b70aa4510323a5bdcf1d6de2d8a400d347e4b8b0"
 
 [[files]]
 file = "datapacks/pack-pack-worldgen/data/packpack/function/build_start.mcfunction"
-hash = "59011774dfac275a137c96b4333188d93f7baa5d86f65794e978059c984f3402"
+hash = "dc018b3adb065728b81a07722894c598dcdd1d87fd7fd8f7b25e84dce14eddb4"
 
 [[files]]
 file = "datapacks/pack-pack-worldgen/data/packpack/function/place_new_player.mcfunction"
@@ -1686,7 +1686,7 @@ hash = "83abe6342bc7b5577e63d36226dca2299bb6d86e1f9d337f78776a3085c1f4f3"
 
 [[files]]
 file = "datapacks/pack-pack-worldgen/pack.mcmeta"
-hash = "bf8d53a894cb1f7635ba66e4278c4b32cb8b3bb0d6386a060b9c118a5c6ce1c1"
+hash = "29f2e8953af463f8b2dac584dd34f3ef795271da0375ec07c992d4ec5a1b25bd"
 
 [[files]]
 file = "mods/ambientsounds.pw.toml"

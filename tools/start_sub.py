@@ -128,7 +128,7 @@ def furniture(deck_y: int) -> dict[Cell, str]:
 
 
 # Deep Seas crushes players swimming past 120 m (dead at 180 m) unless they wear the full
-# Copper Diving Suit, good to 280 m. The sea floor here is about 173 m down, so the wreck keeps
+# Copper Diving Suit, good to 280 m. The sea floor here is 200 m down, so the wreck keeps
 # a suit and a full backtank to breathe from: suiting up is how anyone gets outside.
 STARTER_KIT = [
     "create:copper_diving_helmet",
@@ -139,18 +139,18 @@ STARTER_KIT = [
 ]
 
 
-# The story, on the bridge lectern: you are a scientist who left your dome to explore, ran out
-# of fuel, and sank when something broke. No quotes or apostrophes, it is embedded in SNBT.
+# The story, on the bridge lectern: you are a scientist who left your dome to find out what floods
+# the world and poisons the air, ran out of fuel, and sank when something broke. No quotes or apostrophes, it is embedded in SNBT.
 LOG_TITLE = "Expedition Log"
 LOG_AUTHOR = "You"
 LOG_PAGES = [
-    "Day 1. Left the dome at first light. The council says there is nothing left out past the glass. "
-    "I mean to prove them wrong. Fuel for nine days, air for twenty.",
+    "Day 1. Left the dome at first light. The water rises every year and the air above it burns. "
+    "The council says no answer lies past the glass. I mean to find one. Fuel for nine days, air for twenty.",
     "Day 6. Past the last of the drowned towers. Kelp and sand in every direction. "
     "Fuel is lower than it should be. Turning for home.",
     "Day 7. Out of fuel, drifting. Then a bang from the stern and water in the engine bay. "
     "Sealed it off, but she would not hold her trim. Going down.",
-    "Day 7, later. On the bottom, about 170 metres down. The hull held. "
+    "Day 7, later. On the bottom, two hundred metres down. The hull held. "
     "The lights are gone and the motor with them. The airlock still works.",
     "The diving suit and the backtank are in the chest by the bunks. Wear all of it outside, "
     "the water crushes anyone without it this deep. The tank holds about fifteen minutes of air.",

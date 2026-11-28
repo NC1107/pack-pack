@@ -25,7 +25,7 @@ Tick things off when they're handled, add new ones when they come up.
   Loading a lost cities world pops vanilla's "experimental settings" warning every time, hide experimental warning removes it.
 - **2026-11-24, it's an ocean world.**
   Everything is built by `tools/build_worldgen.py`, which writes the `pack-pack-worldgen` datapack (global packs loads it into every new world) and two lost cities profiles.
-  - Lost worlds' spheres generator puts a sea floor around y=-15 with water up to y=160 everywhere outside lost cities' glass domes, and normal ground only inside them.
+  - Lost worlds' spheres generator puts a sea floor around y=-15 with water up to y=186 (200 m deep) everywhere outside lost cities' glass domes, and normal ground only inside them.
   - All biomes are ocean variants picked by temperature, deep ones where vanilla has ocean basins.
   - Terrain is flattened to a floor at y=64, which only matters inside domes, so an empty dome is a dry floor and not a hill filling the glass.
   - Cities inside domes are dry, cities between them are drowned, nothing within 500 blocks of spawn, and lost cities' railway tunnels are off since they floated through open water as a grid.
@@ -54,7 +54,7 @@ Tick things off when they're handled, add new ones when they come up.
   Sodium, sodium extra and reese's are pinned to the july builds, and iris is gone since its only sodium 0.8 build needs 0.8.13.
   Bring iris and the three packs back once veil works with a newer sodium.
   Sable has open issues with c2me and lithium (physics objects springing back) and with servers stalling while saving physics objects, so watch for those.
-- **2026-11-27, the direction, and chapter 1 first.**
+- **2026-11-27, the direction, and chapter 1 first.** Numbers updated the same day: the surface moved to y=186 so the floor is 200 m down.
   Picked after five reviews from different angles (progression, player experience, tech risk, world and story, devil's advocate), then a second round checking the merged plan.
   - The pack ships in chapters, each with an ending, and we only build the next one after the last one plays well.
   - Chapter 1 is about 4 hours, from the start sub to the first dome.
@@ -63,12 +63,13 @@ Tick things off when they're handled, add new ones when they come up.
     The air above the water is toxic.
     Survivors are scavengers who lost the knowledge, a few village domes are small enclaves, and the council lives in your home dome.
     The end goal is closing whatever is in the abyss, chapters from now.
-  - You're a scientist whose sub broke far from home.
+  - You're a scientist who left the home dome to find out what's flooding the world and poisoning the air, and your sub broke far from home.
+  The mission is the pack's end goal.
     It's a dark saucer with glass all around (custom relic hull and glass blocks from our mod).
     It's static at first, and you launch it into a real sable ship once the hull check passes.
   - The relic battery bank only charges around noon (a solar buoy at the surface) until you repair it.
   - Air starts with the hand crank, then an automated refill is the first unlock.
-  - The suit holds about 185 m, so the 173 m floor and not the trenches.
+  - The suit holds 220 m, so the 200 m floor and not the trenches (down to about 240 m).
     Better suits come with gregtech tiers.
     This needs a mixin, since deep seas hardcodes 120 and 280 m.
   - Above the waterline your breath doesn't refill and you take slow damage.
@@ -107,7 +108,7 @@ Tick things off when they're handled, add new ones when they come up.
   Where we need a machine gregtech doesn't have (like filling backtanks with oxygen), we make our own on gregtech's machine api, from kubejs or our mod.
   Metals come from mob drops and city loot, plus some way of our own to pull elements out of the minerals around you.
   Gregtech's own ore veins still generate where there's stone or tuff under the sea floor, keeping or dropping them is still open.
-  Its raw oil sprouts are off, in open water they were oil columns 175 blocks tall, oil comes from its underground fluid veins instead.
+  Its raw oil sprouts are off, in open water they were oil columns 175 blocks tall (sea level 160 then), oil comes from its underground fluid veins instead.
   The tier map and the open questions are on the pack-pack canvas board for now.
 - [ ] **(critical) Why play this over monifactory, star technology, gregtech odyssey or atm.**
   There's already a bunch of good expert tech packs, so it needs some kind of hook, a theme, a mechanic, a mod mix nobody else has, etc.
