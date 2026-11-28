@@ -97,6 +97,9 @@ cd pack && packwiz refresh
   `--seed` picks another seed, `--skip-generation` checks the world that is already there, and it prints how many chunks a second the generation took.
   `--slots 5` checks a square of 25 dome slots instead of four, which is what the weekly `worldgen soak` workflow runs to catch the rare stuff.
 - Every Monday the `mod updates` workflow runs `packwiz update --all`, runs the full checks on the result, and opens a PR if they pass. It can pick beta builds, so read the list before merging. The patched jars in `pack/mods` are plain files and never get updated by it.
+  Pinned mods (`pin = true` in their `.pw.toml`) are skipped too: sodium, sodium extra and reese's for veil, jei for gregtech's modularui, and the physics stack (sable, create, create aeronautics, create deep seas and c2me).
+  The physics stack is pinned because the checks only boot a fresh world, and a bump there can break subs saved in a real one.
+  Move those on purpose with `packwiz unpin <mod>`, `packwiz update <mod>` and a test in an old world.
 - `tests/` has pytest tests for the tools (the start dome is watertight, the fill commands cover it exactly, log and spark parsing). Run `python3 -m pytest -q tests` and `python3 -m ruff check tools tests`, CI runs both.
 - `tools/boot_server.py` installs neoforge and the server side of the pack into `run/server`, boots it on a fixed seed, grabs a spark health report, and writes `run/boot-report.json`.
 - `tools/boot_client.py` does the same for the client, it launches the game with headlessmc on a virtual display, mc-runtime-test makes a world and joins it, then it writes `run/client-report.json`.
