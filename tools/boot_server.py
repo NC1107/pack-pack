@@ -50,6 +50,16 @@ online-mode=false
 spawn-protection=0
 """
 HEALTH_WAIT_SECONDS = 10
+# Sable's physics runs in a native library that is only loaded once a ship exists, so the boot
+# assembles a small iron block into one: proof the library loads on this OS (it has failed on
+# Windows, Sable #1307 and #1616). Its chunk is force-loaded so the ship keeps ticking.
+PHYSICS_SMOKE = [
+    (0.5, "forceload add 48 48"),
+    (1, "fill 48 100 48 49 101 49 minecraft:iron_block"),
+    (2, "sable assemble area 48 100 48 49 101 49"),
+    (7, "sable info @e"),
+]
+SUB_LEVELS = re.compile(r"Found (?P<count>\d+) sub-levels")
 
 # Every new world's overworld is meant to generate with The Lost Cities. Its in-game
 # commands need a player, so instead read the city hub data it saves per dimension.
@@ -207,6 +217,8 @@ def run_server(cmd: list[str], timeout: int, quiet: bool) -> dict:
             result["reached_done"] = True
             result["server_reported_seconds"] = float(match["seconds"])
             result["wall_seconds_to_done"] = round(time.monotonic() - started, 1)
+            for delay, command in PHYSICS_SMOKE:
+                threading.Timer(delay, send, (proc, command)).start()
             # Let the server tick for a while so spark has real samples, then stop.
             threading.Timer(HEALTH_WAIT_SECONDS, send, (proc, "spark health")).start()
             threading.Timer(HEALTH_WAIT_SECONDS + 5, send, (proc, "stop")).start()
@@ -222,7 +234,14 @@ def run_server(cmd: list[str], timeout: int, quiet: bool) -> dict:
     result["exit_code"] = proc.returncode
     result["clean_stop"] = result["reached_done"] and proc.returncode == 0
     result["health"] = parse_health(after_done)
+    result["physics"] = parse_physics(after_done)
     return result
+
+
+def parse_physics(lines: list[str]) -> dict:
+    counts = [int(m["count"]) for line in lines if (m := SUB_LEVELS.search(line))]
+    return {"assembled": any("Assembled a region" in line for line in lines),
+            "sub_levels": counts[-1] if counts else None}
 
 
 def lost_cities_dimensions() -> dict:
@@ -326,6 +345,8 @@ def main() -> int:
         failures.append(f"{len(report['error_lines'])} error line(s) in latest.log (allowed {args.max_errors})")
     if report["reached_done"] and not report["lost_cities"].get("minecraft:overworld"):
         failures.append(f"overworld has no Lost Cities cities near spawn (city hubs per dimension: {report['lost_cities']})")
+    if report["reached_done"] and not (report["physics"]["assembled"] and report["physics"]["sub_levels"]):
+        failures.append(f"Sable could not assemble a ship, its physics library may not load here: {report['physics']}")
     if report["reached_done"]:
         failures.extend(over_budget(report))
     report["failures"] = failures
@@ -337,6 +358,7 @@ def main() -> int:
     log(f"{len(report['server_mods'])} server mods, {len(report['error_lines'])} error line(s)")
     log(f"health: {json.dumps(report['health'])}")
     log(f"lost cities: {json.dumps(report['lost_cities'])}")
+    log(f"physics: {json.dumps(report['physics'])}")
     for f in failures:
         log(f"FAIL: {f}")
     return 1 if failures else 0
