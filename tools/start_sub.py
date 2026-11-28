@@ -27,6 +27,14 @@ CEILING_LIGHT = "minecraft:sea_lantern"
 # Lights in the ceiling: one in the middle and a ring of eight, so the edge of the deck stays lit.
 LIGHT_CELLS = [(0, 0)] + [(round(5 * math.cos(a * math.pi / 4)), round(5 * math.sin(a * math.pi / 4))) for a in range(8)]
 
+# An escape pod beside the saucer: where you wake up if the saucer is flooded or gone before you've
+# reached a dome (tweaks mod LostSub, POD_OFFSET there), so breaking your own sub isn't a free trip
+# to the domes. A separate sealed room with one door out to sea and a light.
+POD_X = range(-18, -13)
+POD_Y = range(0, 5)
+POD_Z = range(-2, 3)
+POD_DOOR = "minecraft:dark_oak_door[facing=west,hinge=left,open=false,powered=false"
+
 # The only air supply there is at the start: a spare backtank standing under a hand crank.
 # A placed backtank takes rotation from above and fills from it.
 AIR_PUMP_TANK = "create:copper_backtank"
@@ -72,8 +80,27 @@ def blocks() -> dict[Cell, str]:
     for x, z in LIGHT_CELLS:
         placed[(x, CEILING_Y, z)] = CEILING_LIGHT
     placed.update(airlock(DECK_Y, shell))
+    placed.update(escape_pod())
     placed.update(furniture(DECK_Y))
     return placed
+
+
+def escape_pod() -> dict[Cell, str]:
+    pod: dict[Cell, str] = {}
+    for x in POD_X:
+        for y in POD_Y:
+            for z in POD_Z:
+                edge = x in (POD_X[0], POD_X[-1]) or y in (POD_Y[0], POD_Y[-1]) or z in (POD_Z[0], POD_Z[-1])
+                pod[(x, y, z)] = HULL if edge else "minecraft:air"
+    pod[(POD_X[0] + 2, POD_Y[-1], 0)] = CEILING_LIGHT
+    pod[(POD_X[0], POD_Y[0] + 1, 0)] = f"{POD_DOOR},half=lower]"
+    pod[(POD_X[0], POD_Y[0] + 2, 0)] = f"{POD_DOOR},half=upper]"
+    return pod
+
+
+def pod_feet() -> Cell:
+    """Where a player stands in the escape pod, relative to the build origin."""
+    return (POD_X[0] + 2, POD_Y[0] + 1, 0)
 
 
 def airlock(deck_y: int, shell: set[Cell]) -> dict[Cell, str]:

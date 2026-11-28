@@ -20,7 +20,9 @@ A small NeoForge mod with eight mixins and two event handlers, shipped as `pack/
   - the predatory sharks (`packpack:drowned_hunters`, not whale or basking sharks) also target drowned;
   - bosses tagged `packpack:lair_bosses` (Karkinos, Shell Beast) remember where they first appeared, stay within 48 blocks of it and never despawn.
   The tags come from `tools/build_worldgen.py`, and In Control spawns the bosses rarely, only in trenches below y -36.
-- `LostSub` runs when a player respawns: if they come back under the sea (the start sub is flooded or gone) they are moved to a random spot in one of the nearest domes with a diving suit and a full backtank, and that becomes their spawn.
+- `LostSub` runs when a player respawns: if they come back under the sea (the start sub is flooded or gone) they are moved to the escape pod beside the sub with a diving suit and a full backtank.
+  Once they've been inside a dome (checked every 5 seconds, the `packpack_reached_dome` tag), or if the pod is flooded too, they go to a random spot in one of the nearest domes instead, and that becomes their spawn.
+  The pod first means wrecking your own sub isn't a free trip to the domes.
   Someone whose own bed is under water is moved the same way but gets no suit, or a wet bed would hand one out on every death.
   It asks Lost Cities where the domes are through its API.
 - `DiverDepthMixin` lowers Deep Seas' depth limit for a diver in the full Copper Diving Suit from 280 m to 220 m, so the suit covers the 200 m floor but not the trenches (about 240 m), which later suits are for.

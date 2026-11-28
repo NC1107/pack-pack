@@ -850,7 +850,7 @@ hash = "8be69d5b06bbb93d1e1d5ca0b70aa4510323a5bdcf1d6de2d8a400d347e4b8b0"
 
 [[files]]
 file = "datapacks/pack-pack-worldgen/data/packpack/function/build_start.mcfunction"
-hash = "18bda0b63e0b538ba5545637cde68ed6fd9d5e08246c487288b94188a2e28eac"
+hash = "06c64024e3bf44e92c927ccaa584c5151c2bb77ee6abd96708733df07cf3c0d2"
 
 [[files]]
 file = "datapacks/pack-pack-worldgen/data/packpack/function/place_new_player.mcfunction"
@@ -858,11 +858,11 @@ hash = "6547ecc7e6323f15714efa4a704f0f367ba8c3d06d133732d298f4b9f3f9c5b6"
 
 [[files]]
 file = "datapacks/pack-pack-worldgen/data/packpack/function/refresh_start.mcfunction"
-hash = "04d1b8e82c2afe4d0951050bfd0b11a8707609a8586c4c3beebeb0cf5095727d"
+hash = "9153f6ab2f66ce13a1052c8384167798c9e7f858cd3f2ca361752170ab436cd7"
 
 [[files]]
 file = "datapacks/pack-pack-worldgen/data/packpack/function/refresh_start_done.mcfunction"
-hash = "758158757e83da26f6f55758c0ca79f688be8d37f29d045249096a202b9ab2f1"
+hash = "991e6f196c8bbb602b5baba6380c3b110be4f8cbd8407a30cc0687f4c377f7e3"
 
 [[files]]
 file = "datapacks/pack-pack-worldgen/data/packpack/function/settle_new_villagers.mcfunction"
@@ -1978,7 +1978,7 @@ metafile = true
 
 [[files]]
 file = "mods/packpack-tweaks-1.0.0.jar"
-hash = "df05498ee54cb4b534b35ffab60ee039f8c8d2b5c841ab7d73c54122cf80ccef"
+hash = "51d2d65f9e407ba87b09d493a63f25cfc4e9d5b0f54f67d296b48c3e817a9e03"
 
 [[files]]
 file = "mods/reeses-sodium-options.pw.toml"
