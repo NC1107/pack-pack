@@ -54,6 +54,42 @@ Tick things off when they're handled, add new ones when they come up.
   Sodium, sodium extra and reese's are pinned to the july builds, and iris is gone since its only sodium 0.8 build needs 0.8.13.
   Bring iris and the three packs back once veil works with a newer sodium.
   Sable has open issues with c2me and lithium (physics objects springing back) and with servers stalling while saving physics objects, so watch for those.
+- **2026-11-27, the direction, and chapter 1 first.**
+  Picked after five reviews from different angles (progression, player experience, tech risk, world and story, devil's advocate), then a second round checking the merged plan.
+  - The pack ships in chapters, each with an ending, and we only build the next one after the last one plays well.
+  - Chapter 1 is about 4 hours, from the start sub to the first dome.
+    Gregtech shows up at that dome.
+  - The story: a lost civilisation built the domes, and opened something in the abyss that's still flooding the world.
+    The air above the water is toxic.
+    Survivors are scavengers who lost the knowledge, a few village domes are small enclaves, and the council lives in your home dome.
+    The end goal is closing whatever is in the abyss, chapters from now.
+  - You're a scientist whose sub broke far from home.
+    It's a dark saucer with glass all around (custom relic hull and glass blocks from our mod).
+    It's static at first, and you launch it into a real sable ship once the hull check passes.
+  - The relic battery bank only charges around noon (a solar buoy at the surface) until you repair it.
+  - Air starts with the hand crank, then an automated refill is the first unlock.
+  - The suit holds about 185 m, so the 173 m floor and not the trenches.
+    Better suits come with gregtech tiers.
+    This needs a mixin, since deep seas hardcodes 120 and 280 m.
+  - Above the waterline your breath doesn't refill and you take slow damage.
+    Sealed cabins with oxygen are fine.
+  - Wood comes from kelp pressed into boards.
+    A gravestone mod keeps your items findable when you die down there.
+  - Metals come from a sediment dredge and extraction line.
+    In chapter 1 it's built on create, and the gregtech version comes in chapter 2.
+    Loot and mob drops are shortcuts.
+  - Gregtech ore veins are off on the overworld floor, maybe back later in vents or the abyss.
+  - Create stops at andesite and copper in chapter 1, brass needs a gregtech part.
+  - Recipes and materials go in kubejs, blocks, machines and mixins in our mod.
+  - The first dome is a dead dome on the way home, placed on purpose about 640 blocks out on the heading the log gives.
+    Its airlock only opens with a code the repaired sub decrypts.
+    A relic thruster rated for the depth is in one of 2 or 3 small wrecks near spawn, so the sub can move before the dome.
+  - Domes get sparser and richer, one every 1024 blocks, with a rare cluster joined by tunnels.
+    Trenches and vents are the middle tiers, the abyss the late ones.
+  - Multiplayer: each team gets its own start sub about 20k blocks apart, lined up with the dome grid and pregenerated.
+  - Gregtech is frozen for all of 1.x, a major version means a new world.
+  - C2ME goes server-side only.
+  - Order of work: pin the physics mods and add a windows client boot, try launching a sub and soak it through saves and reloads, then the saucer, then hazards and suits, domes, the dredge and the quests.
 
 ## Open questions and gaps
 
