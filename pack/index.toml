@@ -1697,6 +1697,14 @@ file = "datapacks/pack-pack-worldgen/pack.mcmeta"
 hash = "29f2e8953af463f8b2dac584dd34f3ef795271da0375ec07c992d4ec5a1b25bd"
 
 [[files]]
+file = "kubejs/server_scripts/kelp_planks.js"
+hash = "b1e8665592145b9d43fd5aaa4ef7dcda8fac7d35ed22beb4273855950cc93127"
+
+[[files]]
+file = "kubejs/server_scripts/no_ore_veins.js"
+hash = "8a6971d6a12075e8d9650a72c73623984be4c02d306e2f5e374557934e937f57"
+
+[[files]]
 file = "mods/ambientsounds.pw.toml"
 hash = "1801f6f6bf0bd7eaf33544c0ad137f9162aa35239a030efe29a899f5c28bddfa"
 metafile = true
@@ -1714,6 +1722,11 @@ metafile = true
 [[files]]
 file = "mods/badoptimizations.pw.toml"
 hash = "dd56ff2bcc4253d1d70c08333632743fb56cdc4cf5518dc6afc024164633145d"
+metafile = true
+
+[[files]]
+file = "mods/better-advanced-tooltips.pw.toml"
+hash = "03084ff4f74cedc1b8ac6c85a98842f75956fb4fa811d285d8ca7caa8d54da5d"
 metafile = true
 
 [[files]]
@@ -1837,6 +1850,16 @@ hash = "a7f2ae8ea415e95ce1a3518b66edcaf124d8903ff9101d07331f7fec92b3400f"
 metafile = true
 
 [[files]]
+file = "mods/gravestone-and-sable-compatibility-patch.pw.toml"
+hash = "6baec0ac505606e2066b5a00a5873cc6895f0ca639a0bfabd74bf408dcf25749"
+metafile = true
+
+[[files]]
+file = "mods/gravestone-mod.pw.toml"
+hash = "d18f1ea4c6c1c2f99f18a8725d11e14c93abd29988df24c967794fc52e9c969c"
+metafile = true
+
+[[files]]
 file = "mods/gtceu-1.21.1-8.0.0-snapshot-20261124-ddc74f1.jar"
 hash = "fb93fddab0dbcd6e8bdf3f6dd09c30b0ed6f3cfccf9c4dba843f71c66200b2cc"
 
@@ -1883,6 +1906,11 @@ metafile = true
 [[files]]
 file = "mods/kotlin-for-forge.pw.toml"
 hash = "52be2f8af37fa9a10f817b3a676e56c9cdf33a3632048d8e922312878244b794"
+metafile = true
+
+[[files]]
+file = "mods/kubejs.pw.toml"
+hash = "be9f3f981dd69822b4a3e5ab6fd677ec69a4e01dcf66c62e239b6ef65f31f0fd"
 metafile = true
 
 [[files]]
@@ -1960,6 +1988,11 @@ metafile = true
 [[files]]
 file = "mods/resourceful-config.pw.toml"
 hash = "cdb72abea9d80a5229354e9118338bf47b97759b5b911276c4f772917fda8417"
+metafile = true
+
+[[files]]
+file = "mods/rhino.pw.toml"
+hash = "e55ca32b338a0e0540f4fec5170675d860566255ae0f45692a00cb4ebf2eb535"
 metafile = true
 
 [[files]]
