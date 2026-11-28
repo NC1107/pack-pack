@@ -53,12 +53,14 @@ HEALTH_WAIT_SECONDS = 10
 # Sable's physics runs in a native library that is only loaded once a ship exists, so the boot
 # assembles a small iron block into one: proof the library loads on this OS (it has failed on
 # Windows, Sable #1307 and #1616). Its chunk is force-loaded so the ship keeps ticking.
+# It runs after the idle health sample, so building the ship doesn't count against the tick budget.
 PHYSICS_SMOKE = [
-    (0.5, "forceload add 48 48"),
-    (1, "fill 48 100 48 49 101 49 minecraft:iron_block"),
-    (2, "sable assemble area 48 100 48 49 101 49"),
-    (7, "sable info @e"),
+    (HEALTH_WAIT_SECONDS + 1, "forceload add 48 48"),
+    (HEALTH_WAIT_SECONDS + 2, "fill 48 100 48 49 101 49 minecraft:iron_block"),
+    (HEALTH_WAIT_SECONDS + 3, "sable assemble area 48 100 48 49 101 49"),
+    (HEALTH_WAIT_SECONDS + 8, "sable info @e"),
 ]
+STOP_AFTER_SECONDS = HEALTH_WAIT_SECONDS + 10
 SUB_LEVELS = re.compile(r"Found (?P<count>\d+) sub-levels")
 
 # Every new world's overworld is meant to generate with The Lost Cities. Its in-game
@@ -221,7 +223,7 @@ def run_server(cmd: list[str], timeout: int, quiet: bool) -> dict:
                 threading.Timer(delay, send, (proc, command)).start()
             # Let the server tick for a while so spark has real samples, then stop.
             threading.Timer(HEALTH_WAIT_SECONDS, send, (proc, "spark health")).start()
-            threading.Timer(HEALTH_WAIT_SECONDS + 5, send, (proc, "stop")).start()
+            threading.Timer(STOP_AFTER_SECONDS, send, (proc, "stop")).start()
 
     try:
         proc.wait(timeout=60)
