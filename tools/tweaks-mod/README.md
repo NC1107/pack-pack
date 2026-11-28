@@ -23,6 +23,10 @@ A small NeoForge mod with eight mixins and two event handlers, shipped as `pack/
 - `LostSub` runs when a player respawns: if they come back under the sea (the start sub is flooded or gone) they are moved to a random spot in one of the nearest domes with a diving suit and a full backtank, and that becomes their spawn.
   Someone whose own bed is under water is moved the same way but gets no suit, or a wet bed would hand one out on every death.
   It asks Lost Cities where the domes are through its API.
+- `DiverDepthMixin` lowers Deep Seas' depth limit for a diver in the full Copper Diving Suit from 280 m to 220 m, so the suit covers the 200 m floor but not the trenches (about 240 m), which later suits are for.
+- `ToxicAir` makes the air above the sea toxic: with their head out of the water under open sky, a survival player's breath runs down as underwater (about 15 seconds) and then they take a heart of damage a second ("breathed the air above the sea").
+  Anywhere with a roof overhead is safe, like a sub's cabin at the surface.
+  It's why sailing over the top is no shortcut to the domes.
 - `RelicBlocks` adds the start sub's relic hull plating and relic pressure glass, made by the civilisation that built the domes.
   They're as hard as obsidian and drop nothing, so the start sub can't be stripped for deep-rated plating, and they're not unbreakable because the sub has to assemble into a Sable ship later.
   Deep Seas would rate the glass like normal glass (30 m), so `pack/config/submarine_hull.json` sets both to 400 m, the most it allows for blocks from other mods. Deep Seas fills in every other block itself.
