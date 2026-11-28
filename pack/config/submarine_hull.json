@@ -1,0 +1,12 @@
+{
+  "_README": "Per-block hull strength. Edit maxWaterDepth (int) and implosionChance (0..1). Keys starting with _ are ignored.",
+  "_version": 3,
+  "packpack_tweaks:relic_hull": {
+    "maxWaterDepth": 400,
+    "implosionChance": 0.02
+  },
+  "packpack_tweaks:relic_glass": {
+    "maxWaterDepth": 400,
+    "implosionChance": 0.02
+  }
+}
