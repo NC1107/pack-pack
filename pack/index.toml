@@ -9,6 +9,10 @@ file = "config/crash_assistant/config.toml"
 hash = "c6406f3e491aef05e7cd09a3287c12b2020526757125cdc9d6aeecc03c4ba8f1"
 
 [[files]]
+file = "config/create_submarine-server.toml"
+hash = "87780fd63dd3fd5a6a02a000c3fe25d5bbc2322cbd533b5b385a2ebac1707f1b"
+
+[[files]]
 file = "config/create_submarine_client_state.json"
 hash = "51b4703e09e929354b3ff5389e18af2cd2ca69c08cde2c2ff2781b61615519a7"
 
@@ -1946,7 +1950,7 @@ metafile = true
 
 [[files]]
 file = "mods/packpack-tweaks-1.0.0.jar"
-hash = "f055902b8c2d142e71dfff8eac9dfc73e84960d21976de63306d53f7c39c8e6f"
+hash = "df05498ee54cb4b534b35ffab60ee039f8c8d2b5c841ab7d73c54122cf80ccef"
 
 [[files]]
 file = "mods/reeses-sodium-options.pw.toml"

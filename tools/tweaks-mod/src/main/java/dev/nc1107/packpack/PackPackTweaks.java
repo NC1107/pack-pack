@@ -12,6 +12,7 @@ public class PackPackTweaks {
         RelicBlocks.register(modBus);
         NeoForge.EVENT_BUS.register(SeaLife.class);
         NeoForge.EVENT_BUS.register(LostSub.class);
+        NeoForge.EVENT_BUS.register(ToxicAir.class);
         modBus.addListener(LostSub::requestLostCities);
     }
 }

@@ -1,4 +1,7 @@
 {
   "block.packpack_tweaks.relic_hull": "Relic Hull Plating",
-  "block.packpack_tweaks.relic_glass": "Relic Pressure Glass"
+  "block.packpack_tweaks.relic_glass": "Relic Pressure Glass",
+  "message.packpack_tweaks.toxic_air": "The air above the water burns your lungs",
+  "death.attack.toxic_air": "%1$s breathed the air above the sea",
+  "death.attack.toxic_air.player": "%1$s breathed the air above the sea while escaping %2$s"
 }
