@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.26.0](https://github.com/NC1107/pack-pack/compare/v0.25.0...v0.26.0) (2026-11-28)
+
+
+### Features
+
+* fewer, richer domes 1024 blocks apart, the first one east of spawn ([46fa80a](https://github.com/NC1107/pack-pack/commit/46fa80a888b5a4b86d69b5bbadd9e3223237ccaa))
+* kubejs, kelp planks, gravestones and no gregtech ore veins ([4834482](https://github.com/NC1107/pack-pack/commit/4834482c9bf25b49c2e129aa29625868df89765e))
+* put the sea floor 200 m down ([45b22d9](https://github.com/NC1107/pack-pack/commit/45b22d9b13953377dd8f0ac46d190f564fbcaa35))
+* relic hull plating and pressure glass for the start sub ([6f1d7bf](https://github.com/NC1107/pack-pack/commit/6f1d7bfd5c11ef740901adbbc3987e9ffe902291))
+* start in a dark relic saucer instead of the copper wreck ([3534ac7](https://github.com/NC1107/pack-pack/commit/3534ac7e5d9196d66c2ea95cf138527847117446))
+* toxic air above the sea, a 220 m suit and weaker hull shapes ([1a0b9bb](https://github.com/NC1107/pack-pack/commit/1a0b9bb2561135543a7c5f800ac09fd6f7543166))
+
 ## [0.25.0](https://github.com/NC1107/pack-pack/compare/v0.24.0...v0.25.0) (2026-11-27)
 
 
