@@ -30,12 +30,12 @@ DATA_PACK_FORMAT = 48  # Minecraft 1.21.1
 
 # Everything is placed relative to the sea floor. Lost Worlds puts its ocean floor at
 # y=-15 plus a little noise (hardcoded), so that is the reference: dome floors, Lost
-# Cities' ground level and city levels all sit on it. With the sea surface at 160 that
-# is ~175 blocks of water above the floor and ~50 blocks of rock below it.
+# Cities' ground level and city levels all sit on it. The sea surface at 186 puts the floor
+# 200 blocks down, an easy number to remember, with ~50 blocks of rock below it.
 SEABED_Y = -14
 # The deepest trenches of the sea floor (Lost Worlds SeaFloor.MIN)
 SEA_FLOOR_MIN_Y = -56
-SEA_LEVEL = 160
+SEA_LEVEL = 186
 
 # Ocean variant per temperature band. Low continentalness is where vanilla puts its
 # ocean basins, so those get the deep variants and former land gets the shallow ones.

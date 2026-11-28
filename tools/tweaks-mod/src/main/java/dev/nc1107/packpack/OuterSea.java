@@ -15,7 +15,7 @@ public final class OuterSea {
     /**
      * The sea level spawn rules should see under the outer sea: 32 blocks over the dome floor
      * (y -13). Mobs that spawn "near the surface" then spawn over the sea floor, where the reefs
-     * and kelp are, instead of in a band at y 63 in the middle of 175 blocks of water.
+     * and kelp are, instead of in a band at y 63 in the middle of 200 blocks of water.
      */
     public static final int SPAWN_SEA_LEVEL = 19;
 

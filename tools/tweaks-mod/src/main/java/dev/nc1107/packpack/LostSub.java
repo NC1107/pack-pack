@@ -28,7 +28,7 @@ import com.mojang.logging.LogUtils;
 
 /**
  * Players respawn at the world spawn, which is inside the start sub on the sea floor. If the sub
- * has been flooded or taken apart that spot is under 170 metres of water and the player would die
+ * has been flooded or taken apart that spot is under 200 metres of water and the player would die
  * again at once, forever. Then they wake up in a dome instead, somewhere random in one of the
  * nearest few, with a diving suit and a full backtank, and that dome becomes their spawn.
  */
