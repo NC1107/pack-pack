@@ -29,7 +29,8 @@ Tick things off when they're handled, add new ones when they come up.
   - All biomes are ocean variants picked by temperature, deep ones where vanilla has ocean basins.
   - Terrain is flattened to a floor at y=64, which only matters inside domes, so an empty dome is a dry floor and not a hill filling the glass.
   - Cities inside domes are dry, cities between them are drowned, nothing within 500 blocks of spawn, and lost cities' railway tunnels are off since they floated through open water as a grid.
-  - You start in a wrecked copper submarine on the sea floor under spawn (`tools/start_sub.py`), with an airlock, a diving suit and the expedition log.
+  - You start in a dark relic saucer on the sea floor under spawn (`tools/start_sub.py`), built from relic hull plating and pressure glass from our mod, with an airlock, a diving suit and the expedition log.
+    It replaced the first copper wreck on 2026-11-28.
     It's built once when the server starts (a storage flag keeps it from ever overwriting changes) and spawn is set inside it.
     A spare backtank under a hand crank by the bunks is the air supply, about two minutes of cranking for a 15 minute tank.
     The plan is to swap it for a real create sub later.

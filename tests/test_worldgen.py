@@ -120,3 +120,22 @@ def test_worldgen_area_holds_every_dome_window():
                 for z in (gz - check_worldgen.WINDOW, gz + check_worldgen.WINDOW - 1):
                     assert (x >> 4, z >> 4) in chunks
     assert (check_worldgen.Area().centre, check_worldgen.Area().radius) == (896, 420)
+
+
+def test_start_saucer_has_glass_all_the_way_round():
+    """Standing in the middle at eye level, the wall is relic glass in every direction except the airlock."""
+    import math
+    furniture = start_sub.furniture(start_sub.DECK_Y)
+    airlock = start_sub.airlock(start_sub.DECK_Y, start_sub.hull_cells()[0])
+    placed = {cell: block for cell, block in start_sub.blocks().items() if cell not in furniture}
+    eye = start_sub.DECK_Y + 2
+    for step in range(72):
+        angle = step * math.tau / 72
+        # Fine steps, so the ray can't hop diagonally past two blocks that meet at a corner.
+        for twentieth in range(20, 400):
+            r = twentieth / 20
+            cell = (round(r * math.cos(angle)), eye, round(r * math.sin(angle)))
+            block = placed.get(cell, "minecraft:air")
+            if block != "minecraft:air":
+                break
+        assert block == start_sub.WINDOW or cell in airlock, f"{block} blocks the view at {angle:.2f} rad"
