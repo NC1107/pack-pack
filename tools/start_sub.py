@@ -140,7 +140,7 @@ LOG_PAGES = [
     "The hand pump by the bunks still works, there is a spare tank standing on it. "
     "Hold the crank and it fills, a couple of minutes for a full tank. Break a tank to pick it up, "
     "set an empty one under the crank to fill it again.",
-    "The domes are out there, the nearest more than five hundred blocks away. Too far on one tank. "
+    "The nearest dome lies east, six or seven hundred blocks across open water. Too far on one tank. "
     "First air, then power, then get this boat moving again.",
 ]
 

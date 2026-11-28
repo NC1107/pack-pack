@@ -111,15 +111,24 @@ def test_expedition_log_fits_the_lectern_command():
 
 
 def test_worldgen_area_holds_every_dome_window():
-    for slots in (2, 5):
-        area = check_worldgen.Area(slots)
-        assert len(area.domes) == slots * slots
+    for area in (check_worldgen.Area(), check_worldgen.Area(3, 3)):
+        assert len(area.domes) == area.across * area.down
         chunks = set(area.chunks())
         for gx, gz in area.domes:
             for x in (gx - check_worldgen.WINDOW, gx + check_worldgen.WINDOW - 1):
                 for z in (gz - check_worldgen.WINDOW, gz + check_worldgen.WINDOW - 1):
                     assert (x >> 4, z >> 4) in chunks
-    assert (check_worldgen.Area().centre, check_worldgen.Area().radius) == (896, 420)
+        x0, z0, size = check_worldgen.BETWEEN
+        assert (x0 >> 4, z0 >> 4) in chunks and ((x0 + size) >> 4, (z0 + size) >> 4) in chunks
+
+
+def test_worldgen_slots_match_the_dome_grid():
+    """The check looks for domes where the generator puts them: chunk (40, 8) and every 64 chunks."""
+    grid, (ox, oz) = wg.DOME_GRID_CHUNKS, wg.DOME_GRID_OFFSET
+    assert check_worldgen.SLOT_SPACING == grid * 16
+    assert check_worldgen.FIRST_SLOT == (ox * 16, oz * 16)
+    assert ox % 16 == 8 and oz % 16 == 8, "Lost Cities looks spheres up by 16 chunk cells centred on 8"
+    assert check_worldgen.Area().domes == [(640, 128), (1664, 128)]
 
 
 def test_start_saucer_has_glass_all_the_way_round():
