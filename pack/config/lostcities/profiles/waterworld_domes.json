@@ -168,12 +168,12 @@
     "monorailOffset": -2,
     "outsideSurfaceVariation": 1.0,
     "monorailChance": 1.0,
-    "gridOffsetX": 8,
+    "gridOffsetX": 40,
     "citySphereClearAbove": 0,
     "citySphereClearAboveUntilAir": false,
     "sphereSurfaceVariation": 1.0,
-    "gridChunks": 0,
-    "grid32": true
+    "gridChunks": 64,
+    "grid32": false
   },
   "public": true
 }

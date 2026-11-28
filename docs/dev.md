@@ -56,6 +56,8 @@ The client one needs `xvfb-run` (fedora: `sudo dnf install xorg-x11-server-Xvfb`
 If packwiz says a mod is marked for both sides but only needs one, pick on purpose and set `side` in its `.pw.toml`.
 A client-only mod on the server crashes it.
 
+Recipe and gregtech tweaks are kubejs scripts in `pack/kubejs/server_scripts/`, the server writes their log to `logs/kubejs/server.log`.
+
 GregTech Modern for 1.21.1 only exists as the rolling `latest-1.21` snapshot on github, and each new build replaces the jar under that tag, so a download link would break.
 The jar we use sits in `pack/mods` under a name without the `+` (`gtceu-1.21.1-8.0.0-snapshot-<date>-<commit>.jar`), the same file as upstream otherwise (LGPL-3.0, https://github.com/GregTechCEu/GregTech-Modern).
 To move to a newer build: `gh release download latest-1.21 -R GregTechCEu/GregTech-Modern -p 'gtceu-1.21.1-*[0-9a-f].jar'`, swap it in under the new name, `packwiz refresh`, and run the boot and worldgen checks, since the beta's api and configs still move.
@@ -95,7 +97,7 @@ cd pack && packwiz refresh
 - `tools/check_worldgen.py` generates a patch of the ocean with four domes (after `boot_server.py` has installed the server) and fails if a dome's glass is missing, there is air in the water outside it, the ground around it is not level, there is water under the floor at its edge, blocks float in the drowned city between the domes, or a mod's biome got into the ocean.
   CI runs it on every PR with two seeds.
   `--seed` picks another seed, `--skip-generation` checks the world that is already there, and it prints how many chunks a second the generation took.
-  `--slots 5` checks a square of 25 dome slots instead of four, which is what the weekly `worldgen soak` workflow runs to catch the rare stuff.
+  By default it checks the first two dome slots side by side, `--slots 3` checks a square of nine instead, which is what the weekly `worldgen soak` workflow runs to catch the rare stuff (domes are 1024 blocks apart, so that's about as many chunks as 25 slots used to be).
 - Every Monday the `mod updates` workflow runs `packwiz update --all`, runs the full checks on the result, and opens a PR if they pass. It can pick beta builds, so read the list before merging. The patched jars in `pack/mods` are plain files and never get updated by it.
   Pinned mods (`pin = true` in their `.pw.toml`) are skipped too: sodium, sodium extra and reese's for veil, jei for gregtech's modularui, and the physics stack (sable, create, create aeronautics, create deep seas and c2me).
   The physics stack is pinned because the checks only boot a fresh world, and a bump there can break subs saved in a real one.

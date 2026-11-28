@@ -88,6 +88,7 @@ Tick things off when they're handled, add new ones when they come up.
     A relic thruster rated for the depth is in one of 2 or 3 small wrecks near spawn, so the sub can move before the dome.
   - Domes get sparser and richer, one every 1024 blocks, with a rare cluster joined by tunnels.
     Trenches and vents are the middle tiers, the abyss the late ones.
+    Deep seas' abyss dimension is switched off in its release builds for now ("Create Abyss is in development, content disabled in production" in the log), so the late tiers can't count on it yet.
   - Multiplayer: each team gets its own start sub about 20k blocks apart, lined up with the dome grid and pregenerated.
   - Gregtech is frozen for all of 1.x, a major version means a new world.
   - C2ME goes server-side only.
