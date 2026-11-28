@@ -30,7 +30,9 @@ About one dome in four has a village in it, the domes and the glass tubes with a
 Create and create deep seas are in, so submarines with pressure and oxygen are a thing, but there's no progression around them yet.
 GregTech Modern is in too as the tech backbone, the 8.0 beta for 1.21.1, but nothing is gated around it yet either.
 To try one out, `/function packpack:test_sub` (cheats on) builds a small working sub at the surface above you: levers at the stern start and reverse the propeller, and the onboard computer screen sets how deep it goes (good to about 68 m).
-Under the floor it's sand down to bedrock, so there's no mining your way around anything.
+Under the floor it's sand down to bedrock, so there's no mining your way around anything, and gregtech's ore veins are off.
+There are no trees either, wood starts as kelp: smelt it in the sub's furnace, pack the dried kelp into a block, and a block crafts into four oak planks.
+If you die down there your stuff goes into a gravestone you can find again.
 The sea life spawns by biome, reef fish over the warm reefs, deep species down in the trenches, dolphins and orcas up at the surface, and now and then a boss in a trench that stays near where you found it.
 Dropped items sink to the floor instead of floating off to the surface.
 Just make a new world with the default world type, it's all set up by the pack, an old world won't change.
